@@ -8,6 +8,8 @@ import * as serviceWorker from './serviceWorker';
 // Bootstrap library
 import './assets/vendor/bootstrap/bootstrap.scss';
 
+import LoadingScreen from './library/LoadingScreen';
+
 // Application pages
 const Login = lazy(() => import('./pages/Login'));
 
@@ -15,7 +17,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<LoadingScreen />}>
           <Switch>
             <Route path='/login'>
               <Login />

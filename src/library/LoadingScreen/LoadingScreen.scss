@@ -1,0 +1,26 @@
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4rem;
+    animation: rotate 2s ease-in-out infinite;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}
