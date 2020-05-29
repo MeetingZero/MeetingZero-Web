@@ -1,0 +1,25 @@
+.logo-split-logo {
+  display: block;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%;
+
+  @media (max-height: 800px) {
+    width: 25%;
+  }
+}
+
+.logo-split-title {
+  font-size: 6.4rem;
+  font-weight: 300;
+  position: absolute;
+  bottom: 10rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  @media (max-height: 800px) {
+    display: none;
+  }
+}

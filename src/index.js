@@ -6,10 +6,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Bootstrap library
-import "./assets/vendor/bootstrap/bootstrap.scss";
+import './assets/vendor/bootstrap/bootstrap.scss';
 
 // Application pages
-const App = lazy(() => import('./App'));
+const Login = lazy(() => import('./pages/Login'));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,8 +17,8 @@ ReactDOM.render(
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route path="/">
-              <App />
+            <Route path='/login'>
+              <Login />
             </Route>
           </Switch>
         </Suspense>
