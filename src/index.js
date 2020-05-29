@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import store from './app/store';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+
+// Bootstrap library
+import "./assets/vendor/bootstrap/bootstrap.scss";
+
+// Application pages
+const App = lazy(() => import('./App'));
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route path="/">
+              <App />
+            </Route>
+          </Switch>
+        </Suspense>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
