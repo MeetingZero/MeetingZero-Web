@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
+import Button from '../../library/Button';
 
 const SignUp = () => {
   return (
     <LogoSplitLayout>
       <div className="p-2">
         <div className="text-right">
-          <Link to="/login">
-            Login
-          </Link>
+          <Button href="/login" text="Log in" />
         </div>
 
         <div className="container-small absolute-center-y">
@@ -35,7 +33,7 @@ const SignUp = () => {
           <input type="password" className="form-control mb-4" placeholder="Confirm password" />
 
           <div className="text-center">
-            <button className="btn btn-primary px-5">Sign up</button>
+            <Button className="btn btn-primary px-5" text="Sign up" />
           </div>
         </div>
       </div>
