@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
 
-import './Login.scss';
-
 const Login = () => {
   return (
     <LogoSplitLayout>

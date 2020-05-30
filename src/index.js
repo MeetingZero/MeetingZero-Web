@@ -12,6 +12,7 @@ import LoadingScreen from './library/LoadingScreen';
 
 // Application pages
 const Login = lazy(() => import('./pages/Login'));
+const SignUp = lazy(() => import('./pages/SignUp'));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,6 +22,10 @@ ReactDOM.render(
           <Switch>
             <Route path='/login'>
               <Login />
+            </Route>
+
+            <Route path='/sign-up'>
+              <SignUp />
             </Route>
           </Switch>
         </Suspense>
