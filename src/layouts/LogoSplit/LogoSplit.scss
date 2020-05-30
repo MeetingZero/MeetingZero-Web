@@ -1,13 +1,21 @@
+@import "../../assets/vendor/bootstrap/functions";
+@import "../../assets/vendor/bootstrap/variables";
+@import "../../assets/vendor/bootstrap/mixins/breakpoints";
+
 .logo-split-logo {
   display: block;
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 35%;
+  width: 400px;
 
   @media (max-height: 800px) {
     width: 25%;
+  }
+
+  @include media-breakpoint-down(md) {
+    width: 200px;
   }
 }
 

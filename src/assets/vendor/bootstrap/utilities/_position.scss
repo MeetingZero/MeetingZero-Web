@@ -30,3 +30,16 @@
     z-index: $zindex-sticky;
   }
 }
+
+.absolute-center-y {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @include media-breakpoint-down(md) {
+    position: static;
+    transform: none;
+    margin-top: 4rem;
+  }
+}
