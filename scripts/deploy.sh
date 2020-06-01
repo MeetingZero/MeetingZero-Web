@@ -1,0 +1,1 @@
+scp -r build arsood@192.168.2.75:/home/arsood
