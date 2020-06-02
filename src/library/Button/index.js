@@ -14,7 +14,7 @@ const Button = (props) => {
     );
   } else {
     return (
-      <button className={props.className}>
+      <button className={props.className} type={props.type || "button"}>
         {props.loading ?
           <i className="fas fa-sync fa-spin mr-1" />
         : null}
