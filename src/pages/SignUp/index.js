@@ -1,6 +1,7 @@
 import React from 'react';
 import update from 'immutability-helper';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
@@ -8,6 +9,7 @@ import * as userActions from '../../app/user/actions';
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [newUser, setNewUser] = React.useState({
     first_name: '',
@@ -31,7 +33,7 @@ const SignUp = () => {
     dispatch(userActions
     .saveNewUser(newUser))
     .then(() => {
-      console.log("SAVED!");
+      history.push("/signup-confirmation");
     })
     .catch((err) => {
       console.log(err);
