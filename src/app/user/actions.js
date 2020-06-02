@@ -18,3 +18,17 @@ export const saveNewUser = (user) => {
     });
   }
 }
+
+export const getUser = () => {
+  return (dispatch) => {
+    return axios
+    .get("http://localhost:3000/api/v1/users/me", {
+      headers: {
+        "Authorization": window.localStorage.getItem("token")
+      }
+    })
+    .then((response) => {
+      console.log(response);
+    });
+  }
+}

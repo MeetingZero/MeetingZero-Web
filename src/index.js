@@ -14,6 +14,7 @@ import LoadingScreen from './library/LoadingScreen';
 const Login = lazy(() => import('./pages/Login'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const SignUpConfirmation = lazy(() => import('./pages/SignUpConfirmation'));
+const JoinWorkshop = lazy(() => import('./pages/JoinWorkshop'));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -31,6 +32,10 @@ ReactDOM.render(
 
             <Route path='/signup-confirmation'>
               <SignUpConfirmation />
+            </Route>
+
+            <Route path='/join-workshop'>
+              <JoinWorkshop />
             </Route>
           </Switch>
         </Suspense>
