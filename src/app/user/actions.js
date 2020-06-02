@@ -11,10 +11,10 @@ export const saveNewUser = (user) => {
     .then(() => {
       return dispatch(loadingSlice.actions.stopLoading("CREATING_NEW_USER"));
     })
-    .catch(() => {
+    .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading("CREATING_NEW_USER"));
 
-      throw new Error("Error creating user");
+      throw err.response.data;
     });
   }
 }
