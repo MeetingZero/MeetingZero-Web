@@ -1,11 +1,14 @@
 import React from 'react';
 import update from 'immutability-helper';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
 import * as userActions from '../../app/user/actions';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [newUser, setNewUser] = React.useState({
     first_name: '',
     last_name: '',
@@ -25,12 +28,19 @@ const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    userActions
-    .saveNewUser(newUser)
+    dispatch(userActions
+    .saveNewUser(newUser))
     .then(() => {
       console.log("SAVED!");
+    })
+    .catch((err) => {
+      console.log(err);
     });
   }
+
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("CREATING_NEW_USER") >= 0;
+  });
 
   return (
     <LogoSplitLayout>
@@ -62,7 +72,7 @@ const SignUp = () => {
             <input onChange={handleChange} type="password" name="confirm_password" className="form-control mb-4" placeholder="Confirm password" />
 
             <div className="text-center">
-              <Button className="btn btn-primary px-5" text="Sign up" type="submit" />
+              <Button className="btn btn-primary px-5" text="Sign up" type="submit" loading={isLoading} />
             </div>
           </form>
         </div>
