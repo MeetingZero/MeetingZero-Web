@@ -33,6 +33,10 @@ const SignUp = () => {
     dispatch(userActions
     .saveNewUser(newUser))
     .then(() => {
+      window
+      .sessionStorage
+      .setItem("signUpEmail", newUser.email);
+
       history.push("/signup-confirmation");
     })
     .catch((err) => {
