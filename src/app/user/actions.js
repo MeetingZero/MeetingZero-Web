@@ -1,18 +1,22 @@
-import axios from 'axios';
+import axiosInstance from '../../app/axios';
 
 import loadingSlice from '../loading/slice';
 
 export const saveNewUser = (user) => {
   return (dispatch) => {
-    dispatch(loadingSlice.actions.startLoading("CREATING_NEW_USER"));
+    dispatch(loadingSlice.actions.startLoading('CREATING_NEW_USER'));
 
-    return axios
-    .post("http://localhost:3000/api/v1/users", { user })
-    .then(() => {
-      return dispatch(loadingSlice.actions.stopLoading("CREATING_NEW_USER"));
+    return axiosInstance()
+    .post('http://localhost:3000/api/v1/users', { user })
+    .then((response) => {
+      window
+      .localStorage
+      .setItem('authToken', response.data.token);
+
+      return dispatch(loadingSlice.actions.stopLoading('CREATING_NEW_USER'));
     })
     .catch((err) => {
-      dispatch(loadingSlice.actions.stopLoading("CREATING_NEW_USER"));
+      dispatch(loadingSlice.actions.stopLoading('CREATING_NEW_USER'));
 
       throw err.response.data;
     });
@@ -21,12 +25,8 @@ export const saveNewUser = (user) => {
 
 export const getUser = () => {
   return (dispatch) => {
-    return axios
-    .get("http://localhost:3000/api/v1/users/me", {
-      headers: {
-        "Authorization": window.localStorage.getItem("token")
-      }
-    })
+    return axiosInstance()
+    .get('http://localhost:3000/api/v1/users/me')
     .then((response) => {
       console.log(response);
     });
