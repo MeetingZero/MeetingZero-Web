@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
@@ -13,6 +13,10 @@ const JoinWorkshop = () => {
     dispatch(userActions.getUser());
   }, [dispatch]);
 
+  const currentUser = useSelector((state) => {
+    return state.User.currentUser;
+  });
+
   return (
     <LogoSplitLayout>
       <div className="p-2">
@@ -21,7 +25,9 @@ const JoinWorkshop = () => {
         </div>
 
         <div className="container-small mt-10 absolute-center-y">
-          <h1 className="text-center mb-8">Welcome, Matt!</h1>
+          {currentUser.first_name && currentUser.last_name ?
+            <h1 className="text-center mb-8">Welcome, {currentUser.first_name}!</h1>
+          : null}
 
           <input type="text" className="form-control mb-5" placeholder="MeetingZero ID" />
 
