@@ -1,13 +1,14 @@
-import axiosInstance from '../../app/axios';
+import axiosInstance from '../../config/axios';
 
 import loadingSlice from '../loading/slice';
+import userSlice from './slice';
 
 export const saveNewUser = (user) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('CREATING_NEW_USER'));
 
     return axiosInstance()
-    .post('http://localhost:3000/api/v1/users', { user })
+    .post('/api/v1/users', { user })
     .then((response) => {
       window
       .localStorage
@@ -26,9 +27,24 @@ export const saveNewUser = (user) => {
 export const getUser = () => {
   return (dispatch) => {
     return axiosInstance()
-    .get('http://localhost:3000/api/v1/users/me')
+    .get('/api/v1/users/me')
     .then((response) => {
-      console.log(response);
+      return dispatch(userSlice.actions.setUser(response.data));
+    });
+  }
+}
+
+export const loginUser = (email, password) => {
+  return (dispatch) => {
+    return axiosInstance()
+    .post('/api/v1/users/login', {
+      email,
+      password
+    })
+    .then((response) => {
+      return window
+      .localStorage
+      .setItem("authToken", response.data.token);
     });
   }
 }

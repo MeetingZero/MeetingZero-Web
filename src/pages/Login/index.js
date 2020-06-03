@@ -1,9 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
+import Button from '../../library/Button';
+import * as userActions from '../../app/user/actions';
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    dispatch(userActions.loginUser(email, password))
+    .then(() => {
+      history.push('/join-workshop');
+    });
+  }
+
   return (
     <LogoSplitLayout>
       <div className="p-2">
@@ -14,13 +33,15 @@ const Login = () => {
         </div>
 
         <div className="container-small absolute-center-y">
-          <input type="email" className="form-control mb-4" placeholder="Email" />
+          <form onSubmit={handleSubmit}>
+            <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control mb-4" placeholder="Email" />
 
-          <input type="password" className="form-control mb-4" placeholder="Password" />
+            <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control mb-4" placeholder="Password" />
 
-          <div className="text-center mb-1">
-            <button className="btn btn-primary px-5">Sign in</button>
-          </div>
+            <div className="text-center mb-1">
+              <Button type="submit" className="btn btn-primary px-5" text="Sign in" />
+            </div>
+          </form>
 
           <div className="text-center">
             <Link to="/forgot-password" className="small text-muted">

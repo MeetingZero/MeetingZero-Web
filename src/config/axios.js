@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default function() {
   let config = {
-    baseUrl: 'http://localhost:3000',
+    baseURL: 'http://localhost:3000',
     timeout: 10000
   };
 
