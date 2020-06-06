@@ -48,3 +48,22 @@ export const loginUser = (email, password) => {
     });
   }
 }
+
+export const forgotPassword = (email) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('FORGOT_PASSWORD'));
+
+    return axiosInstance()
+    .post('/api/v1/users/forgot-password', { email })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('FORGOT_PASSWORD'));
+      
+      return response;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('FORGOT_PASSWORD'));
+
+      throw err.response.data;
+    });
+  }
+}

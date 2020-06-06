@@ -14,6 +14,7 @@ import LoadingScreen from './library/LoadingScreen';
 const Login = lazy(() => import('./pages/Login'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const SignUpConfirmation = lazy(() => import('./pages/SignUpConfirmation'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const JoinWorkshop = lazy(() => import('./pages/JoinWorkshop'));
 
 ReactDOM.render(
@@ -32,6 +33,10 @@ ReactDOM.render(
 
             <Route path='/signup-confirmation'>
               <SignUpConfirmation />
+            </Route>
+
+            <Route path='/forgot-password'>
+              <ForgotPassword />
             </Route>
 
             <Route path='/join-workshop'>
