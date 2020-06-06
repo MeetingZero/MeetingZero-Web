@@ -7,7 +7,7 @@ import cn from 'classnames';
 import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
 import * as userActions from '../../app/user/actions';
-import * as Regex from '../../config/regex';
+import * as Regex from '../../constants/regex';
 
 const SignUp = () => {
   const dispatch = useDispatch();
