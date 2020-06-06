@@ -1,41 +1,30 @@
 import React from 'react';
-import update from 'immutability-helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import cn from 'classnames';
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
 import * as userActions from '../../app/user/actions';
+import * as Regex from '../../config/regex';
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { register, handleSubmit, errors, setError } = useForm();
 
-  const [newUser, setNewUser] = React.useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    confirm_password: ''
-  });
-
-  const handleChange = (event) => {
-    setNewUser(update(newUser, {
-      $merge: {
-        [event.target.name]: event.target.value
-      }
-    }));
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = (formData) => {
+    if (formData.password !== formData.confirm_password) {
+      return setError("confirm_password");
+    }
 
     dispatch(userActions
-    .saveNewUser(newUser))
+    .saveNewUser(formData))
     .then(() => {
       window
       .sessionStorage
-      .setItem("signUpEmail", newUser.email);
+      .setItem("signUpEmail", formData.email);
 
       history.push("/signup-confirmation");
     })
@@ -56,26 +45,54 @@ const SignUp = () => {
         </div>
 
         <div className="container-small absolute-center-y">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row mb-4">
               <div className="col-md-6 mb-4 mb-md-0">
-                <input onChange={handleChange} type="text" name="first_name" className="form-control" placeholder="First name" />
+                <input ref={register({ required: true })} type="text" name="first_name" className="form-control" placeholder="First name" />
+
+                { errors.first_name ?
+                  <div className="small text-danger">
+                    Please enter a first name
+                  </div>
+                : null}
               </div>
 
               <div className="col-md-6">
-                <input onChange={handleChange} type="text" name="last_name" className="form-control" placeholder="Last name" />
+                <input ref={register({ required: true })} type="text" name="last_name" className="form-control" placeholder="Last name" />
+
+                { errors.last_name ?
+                  <div className="small text-danger">
+                    Please enter a last name
+                  </div>
+                : null}
               </div>
             </div>
 
-            <input onChange={handleChange} type="email" name="email" className="form-control mb-4" placeholder="Email" />
+            <div className="mb-4">
+              <input ref={register({ required: true, pattern: Regex.EMAIL })} type="email" name="email" className="form-control" placeholder="Email" />
 
-            <input onChange={handleChange} type="password" name="password" className="form-control mb-1" placeholder="Password" />
+              { errors.email ?
+                <div className="small text-danger">
+                  Please enter a valid email
+                </div>
+              : null}
+            </div>
 
-            <div className="text-muted small mb-4">
+            <input ref={register({ required: true, pattern: Regex.STRONG_PASSWORD })} type="password" name="password" className="form-control mb-1" placeholder="Password" />
+
+            <div className={cn("small mb-4", errors.password ? 'text-danger' : 'text-muted')}>
               Must include: 8 characters minimum, 1 number or symbol
             </div>
 
-            <input onChange={handleChange} type="password" name="confirm_password" className="form-control mb-4" placeholder="Confirm password" />
+            <div className="mb-4">
+              <input ref={register} type="password" name="confirm_password" className="form-control" placeholder="Confirm password" />
+
+              { errors.confirm_password ?
+                <div className="small text-danger">
+                  Passwords must match
+                </div>
+              : null}
+            </div>
 
             <div className="text-center">
               <Button className="btn btn-primary px-5" text="Sign up" type="submit" loading={isLoading} />

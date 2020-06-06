@@ -27,7 +27,7 @@
   left: 50%;
   transform: translate(-50%, 0);
 
-  @media (max-height: 800px) {
+  @media (max-height: 500px) {
     display: none;
   }
 }
