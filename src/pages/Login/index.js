@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
@@ -13,6 +13,7 @@ const Login = () => {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [loginError, setLoginError] = React.useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,8 +21,15 @@ const Login = () => {
     dispatch(userActions.loginUser(email, password))
     .then(() => {
       history.push('/join-workshop');
+    })
+    .catch(() => {
+      setLoginError(true);
     });
   }
+
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("LOGIN") >= 0;
+  });
 
   return (
     <LogoSplitLayout>
@@ -34,12 +42,18 @@ const Login = () => {
 
         <div className="container-small absolute-center-y">
           <form onSubmit={handleSubmit}>
+            {loginError ?
+              <div className="text-danger mb-1">
+                Hmmm... seems like the email and password do not match up
+              </div>
+            : null}
+
             <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control mb-4" placeholder="Email" />
 
             <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control mb-4" placeholder="Password" />
 
             <div className="text-center mb-1">
-              <Button type="submit" className="btn btn-primary px-5" text="Sign in" />
+              <Button type="submit" className="btn btn-primary px-5" text="Sign in" loading={isLoading} />
             </div>
           </form>
 

@@ -36,15 +36,24 @@ export const getUser = () => {
 
 export const loginUser = (email, password) => {
   return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('LOGIN'));
+
     return axiosInstance()
     .post('/api/v1/users/login', {
       email,
       password
     })
     .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('LOGIN'));
+
       return window
       .localStorage
       .setItem("authToken", response.data.token);
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('LOGIN'));
+
+      throw err.response.data;
     });
   }
 }
