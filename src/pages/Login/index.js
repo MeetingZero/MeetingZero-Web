@@ -43,7 +43,7 @@ const Login = () => {
         <div className="container-small absolute-center-y">
           <form onSubmit={handleSubmit}>
             {loginError ?
-              <div className="text-danger mb-1">
+              <div className="small text-danger mb-2">
                 Hmmm... seems like the email and password do not match up
               </div>
             : null}
