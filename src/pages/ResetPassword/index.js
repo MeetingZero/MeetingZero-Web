@@ -29,7 +29,11 @@ const ResetPassword = () => {
     dispatch(userActions
     .resetPassword(formData.password, formData.confirm_password, queryStringData.email, queryStringData.token))
     .then(() => {
-      history.push("/login?reset_password=true");
+      window
+      .sessionStorage
+      .setItem("resetPassword", "true");
+
+      history.push("/login");
     });
   }
 

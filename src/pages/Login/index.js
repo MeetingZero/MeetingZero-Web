@@ -27,8 +27,12 @@ const Login = () => {
       setAccountActivated(true);
     }
 
-    if (parsedQs.reset_password) {
+    if (window.sessionStorage.getItem("resetPassword")) {
       setPasswordReset(true);
+
+      window
+      .sessionStorage
+      .removeItem("resetPassword");
     }
   }, []);
 
@@ -41,6 +45,8 @@ const Login = () => {
     })
     .catch((err) => {
       setLoginError(err);
+
+      setPasswordReset(false);
     });
   }
 
