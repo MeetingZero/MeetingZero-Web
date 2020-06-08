@@ -15,6 +15,7 @@ const Login = lazy(() => import('./pages/Login'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const SignUpConfirmation = lazy(() => import('./pages/SignUpConfirmation'));
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const ResetPassword = lazy(() => import ('./pages/ResetPassword'));
 const JoinWorkshop = lazy(() => import('./pages/JoinWorkshop'));
 
 ReactDOM.render(
@@ -37,6 +38,10 @@ ReactDOM.render(
 
             <Route path='/forgot-password'>
               <ForgotPassword />
+            </Route>
+
+            <Route path='/reset-password'>
+              <ResetPassword />
             </Route>
 
             <Route path='/join-workshop'>

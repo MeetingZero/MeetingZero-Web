@@ -17,6 +17,7 @@ const Login = () => {
   const [password, setPassword] = React.useState("");
   const [loginError, setLoginError] = React.useState(null);
   const [accountActivated, setAccountActivated] = React.useState(false);
+  const [passwordReset, setPasswordReset] = React.useState(false);
 
   React.useEffect(() => {
     const parsedQs = queryString
@@ -24,6 +25,10 @@ const Login = () => {
 
     if (parsedQs.account_activated) {
       setAccountActivated(true);
+    }
+
+    if (parsedQs.reset_password) {
+      setPasswordReset(true);
     }
   }, []);
 
@@ -63,6 +68,12 @@ const Login = () => {
             {accountActivated ?
               <div className="small text-success mb-2">
                 Account activated! Please log in
+              </div>
+            : null}
+
+            {passwordReset ?
+              <div className="small text-success mb-2">
+                Password reset! Please log in
               </div>
             : null}
 

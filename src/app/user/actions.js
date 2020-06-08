@@ -76,3 +76,27 @@ export const forgotPassword = (email) => {
     });
   }
 }
+
+export const resetPassword = (password, confirmPassword, email, token) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('RESET_PASSWORD'));
+
+    return axiosInstance()
+    .post('/api/v1/users/reset-password', {
+      password,
+      confirm_password: confirmPassword,
+      email,
+      token
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('RESET_PASSWORD'));
+
+      return response;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('FORGOT_PASSWORD'));
+
+      throw err.response.data;
+    });
+  }
+}
