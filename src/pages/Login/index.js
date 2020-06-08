@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import queryString from 'query-string';
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
 import * as userActions from '../../app/user/actions';
+import { createErrorString } from '../../helpers/formatErrorMessages';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,7 +15,17 @@ const Login = () => {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [loginError, setLoginError] = React.useState(false);
+  const [loginError, setLoginError] = React.useState(null);
+  const [accountActivated, setAccountActivated] = React.useState(false);
+
+  React.useEffect(() => {
+    const parsedQs = queryString
+    .parse(window.location.search);
+
+    if (parsedQs.account_activated) {
+      setAccountActivated(true);
+    }
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,8 +34,8 @@ const Login = () => {
     .then(() => {
       history.push('/join-workshop');
     })
-    .catch(() => {
-      setLoginError(true);
+    .catch((err) => {
+      setLoginError(err);
     });
   }
 
@@ -44,7 +56,13 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             {loginError ?
               <div className="small text-danger mb-2">
-                Hmmm... seems like the email and password do not match up
+                {createErrorString(loginError)}
+              </div>
+            : null}
+
+            {accountActivated ?
+              <div className="small text-success mb-2">
+                Account activated! Please log in
               </div>
             : null}
 
