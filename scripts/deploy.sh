@@ -1,1 +1,1 @@
-scp -r build arsood@192.168.2.75:/home/arsood
+yarn build && scp -r build arsood@192.168.2.75:/home/arsood
