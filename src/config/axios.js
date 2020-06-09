@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'development') {
 
 export default function() {
   let config = {
-    baseURL,
+    baseURL: baseUrl,
     timeout: 10000
   };
 
