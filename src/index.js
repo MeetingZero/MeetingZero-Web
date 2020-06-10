@@ -61,6 +61,14 @@ const JoinWorkshop = lazy(() => {
   .then(([moduleExports]) => moduleExports);
 });
 
+const CreateWorkshop = lazy(() => {
+  return Promise.all([
+    import('./pages/CreateWorkshop'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -89,6 +97,10 @@ ReactDOM.render(
 
             <Route path='/join-workshop'>
               <JoinWorkshop />
+            </Route>
+
+            <Route path='/create-workshop'>
+              <CreateWorkshop />
             </Route>
           </Switch>
         </Suspense>

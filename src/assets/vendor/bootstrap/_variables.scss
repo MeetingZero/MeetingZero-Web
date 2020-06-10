@@ -38,7 +38,7 @@ $light-blue: #BBE1FF;
 $blue:    #007bff !default;
 $indigo:  #6610f2 !default;
 $purple:  #3F4089 !default;
-$pink:    #e83e8c !default;
+$pink:    #F2B9BA !default;
 $red:     #dc3545 !default;
 $orange:  #fd7e14 !default;
 $yellow:  #ffc107 !default;
@@ -85,7 +85,7 @@ $theme-colors: map-merge(
     "secondary":  $secondary,
     "success":    $success,
     "info":       $info,
-    "warning":    $warning,
+    "warning":    $pink,
     "danger":     $danger,
     "light":      $light,
     "dark":       $dark
@@ -289,7 +289,7 @@ $embed-responsive-aspect-ratios: join(
 // stylelint-disable value-keyword-case
 $font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-$font-family-base:            'Roboto', sans-serif !default;
+$font-family-base:            'Avenir', 'Roboto', sans-serif !default;
 // stylelint-enable value-keyword-case
 
 $font-size-base:              1.6rem !default; // Assumes the browser default, typically `16px`
