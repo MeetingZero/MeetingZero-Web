@@ -42,4 +42,10 @@
     transform: none;
     margin-top: 4rem;
   }
+
+  @media (max-height: 600px) {
+    position: static;
+    transform: none;
+    margin-top: 4rem;
+  }
 }
