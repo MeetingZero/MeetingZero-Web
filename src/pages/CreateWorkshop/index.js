@@ -37,7 +37,7 @@ const CreateWorkshop = () => {
               Create Workshop
             </div>
 
-            <textarea onChange={handleChange} ref={register({ required: true, maxLength: 140 })} name="workshop_name" className={cn("form-control mb-1", charCountExceeded ? 'bg-warning' : null)} placeholder="Purpose of workshop..."></textarea>
+            <textarea onChange={handleChange} ref={register({ required: true, maxLength: 140 })} name="workshop_name" className={cn("form-control mb-1", charCountExceeded ? 'bg-scary' : null)} placeholder="Purpose of workshop..."></textarea>
 
             <div className="row mb-2">
               <div className="col-6">

@@ -1,28 +1,44 @@
 import React from 'react';
 import cn from 'classnames';
 
-const CharacterCounter = (props) => {
+const CharacterCounter = ({
+  className,
+  inputString,
+  maxChars,
+  warningChars = 100,
+  onExceed
+}) => {
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
+  const [charWarning, setCharWarning] = React.useState(false);
 
   React.useEffect(() => {
-    if (props.inputString.length > props.maxChars) {
+    if (inputString.length > maxChars) {
       setCharCountExceeded(true);
+      setCharWarning(false);
 
-      if (props.onExceed) {
-        props.onExceed(true);
+      if (onExceed) {
+        onExceed(true);
       }
-    } else if (props.inputString.length <= props.maxChars) {
+    } else if (inputString.length >= warningChars && inputString.length <= maxChars) {
       setCharCountExceeded(false);
+      setCharWarning(true);
 
-      if (props.onExceed) {
-        props.onExceed(false);
+      if (onExceed) {
+        onExceed(false);
+      }
+    } else if (inputString.length < warningChars) {
+      setCharCountExceeded(false);
+      setCharWarning(false);
+
+      if (onExceed) {
+        onExceed(false);
       }
     }
-  }, [props]);
+  }, [inputString]);
 
   return (
-    <div className={cn(props.className, charCountExceeded ? 'text-danger' : null)}>
-      {props.inputString.length}/{props.maxChars}
+    <div className={cn(className, charCountExceeded ? 'text-danger' : null, charWarning ? 'text-warning' : null)}>
+      {inputString.length}/{maxChars}
     </div>
   );
 }
