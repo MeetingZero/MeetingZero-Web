@@ -21,7 +21,7 @@ const JoinWorkshop = () => {
     <LogoSplitLayout>
       <div className="p-2">
         <div className="text-right">
-          <Button href="/login" text="Create workshop" />
+          <Button href="/create-workshop" text="Create workshop" />
         </div>
 
         <div className="container-small mt-10 absolute-center-y">
