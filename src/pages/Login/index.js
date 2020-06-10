@@ -17,6 +17,7 @@ const Login = () => {
   const [password, setPassword] = React.useState("");
   const [loginError, setLoginError] = React.useState(null);
   const [accountActivated, setAccountActivated] = React.useState(false);
+  const [alreadyActivated, setAlreadyActivated] = React.useState(false);
   const [passwordReset, setPasswordReset] = React.useState(false);
 
   React.useEffect(() => {
@@ -25,6 +26,10 @@ const Login = () => {
 
     if (parsedQs.account_activated) {
       setAccountActivated(true);
+    }
+
+    if (parsedQs.already_activated) {
+      setAlreadyActivated(true);
     }
 
     if (window.sessionStorage.getItem("resetPassword")) {
@@ -74,6 +79,12 @@ const Login = () => {
             {accountActivated ?
               <div className="small text-success mb-2">
                 Account activated! Please log in
+              </div>
+            : null}
+
+            {alreadyActivated ?
+              <div className="small text-danger mb-2">
+                Account already activated. Please log in.
               </div>
             : null}
 
