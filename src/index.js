@@ -8,15 +8,58 @@ import * as serviceWorker from './serviceWorker';
 // Bootstrap library
 import './assets/vendor/bootstrap/bootstrap.scss';
 
+import * as Misc from './constants/misc';
 import LoadingScreen from './library/LoadingScreen';
 
 // Application pages
-const Login = lazy(() => import('./pages/Login'));
-const SignUp = lazy(() => import('./pages/SignUp'));
-const SignUpConfirmation = lazy(() => import('./pages/SignUpConfirmation'));
-const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
-const ResetPassword = lazy(() => import ('./pages/ResetPassword'));
-const JoinWorkshop = lazy(() => import('./pages/JoinWorkshop'));
+
+const Login = lazy(() => {
+  return Promise.all([
+    import('./pages/Login'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
+const SignUp = lazy(() => {
+  return Promise.all([
+    import('./pages/SignUp'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
+const SignUpConfirmation = lazy(() => {
+  return Promise.all([
+    import('./pages/SignUpConfirmation'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
+const ForgotPassword = lazy(() => {
+  return Promise.all([
+    import('./pages/ForgotPassword'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
+const ResetPassword = lazy(() => {
+  return Promise.all([
+    import('./pages/ResetPassword'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
+const JoinWorkshop = lazy(() => {
+  return Promise.all([
+    import('./pages/JoinWorkshop'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
 
 ReactDOM.render(
   <React.StrictMode>

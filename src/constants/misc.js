@@ -1,0 +1,1 @@
+export const LAZY_LOADING_MIN_TIMEOUT = 2000;
