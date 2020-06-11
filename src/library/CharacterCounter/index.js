@@ -34,7 +34,7 @@ const CharacterCounter = ({
         onExceed(false);
       }
     }
-  }, [inputString]);
+  }, [inputString, maxChars, onExceed, warningChars]);
 
   return (
     <div className={cn(className, charCountExceeded ? 'text-danger' : null, charWarning ? 'text-warning' : null)}>
