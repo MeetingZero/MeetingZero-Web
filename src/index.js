@@ -10,6 +10,7 @@ import './assets/vendor/bootstrap/bootstrap.scss';
 
 import * as Misc from './constants/misc';
 import LoadingScreen from './library/LoadingScreen';
+import Restricted from './routes/Restricted';
 
 // Application pages
 
@@ -95,13 +96,15 @@ ReactDOM.render(
               <ResetPassword />
             </Route>
 
-            <Route path='/join-workshop'>
-              <JoinWorkshop />
-            </Route>
+            <Restricted>
+              <Route path='/join-workshop'>
+                <JoinWorkshop />
+              </Route>
 
-            <Route path='/create-workshop'>
-              <CreateWorkshop />
-            </Route>
+              <Route path='/create-workshop'>
+                <CreateWorkshop />
+              </Route>
+            </Restricted>
           </Switch>
         </Suspense>
       </Router>

@@ -30,6 +30,9 @@ export const getUser = () => {
     .get('/api/v1/users/me')
     .then((response) => {
       return dispatch(userSlice.actions.setUser(response.data));
+    })
+    .catch(() => {
+      return dispatch(userSlice.actions.resetUser());
     });
   }
 }
