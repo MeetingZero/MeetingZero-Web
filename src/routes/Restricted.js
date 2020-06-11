@@ -15,15 +15,21 @@ const Restricted = ({ children }) => {
     return state.User.currentUser;
   });
 
+  if (currentUser.loggedIn === undefined) {
+    return null;
+  }
+
   if (currentUser.loggedIn === false) {
     return <Redirect to="/login" />
   }
 
-  return (
-    <React.Fragment>
-      {children}
-    </React.Fragment>
-  );
+  if (currentUser.loggedIn === true) {
+    return (
+      <React.Fragment>
+        {children}
+      </React.Fragment>
+    );
+  }
 }
 
 export default Restricted;
