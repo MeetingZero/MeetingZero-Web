@@ -113,7 +113,7 @@ ReactDOM.render(
                 <CreateWorkshop />
               </Route>
 
-              <Route path='/workshop/:workshop_code'>
+              <Route path='/workshop/:workshop_token'>
                 <Workshop />
               </Route>
             </Restricted>

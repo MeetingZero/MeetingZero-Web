@@ -27,9 +27,6 @@ const SignUp = () => {
       .setItem("signUpEmail", formData.email);
 
       history.push("/signup-confirmation");
-    })
-    .catch((err) => {
-      console.log(err);
     });
   }
 

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import cn from 'classnames';
 
@@ -6,11 +8,18 @@ import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
 import CharacterCounter from '../../library/CharacterCounter';
 
+import * as workshopActions from '../../app/workshop/actions';
+
 const CreateWorkshop = () => {
-  const { register, handleSubmit, errors, setError } = useForm();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (formData) => {
-    console.log(formData);
+    dispatch(workshopActions.createWorkshop(formData))
+    .then((newWorkshop) => {
+      history.push(`/workshop/${newWorkshop.workshop_token}`);
+    });
   }
 
   const [workshopPurpose, setWorkshopPurpose] = React.useState("");
@@ -23,6 +32,10 @@ const CreateWorkshop = () => {
   const handleExceed = (isExceeded) => {
     setCharCountExceeded(isExceeded);
   }
+
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("CREATING_NEW_WORKSHOP") >= 0;
+  });
 
   return (
     <LogoSplitLayout>
@@ -65,7 +78,7 @@ const CreateWorkshop = () => {
             </div>
 
             <div className="text-center mb-1">
-              <Button type="submit" className="btn btn-primary px-5" text="Create workshop" />
+              <Button type="submit" className="btn btn-primary px-5" text="Create workshop" loading={isLoading} />
             </div>
 
             <div className="mx-auto text-center text-muted small" style={{maxWidth: 200}}>
