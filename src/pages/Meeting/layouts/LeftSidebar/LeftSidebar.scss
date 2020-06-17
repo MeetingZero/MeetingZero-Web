@@ -1,5 +1,6 @@
 @import "../../../../assets/vendor/bootstrap/functions";
 @import "../../../../assets/vendor/bootstrap/variables";
+@import "../../../../assets/vendor/bootstrap/mixins/breakpoints";
 
 .meeting-left-sidebar-container {
   min-width: 1000px;
@@ -8,14 +9,19 @@
 .meeting-logo {
   display: block;
   width: 100%;
-  max-width: 6.4rem;
+  max-width: 10rem;
+  margin-top: 3rem;
+  margin-left: 3rem;
 }
 
 .meeting-left-sidebar-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   border-right: $gray-300 1px solid;
   width: 100%;
   padding: 3rem;
+
+  @media (min-height: 900px) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
 }
