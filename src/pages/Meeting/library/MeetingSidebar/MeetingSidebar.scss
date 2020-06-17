@@ -1,0 +1,23 @@
+@import "../../../../assets/vendor/bootstrap/functions";
+@import "../../../../assets/vendor/bootstrap/variables";
+
+.meeting-sidebar-pills {
+  padding: 0;
+  list-style: none;
+  margin-bottom: 10rem;
+
+  a {
+    display: inline-block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    margin-top: 3rem;
+    font-size: 1.6rem;
+    color: $gray-600;
+
+    &.active {
+      background-color: $purple;
+      color: $white;
+      border-radius: 3rem;
+    }
+  }
+}

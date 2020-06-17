@@ -70,6 +70,14 @@ const CreateWorkshop = lazy(() => {
   .then(([moduleExports]) => moduleExports);
 });
 
+const Meeting = lazy(() => {
+  return Promise.all([
+    import('./pages/Meeting'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -103,6 +111,10 @@ ReactDOM.render(
 
               <Route path='/create-workshop'>
                 <CreateWorkshop />
+              </Route>
+
+              <Route path='/meeting/:meeting_code'>
+                <Meeting />
               </Route>
             </Restricted>
           </Switch>
