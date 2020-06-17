@@ -8,27 +8,27 @@ const MeetingSidebar = () => {
   return (
     <ul className="meeting-sidebar-pills">
       <li>
-        <Button href="google.com" text="What's Working" className="active" />
+        <Button href="#" text="What's Working" className="active" />
       </li>
 
       <li>
-        <Button href="google.com" text="Problems" />
+        <Button href="#" text="Problems" />
       </li>
 
       <li>
-        <Button href="google.com" text="Reframe Problem" />
+        <Button href="#" text="Reframe Problem" />
       </li>
 
       <li>
-        <Button href="google.com" text="Opportunity Question" />
+        <Button href="#" text="Opportunity Question" />
       </li>
 
       <li>
-        <Button href="google.com" text="Solutions" />
+        <Button href="#" text="Solutions" />
       </li>
 
       <li>
-        <Button href="google.com" text="Experiment" />
+        <Button href="#" text="Experiment" />
       </li>
     </ul>
   );

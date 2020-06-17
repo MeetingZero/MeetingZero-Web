@@ -1,15 +1,16 @@
 import React from 'react';
 
 import MeetingSidebar from '../../library/MeetingSidebar';
+import Timer from '../../library/Timer';
 
 import logo from '../../../../assets/images/logo.svg';
 import './LeftSidebar.scss';
 
 const LeftSidebar = ({ children }) => {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid meeting-left-sidebar-container">
       <div className="row">
-        <div className="col-lg-3 p-3 vh-100">
+        <div className="col-3 p-3 vh-100">
           <img src={logo} className="meeting-logo" alt="Meeting Logo" />
 
           <div className="meeting-left-sidebar-bottom">
@@ -17,12 +18,12 @@ const LeftSidebar = ({ children }) => {
           </div>
         </div>
 
-        <div className="col-lg-7 p-3">
+        <div className="col-7 p-3">
           {children}
         </div>
 
-        <div className="col-lg-2">
-          Third Column
+        <div className="col-2">
+          <Timer />
         </div>
       </div>
     </div>

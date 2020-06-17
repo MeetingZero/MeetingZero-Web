@@ -1,6 +1,10 @@
 @import "../../../../assets/vendor/bootstrap/functions";
 @import "../../../../assets/vendor/bootstrap/variables";
 
+.meeting-left-sidebar-container {
+  min-width: 1000px;
+}
+
 .meeting-logo {
   display: block;
   width: 100%;
@@ -11,7 +15,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  border-right: $gray-500 1px solid;
+  border-right: $gray-300 1px solid;
   width: 100%;
   padding: 3rem;
 }
