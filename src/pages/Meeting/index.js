@@ -1,6 +1,6 @@
 import React from 'react';
 
-import WhatIsWorking from './modules/WhatIsWorking';
+import WhatIsWorking from './stages/WhatIsWorking';
 
 const Meeting = () => {
   return (
