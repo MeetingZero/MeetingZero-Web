@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MeetingSidebar from '../../library/MeetingSidebar';
+import WorkshopSidebar from '../../library/WorkshopSidebar';
 import Blurb from '../../library/Blurb';
 import Timer from '../../library/Timer';
 
@@ -9,13 +9,13 @@ import './LeftSidebar.scss';
 
 const LeftSidebar = ({ children }) => {
   return (
-    <div className="container-fluid meeting-left-sidebar-container">
+    <div className="container-fluid workshop-left-sidebar-container">
       <div className="row">
         <div className="col-3 vh-100">
-          <img src={logo} className="meeting-logo" alt="Meeting Logo" />
+          <img src={logo} className="workshop-logo" alt="Workshop Logo" />
 
-          <div className="meeting-left-sidebar-bottom">
-            <MeetingSidebar />
+          <div className="workshop-left-sidebar-bottom">
+            <WorkshopSidebar />
 
             <Blurb />
           </div>

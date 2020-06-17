@@ -2,11 +2,11 @@ import React from 'react';
 
 import Button from '../../../../library/Button';
 
-import './MeetingSidebar.scss';
+import './WorkshopSidebar.scss';
 
-const MeetingSidebar = () => {
+const WorkshopSidebar = () => {
   return (
-    <ul className="meeting-sidebar-pills">
+    <ul className="workshop-sidebar-pills">
       <li>
         <Button href="#" text="What's Working" className="active" />
       </li>
@@ -34,4 +34,4 @@ const MeetingSidebar = () => {
   );
 }
 
-export default MeetingSidebar;
+export default WorkshopSidebar;

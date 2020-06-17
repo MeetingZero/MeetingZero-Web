@@ -2,10 +2,10 @@ import React from 'react';
 
 import WhatIsWorking from './stages/WhatIsWorking';
 
-const Meeting = () => {
+const Workshop = () => {
   return (
     <WhatIsWorking />
   );
 }
 
-export default Meeting;
+export default Workshop;
