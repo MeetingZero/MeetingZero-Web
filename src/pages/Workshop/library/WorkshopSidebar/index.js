@@ -14,6 +14,10 @@ const WorkshopSidebar = () => {
     return state.Workshop.currentWorkshopStep;
   });
 
+  if (workshopDirectorGroup === 0 || !currentWorkshopStep) {
+    return null;
+  }
+
   return (
     <ul className="workshop-sidebar-pills">
       {Object.keys(workshopDirectorGroup).map((key) => {
@@ -22,6 +26,16 @@ const WorkshopSidebar = () => {
         return (
           <li key={key}>
             <Button href="#" text={workshopDirector[0].workshop_stage.name} className={currentWorkshopStep.workshop_stage_id === workshopDirector[0].workshop_stage_id ? 'active' : ''} />
+
+            <ul>
+              {workshopDirector.map((wd) => {
+                return (
+                  <li key={wd.id}>
+                    <Button href="#" text={`- ${wd.workshop_stage_step.name}`} />
+                  </li>
+                )
+              })}
+            </ul>
           </li>
         )
       })}

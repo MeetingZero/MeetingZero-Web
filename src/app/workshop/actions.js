@@ -37,7 +37,7 @@ export const getDirector = (workshopId) => {
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('GET_WORKSHOP_DIRECTOR'));
 
-      throw err.response.data;
+      throw err;
     });
   }
 }
@@ -56,7 +56,7 @@ export const getCurrentStep = (workshopId) => {
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('GET_CURRENT_WORKSHOP_STEP'));
 
-      throw err.response.data;
+      throw err;
     });
   }
 }
