@@ -1,7 +1,16 @@
+@keyframes fadeInOut {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
 circle {
   transition: stroke-dashoffset 0.35s;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+
+  &.expired {
+    animation: fadeInOut 1.2s linear infinite;
+  }
 }
 
 .timer-display {

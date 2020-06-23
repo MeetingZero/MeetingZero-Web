@@ -5,6 +5,7 @@ import './RingTimer.scss';
 const RingTimer = ({ radius, strokeWidth }) => {
   const [progress, setProgress] = React.useState(100);
   const [stroke, setStroke] = React.useState('#3F4089');
+  const [timerExpired, setTimerExpired] = React.useState(false);
 
   React.useEffect(() => {
     const interval = window.setInterval(() => {
@@ -13,14 +14,23 @@ const RingTimer = ({ radius, strokeWidth }) => {
       }
     }, 1000);
 
+    if (timerExpired) {
+      window.clearInterval(interval);
+      setProgress(100);
+    }
+
     return () => window.clearInterval(interval);
-  }, [progress]);
+  }, [progress, timerExpired]);
 
   React.useEffect(() => {
-    if (progress < 50 && progress > 10) {
+    if (progress <= 50 && progress > 10) {
       setStroke('#ffc107');
-    } else if (progress <= 10) {
+    } else if (progress <= 15) {
       setStroke('#dc3545');
+    } 
+    
+    if (progress === 0) {
+      setTimerExpired(true);
     }
   }, [progress]);
 
@@ -36,6 +46,7 @@ const RingTimer = ({ radius, strokeWidth }) => {
 
       <svg height={radius * 2} width={radius * 2}>
         <circle
+          className={timerExpired ? 'expired' : null}
           stroke={stroke}
           fill='transparent'
           strokeWidth={strokeWidth}
