@@ -1,35 +1,30 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Button from '../../../../library/Button';
 
 import './WorkshopSidebar.scss';
 
 const WorkshopSidebar = () => {
+  const workshopDirectorGroup = useSelector((state) => {
+    return state.Workshop.workshopDirector;
+  });
+
+  const currentWorkshopStep = useSelector((state) => {
+    return state.Workshop.currentWorkshopStep;
+  });
+
   return (
     <ul className="workshop-sidebar-pills">
-      <li>
-        <Button href="#" text="What's Working" className="active" />
-      </li>
+      {Object.keys(workshopDirectorGroup).map((key) => {
+        const workshopDirector = workshopDirectorGroup[key];
 
-      <li>
-        <Button href="#" text="Problems" />
-      </li>
-
-      <li>
-        <Button href="#" text="Reframe Problem" />
-      </li>
-
-      <li>
-        <Button href="#" text="Opportunity Question" />
-      </li>
-
-      <li>
-        <Button href="#" text="Solutions" />
-      </li>
-
-      <li>
-        <Button href="#" text="Experiment" />
-      </li>
+        return (
+          <li key={key}>
+            <Button href="#" text={workshopDirector[0].workshop_stage.name} className={currentWorkshopStep.workshop_stage_id === workshopDirector[0].workshop_stage_id ? 'active' : ''} />
+          </li>
+        )
+      })}
     </ul>
   );
 }
