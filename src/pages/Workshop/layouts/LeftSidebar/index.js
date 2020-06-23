@@ -26,7 +26,7 @@ const LeftSidebar = ({ children }) => {
         </div>
 
         <div className="col-2">
-          <RingTimer radius={75} stroke={4} progress={95} />
+          <RingTimer radius={75} strokeWidth={4} progress={95} />
         </div>
       </div>
     </div>
