@@ -23,9 +23,9 @@ const RingTimer = ({ radius, strokeWidth }) => {
   }, [progress, timerExpired]);
 
   React.useEffect(() => {
-    if (progress <= 50 && progress > 10) {
+    if (progress <= 50 && progress > 25) {
       setStroke('#ffc107');
-    } else if (progress <= 15) {
+    } else if (progress <= 25) {
       setStroke('#dc3545');
     } 
     
