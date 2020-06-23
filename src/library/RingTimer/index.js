@@ -2,10 +2,30 @@ import React from 'react';
 
 import './RingTimer.scss';
 
-const RingTimer = ({ radius, strokeWidth, progress }) => {
+const RingTimer = ({ radius, strokeWidth }) => {
+  const [progress, setProgress] = React.useState(100);
+  const [stroke, setStroke] = React.useState('#3F4089');
+
+  React.useEffect(() => {
+    const interval = window.setInterval(() => {
+      if (progress > 0) {
+        setProgress(progress - 10);
+      }
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [progress]);
+
+  React.useEffect(() => {
+    if (progress < 50 && progress > 10) {
+      setStroke('#ffc107');
+    } else if (progress <= 10) {
+      setStroke('#dc3545');
+    }
+  }, [progress]);
+
   const normalizedRadius = radius - strokeWidth * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
-
   const strokeDashoffset = circumference - progress / 100 * circumference;
 
   return (
@@ -16,7 +36,7 @@ const RingTimer = ({ radius, strokeWidth, progress }) => {
 
       <svg height={radius * 2} width={radius * 2}>
         <circle
-          stroke='#3F4089'
+          stroke={stroke}
           fill='transparent'
           strokeWidth={strokeWidth}
           strokeDasharray={circumference + ' ' + circumference}
