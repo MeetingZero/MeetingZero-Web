@@ -2,7 +2,7 @@ import React from 'react';
 
 import WorkshopSidebar from '../../library/WorkshopSidebar';
 import Blurb from '../../library/Blurb';
-import Timer from '../../library/Timer';
+import RingTimer from '../../../../library/RingTimer';
 
 import logo from '../../../../assets/images/logo.svg';
 import './LeftSidebar.scss';
@@ -26,7 +26,7 @@ const LeftSidebar = ({ children }) => {
         </div>
 
         <div className="col-2">
-          <Timer />
+          <RingTimer radius={75} stroke={4} progress={95} />
         </div>
       </div>
     </div>
