@@ -25,13 +25,13 @@ const WorkshopSidebar = () => {
 
         return (
           <li key={key}>
-            <Button href="#" text={workshopDirector[0].workshop_stage.name} className={currentWorkshopStep.workshop_stage_id === workshopDirector[0].workshop_stage_id ? 'active' : ''} />
+            <Button href="#" text={workshopDirector[0].workshop_stage.name} className={currentWorkshopStep.workshop_stage_id === workshopDirector[0].workshop_stage_id ? 'active' : null} />
 
             <ul>
               {workshopDirector.map((wd) => {
                 return (
                   <li key={wd.id}>
-                    <Button href="#" text={`- ${wd.workshop_stage_step.name}`} />
+                    <Button href="#" text={`- ${wd.workshop_stage_step.name}`} className={currentWorkshopStep.workshop_stage_step_id === wd.workshop_stage_step_id ? 'font-weight-bold' : null} />
                   </li>
                 )
               })}
