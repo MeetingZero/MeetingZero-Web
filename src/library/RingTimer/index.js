@@ -9,18 +9,24 @@ const RingTimer = ({ radius, stroke, progress }) => {
   const strokeDashoffset = circumference - progress / 100 * circumference;
 
   return (
-    <svg height={radius * 2} width={radius * 2}>
-      <circle
-        stroke="#3F4089"
-        fill="transparent"
-        strokeWidth={ stroke }
-        strokeDasharray={ circumference + ' ' + circumference }
-        style={ { strokeDashoffset } }
-        r={ normalizedRadius }
-        cx={ radius }
-        cy={ radius }
-      />
-    </svg>
+    <div className="position-relative d-inline-block">
+      <div className="timer-display">
+        12:00
+      </div>
+
+      <svg height={radius * 2} width={radius * 2}>
+        <circle
+          stroke="#3F4089"
+          fill="transparent"
+          strokeWidth={ stroke }
+          strokeDasharray={ circumference + ' ' + circumference }
+          style={ { strokeDashoffset } }
+          r={ normalizedRadius }
+          cx={ radius }
+          cy={ radius }
+        />
+      </svg>
+    </div>
   );
 }
 
