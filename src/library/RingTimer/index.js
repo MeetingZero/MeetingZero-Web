@@ -9,7 +9,7 @@ const RingTimer = ({ radius, strokeWidth }) => {
 
   React.useEffect(() => {
     const interval = window.setInterval(() => {
-      if (progress > 0) {
+      if (progress >= 0) {
         setProgress(progress - 10);
       }
     }, 1000);
@@ -29,7 +29,7 @@ const RingTimer = ({ radius, strokeWidth }) => {
       setStroke('#dc3545');
     } 
     
-    if (progress === 0) {
+    if (progress < 0) {
       setTimerExpired(true);
     }
   }, [progress]);
