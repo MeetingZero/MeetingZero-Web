@@ -29,7 +29,7 @@ const WorkshopStart = () => {
         </div>
       </div>
 
-      <ul className='requirements-list'>
+      <ul className='requirements-list mb-4'>
         <li>
           <img src={timeIcon} /> <div>65 Minutes</div>
         </li>
@@ -54,6 +54,12 @@ const WorkshopStart = () => {
           <img src={lightbulbIcon} /> <div>View Pro Tips for guidance, and follow along with an example in which building owners improve their tenets' experience</div>
         </li>
       </ul>
+
+      <div className="text-right pr-8">
+        <button className="btn btn-primary px-3">
+          Start Workshop
+        </button>
+      </div>
     </Squiggle>
   );
 }
