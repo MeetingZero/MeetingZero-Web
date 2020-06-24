@@ -1,16 +1,29 @@
 import React from 'react';
+import moment from 'moment';
 
 import './RingTimer.scss';
 
-const RingTimer = ({ radius, strokeWidth }) => {
+const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp }) => {
   const [progress, setProgress] = React.useState(100);
   const [stroke, setStroke] = React.useState('#3F4089');
   const [timerExpired, setTimerExpired] = React.useState(false);
+  const [timerDisplay, setTimerDisplay] = React.useState('Start!');
+
+  const expireTime = moment(expireTimestamp);
+  const startTime = moment(startTimestamp);
 
   React.useEffect(() => {
     const interval = window.setInterval(() => {
+      const currentTime = moment().utc();
+      const secondsDiffFromCurrentTime = expireTime.diff(currentTime, 'seconds');
+      const secondsDiffFromStartTime = expireTime.diff(startTime, 'seconds');
+
+      const timeRemainingDuration = moment.duration(secondsDiffFromCurrentTime, 'seconds');
+
+      setTimerDisplay(`${timeRemainingDuration._data.minutes}:${timeRemainingDuration._data.seconds}`);
+
       if (progress >= 0) {
-        setProgress(progress - 10);
+        setProgress((secondsDiffFromCurrentTime / secondsDiffFromStartTime) * 100);
       }
     }, 1000);
 
@@ -20,16 +33,16 @@ const RingTimer = ({ radius, strokeWidth }) => {
     }
 
     return () => window.clearInterval(interval);
-  }, [progress, timerExpired]);
+  }, [progress, timerExpired, expireTime, startTime]);
 
   React.useEffect(() => {
     if (progress <= 50 && progress > 25) {
       setStroke('#ffc107');
     } else if (progress <= 25) {
       setStroke('#dc3545');
-    } 
+    }
     
-    if (progress < 0) {
+    if (progress === 0) {
       setTimerExpired(true);
     }
   }, [progress]);
@@ -41,7 +54,7 @@ const RingTimer = ({ radius, strokeWidth }) => {
   return (
     <div className="position-relative d-inline-block">
       <div className="timer-display">
-        12:00
+        {timerDisplay}
       </div>
 
       <svg height={radius * 2} width={radius * 2}>

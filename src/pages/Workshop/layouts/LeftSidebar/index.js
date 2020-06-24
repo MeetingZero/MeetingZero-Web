@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import WorkshopSidebar from '../../library/WorkshopSidebar';
 import Blurb from '../../library/Blurb';
@@ -26,7 +27,7 @@ const LeftSidebar = ({ children }) => {
         </div>
 
         <div className="col-2">
-          <RingTimer radius={75} strokeWidth={4} progress={95} />
+          <RingTimer radius={75} strokeWidth={4} startTimestamp={moment().utc().toISOString()} expireTimestamp={moment().utc().add(10, 'seconds').toISOString()} />
         </div>
       </div>
     </div>
