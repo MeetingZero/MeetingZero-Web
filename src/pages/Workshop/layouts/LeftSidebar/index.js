@@ -31,7 +31,8 @@ const LeftSidebar = ({ children }) => {
             radius={75}
             strokeWidth={4}
             startTimestamp={moment().utc().toISOString()}
-            expireTimestamp={moment().utc().add(300, 'seconds').toISOString()}
+            expireTimestamp={moment().utc().add(10, 'seconds').toISOString()}
+            onTimerExpired={() => console.log('TIMER EXPIRED')}
           />
         </div>
       </div>
