@@ -10,7 +10,7 @@ import './LeftSidebar.scss';
 
 const LeftSidebar = ({ children }) => {
   return (
-    <div className="container-fluid workshop-left-sidebar-container">
+    <div className="container-fluid container-fixed">
       <div className="row">
         <div className="col-3 vh-100">
           <img src={logo} className="workshop-logo" alt="Workshop Logo" />

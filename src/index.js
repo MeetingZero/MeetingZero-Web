@@ -70,6 +70,14 @@ const CreateWorkshop = lazy(() => {
   .then(([moduleExports]) => moduleExports);
 });
 
+const WorkshopStart = lazy(() => {
+  return Promise.all([
+    import('./pages/WorkshopStart'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
 const Workshop = lazy(() => {
   return Promise.all([
     import('./pages/Workshop'),
@@ -84,36 +92,40 @@ ReactDOM.render(
       <Router>
         <Suspense fallback={<LoadingScreen />}>
           <Switch>
-            <Route path='/login'>
+            <Route exact path='/login'>
               <Login />
             </Route>
 
-            <Route path='/sign-up'>
+            <Route exact path='/sign-up'>
               <SignUp />
             </Route>
 
-            <Route path='/signup-confirmation'>
+            <Route exact path='/signup-confirmation'>
               <SignUpConfirmation />
             </Route>
 
-            <Route path='/forgot-password'>
+            <Route exact path='/forgot-password'>
               <ForgotPassword />
             </Route>
 
-            <Route path='/reset-password'>
+            <Route exact path='/reset-password'>
               <ResetPassword />
             </Route>
 
             <Restricted>
-              <Route path='/join-workshop'>
+              <Route exact path='/join-workshop'>
                 <JoinWorkshop />
               </Route>
 
-              <Route path='/create-workshop'>
+              <Route exact path='/create-workshop'>
                 <CreateWorkshop />
               </Route>
 
-              <Route path='/workshop/:workshop_token'>
+              <Route exact path='/workshop/:workshop_token/start'>
+                <WorkshopStart />
+              </Route>
+
+              <Route exact path='/workshop/:workshop_token'>
                 <Workshop />
               </Route>
             </Restricted>

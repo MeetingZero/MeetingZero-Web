@@ -18,7 +18,7 @@ const CreateWorkshop = () => {
   const onSubmit = (formData) => {
     dispatch(workshopActions.createWorkshop(formData))
     .then((newWorkshop) => {
-      history.push(`/workshop/${newWorkshop.workshop_token}`);
+      history.push(`/workshop/${newWorkshop.workshop_token}/start`);
     });
   }
 
