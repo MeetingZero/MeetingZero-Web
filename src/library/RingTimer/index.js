@@ -1,9 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 
+import { lpadZero } from '../../helpers/numberUtils';
+
 import './RingTimer.scss';
 
-const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp }) => {
+const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTimerExpired }) => {
   const [progress, setProgress] = React.useState(100);
   const [stroke, setStroke] = React.useState('#3F4089');
   const [timerExpired, setTimerExpired] = React.useState(false);
@@ -20,7 +22,7 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp }) => 
 
       const timeRemainingDuration = moment.duration(secondsDiffFromCurrentTime, 'seconds');
 
-      setTimerDisplay(`${timeRemainingDuration._data.minutes}:${timeRemainingDuration._data.seconds}`);
+      setTimerDisplay(`${lpadZero(timeRemainingDuration._data.minutes, 2)}:${lpadZero(timeRemainingDuration._data.seconds, 2)}`);
 
       if (progress >= 0) {
         setProgress((secondsDiffFromCurrentTime / secondsDiffFromStartTime) * 100);
@@ -30,6 +32,10 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp }) => 
     if (timerExpired) {
       window.clearInterval(interval);
       setProgress(100);
+
+      if (onTimerExpired) {
+        onTimerExpired();
+      }
     }
 
     return () => window.clearInterval(interval);

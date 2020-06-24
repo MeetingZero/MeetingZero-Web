@@ -27,7 +27,7 @@ const LeftSidebar = ({ children }) => {
         </div>
 
         <div className="col-2">
-          <RingTimer radius={75} strokeWidth={4} startTimestamp={moment().utc().toISOString()} expireTimestamp={moment().utc().add(10, 'seconds').toISOString()} />
+          <RingTimer radius={75} strokeWidth={4} startTimestamp={moment().utc().toISOString()} expireTimestamp={moment().utc().add(300, 'seconds').toISOString()} />
         </div>
       </div>
     </div>
