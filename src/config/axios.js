@@ -1,18 +1,10 @@
 import axios from 'axios';
 
+import { BASE_URL } from '../constants/endpoints';
+
 export default function() {
-  let baseUrl;
-
-  if (process.env.NODE_ENV === 'development') {
-    baseUrl = 'http://localhost:3000';
-  } else if (process.env.REACT_APP_ENV === 'staging') {
-    baseUrl = 'https://api-dev.meetingzero.net';
-  } else if (process.env.NODE_ENV === 'production') {
-    baseUrl = 'https://api.meetingzero.net';
-  }
-
   let config = {
-    baseURL: baseUrl,
+    baseURL: BASE_URL,
     timeout: 10000
   };
 

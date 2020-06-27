@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { cableConsumer } from '../../config/cableConsumer';
+
 import Squiggle from '../../layouts/Squiggle';
 
 import timeIcon from '../../assets/images/time.svg';
@@ -11,6 +13,19 @@ import lightbulbIcon from '../../assets/images/light_bulb.svg';
 import './WorkshopStart.scss';
 
 const WorkshopStart = () => {
+  cableConsumer()
+  .subscriptions
+  .create({
+    channel: 'WorkshopChannel'
+  }, {
+    received: (data) => {
+      console.log(data);
+    },
+    connected: () => {
+      console.log("CONNECTED!!");
+    }
+  });
+
   return (
     <Squiggle>
       <div className="feather-card mt-10 mb-3">
