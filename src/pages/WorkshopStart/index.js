@@ -46,27 +46,27 @@ const WorkshopStart = () => {
 
       <ul className='requirements-list mb-4'>
         <li>
-          <img src={timeIcon} /> <div>65 Minutes</div>
+          <img src={timeIcon} alt='Time Icon' /> <div>65 Minutes</div>
         </li>
 
         <li>
-          <img src={bathroomIcon} /> <div>Bathroom break halfway through</div>
+          <img src={bathroomIcon} alt='Bathroom Icon' /> <div>Bathroom break halfway through</div>
         </li>
 
         <li>
-          <img src={anonymousIcon} /> <div>All responses are anonymous</div>
+          <img src={anonymousIcon} alt='Anonymous Icon' /> <div>All responses are anonymous</div>
         </li>
 
         <li>
-          <img src={soundIcon} /> <div>We work together, in silence, unless otherwise instructed</div>
+          <img src={soundIcon} alt='Sound Icon' /> <div>We work together, in silence, unless otherwise instructed</div>
         </li>
 
         <li>
-          <img src={musicIcon} /> <div>Non-lyrical music is a good way to remove the awkwardness of silence</div>
+          <img src={musicIcon} alt="Music Icon" /> <div>Non-lyrical music is a good way to remove the awkwardness of silence</div>
         </li>
 
         <li>
-          <img src={lightbulbIcon} /> <div>View Pro Tips for guidance, and follow along with an example in which building owners improve their tenets' experience</div>
+          <img src={lightbulbIcon} alt='Light Bulb Icon' /> <div>View Pro Tips for guidance, and follow along with an example in which building owners improve their tenets' experience</div>
         </li>
       </ul>
 
