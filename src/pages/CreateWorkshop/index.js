@@ -7,6 +7,7 @@ import cn from 'classnames';
 import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
 import CharacterCounter from '../../library/CharacterCounter';
+import TagsInput from '../../library/TagsInput';
 
 import * as workshopActions from '../../app/workshop/actions';
 
@@ -15,8 +16,10 @@ const CreateWorkshop = () => {
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
 
+  const [emails, setEmails] = React.useState([]);
+
   const onSubmit = (formData) => {
-    dispatch(workshopActions.createWorkshop(formData))
+    dispatch(workshopActions.createWorkshop(formData, emails))
     .then((newWorkshop) => {
       history.push(`/workshop/${newWorkshop.workshop_token}/start`);
     });
@@ -36,6 +39,10 @@ const CreateWorkshop = () => {
   const isLoading = useSelector((state) => {
     return state.Loading.indexOf("CREATING_NEW_WORKSHOP") >= 0;
   });
+
+  const handleEmailChange = (emails) => {
+    return setEmails(emails);
+  }
 
   return (
     <LogoSplitLayout>
@@ -71,10 +78,16 @@ const CreateWorkshop = () => {
               </div>
             </div>
 
-            <input type="text" className="form-control border-top-0 border-left-0 border-right-0 rounded-0 mb-1" placeholder="Invite Attendees" />
+            <TagsInput
+              className="form-control border-top-0 border-left-0 border-right-0 rounded-0 mb-1"
+              value={emails}
+              onChange={handleEmailChange}
+              onlyUnique={true}
+              placeholder="Invite Attendees"
+            />
 
             <div className="text-right mb-5">
-              Separate emails with a comma
+              Separate emails with the tab or enter key
             </div>
 
             <div className="text-center mb-1">
