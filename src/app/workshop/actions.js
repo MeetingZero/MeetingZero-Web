@@ -3,14 +3,15 @@ import axiosInstance from '../../config/axios';
 import loadingSlice from '../loading/slice';
 import workshopSlice from '../workshop/slice';
 
-export const createWorkshop = (workshop) => {
+export const createWorkshop = (workshop, emails) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('CREATING_NEW_WORKSHOP'));
 
     return axiosInstance()
     .post('/api/v1/workshops', {
       purpose: workshop.purpose,
-      template: "BRANCH_1"
+      template: "BRANCH_1",
+      emails
     })
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('CREATING_NEW_WORKSHOP'));
