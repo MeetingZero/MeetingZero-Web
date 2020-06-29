@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import cn from 'classnames';
+import DateTimePicker from 'react-datetime-picker';
+import moment from 'moment';
 
 import LogoSplitLayout from '../../layouts/LogoSplit';
 import Button from '../../library/Button';
@@ -17,16 +19,20 @@ const CreateWorkshop = () => {
   const { register, handleSubmit, errors } = useForm();
 
   const [emails, setEmails] = React.useState([]);
+  const [workshopPurpose, setWorkshopPurpose] = React.useState("");
+  const [charCountExceeded, setCharCountExceeded] = React.useState(false);
+  const [dateTimeSelected, setDateTimeSelected] = React.useState(null);
 
   const onSubmit = (formData) => {
-    dispatch(workshopActions.createWorkshop(formData, emails))
+    const dateTimeSelectedUtc = moment(dateTimeSelected)
+    .utc()
+    .toISOString();
+
+    dispatch(workshopActions.createWorkshop(formData, emails, dateTimeSelectedUtc))
     .then((newWorkshop) => {
       history.push(`/workshop/${newWorkshop.workshop_token}/start`);
     });
   }
-
-  const [workshopPurpose, setWorkshopPurpose] = React.useState("");
-  const [charCountExceeded, setCharCountExceeded] = React.useState(false);
 
   const handleChange = (event) => {
     setWorkshopPurpose(event.target.value);
@@ -86,8 +92,19 @@ const CreateWorkshop = () => {
               placeholder="Invite Attendees"
             />
 
-            <div className="text-right mb-5">
+            <div className="text-right mb-2">
               Separate emails with the tab or enter key
+            </div>
+
+            <div className="mb-2">
+              Select Date and Time
+            </div>
+
+            <div className="mb-5">
+              <DateTimePicker 
+                value={dateTimeSelected}
+                onChange={setDateTimeSelected}
+              />
             </div>
 
             <div className="text-center mb-1">
