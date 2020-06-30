@@ -27,12 +27,12 @@ export const createWorkshop = (workshop, emails, dateTimeSelected) => {
   }
 }
 
-export const getDirector = (workshopId) => {
+export const getDirector = (workshopToken) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('GET_WORKSHOP_DIRECTOR'));
 
     return axiosInstance()
-    .get(`/api/v1/workshops/${workshopId}/director`)
+    .get(`/api/v1/workshops/${workshopToken}/director`)
     .then((response) => {
       return dispatch(workshopSlice.actions.setWorkshopDirector(response.data));
     })
@@ -44,12 +44,12 @@ export const getDirector = (workshopId) => {
   }
 }
 
-export const getCurrentStep = (workshopId) => {
+export const getCurrentStep = (workshopToken) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('GET_CURRENT_WORKSHOP_STEP'));
 
     return axiosInstance()
-    .get(`/api/v1/workshops/${workshopId}/director/current`)
+    .get(`/api/v1/workshops/${workshopToken}/director/current`)
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('GET_CURRENT_WORKSHOP_STEP'));
 
@@ -63,12 +63,12 @@ export const getCurrentStep = (workshopId) => {
   }
 }
 
-export const getWorkshop = (workshopId) => {
+export const getWorkshop = (workshopToken) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('GET_WORKSHOP'));
 
     return axiosInstance()
-    .get(`/api/v1/workshops/${workshopId}`)
+    .get(`/api/v1/workshops/${workshopToken}`)
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('GET_WORKSHOP'));
 
