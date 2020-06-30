@@ -86,9 +86,13 @@ const WorkshopStart = () => {
       </ul>
 
       <div className="text-right pr-8">
-        <button className="btn btn-primary px-3">
-          Start Workshop
-        </button>
+        {workshop && workshop.is_host ?
+          <button className="btn btn-primary px-3">
+            Start Workshop
+          </button>
+        :
+          <div>Waiting for host to start the meeting...</div>
+        }
       </div>
     </Squiggle>
   );
