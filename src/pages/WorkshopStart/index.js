@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { cableConsumer } from '../../config/cableConsumer';
 import * as workshopActions from '../../app/workshop/actions';
@@ -37,13 +37,17 @@ const WorkshopStart = () => {
     }
   });
 
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
+
   return (
     <Squiggle>
       <div className="feather-card mt-10 mb-3">
         <h4 className="font-weight-normal mb-1">Workshop Purpose</h4>
 
         <div>
-          Make sure all copy is finalized
+          {workshop && workshop.purpose}
         </div>
       </div>
 
