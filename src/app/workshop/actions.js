@@ -3,7 +3,7 @@ import axiosInstance from '../../config/axios';
 import loadingSlice from '../loading/slice';
 import workshopSlice from '../workshop/slice';
 
-export const createWorkshop = (workshop, emails, dateTimeSelected) => {
+export const createWorkshop = (workshop, emails, dateTimePlanned) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('CREATING_NEW_WORKSHOP'));
 
@@ -12,7 +12,7 @@ export const createWorkshop = (workshop, emails, dateTimeSelected) => {
       purpose: workshop.purpose,
       template: "BRANCH_1",
       emails,
-      date_time_selected: dateTimeSelected
+      date_time_planned: dateTimePlanned
     })
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('CREATING_NEW_WORKSHOP'));
