@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import { cableConsumer } from '../../config/cableConsumer';
 
@@ -13,10 +14,13 @@ import lightbulbIcon from '../../assets/images/light_bulb.svg';
 import './WorkshopStart.scss';
 
 const WorkshopStart = () => {
-  cableConsumer()
+  const params = useParams();
+
+  cableConsumer(params.workshop_token)
   .subscriptions
   .create({
-    channel: 'WorkshopChannel'
+    channel: 'WorkshopChannel',
+    workshop_token: params.workshop_token
   }, {
     received: (data) => {
       console.log(data);
