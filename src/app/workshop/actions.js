@@ -62,3 +62,22 @@ export const getCurrentStep = (workshopId) => {
     });
   }
 }
+
+export const getWorkshop = (workshopId) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('GET_WORKSHOP'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops/${workshopId}`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_WORKSHOP'));
+
+      return dispatch(workshopSlice.actions.setWorkshop(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_WORKSHOP'));
+
+      throw err;
+    });
+  }
+}

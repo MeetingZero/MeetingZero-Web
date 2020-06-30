@@ -1,7 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { cableConsumer } from '../../config/cableConsumer';
+import * as workshopActions from '../../app/workshop/actions';
 
 import Squiggle from '../../layouts/Squiggle';
 
@@ -14,7 +16,12 @@ import lightbulbIcon from '../../assets/images/light_bulb.svg';
 import './WorkshopStart.scss';
 
 const WorkshopStart = () => {
+  const dispatch = useDispatch();
   const params = useParams();
+
+  React.useEffect(() => {
+    dispatch(workshopActions.getWorkshop(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
 
   cableConsumer(params.workshop_token)
   .subscriptions
