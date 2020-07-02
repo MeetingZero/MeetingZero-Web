@@ -81,3 +81,22 @@ export const getWorkshop = (workshopToken) => {
     });
   }
 }
+
+export const getWorkshopMembers = (workshopToken) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('GET_WORKSHOP_MEMBERS'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops/${workshopToken}/members`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_WORKSHOP_MEMBERS'));
+
+      return dispatch(workshopSlice.actions.setWorkshopMembers(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_WORKSHOP_MEMBERS'));
+
+      throw err;
+    });
+  }
+}

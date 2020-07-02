@@ -55,7 +55,7 @@ const WorkshopStart = () => {
         <h4 className="font-weight-normal mb-1">Attendees</h4>
 
         <div>
-          Make sure all copy is finalized
+          <WorkshopMembers />
         </div>
       </div>
 
@@ -95,6 +95,35 @@ const WorkshopStart = () => {
         }
       </div>
     </Squiggle>
+  );
+}
+
+const WorkshopMembers = () => {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  React.useEffect(() => {
+    dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
+
+  const workshopMembers = useSelector((state) => {
+    return state.Workshop.workshopMembers;
+  });
+
+  return (
+    <React.Fragment>
+      {workshopMembers.map((member) => {
+        if (member.user) {
+          return (
+            <span key={member.id}>{member.user.first_name}</span>
+          );
+        }
+
+        return (
+          <span key={member.id}>member.email</span>
+        );
+      })}
+    </React.Fragment>
   );
 }
 
