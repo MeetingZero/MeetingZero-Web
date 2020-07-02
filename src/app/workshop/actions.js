@@ -100,3 +100,22 @@ export const getWorkshopMembers = (workshopToken) => {
     });
   }
 }
+
+export const startWorkshop = (workshopToken) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('STARTING_WORKSHOP'));
+
+    return axiosInstance()
+    .put(`/api/v1/workshops/${workshopToken}/start`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('STARTING_WORKSHOP'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('STARTING_WORKSHOP'));
+
+      throw err.response.data;
+    });
+  }
+}

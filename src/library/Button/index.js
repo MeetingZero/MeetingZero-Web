@@ -18,6 +18,7 @@ const Button = (props) => {
         className={props.className}
         type={props.type || "button"}
         disabled={props.loading ? 'disabled' : null}
+        onClick={props.onClick}
       >
         {props.loading ?
           <i className="fas fa-sync fa-spin mr-1" />

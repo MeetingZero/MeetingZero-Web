@@ -6,6 +6,7 @@ import { cableConsumer } from '../../config/cableConsumer';
 import * as workshopActions from '../../app/workshop/actions';
 
 import Squiggle from '../../layouts/Squiggle';
+import Button from '../../library/Button';
 
 import timeIcon from '../../assets/images/time.svg';
 import bathroomIcon from '../../assets/images/bathroom.svg';
@@ -23,22 +24,32 @@ const WorkshopStart = () => {
     dispatch(workshopActions.getWorkshop(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
-  cableConsumer(params.workshop_token)
-  .subscriptions
-  .create({
-    channel: 'WorkshopChannel',
-    workshop_token: params.workshop_token
-  }, {
-    received: (data) => {
-      console.log(data);
-    },
-    connected: () => {
-      console.log("CONNECTED!!");
-    }
-  });
+  React.useEffect(() => {
+    cableConsumer(params.workshop_token)
+    .subscriptions
+    .create({
+      channel: 'WorkshopChannel',
+      workshop_token: params.workshop_token
+    }, {
+      received: (data) => {
+        console.log(data);
+      },
+      connected: () => {
+        console.log("CONNECTED!!");
+      }
+    });
+  }, [params.workshop_token]);
 
   const workshop = useSelector((state) => {
     return state.Workshop.workshop;
+  });
+
+  const startWorkshop = () => {
+    dispatch(workshopActions.startWorkshop(params.workshop_token));
+  }
+
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("STARTING_WORKSHOP") >= 0;
   });
 
   return (
@@ -87,9 +98,12 @@ const WorkshopStart = () => {
 
       <div className="text-right pr-8">
         {workshop && workshop.is_host ?
-          <button className="btn btn-primary px-3">
-            Start Workshop
-          </button>
+          <Button
+            onClick={startWorkshop}
+            className="btn btn-primary px-3"
+            text="Start Workshop"
+            loading={isLoading}
+          />
         :
           <div>Waiting for host to start the meeting...</div>
         }
