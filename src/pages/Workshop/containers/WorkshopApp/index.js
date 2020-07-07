@@ -8,7 +8,7 @@ import Blurb from '../../library/Blurb';
 import RingTimer from '../../../../library/RingTimer';
 
 import logo from '../../../../assets/images/logo.svg';
-import './LeftSidebar.scss';
+import './WorkshopApp.scss';
 
 const LeftSidebar = ({ children }) => {
   const dispatch = useDispatch();

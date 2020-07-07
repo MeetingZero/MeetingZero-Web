@@ -1,15 +1,30 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-import LeftSidebar from '../../layouts/LeftSidebar';
+import WorkshopApp from '../../containers/WorkshopApp';
+import Responses from './steps/Responses';
+import Review from './steps/Review';
 
 const WhatIsWorking = () => {
-  return (
-    <LeftSidebar>
-      <h1 className="h2 mt-5">Start with what's working</h1>
+  const currentWorkshopStep = useSelector((state) => {
+    return state.Workshop.currentWorkshopStep;
+  });
 
-      <h5>Up to three short statements of what's going well.</h5>
-    </LeftSidebar>
-  );
+  const currentStepKey = currentWorkshopStep.workshop_stage_step.key;
+
+  if (currentStepKey === "WHATS_WORKING_RESPONSES") {
+    return (
+      <WorkshopApp>
+        <Responses />
+      </WorkshopApp>
+    );
+  } else if (currentStepKey === "WHATS_WORKING_REVIEW") {
+    return (
+      <WorkshopApp>
+        <Review />
+      </WorkshopApp>
+    );
+  }
 }
 
 export default WhatIsWorking;
