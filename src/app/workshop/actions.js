@@ -138,3 +138,24 @@ export const validateWorkshop = (workshopToken) => {
     });
   }
 }
+
+export const completeWorkshopStep = (workshopToken, workshopStageStepId) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('COMPLETING_WORKSHOP_STEP'));
+
+    return axiosInstance()
+    .put(`/api/v1/workshops/${workshopToken}/complete-step`, {
+      workshop_stage_step_id: workshopStageStepId
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('COMPLETING_WORKSHOP_STEP'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('COMPLETING_WORKSHOP_STEP'));
+
+      throw err.response.data;
+    });
+  }
+}

@@ -31,6 +31,10 @@ const Workshop = () => {
     return state.Workshop.currentWorkshopStep;
   });
 
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
+
   React.useEffect(() => {
     dispatch(
       workshopActions
@@ -45,7 +49,14 @@ const Workshop = () => {
     );
   }, [dispatch, params.workshop_token]);
 
-  if (!currentWorkshopStep) {
+  React.useEffect(() => {
+    dispatch(
+      workshopActions
+      .getWorkshop(params.workshop_token)
+    );
+  }, [dispatch, params.workshop_token]);
+
+  if (!currentWorkshopStep || !workshop) {
     return null;
   }
 

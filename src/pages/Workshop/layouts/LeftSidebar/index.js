@@ -1,5 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as workshopActions from '../../../../app/workshop/actions';
 
 import WorkshopSidebar from '../../library/WorkshopSidebar';
 import Blurb from '../../library/Blurb';
@@ -9,9 +11,23 @@ import logo from '../../../../assets/images/logo.svg';
 import './LeftSidebar.scss';
 
 const LeftSidebar = ({ children }) => {
+  const dispatch = useDispatch();
+
   const currentWorkshopStep = useSelector((state) => {
     return state.Workshop.currentWorkshopStep;
   });
+
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
+
+  const handleTimerExpired = () => {
+    if (workshop.is_host) {
+      const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
+
+      dispatch(workshopActions.completeWorkshopStep(workshop.workshop_token, workshopStageStepId));
+    }
+  }
 
   return (
     <div className="container-fluid container-fixed">
@@ -36,7 +52,7 @@ const LeftSidebar = ({ children }) => {
             strokeWidth={4}
             startTimestamp={currentWorkshopStep.workshop_stage_step_start_time}
             expireTimestamp={currentWorkshopStep.workshop_stage_step_expire_time}
-            onTimerExpired={() => console.log('TIMER EXPIRED')}
+            onTimerExpired={handleTimerExpired}
           />
         </div>
       </div>
