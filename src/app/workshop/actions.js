@@ -119,3 +119,22 @@ export const startWorkshop = (workshopToken) => {
     });
   }
 }
+
+export const validateWorkshop = (workshopToken) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('VALIDATING_WORKSHOP'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops/${workshopToken}/validate`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('VALIDATING_WORKSHOP'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('VALIDATING_WORKSHOP'));
+
+      throw err.response.data;
+    });
+  }
+}

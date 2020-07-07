@@ -1,9 +1,10 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { cableConsumer } from '../../config/cableConsumer';
 import * as workshopActions from '../../app/workshop/actions';
+import workshopSlice from '../../app/workshop/slice';
 
 import Squiggle from '../../layouts/Squiggle';
 import Button from '../../library/Button';
@@ -19,6 +20,7 @@ import './WorkshopStart.scss';
 const WorkshopStart = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const history = useHistory();
 
   React.useEffect(() => {
     dispatch(workshopActions.getWorkshop(params.workshop_token));
@@ -32,17 +34,25 @@ const WorkshopStart = () => {
       workshop_token: params.workshop_token
     }, {
       received: (data) => {
-        console.log(data);
+        if (data.workshop) {
+          return dispatch(workshopSlice.actions.setWorkshop(data.workshop));
+        }
       },
       connected: () => {
         console.log("CONNECTED!!");
       }
     });
-  }, [params.workshop_token]);
+  }, [params.workshop_token, dispatch]);
 
   const workshop = useSelector((state) => {
     return state.Workshop.workshop;
   });
+
+  React.useEffect(() => {
+    if (workshop && workshop.started_at) {
+      history.push(`/workshop/${params.workshop_token}`);
+    }
+  }, [workshop, params.workshop_token, history]);
 
   const startWorkshop = () => {
     dispatch(workshopActions.startWorkshop(params.workshop_token));
@@ -62,13 +72,15 @@ const WorkshopStart = () => {
         </div>
       </div>
 
-      <div className="feather-card mb-10">
-        <h4 className="font-weight-normal mb-1">Attendees</h4>
+      {workshop && workshop.is_host ?
+        <div className="feather-card mb-10">
+          <h4 className="font-weight-normal mb-1">Attendees</h4>
 
-        <div>
-          <WorkshopMembers />
+          <div>
+            <WorkshopMembers />
+          </div>
         </div>
-      </div>
+      : null}
 
       <ul className='requirements-list mb-4'>
         <li>
@@ -126,10 +138,12 @@ const WorkshopMembers = () => {
 
   return (
     <React.Fragment>
-      {workshopMembers.map((member) => {
+      {workshopMembers.map((member, index) => {
         if (member.user) {
           return (
-            <span key={member.id}>{member.user.first_name}</span>
+            <React.Fragment key={member.id}>
+              <span>{member.user.first_name}</span>{index + 1 < workshopMembers.length ? ", " : null}
+            </React.Fragment>
           );
         }
 
