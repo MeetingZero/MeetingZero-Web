@@ -38,7 +38,7 @@ const LeftSidebar = ({ children }) => {
           <div className="workshop-left-sidebar-bottom">
             <WorkshopSidebar />
 
-            <Blurb />
+            <Blurb title="Workshop Purpose" text={workshop.purpose} />
           </div>
         </div>
 
