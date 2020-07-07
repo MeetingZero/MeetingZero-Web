@@ -9,6 +9,7 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTim
   const [progress, setProgress] = React.useState(100);
   const [stroke, setStroke] = React.useState('#3F4089');
   const [timerExpired, setTimerExpired] = React.useState(false);
+  const [callbackCalled, setCallbackCalled] = React.useState(false);
   const [timerDisplay, setTimerDisplay] = React.useState('Start!');
   const [millisecondsRemaining, setMillisecondsRemaining] = React.useState();
 
@@ -47,10 +48,13 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTim
   }, [progress, timerExpired, expireTime, startTime, millisecondsRemaining]);
 
   React.useEffect(() => {
-    if (timerExpired && onTimerExpired) {
+    // Call the call back if time has expired and it hasn't already been called
+    // P.S. I don't love this... Need to change
+    if (timerExpired && onTimerExpired && !callbackCalled) {
       onTimerExpired();
+      return setCallbackCalled(true);
     }
-  }, [timerExpired, onTimerExpired]);
+  }, [timerExpired, onTimerExpired, callbackCalled]);
 
   React.useEffect(() => {
     if (progress <= 50 && progress > 25) {
