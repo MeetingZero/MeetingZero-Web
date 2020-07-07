@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { cableConsumer } from '../../config/cableConsumer';
+import workshopSlice from '../../app/workshop/slice';
 import * as workshopActions from '../../app/workshop/actions';
 
 import WhatIsWorking from './stages/WhatIsWorking';
@@ -19,7 +20,13 @@ const Workshop = () => {
       workshop_token: params.workshop_token
     }, {
       received: (data) => {
-        console.log(data);
+        if (data.current_workshop_director) {
+          dispatch(
+            workshopSlice
+            .actions
+            .setCurrentWorkshopStep(data.current_workshop_director)
+          );
+        }
       },
       connected: () => {
         console.log("WORKSHOP CABLE CONNECTED!");
@@ -65,6 +72,10 @@ const Workshop = () => {
   if (currentWorkshopStageKey === "WHATS_WORKING") {
     return (
       <WhatIsWorking />
+    );
+  } else {
+    return (
+      <div>TBD</div>
     );
   }
 }
