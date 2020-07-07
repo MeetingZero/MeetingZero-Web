@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 import WorkshopSidebar from '../../library/WorkshopSidebar';
 import Blurb from '../../library/Blurb';
@@ -9,6 +9,10 @@ import logo from '../../../../assets/images/logo.svg';
 import './LeftSidebar.scss';
 
 const LeftSidebar = ({ children }) => {
+  const currentWorkshopStep = useSelector((state) => {
+    return state.Workshop.currentWorkshopStep;
+  });
+
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
@@ -30,8 +34,8 @@ const LeftSidebar = ({ children }) => {
           <RingTimer
             radius={75}
             strokeWidth={4}
-            startTimestamp={moment().utc().toISOString()}
-            expireTimestamp={moment().utc().add(10, 'seconds').toISOString()}
+            startTimestamp={currentWorkshopStep.workshop_stage_step_start_time}
+            expireTimestamp={currentWorkshopStep.workshop_stage_step_expire_time}
             onTimerExpired={() => console.log('TIMER EXPIRED')}
           />
         </div>

@@ -10,6 +10,7 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTim
   const [stroke, setStroke] = React.useState('#3F4089');
   const [timerExpired, setTimerExpired] = React.useState(false);
   const [timerDisplay, setTimerDisplay] = React.useState('Start!');
+  const [millisecondsRemaining, setMillisecondsRemaining] = React.useState();
 
   const expireTime = moment(expireTimestamp);
   const startTime = moment(startTimestamp);
@@ -22,9 +23,17 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTim
 
       const timeRemainingDuration = moment.duration(secondsDiffFromCurrentTime, 'seconds');
 
+      setMillisecondsRemaining(timeRemainingDuration._milliseconds);
+
+      if (timeRemainingDuration._milliseconds <= 0) {
+        setTimerDisplay("00:00");
+        setStroke('#dc3545');
+        return setTimerExpired(true);
+      }
+
       setTimerDisplay(`${lpadZero(timeRemainingDuration._data.minutes, 2)}:${lpadZero(timeRemainingDuration._data.seconds, 2)}`);
 
-      if (progress >= 0) {
+      if (millisecondsRemaining && millisecondsRemaining >= 0) {
         setProgress((secondsDiffFromCurrentTime / secondsDiffFromStartTime) * 100);
       }
     }, 1000);
@@ -48,10 +57,6 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTim
       setStroke('#ffc107');
     } else if (progress <= 25) {
       setStroke('#dc3545');
-    }
-    
-    if (progress === 0) {
-      setTimerExpired(true);
     }
   }, [progress]);
 
