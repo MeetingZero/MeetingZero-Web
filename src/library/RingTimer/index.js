@@ -11,7 +11,7 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTim
   const [timerExpired, setTimerExpired] = React.useState(false);
   const [callbackCalled, setCallbackCalled] = React.useState(false);
   const [timerDisplay, setTimerDisplay] = React.useState('Start!');
-  const [millisecondsRemaining, setMillisecondsRemaining] = React.useState();
+  const [millisecondsRemaining, setMillisecondsRemaining] = React.useState(null);
 
   const expireTime = moment(expireTimestamp);
   const startTime = moment(startTimestamp);
@@ -63,6 +63,16 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTim
       setStroke('#dc3545');
     }
   }, [progress]);
+
+  // When start and expire timestamps change, reset everything
+  React.useEffect(() => {
+    setProgress(100);
+    setStroke('#3F4089');
+    setTimerExpired(false);
+    setCallbackCalled(false);
+    setTimerDisplay('Start!');
+    setMillisecondsRemaining(null);
+  }, [startTimestamp, expireTimestamp]);
 
   const normalizedRadius = radius - strokeWidth * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
