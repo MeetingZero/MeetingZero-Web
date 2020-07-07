@@ -39,7 +39,7 @@ const WorkshopStart = () => {
         }
       },
       connected: () => {
-        console.log("CONNECTED!!");
+        console.log("WORKSHOP START CABLE CONNECTED!");
       }
     });
   }, [params.workshop_token, dispatch]);

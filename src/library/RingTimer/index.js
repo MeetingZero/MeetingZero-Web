@@ -44,7 +44,7 @@ const RingTimer = ({ radius, strokeWidth, startTimestamp, expireTimestamp, onTim
     }
 
     return () => window.clearInterval(interval);
-  }, [progress, timerExpired, expireTime, startTime]);
+  }, [progress, timerExpired, expireTime, startTime, millisecondsRemaining]);
 
   React.useEffect(() => {
     if (timerExpired && onTimerExpired) {

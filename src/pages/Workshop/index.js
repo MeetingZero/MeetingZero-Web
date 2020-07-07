@@ -2,12 +2,30 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import WhatIsWorking from './stages/WhatIsWorking';
+import { cableConsumer } from '../../config/cableConsumer';
 import * as workshopActions from '../../app/workshop/actions';
+
+import WhatIsWorking from './stages/WhatIsWorking';
 
 const Workshop = () => {
   const dispatch = useDispatch();
   const params = useParams();
+
+  React.useEffect(() => {
+    cableConsumer(params.workshop_token)
+    .subscriptions
+    .create({
+      channel: 'WorkshopChannel',
+      workshop_token: params.workshop_token
+    }, {
+      received: (data) => {
+        console.log(data);
+      },
+      connected: () => {
+        console.log("WORKSHOP CABLE CONNECTED!");
+      }
+    });
+  }, [params.workshop_token, dispatch]);
 
   const currentWorkshopStep = useSelector((state) => {
     return state.Workshop.currentWorkshopStep;
