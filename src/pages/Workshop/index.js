@@ -6,7 +6,11 @@ import { cableConsumer } from '../../config/cableConsumer';
 import workshopSlice from '../../app/workshop/slice';
 import * as workshopActions from '../../app/workshop/actions';
 
-import WhatIsWorking from './stages/WhatIsWorking';
+import LoadingScreen from '../../library/LoadingScreen';
+
+const WhatIsWorking = React.lazy(() => {
+  return import('./stages/WhatIsWorking');
+});
 
 const Workshop = () => {
   const dispatch = useDispatch();
@@ -71,7 +75,9 @@ const Workshop = () => {
 
   if (currentWorkshopStageKey === "WHATS_WORKING") {
     return (
-      <WhatIsWorking />
+      <React.Suspense fallback={<LoadingScreen />}>
+        <WhatIsWorking />
+      </React.Suspense>
     );
   } else {
     return (
