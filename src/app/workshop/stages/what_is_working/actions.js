@@ -22,7 +22,7 @@ export const saveResponse = (workshopToken, responseText) => {
   }
 }
 
-export const getResponses = (workshopToken) => {
+export const getMyResponses = (workshopToken) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('GET_WHAT_IS_WORKING_RESPONSES'));
 
@@ -31,7 +31,7 @@ export const getResponses = (workshopToken) => {
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('GET_WHAT_IS_WORKING_RESPONSES'));
 
-      return dispatch(whatIsWorkingSlice.actions.setWhatIsWorkingResponses(response.data));
+      return dispatch(whatIsWorkingSlice.actions.setMyWhatIsWorkingResponses(response.data));
     })
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('GET_WHAT_IS_WORKING_RESPONSES'));

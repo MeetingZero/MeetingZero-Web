@@ -29,12 +29,12 @@ const Responses = () => {
     return state.Loading.indexOf("SAVE_WHAT_IS_WORKING_RESPONSE") >= 0;
   });
 
-  const whatIsWorkingResponses = useSelector((state) => {
-    return state.WhatIsWorking.whatIsWorkingResponses;
+  const myWhatIsWorkingResponses = useSelector((state) => {
+    return state.WhatIsWorking.myWhatIsWorkingResponses;
   });
 
   React.useEffect(() => {
-    dispatch(whatIsWorkingActions.getResponses(params.workshop_token));
+    dispatch(whatIsWorkingActions.getMyResponses(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
   return (
