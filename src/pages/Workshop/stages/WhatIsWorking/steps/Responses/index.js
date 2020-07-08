@@ -1,23 +1,41 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '../../../../../../library/Button';
 import CharacterCounter from '../../../../../../library/CharacterCounter';
 
+import * as whatIsWorkingActions from '../../../../../../app/workshop/stages/what_is_working/actions';
+
 const Responses = () => {
+  const params = useParams();
+  const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
 
-  const [response, setResponse] = React.useState("");
+  const [responseText, setResponseText] = React.useState("");
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
 
   const onSubmit = (formData) => {
-    console.log(formData);
+    dispatch(whatIsWorkingActions.saveResponse(params.workshop_token, formData.response_text));
   }
 
   const handleExceed = (isExceeded) => {
     setCharCountExceeded(isExceeded);
   }
+
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("SAVE_WHAT_IS_WORKING_RESPONSE") >= 0;
+  });
+
+  const whatIsWorkingResponses = useSelector((state) => {
+    return state.WhatIsWorking.whatIsWorkingResponses;
+  });
+
+  React.useEffect(() => {
+    dispatch(whatIsWorkingActions.getResponses(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
 
   return (
     <React.Fragment>
@@ -33,9 +51,9 @@ const Responses = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
-          onChange={(event) => setResponse(event.target.value)}
+          onChange={(event) => setResponseText(event.target.value)}
           ref={register({ required: true, maxLength: 140 })}
-          name="response"
+          name="response_text"
           className={cn("form-control mb-1", charCountExceeded ? 'bg-scary' : null)}
           placeholder="Keep it positive"
         />
@@ -48,14 +66,20 @@ const Responses = () => {
 
         <div className="text-right">
           <CharacterCounter
-            inputString={response}
+            inputString={responseText}
             maxChars={140}
             onExceed={handleExceed}
           />
         </div>
 
         <div>
-          <Button type="submit" text="Submit" className="btn btn-primary px-5 rounded" />
+          <Button
+            type="submit"
+            text="Submit"
+            className="btn btn-primary px-5 rounded"
+            disabled={responseText.length === 0}
+            loading={isLoading}
+          />
         </div>
       </form>
     </React.Fragment>

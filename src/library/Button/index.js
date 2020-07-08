@@ -17,7 +17,7 @@ const Button = (props) => {
       <button
         className={props.className}
         type={props.type || "button"}
-        disabled={props.loading ? 'disabled' : null}
+        disabled={props.loading || props.disabled ? 'disabled' : null}
         onClick={props.onClick}
       >
         {props.loading ?
