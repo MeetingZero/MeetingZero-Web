@@ -12,7 +12,7 @@ export const saveResponse = (workshopToken, responseText) => {
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('SAVE_WHAT_IS_WORKING_RESPONSE'));
 
-      return dispatch(whatIsWorkingSlice.actions.setWhatIsWorkingResponses(response.data));
+      return dispatch(whatIsWorkingSlice.actions.setMyWhatIsWorkingResponses(response.data));
     })
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('SAVE_WHAT_IS_WORKING_RESPONSE'));

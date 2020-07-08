@@ -17,8 +17,15 @@ const Responses = () => {
   const [responseText, setResponseText] = React.useState("");
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
 
+  // Get responses on page load for editing and validation purposes
+  React.useEffect(() => {
+    dispatch(whatIsWorkingActions.getMyResponses(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
+
   const onSubmit = (formData) => {
     dispatch(whatIsWorkingActions.saveResponse(params.workshop_token, formData.response_text));
+
+    setResponseText("");
   }
 
   const handleExceed = (isExceeded) => {
@@ -33,25 +40,24 @@ const Responses = () => {
     return state.WhatIsWorking.myWhatIsWorkingResponses;
   });
 
-  React.useEffect(() => {
-    dispatch(whatIsWorkingActions.getMyResponses(params.workshop_token));
-  }, [dispatch, params.workshop_token]);
-
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Start with what's working</h1>
 
       <h5 className="mb-4">Up to three short statements of what's going well.</h5>
 
-      <div className="mb-2">
-        <Button text="Previous" className="btn btn-link" />
+      {myWhatIsWorkingResponses.length > 0 ?
+        <div className="mb-2">
+          <Button text="Previous" className="btn btn-link" />
 
-        <Button text="Forward" className="btn btn-link ml-3" />
-      </div>
+          <Button text="Forward" className="btn btn-link ml-3" />
+        </div>
+      : null}
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <textarea
           onChange={(event) => setResponseText(event.target.value)}
+          value={responseText}
           ref={register({ required: true, maxLength: 140 })}
           name="response_text"
           className={cn("form-control mb-1", charCountExceeded ? 'bg-scary' : null)}
