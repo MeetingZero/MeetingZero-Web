@@ -67,7 +67,7 @@ const CreateWorkshop = () => {
 
             <div className="row mb-10">
               <div className="col-6">
-                { errors.purpose ?
+                {errors.purpose ?
                   <div className="small text-danger">
                     Please enter a workshop name of 140 characters or less
                   </div>
