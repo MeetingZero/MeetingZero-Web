@@ -17,15 +17,22 @@ const Responses = () => {
   const [responseText, setResponseText] = React.useState("");
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
 
-  // Get responses on page load for editing and validation purposes
+  // Get my responses on page load for editing and validation purposes
   React.useEffect(() => {
     dispatch(whatIsWorkingActions.getMyResponses(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
   const onSubmit = (formData) => {
-    dispatch(whatIsWorkingActions.saveResponse(params.workshop_token, formData.response_text));
-
-    setResponseText("");
+    dispatch(
+      whatIsWorkingActions
+      .saveResponse(
+        params.workshop_token,
+        formData.response_text
+      )
+    )
+    .then(() => {
+      setResponseText("");
+    });
   }
 
   const handleExceed = (isExceeded) => {

@@ -27,7 +27,7 @@ export const getMyResponses = (workshopToken) => {
     dispatch(loadingSlice.actions.startLoading('GET_MY_WHAT_IS_WORKING_RESPONSES'));
 
     return axiosInstance()
-    .get(`/api/v1/workshops/${workshopToken}/what_is_working`)
+    .get(`/api/v1/workshops/${workshopToken}/what_is_working?my_filter=true`)
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('GET_MY_WHAT_IS_WORKING_RESPONSES'));
 
@@ -35,6 +35,25 @@ export const getMyResponses = (workshopToken) => {
     })
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('GET_MY_WHAT_IS_WORKING_RESPONSES'));
+
+      throw err;
+    });
+  }
+}
+
+export const getAllResponses = (workshopToken) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('GET_ALL_WHAT_IS_WORKING_RESPONSES'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops/${workshopToken}/what_is_working`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_ALL_WHAT_IS_WORKING_RESPONSES'));
+
+      return dispatch(whatIsWorkingSlice.actions.setAllWhatIsWorkingResponses(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_ALL_WHAT_IS_WORKING_RESPONSES'));
 
       throw err;
     });
