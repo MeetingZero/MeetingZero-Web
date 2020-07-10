@@ -14,8 +14,9 @@ const Responses = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
 
-  const [responseText, setResponseText] = React.useState("");
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
+  const [viewIndex, setViewIndex] = React.useState(0);
+  const [responseText, setResponseText] = React.useState("");
 
   // Get my responses on page load for editing and validation purposes
   React.useEffect(() => {
@@ -23,16 +24,30 @@ const Responses = () => {
   }, [dispatch, params.workshop_token]);
 
   const onSubmit = (formData) => {
-    dispatch(
-      whatIsWorkingActions
-      .saveResponse(
-        params.workshop_token,
-        formData.response_text
+    if (myWhatIsWorkingResponses[viewIndex] === null) {
+      dispatch(
+        whatIsWorkingActions
+        .saveResponse(
+          params.workshop_token,
+          formData.response_text
+        )
       )
-    )
-    .then(() => {
-      setResponseText("");
-    });
+      .then(() => {
+        setResponseText("");
+      });
+    } else {
+      dispatch(
+        whatIsWorkingActions
+        .updateResponse(
+          params.workshop_token,
+          myWhatIsWorkingResponses[viewIndex].id,
+          formData.response_text
+        )
+      )
+      .then(() => {
+        setResponseText("");
+      });
+    }
   }
 
   const handleExceed = (isExceeded) => {
@@ -47,17 +62,39 @@ const Responses = () => {
     return state.WhatIsWorking.myWhatIsWorkingResponses;
   });
 
+  React.useEffect(() => {
+    setViewIndex(myWhatIsWorkingResponses.length - 1);
+  }, [myWhatIsWorkingResponses]);
+
+  React.useEffect(() => {
+    if (myWhatIsWorkingResponses[viewIndex]) {
+      setResponseText(myWhatIsWorkingResponses[viewIndex].response_text);
+    } else {
+      setResponseText("");
+    }
+  }, [viewIndex, myWhatIsWorkingResponses]);
+
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Start with what's working</h1>
 
       <h5 className="mb-4">Up to three short statements of what's going well.</h5>
 
-      {myWhatIsWorkingResponses.length > 0 ?
+      {myWhatIsWorkingResponses.length > 1 ?
         <div className="mb-2">
-          <Button text="Previous" className="btn btn-link" />
+          <Button
+            onClick={() => setViewIndex(viewIndex - 1)}
+            text="Previous"
+            className="btn btn-link mr-3"
+            disabled={myWhatIsWorkingResponses[viewIndex - 1] === undefined}
+          />
 
-          <Button text="Forward" className="btn btn-link ml-3" />
+          <Button
+            onClick={() => setViewIndex(viewIndex + 1)}
+            text="Forward"
+            className="btn btn-link"
+            disabled={myWhatIsWorkingResponses[viewIndex + 1] === undefined}
+          />
         </div>
       : null}
 
@@ -88,7 +125,7 @@ const Responses = () => {
         <div>
           <Button
             type="submit"
-            text="Submit"
+            text={myWhatIsWorkingResponses[viewIndex] === null ? "Submit" : "Update"}
             className="btn btn-primary px-5 rounded"
             disabled={responseText.length === 0}
             loading={isLoading}

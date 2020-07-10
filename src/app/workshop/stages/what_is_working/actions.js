@@ -22,6 +22,25 @@ export const saveResponse = (workshopToken, responseText) => {
   }
 }
 
+export const updateResponse = (workshopToken, responseId, responseText) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVE_WHAT_IS_WORKING_RESPONSE'));
+
+    return axiosInstance()
+    .put(`/api/v1/workshops/${workshopToken}/what_is_working/${responseId}`, { response_text: responseText })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_WHAT_IS_WORKING_RESPONSE'));
+
+      return dispatch(whatIsWorkingSlice.actions.setMyWhatIsWorkingResponses(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_WHAT_IS_WORKING_RESPONSE'));
+
+      throw err;
+    });
+  }
+}
+
 export const getMyResponses = (workshopToken) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('GET_MY_WHAT_IS_WORKING_RESPONSES'));

@@ -3,12 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const whatIsWorkingSlice = createSlice({
   name: 'Workshop/WhatIsWorking',
   initialState: {
-    myWhatIsWorkingResponses: [],
+    myWhatIsWorkingResponses: [null],
     allWhatIsWorkingResponses: []
   },
   reducers: {
     setMyWhatIsWorkingResponses: (state, action) => {
-      state.myWhatIsWorkingResponses = action.payload;
+      state.myWhatIsWorkingResponses = [...action.payload, null];
 
       return state;
     },
