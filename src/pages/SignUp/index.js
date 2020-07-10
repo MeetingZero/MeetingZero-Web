@@ -47,7 +47,7 @@ const SignUp = () => {
               <div className="col-md-6 mb-4 mb-md-0">
                 <input ref={register({ required: true })} type="text" name="first_name" className="form-control" placeholder="First name" />
 
-                { errors.first_name ?
+                {errors.first_name ?
                   <div className="small text-danger">
                     Please enter a first name
                   </div>
@@ -57,7 +57,7 @@ const SignUp = () => {
               <div className="col-md-6">
                 <input ref={register({ required: true })} type="text" name="last_name" className="form-control" placeholder="Last name" />
 
-                { errors.last_name ?
+                {errors.last_name ?
                   <div className="small text-danger">
                     Please enter a last name
                   </div>
@@ -68,7 +68,7 @@ const SignUp = () => {
             <div className="mb-4">
               <input ref={register({ required: true, pattern: Regex.EMAIL })} type="email" name="email" className="form-control" placeholder="Email" />
 
-              { errors.email ?
+              {errors.email ?
                 <div className="small text-danger">
                   Please enter a valid email
                 </div>
@@ -84,7 +84,7 @@ const SignUp = () => {
             <div className="mb-4">
               <input ref={register} type="password" name="confirm_password" className="form-control" placeholder="Confirm password" />
 
-              { errors.confirm_password ?
+              {errors.confirm_password ?
                 <div className="small text-danger">
                   Passwords must match
                 </div>

@@ -108,7 +108,7 @@ const Responses = () => {
           placeholder="Keep it positive"
         />
 
-        {errors.response ?
+        {errors.response_text ?
           <div className="small text-danger">
             Please enter a response of 140 characters or less
           </div>
