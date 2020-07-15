@@ -12,6 +12,10 @@ const WhatIsWorking = React.lazy(() => {
   return import('./stages/WhatIsWorking');
 });
 
+const Problems = React.lazy(() => {
+  return import('./stages/Problems');
+});
+
 const Workshop = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -79,9 +83,11 @@ const Workshop = () => {
         <WhatIsWorking />
       </React.Suspense>
     );
-  } else {
+  } else if (currentWorkshopStageKey === "PROBLEMS") {
     return (
-      <div>TBD</div>
+      <React.Suspense fallback={<LoadingScreen />}>
+        <Problems />
+      </React.Suspense>
     );
   }
 }
