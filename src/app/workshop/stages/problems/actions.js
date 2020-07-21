@@ -78,3 +78,45 @@ export const updateResponse = (workshopToken, responseId, responseText) => {
     });
   }
 }
+
+export const saveVote = (workshopToken, problemResponseId, voteNum) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVE_PROBLEM_VOTE'));
+
+    return axiosInstance()
+    .post(`/api/v1/workshops/${workshopToken}/problems/${problemResponseId}/vote`, {
+      vote_number: voteNum
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_PROBLEM_VOTE'));
+
+      return dispatch(problemsSlice.actions.setAllProblemsResponses(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_PROBLEM_VOTE'));
+
+      throw err;
+    });
+  }
+}
+
+export const updateVote = (workshopToken, problemResponseId, myProblemVoteId, voteNum) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVE_PROBLEM_VOTE'));
+
+    return axiosInstance()
+    .put(`/api/v1/workshops/${workshopToken}/problems/${problemResponseId}/vote/${myProblemVoteId}`, {
+      vote_number: voteNum
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_PROBLEM_VOTE'));
+
+      return dispatch(problemsSlice.actions.setAllProblemsResponses(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_PROBLEM_VOTE'));
+
+      throw err;
+    });
+  }
+}
