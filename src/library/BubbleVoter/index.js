@@ -7,7 +7,9 @@ const BubbleVoter = ({ minText, maxText, onVote, startingVote }) => {
   const [voteSelected, setVoteSelected] = React.useState(null);
 
   React.useEffect(() => {
-    if (startingVote) {
+    if (startingVote === null || startingVote === undefined) {
+      setVoteSelected(0);
+    } else {
       setVoteSelected(startingVote);
     }
   }, [startingVote]);
@@ -27,19 +29,19 @@ const BubbleVoter = ({ minText, maxText, onVote, startingVote }) => {
       </div>
 
       <div className="bubble-voter-bubble-container">
-        <div onClick={() => handleVote(1)} className={cn('bubble-voter-bubble', voteSelected >= 1 ? 'active' : '')}></div>
+        <div onClick={() => handleVote(1)} className={cn('bubble-voter-bubble', voteSelected >= 1 ? 'active' : null)}></div>
       </div>
       <div className="bubble-voter-bubble-container">
-        <div onClick={() => handleVote(2)} className={cn('bubble-voter-bubble', voteSelected >= 2 ? 'active' : '')}></div>
+        <div onClick={() => handleVote(2)} className={cn('bubble-voter-bubble', voteSelected >= 2 ? 'active' : null)}></div>
       </div>
       <div className="bubble-voter-bubble-container">
-        <div onClick={() => handleVote(3)} className={cn('bubble-voter-bubble', voteSelected >= 3 ? 'active' : '')}></div>
+        <div onClick={() => handleVote(3)} className={cn('bubble-voter-bubble', voteSelected >= 3 ? 'active' : null)}></div>
       </div>
       <div className="bubble-voter-bubble-container">
-        <div onClick={() => handleVote(4)} className={cn('bubble-voter-bubble', voteSelected >= 4 ? 'active' : '')}></div>
+        <div onClick={() => handleVote(4)} className={cn('bubble-voter-bubble', voteSelected >= 4 ? 'active' : null)}></div>
       </div>
       <div className="bubble-voter-bubble-container">
-        <div onClick={() => handleVote(5)} className={cn('bubble-voter-bubble', voteSelected >= 5 ? 'active' : '')}></div>
+        <div onClick={() => handleVote(5)} className={cn('bubble-voter-bubble', voteSelected === 5 ? 'active' : null)}></div>
       </div>
 
       <div className="bubble-voter-label text-right">

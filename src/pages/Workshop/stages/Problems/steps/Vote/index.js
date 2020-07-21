@@ -27,13 +27,13 @@ const Vote = () => {
   React.useEffect(() => {
     // Set the view index to the problem that doesn't have a vote yet
     for (let i = 0; i < allProblemsResponses.length; i++) {
-      if (!allProblemsResponses[i].my_problem_vote) {
+      if (viewIndex === null && !allProblemsResponses[i].my_problem_vote) {
         return setViewIndex(i);
       }
     }
 
     // If all problems have votes and nothing is currently selected, show the last one
-    if (!viewIndex && allProblemsResponses.length > 0) {
+    if (viewIndex === null && allProblemsResponses.length > 0) {
       return setViewIndex(allProblemsResponses.length - 1);
     }
   }, [allProblemsResponses, viewIndex]);
@@ -47,7 +47,12 @@ const Vote = () => {
           allProblemsResponses[viewIndex].id,
           voteNum
         )
-      );
+      )
+      .then(() => {
+        if (allProblemsResponses[viewIndex + 1] !== undefined) {
+          return setViewIndex(viewIndex + 1);
+        }
+      });
     } else {
       dispatch(
         problemsActions
@@ -95,12 +100,14 @@ const Vote = () => {
             {allProblemsResponses[viewIndex].response_text}
           </div>
 
-          <BubbleVoter
-            minText='Not important'
-            maxText='Very important'
-            onVote={(voteNum) => submitVote(voteNum)}
-            startingVote={allProblemsResponses[viewIndex].my_problem_vote ? allProblemsResponses[viewIndex].my_problem_vote.vote_number : 0}
-          />
+          <div style={{maxWidth: '80%'}} className="mx-auto">
+            <BubbleVoter
+              minText='Not important'
+              maxText='Very important'
+              onVote={(voteNum) => submitVote(voteNum)}
+              startingVote={allProblemsResponses[viewIndex].my_problem_vote ? allProblemsResponses[viewIndex].my_problem_vote.vote_number : 0}
+            />
+          </div>
         </React.Fragment>
       : null}
     </React.Fragment>
