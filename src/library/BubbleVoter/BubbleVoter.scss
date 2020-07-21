@@ -1,0 +1,31 @@
+@import "../../assets/vendor/bootstrap/functions";
+@import "../../assets/vendor/bootstrap/variables";
+
+.bubble-voter {
+  display: flex;
+  align-items: center;
+}
+
+.bubble-voter-bubble {
+  width: 32px;
+  height: 32px;
+  border: $primary 1px solid;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  &:hover {
+    background-color: $primary;
+    cursor: pointer;
+  }
+
+  &.active {
+    background-color: $primary;
+  }
+}
+
+.bubble-voter-label, .bubble-voter-bubble-container {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
