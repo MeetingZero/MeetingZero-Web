@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import WorkshopApp from 'pages/Workshop/containers/WorkshopApp';
 import Responses from './steps/Responses';
 import Vote from './steps/Vote';
+import ReviewVotes from './steps/ReviewVotes';
 
 const Problems = () => {
   const currentWorkshopStep = useSelector((state) => {
@@ -22,6 +23,12 @@ const Problems = () => {
     return (
       <WorkshopApp>
         <Vote />
+      </WorkshopApp>
+    );
+  } else if (currentStepKey === "PROBLEMS_REVIEW_VOTES") {
+    return (
+      <WorkshopApp>
+        <ReviewVotes />
       </WorkshopApp>
     );
   }

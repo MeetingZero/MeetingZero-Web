@@ -120,3 +120,22 @@ export const updateVote = (workshopToken, problemResponseId, myProblemVoteId, vo
     });
   }
 }
+
+export const calculateVotingResults = (workshopToken) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('CALCULATING_VOTING_RESULTS'));
+
+    return axiosInstance()
+    .post(`/api/v1/workshops/${workshopToken}/problems/calculate-votes`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('CALCULATING_VOTING_RESULTS'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('CALCULATING_VOTING_RESULTS'));
+
+      throw err.response.data;
+    });
+  }
+}
