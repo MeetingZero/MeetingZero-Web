@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
+import ProTip from 'library/ProTip';
 
 import * as whatIsWorkingActions from 'app/workshop/stages/what_is_working/actions';
 
@@ -132,6 +133,8 @@ const Responses = () => {
           />
         </div>
       </form>
+
+      <ProTip />
     </React.Fragment>
   );
 }
