@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import * as userActions from '../app/user/actions';
+import * as userActions from 'app/user/actions';
 
 const Restricted = ({ children }) => {
   const dispatch = useDispatch();

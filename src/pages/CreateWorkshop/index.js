@@ -6,12 +6,12 @@ import cn from 'classnames';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
 
-import LogoSplitLayout from '../../layouts/LogoSplit';
-import Button from '../../library/Button';
-import CharacterCounter from '../../library/CharacterCounter';
-import TagsInput from '../../library/TagsInput';
+import LogoSplitLayout from 'layouts/LogoSplit';
+import Button from 'library/Button';
+import CharacterCounter from 'library/CharacterCounter';
+import TagsInput from 'library/TagsInput';
 
-import * as workshopActions from '../../app/workshop/actions';
+import * as workshopActions from 'app/workshop/actions';
 
 const CreateWorkshop = () => {
   const dispatch = useDispatch();

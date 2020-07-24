@@ -4,10 +4,10 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '../../../../../../library/Button';
-import CharacterCounter from '../../../../../../library/CharacterCounter';
+import Button from 'library/Button';
+import CharacterCounter from 'library/CharacterCounter';
 
-import * as whatIsWorkingActions from '../../../../../../app/workshop/stages/what_is_working/actions';
+import * as whatIsWorkingActions from 'app/workshop/stages/what_is_working/actions';
 
 const Responses = () => {
   const params = useParams();

@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 
-import LogoSplitLayout from '../../layouts/LogoSplit';
-import Button from '../../library/Button';
-import * as userActions from '../../app/user/actions';
-import { createErrorString } from '../../helpers/formatErrorMessages';
+import LogoSplitLayout from 'layouts/LogoSplit';
+import Button from 'library/Button';
+import * as userActions from 'app/user/actions';
+import { createErrorString } from 'helpers/formatErrorMessages';
 
 const Login = () => {
   const dispatch = useDispatch();

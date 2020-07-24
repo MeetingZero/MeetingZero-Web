@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import LogoSplitLayout from '../../layouts/LogoSplit';
-import Button from '../../library/Button';
+import LogoSplitLayout from 'layouts/LogoSplit';
+import Button from 'library/Button';
 
-import * as workshopActions from '../../app/workshop/actions';
+import * as workshopActions from 'app/workshop/actions';
 
 const JoinWorkshop = () => {
   const dispatch = useDispatch();

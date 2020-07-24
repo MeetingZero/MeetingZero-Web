@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import Button from '../../../../../../library/Button';
-import BubbleVoter from '../../../../../../library/BubbleVoter';
+import Button from 'library/Button';
+import BubbleVoter from 'library/BubbleVoter';
 
-import * as problemsActions from '../../../../../../app/workshop/stages/problems/actions';
+import * as problemsActions from 'app/workshop/stages/problems/actions';
 
 const Vote = () => {
   const params = useParams();

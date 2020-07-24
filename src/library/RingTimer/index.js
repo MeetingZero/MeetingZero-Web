@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import { lpadZero } from '../../helpers/numberUtils';
+import { lpadZero } from 'helpers/numberUtils';
 
 import './RingTimer.scss';
 

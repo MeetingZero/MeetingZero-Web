@@ -2,11 +2,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { cableConsumer } from '../../config/cableConsumer';
-import workshopSlice from '../../app/workshop/slice';
-import * as workshopActions from '../../app/workshop/actions';
+import { cableConsumer } from 'config/cableConsumer';
+import workshopSlice from 'app/workshop/slice';
+import * as workshopActions from 'app/workshop/actions';
 
-import LoadingScreen from '../../library/LoadingScreen';
+import LoadingScreen from 'library/LoadingScreen';
 
 const WhatIsWorking = React.lazy(() => {
   return import('./stages/WhatIsWorking');

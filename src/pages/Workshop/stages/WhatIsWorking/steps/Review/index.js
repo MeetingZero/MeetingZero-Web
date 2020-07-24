@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import * as whatIsWorkingActions from '../../../../../../app/workshop/stages/what_is_working/actions';
+import * as whatIsWorkingActions from 'app/workshop/stages/what_is_working/actions';
 
 const Review = () => {
   const params = useParams();

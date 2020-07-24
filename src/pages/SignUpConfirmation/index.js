@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import LogoSplitLayout from '../../layouts/LogoSplit';
-import Button from '../../library/Button';
+import LogoSplitLayout from 'layouts/LogoSplit';
+import Button from 'library/Button';
 
 const SignUpConfirmation = () => {
   const history = useHistory();

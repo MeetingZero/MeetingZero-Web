@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import * as workshopActions from '../../../../app/workshop/actions';
+import * as workshopActions from 'app/workshop/actions';
 
-import WorkshopSidebar from '../../library/WorkshopSidebar';
-import Blurb from '../../library/Blurb';
-import RingTimer from '../../../../library/RingTimer';
+import WorkshopSidebar from 'pages/Workshop/library/WorkshopSidebar';
+import Blurb from 'pages/Workshop/library/Blurb';
+import RingTimer from 'library/RingTimer';
 
-import logo from '../../../../assets/images/logo.svg';
+import logo from 'assets/images/logo.svg';
 import './WorkshopApp.scss';
 
 const LeftSidebar = ({ children }) => {

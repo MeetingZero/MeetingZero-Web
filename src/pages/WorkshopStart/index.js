@@ -2,19 +2,19 @@ import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { cableConsumer } from '../../config/cableConsumer';
-import * as workshopActions from '../../app/workshop/actions';
-import workshopSlice from '../../app/workshop/slice';
+import { cableConsumer } from 'config/cableConsumer';
+import * as workshopActions from 'app/workshop/actions';
+import workshopSlice from 'app/workshop/slice';
 
-import Squiggle from '../../layouts/Squiggle';
-import Button from '../../library/Button';
+import Squiggle from 'layouts/Squiggle';
+import Button from 'library/Button';
 
-import timeIcon from '../../assets/images/time.svg';
-import bathroomIcon from '../../assets/images/bathroom.svg';
-import anonymousIcon from '../../assets/images/anonymous.svg';
-import soundIcon from '../../assets/images/sound.svg';
-import musicIcon from '../../assets/images/music.svg';
-import lightbulbIcon from '../../assets/images/light_bulb.svg';
+import timeIcon from 'assets/images/time.svg';
+import bathroomIcon from 'assets/images/bathroom.svg';
+import anonymousIcon from 'assets/images/anonymous.svg';
+import soundIcon from 'assets/images/sound.svg';
+import musicIcon from 'assets/images/music.svg';
+import lightbulbIcon from 'assets/images/light_bulb.svg';
 import './WorkshopStart.scss';
 
 const WorkshopStart = () => {

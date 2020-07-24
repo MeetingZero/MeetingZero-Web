@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import cn from 'classnames';
 import queryString from 'query-string';
 
-import LogoSplitLayout from '../../layouts/LogoSplit';
-import Button from '../../library/Button';
-import * as userActions from '../../app/user/actions';
-import * as Regex from '../../constants/regex';
+import LogoSplitLayout from 'layouts/LogoSplit';
+import Button from 'library/Button';
+import * as userActions from 'app/user/actions';
+import * as Regex from 'constants/regex';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();

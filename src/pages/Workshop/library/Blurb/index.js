@@ -1,6 +1,6 @@
 import React from 'react';
 
-import noTalking from '../../../../assets/images/no_talking.svg';
+import noTalking from 'assets/images/no_talking.svg';
 import './Blurb.scss';
 
 const Blurb = ({ title, text }) => {

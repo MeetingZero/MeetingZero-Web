@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Button from '../../../../library/Button';
+import Button from 'library/Button';
 
 import './WorkshopSidebar.scss';
 

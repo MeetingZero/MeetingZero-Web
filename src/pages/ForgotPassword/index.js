@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 
-import LogoSplitLayout from '../../layouts/LogoSplit';
-import Button from '../../library/Button';
-import * as userActions from '../../app/user/actions';
+import LogoSplitLayout from 'layouts/LogoSplit';
+import Button from 'library/Button';
+import * as userActions from 'app/user/actions';
 
 const Login = () => {
   const dispatch = useDispatch();

@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Bootstrap library
-import './assets/vendor/bootstrap/bootstrap.scss';
+import 'assets/vendor/bootstrap/bootstrap.scss';
 
-import * as Misc from './constants/misc';
-import LoadingScreen from './library/LoadingScreen';
-import Restricted from './routes/Restricted';
+import * as Misc from 'constants/misc';
+import LoadingScreen from 'library/LoadingScreen';
+import Restricted from 'routes/Restricted';
 
 // Application pages
 

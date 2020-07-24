@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import WorkshopApp from '../../containers/WorkshopApp';
+import WorkshopApp from 'pages/Workshop/containers/WorkshopApp';
 import Responses from './steps/Responses';
 import Review from './steps/Review';
 
