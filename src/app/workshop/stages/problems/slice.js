@@ -4,7 +4,8 @@ const problemsSlice = createSlice({
   name: 'Workshop/Problems',
   initialState: {
     myProblemsResponses: [null],
-    allProblemsResponses: []
+    allProblemsResponses: [],
+    problemsVoteResults: null
   },
   reducers: {
     setMyProblemsResponses: (state, action) => {
@@ -14,6 +15,11 @@ const problemsSlice = createSlice({
     },
     setAllProblemsResponses: (state, action) => {
       state.allProblemsResponses = action.payload;
+
+      return state;
+    },
+    setProblemsVoteResults: (state, action) => {
+      state.problemsVoteResults = action.payload;
 
       return state;
     }

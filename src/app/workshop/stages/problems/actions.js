@@ -130,7 +130,7 @@ export const calculateVotingResults = (workshopToken) => {
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('CALCULATING_VOTING_RESULTS'));
 
-      return response.data;
+      return dispatch(problemsSlice.actions.setProblemsVoteResults(response.data));
     })
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('CALCULATING_VOTING_RESULTS'));
