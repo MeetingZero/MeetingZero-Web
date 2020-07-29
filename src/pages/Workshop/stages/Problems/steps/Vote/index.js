@@ -27,7 +27,7 @@ const Vote = () => {
   React.useEffect(() => {
     // Set the view index to the problem that doesn't have a vote yet
     for (let i = 0; i < allProblemsResponses.length; i++) {
-      if (viewIndex === null && !allProblemsResponses[i].my_problem_vote) {
+      if (viewIndex === null && !allProblemsResponses[i].star_voting_vote) {
         return setViewIndex(i);
       }
     }
@@ -39,7 +39,7 @@ const Vote = () => {
   }, [allProblemsResponses, viewIndex]);
 
   const submitVote = (voteNum) => {
-    if (allProblemsResponses[viewIndex].my_problem_vote === null) {
+    if (allProblemsResponses[viewIndex].star_voting_vote === null) {
       dispatch(
         problemsActions
         .saveVote(
@@ -59,7 +59,7 @@ const Vote = () => {
         .updateVote(
           params.workshop_token,
           allProblemsResponses[viewIndex].id,
-          allProblemsResponses[viewIndex].my_problem_vote.id,
+          allProblemsResponses[viewIndex].star_voting_vote.id,
           voteNum
         )
       );
@@ -105,7 +105,7 @@ const Vote = () => {
               minText='Not important'
               maxText='Very important'
               onVote={(voteNum) => submitVote(voteNum)}
-              startingVote={allProblemsResponses[viewIndex].my_problem_vote ? allProblemsResponses[viewIndex].my_problem_vote.vote_number : 0}
+              startingVote={allProblemsResponses[viewIndex].star_voting_vote ? allProblemsResponses[viewIndex].star_voting_vote.vote_number : 0}
             />
           </div>
         </React.Fragment>
