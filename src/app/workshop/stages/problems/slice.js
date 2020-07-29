@@ -5,7 +5,7 @@ const problemsSlice = createSlice({
   initialState: {
     myProblemsResponses: [null],
     allProblemsResponses: [],
-    problemsVoteResults: null
+    starVotingResults: null
   },
   reducers: {
     setMyProblemsResponses: (state, action) => {
@@ -18,8 +18,8 @@ const problemsSlice = createSlice({
 
       return state;
     },
-    setProblemsVoteResults: (state, action) => {
-      state.problemsVoteResults = action.payload;
+    setStarVotingResults: (state, action) => {
+      state.starVotingResults = action.payload;
 
       return state;
     }
