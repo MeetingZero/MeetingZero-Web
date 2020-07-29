@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as problemsActions from 'app/workshop/stages/problems/actions';
+import * as votingActions from 'app/voting/actions';
 
 const ReviewVotes = () => {
   const dispatch = useDispatch();
@@ -10,13 +10,13 @@ const ReviewVotes = () => {
 
   React.useEffect(() => {
     dispatch(
-      problemsActions
-      .calculateVotingResults(params.workshop_token)
+      votingActions
+      .calculateVotingResults(params.workshop_token, "ProblemResponse")
     );
   }, [dispatch, params.workshop_token]);
 
   const starVotingResults = useSelector((state) => {
-    return state.Problems.starVotingResults;
+    return state.Voting.starVotingResults["ProblemResponse"];
   });
 
   return (

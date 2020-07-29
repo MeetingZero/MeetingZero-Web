@@ -6,6 +6,8 @@ import Button from 'library/Button';
 import BubbleVoter from 'library/BubbleVoter';
 
 import * as problemsActions from 'app/workshop/stages/problems/actions';
+import * as votingActions from 'app/voting/actions';
+import problemsSlice from 'app/workshop/stages/problems/slice';
 
 const Vote = () => {
   const params = useParams();
@@ -41,28 +43,35 @@ const Vote = () => {
   const submitVote = (voteNum) => {
     if (allProblemsResponses[viewIndex].star_voting_vote === null) {
       dispatch(
-        problemsActions
+        votingActions
         .saveVote(
           params.workshop_token,
           allProblemsResponses[viewIndex].id,
+          "ProblemResponse",
           voteNum
         )
       )
-      .then(() => {
+      .then((responseData) => {
+        dispatch(problemsSlice.actions.setAllProblemsResponses(responseData))
+        
         if (allProblemsResponses[viewIndex + 1] !== undefined) {
           return setViewIndex(viewIndex + 1);
         }
       });
     } else {
       dispatch(
-        problemsActions
+        votingActions
         .updateVote(
           params.workshop_token,
           allProblemsResponses[viewIndex].id,
+          "ProblemResponse",
           allProblemsResponses[viewIndex].star_voting_vote.id,
           voteNum
         )
-      );
+      )
+      .then((responseData) => {
+        dispatch(problemsSlice.actions.setAllProblemsResponses(responseData))
+      });
     }
   }
 
