@@ -134,7 +134,10 @@ const Responses = () => {
         </div>
       </form>
 
-      <ProTip />
+      <ProTip
+        tipText="Tip Text Here"
+        exampleText="This is an example"
+      />
     </React.Fragment>
   );
 }
