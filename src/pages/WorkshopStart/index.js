@@ -142,13 +142,21 @@ const WorkshopMembers = () => {
         if (member.user) {
           return (
             <React.Fragment key={member.id}>
-              <span>{member.user.first_name}</span>{index + 1 < workshopMembers.length ? ", " : null}
+              <span>
+                {member.user.first_name}
+              </span>
+              {index + 1 < workshopMembers.length ? ", " : null}
             </React.Fragment>
           );
         }
 
         return (
-          <span key={member.id}>member.email</span>
+          <React.Fragment key={member.id}>
+            <span>
+              {member.email}
+            </span>
+            {index + 1 < workshopMembers.length ? ", " : null}
+          </React.Fragment>
         );
       })}
     </React.Fragment>
