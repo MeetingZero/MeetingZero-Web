@@ -1,19 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import votingSlice from './voting/slice';
 import loadingSlice from './loading/slice';
 import userSlice from './user/slice';
 import workshopSlice from './workshop/slice';
 import whatIsWorkingSlice from './workshop/stages/what_is_working/slice';
 import problemsSlice from './workshop/stages/problems/slice';
-import votingSlice from './voting/slice';
+import reframeProblemSlice from './workshop/stages/reframe_problem/slice';
 
 export default configureStore({
   reducer: {
+    Voting: votingSlice.reducer,
     Loading: loadingSlice.reducer,
     User: userSlice.reducer,
     Workshop: workshopSlice.reducer,
     WhatIsWorking: whatIsWorkingSlice.reducer,
     Problems: problemsSlice.reducer,
-    Voting: votingSlice.reducer
+    ReframeProblem: reframeProblemSlice.reducer
   }
 });
