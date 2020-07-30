@@ -1,0 +1,1 @@
+export const WHAT_IS_WORKING_RESPONSE_LIMIT = 3;

@@ -1,0 +1,1 @@
+export const PROBLEMS_RESPONSE_LIMIT = 2;
