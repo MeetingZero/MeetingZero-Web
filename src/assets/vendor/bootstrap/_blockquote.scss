@@ -1,0 +1,15 @@
+blockquote {
+  position: relative;
+  padding-left: 2rem;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 50%;
+    width: 1px;
+    background-color: $primary;
+    transform: translate(0, -50%);
+  }
+}

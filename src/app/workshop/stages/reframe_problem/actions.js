@@ -5,17 +5,17 @@ import reframeProblemSlice from './slice';
 
 export const saveResponse = (workshopToken, responseText) => {
   return (dispatch) => {
-    dispatch(loadingSlice.actions.startLoading('SAVING_REFRAME_PROBLEM_RESPONSE'));
+    dispatch(loadingSlice.actions.startLoading('SAVE_REFRAME_PROBLEM_RESPONSE'));
 
     return axiosInstance()
     .post(`/api/v1/workshops/${workshopToken}/reframe_problem`, { response_text: responseText })
     .then((response) => {
-      dispatch(loadingSlice.actions.stopLoading('SAVING_REFRAME_PROBLEM_RESPONSE'));
+      dispatch(loadingSlice.actions.stopLoading('SAVE_REFRAME_PROBLEM_RESPONSE'));
 
       return dispatch(reframeProblemSlice.actions.setMyReframeProblemResponse(response.data));
     })
     .catch((err) => {
-      dispatch(loadingSlice.actions.stopLoading('SAVING_REFRAME_PROBLEM_RESPONSE'));
+      dispatch(loadingSlice.actions.stopLoading('SAVE_REFRAME_PROBLEM_RESPONSE'));
 
       throw err;
     });
@@ -24,17 +24,17 @@ export const saveResponse = (workshopToken, responseText) => {
 
 export const updateResponse = (workshopToken, responseId, responseText) => {
   return (dispatch) => {
-    dispatch(loadingSlice.actions.startLoading('SAVING_REFRAME_PROBLEM_RESPONSE'));
+    dispatch(loadingSlice.actions.startLoading('SAVE_REFRAME_PROBLEM_RESPONSE'));
 
     return axiosInstance()
     .put(`/api/v1/workshops/${workshopToken}/reframe_problem/${responseId}`, { response_text: responseText })
     .then((response) => {
-      dispatch(loadingSlice.actions.stopLoading('SAVING_REFRAME_PROBLEM_RESPONSE'));
+      dispatch(loadingSlice.actions.stopLoading('SAVE_REFRAME_PROBLEM_RESPONSE'));
 
       return dispatch(reframeProblemSlice.actions.setMyReframeProblemResponse(response.data));
     })
     .catch((err) => {
-      dispatch(loadingSlice.actions.stopLoading('SAVING_REFRAME_PROBLEM_RESPONSE'));
+      dispatch(loadingSlice.actions.stopLoading('SAVE_REFRAME_PROBLEM_RESPONSE'));
 
       throw err;
     });

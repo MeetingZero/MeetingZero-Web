@@ -9,6 +9,7 @@ import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
 
 import * as reframeProblemActions from 'app/workshop/stages/reframe_problem/actions';
+import * as votingActions from 'app/voting/actions';
 
 const Response = () => {
   const params = useParams();
@@ -18,7 +19,11 @@ const Response = () => {
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [responseText, setResponseText] = React.useState("");
 
-  // Get my responses on page load for editing and validation purposes
+  React.useEffect(() => {
+    dispatch(votingActions.calculateVotingResults(params.workshop_token, "ProblemResponse"));
+  }, [dispatch, params.workshop_token]);
+
+  // Get my response on page load for editing and validation purposes
   React.useEffect(() => {
     dispatch(reframeProblemActions.getMyResponse(params.workshop_token));
   }, [dispatch, params.workshop_token]);
@@ -62,6 +67,10 @@ const Response = () => {
     return state.ReframeProblem.myReframeProblemResponse;
   });
 
+  const starVotingResults = useSelector((state) => {
+    return state.Voting.starVotingResults["ProblemResponse"];
+  });
+
   React.useEffect(() => {
     if (myReframeProblemResponse) {
       setResponseText(myReframeProblemResponse.response_text);
@@ -72,17 +81,21 @@ const Response = () => {
 
   return (
     <React.Fragment>
-      <h1 className="h2 mt-5">Reframe Problem</h1>
+      <h1 className="h2 mt-5 mb-5">Reframe Problem</h1>
 
-      <div className="text-muted">
-        Problem to Reframe:
-      </div>
+      {starVotingResults ?
+        <blockquote className="mb-5">
+          <div className="text-muted small">
+            Problem to Reframe:
+          </div>
 
-      <div>
-        Some issue here
-      </div>
+          <div>
+            {starVotingResults.runoff_winner.resource.response_text}
+          </div>
+        </blockquote>
+      : null}
 
-      <div>
+      <div className="mb-5">
         Ask yourself and answer the question, "so what?" as it relates to the problem (you get one response)
       </div>
 
