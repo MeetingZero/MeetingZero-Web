@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ProTip from 'library/ProTip';
+
 import * as votingActions from 'app/voting/actions';
 
 const ReviewVotes = () => {
@@ -38,6 +40,10 @@ const ReviewVotes = () => {
           </div>
         </React.Fragment>
       : null}
+
+      <ProTip
+        calloutText="Winning Reframe: Waiting for the elevators is annoying"
+      />
     </React.Fragment>
   );
 }

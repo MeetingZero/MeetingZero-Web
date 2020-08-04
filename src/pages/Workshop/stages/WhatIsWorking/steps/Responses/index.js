@@ -135,7 +135,7 @@ const Responses = () => {
       </form>
 
       <ProTip
-        tipText={
+        mainText={
           <React.Fragment>
             <p>
               Keep your statements related to the meeting objective.
@@ -146,7 +146,7 @@ const Responses = () => {
             </p>
           </React.Fragment>
         }
-        exampleText="The tenents in the building love our facility's cleanliness."
+        calloutText="The tenents in the building love our facility's cleanliness."
       />
     </React.Fragment>
   );

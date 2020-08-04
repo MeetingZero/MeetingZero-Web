@@ -122,7 +122,7 @@ const Vote = () => {
       : null}
 
       <ProTip
-        tipText="If you're stuck, go with your gut."
+        mainText="If you're stuck, go with your gut."
       />
     </React.Fragment>
   );

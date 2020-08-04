@@ -135,8 +135,8 @@ const Responses = () => {
       </form>
 
       <ProTip
-        tipText="Focus on your customer and business needs."
-        exampleText="The elevators in the building are too slow."
+        mainText="Focus on your customer and business needs."
+        calloutText="The elevators in the building are too slow."
       />
     </React.Fragment>
   );

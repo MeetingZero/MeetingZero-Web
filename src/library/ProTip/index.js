@@ -6,7 +6,7 @@ import lightBulb from 'assets/images/light_bulb.svg';
 
 import './ProTip.scss';
 
-const ProTip = ({ tipText, exampleText, position }) => {
+const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", calloutText, position }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
@@ -27,25 +27,27 @@ const ProTip = ({ tipText, exampleText, position }) => {
               className="fa fa-close pro-tip-box-close text-muted"
             />
 
-            <div className="px-3 pt-3">
-              <div className="text-muted small mb-1">
-                Pro Tip
-              </div>
+            {mainText ?
+              <div className={cn("px-3 pt-3", mainText ? null : "pb-3")}>
+                <div className="text-muted small mb-1">
+                  {mainTitle}
+                </div>
 
-              <div className={cn("small", exampleText ? "mb-1" : null)}>
-                {tipText}
+                <div className={cn("small", calloutText ? "mb-1" : null)}>
+                  {mainText}
+                </div>
               </div>
-            </div>
+            : null}
 
-            {exampleText ?
+            {calloutText ?
               <div className="px-2 pb-2">
                 <div className="pro-tip-example-text pt-4 pb-2 px-2">
                   <div className="text-muted small mb-1">
-                    Example
+                    {calloutTitle}
                   </div>
 
                   <div className="small">
-                    {exampleText}
+                    {calloutText}
                   </div>
                 </div>
               </div>

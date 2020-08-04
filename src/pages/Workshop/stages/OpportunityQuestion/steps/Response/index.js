@@ -143,8 +143,8 @@ const Response = () => {
           </form>
 
           <ProTip
-            tipText="Tip Text Here"
-            exampleText="This is an example"
+            mainText="Focus on the problem and how to transfer it into a question."
+            calloutText="How Might We make the wait feel less annoying?"
           />
         </React.Fragment>
       :
