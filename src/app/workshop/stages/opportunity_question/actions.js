@@ -41,7 +41,7 @@ export const updateResponse = (workshopToken, responseId, responseText) => {
   }
 }
 
-export const getMyResponse = (workshopToken) => {
+export const getResponse = (workshopToken) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('GET_MY_OPPORTUNITY_QUESTION_RESPONSE'));
 

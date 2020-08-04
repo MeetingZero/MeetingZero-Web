@@ -7,6 +7,7 @@ import workshopSlice from 'app/workshop/slice';
 import * as workshopActions from 'app/workshop/actions';
 
 import LoadingScreen from 'library/LoadingScreen';
+import { loadPartialConfig } from '@babel/core';
 
 const WhatIsWorking = React.lazy(() => {
   return import('./stages/WhatIsWorking');
@@ -22,6 +23,10 @@ const ReframeProblem = React.lazy(() => {
 
 const OpportunityQuestion = React.lazy(() => {
   return import('./stages/OpportunityQuestion');
+});
+
+const Solutions = React.lazy(() => {
+  return import('./stages/Solutions');
 });
 
 const Workshop = () => {
@@ -107,6 +112,12 @@ const Workshop = () => {
     return (
       <React.Suspense fallback={<LoadingScreen />}>
         <OpportunityQuestion />
+      </React.Suspense>
+    );
+  } else if (currentWorkshopStageKey === "SOLUTIONS") {
+    return (
+      <React.Suspense fallback={<LoadingScreen />}>
+        <Solutions />
       </React.Suspense>
     );
   }

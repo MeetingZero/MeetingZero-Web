@@ -1,0 +1,1 @@
+export const SOLUTIONS_RESPONSE_LIMIT = 15;

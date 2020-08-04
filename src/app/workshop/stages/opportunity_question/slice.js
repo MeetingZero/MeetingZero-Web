@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const opportunityQuestionSlice = createSlice({
   name: 'Workshop/OpportunityQuestion',
   initialState: {
-    myOpportunityQuestionResponse: null
+    opportunityQuestionResponse: null
   },
   reducers: {
     setMyOpportunityQuestionResponse: (state, action) => {
-      state.myOpportunityQuestionResponse = action.payload;
+      state.opportunityQuestionResponse = action.payload;
 
       return state;
     }

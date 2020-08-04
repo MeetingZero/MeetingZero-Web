@@ -23,13 +23,13 @@ const Response = () => {
     dispatch(votingActions.calculateVotingResults(params.workshop_token, "ReframeProblemResponse"));
   }, [dispatch, params.workshop_token]);
 
-  // Get my response on page load for editing and validation purposes
+  // Get response on page load for editing and validation purposes
   React.useEffect(() => {
-    dispatch(opportunityQuestionActions.getMyResponse(params.workshop_token));
+    dispatch(opportunityQuestionActions.getResponse(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
   const onSubmit = (formData) => {
-    if (myOpportunityQuestionResponse === null) {
+    if (opportunityQuestionResponse === null) {
       dispatch(
         opportunityQuestionActions
         .saveResponse(
@@ -45,7 +45,7 @@ const Response = () => {
         opportunityQuestionActions
         .updateResponse(
           params.workshop_token,
-          myOpportunityQuestionResponse.id,
+          opportunityQuestionResponse.id,
           formData.response_text
         )
       )
@@ -63,8 +63,8 @@ const Response = () => {
     return state.Loading.indexOf("SAVE_OPPORTUNITY_QUESTION_RESPONSE") >= 0;
   });
 
-  const myOpportunityQuestionResponse = useSelector((state) => {
-    return state.OpportunityQuestion.myOpportunityQuestionResponse;
+  const opportunityQuestionResponse = useSelector((state) => {
+    return state.OpportunityQuestion.opportunityQuestionResponse;
   });
 
   const workshop = useSelector((state) => {
@@ -76,12 +76,12 @@ const Response = () => {
   });
 
   React.useEffect(() => {
-    if (myOpportunityQuestionResponse) {
-      setResponseText(myOpportunityQuestionResponse.response_text);
+    if (opportunityQuestionResponse) {
+      setResponseText(opportunityQuestionResponse.response_text);
     } else {
       setResponseText("");
     }
-  }, [myOpportunityQuestionResponse]);
+  }, [opportunityQuestionResponse]);
 
   return (
     <React.Fragment>
@@ -134,7 +134,7 @@ const Response = () => {
             <div>
               <Button
                 type="submit"
-                text={myOpportunityQuestionResponse === null ? "Submit" : "Update"}
+                text={opportunityQuestionResponse === null ? "Submit" : "Update"}
                 className="btn btn-primary px-5 rounded"
                 disabled={responseText.length === 0}
                 loading={isLoading}
