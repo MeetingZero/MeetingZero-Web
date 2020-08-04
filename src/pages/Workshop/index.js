@@ -20,6 +20,10 @@ const ReframeProblem = React.lazy(() => {
   return import('./stages/ReframeProblem');
 });
 
+const OpportunityQuestion = React.lazy(() => {
+  return import('./stages/OpportunityQuestion');
+});
+
 const Workshop = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -97,6 +101,12 @@ const Workshop = () => {
     return (
       <React.Suspense fallback={<LoadingScreen />}>
         <ReframeProblem />
+      </React.Suspense>
+    );
+  } else if (currentWorkshopStageKey === "OPPORTUNITY_QUESTION") {
+    return (
+      <React.Suspense fallback={<LoadingScreen />}>
+        <OpportunityQuestion />
       </React.Suspense>
     );
   }

@@ -7,6 +7,7 @@ import workshopSlice from './workshop/slice';
 import whatIsWorkingSlice from './workshop/stages/what_is_working/slice';
 import problemsSlice from './workshop/stages/problems/slice';
 import reframeProblemSlice from './workshop/stages/reframe_problem/slice';
+import opportunityQuestionSlice from './workshop/stages/opportunity_question/slice';
 
 export default configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export default configureStore({
     Workshop: workshopSlice.reducer,
     WhatIsWorking: whatIsWorkingSlice.reducer,
     Problems: problemsSlice.reducer,
-    ReframeProblem: reframeProblemSlice.reducer
+    ReframeProblem: reframeProblemSlice.reducer,
+    OpportunityQuestion: opportunityQuestionSlice.reducer
   }
 });
