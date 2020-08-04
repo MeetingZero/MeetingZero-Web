@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import Button from 'library/Button';
 import BubbleVoter from 'library/BubbleVoter';
+import ProTip from 'library/ProTip';
 
 import * as problemsActions from 'app/workshop/stages/problems/actions';
 import * as votingActions from 'app/voting/actions';
@@ -119,6 +120,10 @@ const Vote = () => {
           </div>
         </React.Fragment>
       : null}
+
+      <ProTip
+        tipText="If you're stuck, go with your gut."
+      />
     </React.Fragment>
   );
 }

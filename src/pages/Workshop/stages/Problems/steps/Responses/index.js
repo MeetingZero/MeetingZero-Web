@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
+import ProTip from 'library/ProTip';
 
 import * as problemsActions from 'app/workshop/stages/problems/actions';
 
@@ -132,6 +133,11 @@ const Responses = () => {
           />
         </div>
       </form>
+
+      <ProTip
+        tipText="Focus on your customer and business needs."
+        exampleText="The elevators in the building are too slow."
+      />
     </React.Fragment>
   );
 }
