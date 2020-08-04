@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="38px" viewBox="0 0 24 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="26px" height="40px" viewBox="0 0 26 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Light Bulb</title>
-    <g id="Light-Bulb" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-        <g id="Light-Unfilled" stroke="#F9CF5C" stroke-width="1.5">
-            <path d="M18,30 L18.000595,28.6154926 C18.0021557,24.9837312 19.1667426,21.4479209 21.3237327,18.5260916 C23.1079109,16.1092682 24,13.9163972 24,11.9474788 C24,5.34906847 18.627417,0 12,0 C5.372583,0 0,5.34906847 0,11.9474788 C0,13.9165064 0.892121429,16.1092075 2.67636429,18.5255821 C4.83551428,21.4496878 6.00057469,24.9888632 6.00057469,28.6237391 L6.00057469,30 L6.00057469,30" id="Path"></path>
-            <line x1="7" y1="34.5" x2="16" y2="34.5" id="Path-7"></line>
-            <line x1="9.27777778" y1="37.5" x2="13.7992422" y2="37.5" id="Path-8"></line>
+    <g id="Hi-Fi-For-REAL" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Experiment-with-Por-Tip" transform="translate(-1179.000000, -686.000000)" stroke="#F9CF5C" stroke-width="1.5">
+            <g id="Light-Unfilled" transform="translate(1180.000000, 687.000000)">
+                <path d="M18,30 L18.000595,28.6154926 C18.0021557,24.9837312 19.1667426,21.4479209 21.3237327,18.5260916 C23.1079109,16.1092682 24,13.9163972 24,11.9474788 C24,5.34906847 18.627417,0 12,0 C5.372583,0 0,5.34906847 0,11.9474788 C0,13.9165064 0.892121429,16.1092075 2.67636429,18.5255821 C4.83551428,21.4496878 6.00057469,24.9888632 6.00057469,28.6237391 L6.00057469,30 L6.00057469,30" id="Path"></path>
+                <line x1="7" y1="34.5" x2="16" y2="34.5" id="Path-7"></line>
+                <line x1="9.27777778" y1="37.5" x2="13.7992422" y2="37.5" id="Path-8"></line>
+            </g>
         </g>
     </g>
 </svg>

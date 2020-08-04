@@ -8,36 +8,47 @@ import './ProTip.scss';
 const ProTip = ({ tipText, exampleText }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
+  console.log(isOpen)
+
   return (
-    <div className="pro-tip-lightbulb-container">
+    <div onClick={() => setIsOpen(true)} className="pro-tip-lightbulb-container">
       <div className="position-relative">
         <div className={cn("pro-tip-box rounded", isOpen ? "d-block" : "d-none")}>
-          <i className="fa fa-close pro-tip-box-close text-muted" />
+          <i
+            onClick={(event) => {
+              event.stopPropagation();
+              setIsOpen(false);
+            }}
+            className="fa fa-close pro-tip-box-close text-muted"
+          />
 
-          <div className="text-muted small mb-1">
-            Pro Tip
-          </div>
+          <div className="px-3 pt-3">
+            <div className="text-muted small mb-1">
+              Pro Tip
+            </div>
 
-          <div className={cn("small", exampleText ? "mb-4" : null)}>
-            {tipText}
+            <div className={cn("small", exampleText ? "mb-1" : null)}>
+              {tipText}
+            </div>
           </div>
 
           {exampleText ?
-            <React.Fragment>
-              <div className="text-muted small mb-1">
-                Example
-              </div>
+            <div className="px-2 pb-2">
+              <div className="pro-tip-example-text pt-4 pb-2 px-2">
+                <div className="text-muted small mb-1">
+                  Example
+                </div>
 
-              <div className="small">
-                {exampleText}
+                <div className="small">
+                  {exampleText}
+                </div>
               </div>
-            </React.Fragment>
+            </div>
           : null}
         </div>
 
         <img
           src={lightBulb}
-          onClick={() => setIsOpen(true)}
           className="pro-tip-lightbulb"
           alt="Pro Tip Lightbulb"
         />

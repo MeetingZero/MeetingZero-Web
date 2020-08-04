@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="330px" height="133px" viewBox="0 0 330 133" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Path 7</title>
+    <defs>
+        <linearGradient x1="50%" y1="-34.9360556%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FC9B9F" stop-opacity="0.313155594" offset="0%"></stop>
+            <stop stop-color="#F76165" stop-opacity="0.313155594" offset="100%"></stop>
+        </linearGradient>
+        <path d="M20,246.756099 C72.9908052,260.651171 117.319773,267.204367 152.986903,266.415687 C206.487598,265.232668 206.481094,239.548284 254.183922,241.577769 C285.985808,242.930759 315.257834,253.890544 342,274.457123 L342,355.463599 C342,361.538731 337.075132,366.463599 331,366.463599 L31,366.463599 C24.9248678,366.463599 20,361.538731 20,355.463599 L20,246.756099 L20,246.756099 Z" id="path-2"></path>
+        <filter x="-2.2%" y="-4.0%" width="104.3%" height="111.2%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.884624094   0 0 0 0 0.884624094   0 0 0 0 0.884624094  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Hi-Fi-For-REAL" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Experiment-with-Por-Tip" transform="translate(-834.000000, -539.000000)">
+            <g id="Path-7" transform="translate(818.000000, 300.000000)">
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+            </g>
+        </g>
+    </g>
+</svg>

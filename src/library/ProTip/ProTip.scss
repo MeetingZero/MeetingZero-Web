@@ -5,6 +5,7 @@
   position: fixed;
   bottom: 50px;
   right: 50px;
+  z-index: 2;
 }
 
 .pro-tip-lightbulb {
@@ -14,15 +15,20 @@
 
 .pro-tip-box {
   position: absolute;
-  top: calc(-100% - 100px);
-  left: calc(-100% - 380px);
-  min-width: 400px;
+  bottom: 100%;
+  right: 100%;
+  min-width: 40rem;
   background-color: lighten($yellow, 20);
-  padding: 2rem;
 }
 
 .pro-tip-box-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  cursor: pointer;
+}
+
+.pro-tip-example-text {
+  background: url(../../assets/images/red_squiggle.svg) no-repeat;
+  background-size: cover;
 }
