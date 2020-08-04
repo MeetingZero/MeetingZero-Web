@@ -20,7 +20,7 @@ const Response = () => {
   const [responseText, setResponseText] = React.useState("");
 
   React.useEffect(() => {
-    dispatch(votingActions.calculateVotingResults(params.workshop_token, "ReframeProblem"));
+    dispatch(votingActions.calculateVotingResults(params.workshop_token, "ReframeProblemResponse"));
   }, [dispatch, params.workshop_token]);
 
   // Get my response on page load for editing and validation purposes
@@ -72,7 +72,7 @@ const Response = () => {
   });
 
   const starVotingResults = useSelector((state) => {
-    return state.Voting.starVotingResults["ReframeProblem"];
+    return state.Voting.starVotingResults["ReframeProblemResponse"];
   });
 
   React.useEffect(() => {
