@@ -6,11 +6,11 @@ import lightBulb from 'assets/images/light_bulb.svg';
 
 import './ProTip.scss';
 
-const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", calloutText, position }) => {
+const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", calloutText, position = "bottom-right" }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <div onClick={() => setIsOpen(true)} className={cn("pro-tip-lightbulb-container", position ? position : "bottom-right")}>
+    <div onClick={() => setIsOpen(true)} className={cn("pro-tip-lightbulb-container", position)}>
       <div className="position-relative">
         <CSSTransition
           in={isOpen}

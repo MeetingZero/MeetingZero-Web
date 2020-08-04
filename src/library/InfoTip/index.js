@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 
 import infoTipIcon from 'assets/images/info_tip.svg';
