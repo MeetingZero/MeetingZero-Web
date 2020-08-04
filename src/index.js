@@ -7,6 +7,8 @@ import * as serviceWorker from './serviceWorker';
 
 // Bootstrap library
 import 'assets/vendor/bootstrap/bootstrap.scss';
+// Animate.css library
+import 'animate.css';
 
 import * as Misc from 'constants/misc';
 import LoadingScreen from 'library/LoadingScreen';

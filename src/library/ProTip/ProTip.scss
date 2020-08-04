@@ -32,3 +32,11 @@
   background: url(../../assets/images/red_squiggle.svg) no-repeat;
   background-size: cover;
 }
+
+.pro-tip-enter {
+  animation: .5s bounceIn ease;
+}
+
+.pro-tip-exit {
+  animation: .6s bounceOut ease;
+}
