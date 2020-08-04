@@ -1,0 +1,36 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
+.info-tip-icon-container {
+  z-index: 2;
+}
+
+.info-tip-icon {
+  width: 5rem;
+  cursor: pointer;
+}
+
+.info-tip-box {
+  position: absolute;
+  bottom: 100%;
+  left: 100%;
+  min-width: 70rem;
+  background-color: $cyan;
+  padding: 2rem;
+  border: $primary 1px solid;
+}
+
+.info-tip-box-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.info-tip-enter {
+  animation: .5s fadeIn ease;
+}
+
+.info-tip-exit {
+  animation: .6s fadeOut ease;
+}

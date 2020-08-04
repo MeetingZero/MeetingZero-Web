@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
+import InfoTip from 'library/InfoTip';
 
 import * as reframeProblemActions from 'app/workshop/stages/reframe_problem/actions';
 import * as votingActions from 'app/voting/actions';
@@ -133,6 +134,38 @@ const Response = () => {
           />
         </div>
       </form>
+
+      <InfoTip
+        styles={{
+          position: "absolute",
+          bottom: "5rem",
+          left: "3rem"
+        }}
+        title="Historical Example"
+        text={
+          <React.Fragment>
+            <p>
+              In the 1950s, shipping goods by air was on the cusp of overtaking shipping goods by sea. This was because engineers could not come up with a way to make boat travel faster. They tried inventing faster boats, creating shorter routes, limiting the size of ship crews, and more. But nothing worked out. One truck driver saw the problem from a new frame of reference. He noticed the inefficiency of unloading and loading his truck onto the ship one item at a time. He proposed a solution that no engineer could see: If you take the back of my truck off and load it onto the ship you will decrease shipping times.
+            </p>
+
+            <p>
+              Voilà! Containerization was born.
+            </p>
+
+            <p>
+              The problem was that engineers asked the question: "How might we make boats faster?" This question, however, would have never led to containerization because it presupposes that the problem is with the speed of the boat. What they should have asked was: "How might we make the entire shipping process faster?" Coming up with the right question is not always easy. What we have to do is something called reframing the problem.
+            </p>
+
+            <p>
+              When one sees a problem, e.g., boats are too slow, one should ask the question: <strong>"So what?" Problem answer: "Longer transport time cost us more money."</strong> Instead of leading to the search for faster boats, this question leads one to another, namely: "How might we decrease transport time?" or "What else can we do to decrease transport time?" This reframing might generate the insight that, in turn, renders the solution of containerization.
+            </p>
+
+            <p>
+              Thus, the problem to solve was not simply to increase nautical speed from point A to B simply because 99.9% of the journey is over water but rather the issue was that ships were docked too long due to the unloaded of trucks and reloading of those goods into the ships. Problem reframing saved the maritime transport industry not by innovating in the 99.9% but by looking at what others overlooked. Namely, the 0.1% of the process.
+            </p>
+          </React.Fragment>
+        }
+      />
 
       <ProTip
         mainText="Think deeply about what it would do for you if you solved the problem and why that would matter."
