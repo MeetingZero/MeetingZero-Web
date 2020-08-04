@@ -135,8 +135,18 @@ const Responses = () => {
       </form>
 
       <ProTip
-        tipText="Tip Text Here"
-        exampleText="This is an example"
+        tipText={
+          <React.Fragment>
+            <p>
+              Keep your statements related to the meeting objective.
+            </p>
+
+            <p>
+              Be objective and avoid mentioning individuals.
+            </p>
+          </React.Fragment>
+        }
+        exampleText="The tenents in the building love our facility's cleanliness."
       />
     </React.Fragment>
   );
