@@ -7,7 +7,6 @@ import workshopSlice from 'app/workshop/slice';
 import * as workshopActions from 'app/workshop/actions';
 
 import LoadingScreen from 'library/LoadingScreen';
-import { loadPartialConfig } from '@babel/core';
 
 const WhatIsWorking = React.lazy(() => {
   return import('./stages/WhatIsWorking');
