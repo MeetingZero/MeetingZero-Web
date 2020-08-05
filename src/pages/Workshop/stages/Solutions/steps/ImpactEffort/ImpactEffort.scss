@@ -1,0 +1,30 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
+.impact-effort-chart {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.impact-effort-chart-row {
+  display: flex;
+}
+
+.impact-effort-chart-quadrant {
+  position: relative;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: 50%;
+  background-color: lighten($yellow, 20);
+  text-align: center;
+  font-size: 4rem;
+  height: 300px;
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
