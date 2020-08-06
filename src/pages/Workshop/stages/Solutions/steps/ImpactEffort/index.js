@@ -36,6 +36,11 @@ const ImpactEffort = () => {
   }
 
   const handleDrop = (solution, priority) => {
+    // If priority is already set to drop target, do nothing
+    if (solution.solution_priority && solution.solution_priority === priority) {
+      return;
+    }
+
     dispatch(solutionsActions.setPriority(params.workshop_token, solution.id, priority));
   }
 
