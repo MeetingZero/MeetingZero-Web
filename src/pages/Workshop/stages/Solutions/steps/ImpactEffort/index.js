@@ -226,6 +226,12 @@ const ImpactEffortItem = ({ position = "right", number, solution, showText, onDr
     }
   }, [showText]);
 
+  React.useEffect(() => {
+    if (!solution.solution_priority) {
+      return setShowText(true);
+    }
+  }, [solution]);
+
   return (
     <div
       className="ie-item-container"
