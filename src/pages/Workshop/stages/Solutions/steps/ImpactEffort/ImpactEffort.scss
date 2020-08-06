@@ -2,9 +2,42 @@
 @import "assets/vendor/bootstrap/_variables";
 
 .impact-effort-chart {
+  position: relative;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+
+  .title-top,
+  .title-bottom,
+  .title-left,
+  .title-right {
+    position: absolute;
+    z-index: 2;
+  }
+  
+  .title-top {
+    bottom: calc(100% + 1rem);
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .title-bottom {
+    top: calc(100% + 1rem);
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .title-left {
+    top: 50%;
+    right: calc(100% + 1rem);
+    transform: translate(0, -50%);
+  }
+
+  .title-right {
+    top: 50%;
+    left: calc(100% + 1rem);
+    transform: translate(0, -50%);
+  }
 }
 
 .impact-effort-chart-row {
@@ -16,10 +49,11 @@
   flex-shrink: 1;
   flex-grow: 1;
   flex-basis: 50%;
-  background-color: lighten($yellow, 20);
+  background-color: $yellow;
   text-align: center;
   font-size: 4rem;
   height: 300px;
+  opacity: .26;
 
   span {
     position: absolute;
