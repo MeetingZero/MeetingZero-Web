@@ -86,7 +86,7 @@ const ImpactEffort = () => {
               {solutions.map((solution, index) => {
                 if (solution.solution_priority === "Do Now") {
                   return (
-                    <div className="p-1">
+                    <div key={solution.id} className="p-1">
                       <ImpactEffortItem
                         number={index + 1}
                         solution={solution}
@@ -113,7 +113,7 @@ const ImpactEffort = () => {
               {solutions.map((solution, index) => {
                 if (solution.solution_priority === "Make a Project") {
                   return (
-                    <div className="p-1">
+                    <div key={solution.id} className="p-1">
                       <ImpactEffortItem
                         number={index + 1}
                         solution={solution}
@@ -142,7 +142,7 @@ const ImpactEffort = () => {
               {solutions.map((solution, index) => {
                 if (solution.solution_priority === "Make a Task") {
                   return (
-                    <div className="p-1">
+                    <div key={solution.id} className="p-1">
                       <ImpactEffortItem
                         number={index + 1}
                         solution={solution}
@@ -169,7 +169,7 @@ const ImpactEffort = () => {
               {solutions.map((solution, index) => {
                 if (solution.solution_priority === "Forget for Now") {
                   return (
-                    <div className="p-1">
+                    <div key={solution.id} className="p-1">
                       <ImpactEffortItem
                         number={index + 1}
                         solution={solution}
