@@ -27,6 +27,8 @@ const ImpactEffort = () => {
         return setNewItemIndex(i);
       }
     }
+
+    return setNewItemIndex(null);
   }, [solutions]);
 
   const handleDragStart = (solution) => {
@@ -79,6 +81,20 @@ const ImpactEffort = () => {
             onDragOver={(event) => event.preventDefault()}
           >
             <span>Do Now</span>
+
+            {solutions.map((solution, index) => {
+              if (solution.solution_priority === "Do Now") {
+                return (
+                  <ImpactEffortItem
+                    number={index + 1}
+                    solution={solution}
+                    onDragStart={handleDragStart}
+                  />
+                );
+              }
+
+              return null;
+            })}
           </div>
 
           <div
@@ -88,6 +104,20 @@ const ImpactEffort = () => {
             onDragOver={(event) => event.preventDefault()}
           >
             <span>Make a Project</span>
+
+            {solutions.map((solution, index) => {
+              if (solution.solution_priority === "Make a Project") {
+                return (
+                  <ImpactEffortItem
+                    number={index + 1}
+                    solution={solution}
+                    onDragStart={handleDragStart}
+                  />
+                );
+              }
+
+              return null;
+            })}
           </div>
         </div>
 
@@ -99,6 +129,20 @@ const ImpactEffort = () => {
             onDragOver={(event) => event.preventDefault()}
           >
             <span>Make a Task</span>
+
+            {solutions.map((solution, index) => {
+              if (solution.solution_priority === "Make a Task") {
+                return (
+                  <ImpactEffortItem
+                    number={index + 1}
+                    solution={solution}
+                    onDragStart={handleDragStart}
+                  />
+                );
+              }
+
+              return null;
+            })}
           </div>
 
           <div
@@ -108,6 +152,20 @@ const ImpactEffort = () => {
             onDragOver={(event) => event.preventDefault()}
           >
             <span>Forget for Now</span>
+
+            {solutions.map((solution, index) => {
+              if (solution.solution_priority === "Forget for Now") {
+                return (
+                  <ImpactEffortItem
+                    number={index + 1}
+                    solution={solution}
+                    onDragStart={handleDragStart}
+                  />
+                );
+              }
+
+              return null;
+            })}
           </div>
         </div>
       </div>
