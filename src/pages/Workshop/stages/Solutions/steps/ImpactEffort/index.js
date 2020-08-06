@@ -82,19 +82,23 @@ const ImpactEffort = () => {
           >
             <span>Do Now</span>
 
-            {solutions.map((solution, index) => {
-              if (solution.solution_priority === "Do Now") {
-                return (
-                  <ImpactEffortItem
-                    number={index + 1}
-                    solution={solution}
-                    onDragStart={handleDragStart}
-                  />
-                );
-              }
+            <div className="d-flex flex-wrap">
+              {solutions.map((solution, index) => {
+                if (solution.solution_priority === "Do Now") {
+                  return (
+                    <div className="p-1">
+                      <ImpactEffortItem
+                        number={index + 1}
+                        solution={solution}
+                        onDragStart={handleDragStart}
+                      />
+                    </div>
+                  );
+                }
 
-              return null;
-            })}
+                return null;
+              })}
+            </div>
           </div>
 
           <div
@@ -105,19 +109,23 @@ const ImpactEffort = () => {
           >
             <span>Make a Project</span>
 
-            {solutions.map((solution, index) => {
-              if (solution.solution_priority === "Make a Project") {
-                return (
-                  <ImpactEffortItem
-                    number={index + 1}
-                    solution={solution}
-                    onDragStart={handleDragStart}
-                  />
-                );
-              }
+            <div className="d-flex flex-wrap">
+              {solutions.map((solution, index) => {
+                if (solution.solution_priority === "Make a Project") {
+                  return (
+                    <div className="p-1">
+                      <ImpactEffortItem
+                        number={index + 1}
+                        solution={solution}
+                        onDragStart={handleDragStart}
+                      />
+                    </div>
+                  );
+                }
 
-              return null;
-            })}
+                return null;
+              })}
+            </div>
           </div>
         </div>
 
@@ -130,19 +138,23 @@ const ImpactEffort = () => {
           >
             <span>Make a Task</span>
 
-            {solutions.map((solution, index) => {
-              if (solution.solution_priority === "Make a Task") {
-                return (
-                  <ImpactEffortItem
-                    number={index + 1}
-                    solution={solution}
-                    onDragStart={handleDragStart}
-                  />
-                );
-              }
+            <div className="d-flex flex-wrap">
+              {solutions.map((solution, index) => {
+                if (solution.solution_priority === "Make a Task") {
+                  return (
+                    <div className="p-1">
+                      <ImpactEffortItem
+                        number={index + 1}
+                        solution={solution}
+                        onDragStart={handleDragStart}
+                      />
+                    </div>
+                  );
+                }
 
-              return null;
-            })}
+                return null;
+              })}
+            </div>
           </div>
 
           <div
@@ -153,19 +165,23 @@ const ImpactEffort = () => {
           >
             <span>Forget for Now</span>
 
-            {solutions.map((solution, index) => {
-              if (solution.solution_priority === "Forget for Now") {
-                return (
-                  <ImpactEffortItem
-                    number={index + 1}
-                    solution={solution}
-                    onDragStart={handleDragStart}
-                  />
-                );
-              }
+            <div className="d-flex flex-wrap">
+              {solutions.map((solution, index) => {
+                if (solution.solution_priority === "Forget for Now") {
+                  return (
+                    <div className="p-1">
+                      <ImpactEffortItem
+                        number={index + 1}
+                        solution={solution}
+                        onDragStart={handleDragStart}
+                      />
+                    </div>
+                  );
+                }
 
-              return null;
-            })}
+                return null;
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -194,6 +210,7 @@ const ImpactEffortItem = ({ number, solution, showText, onDragStart }) => {
           setShowText(false);
           onDragStart(solution);
         }}
+        onDragEnd={() => setShowText(true)}
       >
         {number}
       </div>

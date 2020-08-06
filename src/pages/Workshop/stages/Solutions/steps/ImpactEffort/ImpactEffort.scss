@@ -49,7 +49,7 @@
   flex-shrink: 1;
   flex-grow: 1;
   flex-basis: 50%;
-  background-color: lighten($yellow, 20);
+  background-color: lighten($yellow, 27);
   text-align: center;
   height: 300px;
   color: $gray-500;
@@ -65,6 +65,9 @@
 }
 
 .ie-item-container {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
   position: relative;
   width: 30px;
   height: 30px;
