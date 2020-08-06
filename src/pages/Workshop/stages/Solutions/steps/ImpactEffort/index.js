@@ -11,6 +11,7 @@ const ImpactEffort = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const [newItemIndex, setNewItemIndex] = React.useState(null);
+  const [currentDraggedSolution, setCurrentDraggedSolution] = React.useState(null);
 
   React.useEffect(() => {
     dispatch(solutionsActions.getAllResponses(params.workshop_token));
@@ -28,6 +29,14 @@ const ImpactEffort = () => {
     }
   }, [solutions]);
 
+  const handleDragStart = (solution) => {
+    return setCurrentDraggedSolution(solution);
+  }
+
+  const handleDrop = (solution, priority) => {
+    console.log(solution, priority);
+  }
+
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Evaluate Solutions</h1>
@@ -38,8 +47,9 @@ const ImpactEffort = () => {
         <div className="mb-7">
           <ImpactEffortItem
             number={newItemIndex + 1}
-            text={solutions[newItemIndex].response_text}
+            solution={solutions[newItemIndex]}
             showText={true}
+            onDragStart={handleDragStart}
           />
         </div>
       : null}
@@ -62,21 +72,41 @@ const ImpactEffort = () => {
         </div>
 
         <div className="impact-effort-chart-row">
-          <div className="impact-effort-chart-quadrant border-right border-bottom border-dark">
+          <div
+            className="impact-effort-chart-quadrant border-right border-bottom border-dark"
+            onDrop={() => handleDrop(currentDraggedSolution, "Do Now")}
+            onDragEnter={(event) => event.preventDefault()}
+            onDragOver={(event) => event.preventDefault()}
+          >
             <span>Do Now</span>
           </div>
 
-          <div className="impact-effort-chart-quadrant border-left border-bottom border-dark">
+          <div
+            className="impact-effort-chart-quadrant border-left border-bottom border-dark"
+            onDrop={() => handleDrop(currentDraggedSolution, "Make a Project")}
+            onDragEnter={(event) => event.preventDefault()}
+            onDragOver={(event) => event.preventDefault()}
+          >
             <span>Make a Project</span>
           </div>
         </div>
 
         <div className="impact-effort-chart-row">
-          <div className="impact-effort-chart-quadrant border-right border-top border-dark">
+          <div
+            className="impact-effort-chart-quadrant border-right border-top border-dark"
+            onDrop={() => handleDrop(currentDraggedSolution, "Make a Task")}
+            onDragEnter={(event) => event.preventDefault()}
+            onDragOver={(event) => event.preventDefault()}
+          >
             <span>Make a Task</span>
           </div>
 
-          <div className="impact-effort-chart-quadrant border-left border-top border-dark">
+          <div
+            className="impact-effort-chart-quadrant border-left border-top border-dark"
+            onDrop={() => handleDrop(currentDraggedSolution, "Forget for Now")}
+            onDragEnter={(event) => event.preventDefault()}
+            onDragOver={(event) => event.preventDefault()}
+          >
             <span>Forget for Now</span>
           </div>
         </div>
@@ -85,7 +115,7 @@ const ImpactEffort = () => {
   );
 }
 
-const ImpactEffortItem = ({ number, text, showText }) => {
+const ImpactEffortItem = ({ number, solution, showText, onDragStart }) => {
   const [shouldShowText, setShowText] = React.useState(false);
 
   React.useEffect(() => {
@@ -95,11 +125,23 @@ const ImpactEffortItem = ({ number, text, showText }) => {
   }, [showText]);
 
   return (
-    <div onClick={() => setShowText(!shouldShowText)} className="ie-item">
-      {number}
+    <div
+      className="ie-item-container"
+    >
+      <div
+        onClick={() => setShowText(!shouldShowText)}
+        className="ie-item"
+        draggable
+        onDragStart={() => {
+          setShowText(false);
+          onDragStart(solution);
+        }}
+      >
+        {number}
+      </div>
 
       <div className={cn("ie-content", shouldShowText ? "d-block" : "d-none")}>
-        {text}
+        {solution.response_text}
       </div>
     </div>
   );
