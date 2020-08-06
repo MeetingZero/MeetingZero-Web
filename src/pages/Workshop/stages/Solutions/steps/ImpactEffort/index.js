@@ -10,6 +10,7 @@ import * as solutionsActions from 'app/workshop/stages/solutions/actions';
 const ImpactEffort = () => {
   const params = useParams();
   const dispatch = useDispatch();
+  const [newItemIndex, setNewItemIndex] = React.useState(null);
 
   React.useEffect(() => {
     dispatch(solutionsActions.getAllResponses(params.workshop_token));
@@ -19,18 +20,29 @@ const ImpactEffort = () => {
     return state.Solutions.allSolutionsResponses;
   });
 
+  React.useEffect(() => {
+    for (let i = 0; i < solutions.length; i++) {
+      if (!solutions[i].solution_priority) {
+        return setNewItemIndex(i);
+      }
+    }
+  }, [solutions]);
+
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Evaluate Solutions</h1>
 
       <h5 className="mb-7">Drag and drop each solution (red dot) where you feel it's appropriate based off the impact it will have for your customers and for the business and what the effort needed will be to implement it.</h5>
 
-      <div className="mb-7">
-        <ImpactEffortItem
-          number={1}
-          text="I think there’s a big issue with the elevators being really creaky. They are scary and people don’t want to ride them"
-        />
-      </div>
+      {solutions.length > 0 && newItemIndex !== null ?
+        <div className="mb-7">
+          <ImpactEffortItem
+            number={newItemIndex + 1}
+            text={solutions[newItemIndex].response_text}
+            showText={true}
+          />
+        </div>
+      : null}
 
       <div className="impact-effort-chart">
         <div className="title-top">
