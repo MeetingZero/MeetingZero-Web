@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
+import ProTip from 'library/ProTip';
+
 import "./ImpactEffort.scss";
 
 import * as solutionsActions from 'app/workshop/stages/solutions/actions';
@@ -190,6 +192,22 @@ const ImpactEffort = () => {
           </div>
         </div>
       </div>
+
+      <ProTip
+        mainText="Before you place a solution into a quandrant, think about the impact (y-axis), then focus your thinking on effort (x-axis)."
+        calloutTitle="Definitions"
+        calloutText={
+          <React.Fragment>
+            <p>
+              <strong>Impact:</strong> How well the solution serves your users in ways that also meet the needs of the business.
+            </p>
+
+            <p>
+              <strong>Effort:</strong> The higher the effort, the longer the solution will take to deliver value to your users.
+            </p>
+          </React.Fragment>
+        }
+      />
     </React.Fragment>
   );
 }
