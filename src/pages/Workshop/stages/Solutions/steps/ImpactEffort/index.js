@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 
 import "./ImpactEffort.scss";
 
@@ -22,7 +23,14 @@ const ImpactEffort = () => {
     <React.Fragment>
       <h1 className="h2 mt-5">Evaluate Solutions</h1>
 
-      <h5 className="mb-10">Drag and drop each solution (red dot) where you feel it's appropriate based off the impact it will have for your customers and for the business and what the effort needed will be to implement it.</h5>
+      <h5 className="mb-7">Drag and drop each solution (red dot) where you feel it's appropriate based off the impact it will have for your customers and for the business and what the effort needed will be to implement it.</h5>
+
+      <div className="mb-7">
+        <ImpactEffortItem
+          number={1}
+          text="I think there’s a big issue with the elevators being really creaky. They are scary and people don’t want to ride them"
+        />
+      </div>
 
       <div className="impact-effort-chart">
         <div className="title-top">
@@ -62,6 +70,26 @@ const ImpactEffort = () => {
         </div>
       </div>
     </React.Fragment>
+  );
+}
+
+const ImpactEffortItem = ({ number, text, showText }) => {
+  const [shouldShowText, setShowText] = React.useState(false);
+
+  React.useEffect(() => {
+    if (showText !== undefined) {
+      setShowText(showText);
+    }
+  }, [showText]);
+
+  return (
+    <div onClick={() => setShowText(!shouldShowText)} className="ie-item">
+      {number}
+
+      <div className={cn("ie-content", shouldShowText ? "d-block" : "d-none")}>
+        {text}
+      </div>
+    </div>
   );
 }
 

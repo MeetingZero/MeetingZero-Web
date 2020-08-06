@@ -62,3 +62,29 @@
     transform: translate(-50%, -50%);
   }
 }
+
+.ie-item {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background-color: $red;
+  color: $white;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  z-index: 2;
+
+  .ie-content {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 1rem);
+    background-color: $primary;
+    transform: translate(0, -50%);
+    min-width: 50rem;
+    text-align: left;
+    padding: 1rem;
+    border-radius: 1rem;
+    z-index: 2;
+  }
+}
