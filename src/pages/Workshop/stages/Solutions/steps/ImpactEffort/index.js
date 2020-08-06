@@ -1,8 +1,23 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import "./ImpactEffort.scss";
 
+import * as solutionsActions from 'app/workshop/stages/solutions/actions';
+
 const ImpactEffort = () => {
+  const params = useParams();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(solutionsActions.getAllResponses(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
+
+  const solutions = useSelector((state) => {
+    return state.Solutions.allSolutionsResponses;
+  });
+
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Evaluate Solutions</h1>
