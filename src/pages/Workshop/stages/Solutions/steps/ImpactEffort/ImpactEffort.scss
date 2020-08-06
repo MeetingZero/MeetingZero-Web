@@ -98,3 +98,11 @@
   z-index: 2;
   color: $white;
 }
+
+.ie-content-enter {
+  animation: .2s fadeIn ease;
+}
+
+.ie-content-exit {
+  animation: .3s fadeOut ease;
+}

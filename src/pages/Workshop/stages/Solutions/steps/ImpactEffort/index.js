@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import cn from 'classnames';
+import { CSSTransition } from 'react-transition-group';
 
 import "./ImpactEffort.scss";
 
@@ -215,9 +215,16 @@ const ImpactEffortItem = ({ number, solution, showText, onDragStart }) => {
         {number}
       </div>
 
-      <div className={cn("ie-content", shouldShowText ? "d-block" : "d-none")}>
-        {solution.response_text}
-      </div>
+      <CSSTransition
+        in={shouldShowText}
+        timeout={200}
+        classNames="ie-content"
+        unmountOnExit
+      >
+        <div className="ie-content">
+          {solution.response_text}
+        </div>
+      </CSSTransition>
     </div>
   );
 }
