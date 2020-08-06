@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
+import cn from 'classnames';
 
 import ProTip from 'library/ProTip';
 
@@ -98,6 +99,7 @@ const ImpactEffort = () => {
                         number={index + 1}
                         solution={solution}
                         onDragStart={handleDragStart}
+                        position="top"
                       />
                     </div>
                   );
@@ -125,6 +127,7 @@ const ImpactEffort = () => {
                         number={index + 1}
                         solution={solution}
                         onDragStart={handleDragStart}
+                        position="top"
                       />
                     </div>
                   );
@@ -154,6 +157,7 @@ const ImpactEffort = () => {
                         number={index + 1}
                         solution={solution}
                         onDragStart={handleDragStart}
+                        position="top"
                       />
                     </div>
                   );
@@ -181,6 +185,7 @@ const ImpactEffort = () => {
                         number={index + 1}
                         solution={solution}
                         onDragStart={handleDragStart}
+                        position="top"
                       />
                     </div>
                   );
@@ -212,7 +217,7 @@ const ImpactEffort = () => {
   );
 }
 
-const ImpactEffortItem = ({ number, solution, showText, onDragStart }) => {
+const ImpactEffortItem = ({ position = "right", number, solution, showText, onDragStart }) => {
   const [shouldShowText, setShowText] = React.useState(false);
 
   React.useEffect(() => {
@@ -233,7 +238,6 @@ const ImpactEffortItem = ({ number, solution, showText, onDragStart }) => {
           setShowText(false);
           onDragStart(solution);
         }}
-        onDragEnd={() => setShowText(true)}
       >
         {number}
       </div>
@@ -244,7 +248,7 @@ const ImpactEffortItem = ({ number, solution, showText, onDragStart }) => {
         classNames="ie-content"
         unmountOnExit
       >
-        <div className="ie-content">
+        <div className={cn("ie-content", `position-${position}`)}>
           {solution.response_text}
         </div>
       </CSSTransition>

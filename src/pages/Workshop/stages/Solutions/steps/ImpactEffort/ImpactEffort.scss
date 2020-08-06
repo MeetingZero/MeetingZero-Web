@@ -87,16 +87,36 @@
 
 .ie-content {
   position: absolute;
-  top: 50%;
-  left: calc(100% + 1rem);
   background-color: $primary;
-  transform: translate(0, -50%);
   min-width: 50rem;
   text-align: left;
   padding: 1rem;
   border-radius: 1rem;
   z-index: 2;
   color: $white;
+
+  &.position-right {
+    top: 50%;
+    left: calc(100% + 1rem);
+    transform: translate(0, -50%);
+  }
+
+  &.position-top {
+    bottom: calc(100% + 1rem);
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -10px;
+      border-width: 7px;
+      border-style: solid;
+      border-color: $primary transparent transparent transparent;
+    }
+  }
 }
 
 .ie-content-enter {
