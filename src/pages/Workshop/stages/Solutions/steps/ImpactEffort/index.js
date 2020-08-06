@@ -34,7 +34,7 @@ const ImpactEffort = () => {
   }
 
   const handleDrop = (solution, priority) => {
-    console.log(solution, priority);
+    dispatch(solutionsActions.setPriority(params.workshop_token, solution.id, priority));
   }
 
   return (

@@ -19,7 +19,7 @@ const solutionsSlice = createSlice({
 
       return state;
     },
-    setAllWhatIsWorkingResponses: (state, action) => {
+    setAllSolutionsResponses: (state, action) => {
       state.allSolutionsResponses = action.payload;
 
       return state;

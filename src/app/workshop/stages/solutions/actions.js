@@ -69,10 +69,29 @@ export const getAllResponses = (workshopToken) => {
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('GET_ALL_SOLUTIONS_RESPONSES'));
 
-      return dispatch(solutionsSlice.actions.setAllWhatIsWorkingResponses(response.data));
+      return dispatch(solutionsSlice.actions.setAllSolutionsResponses(response.data));
     })
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('GET_ALL_SOLUTIONS_RESPONSES'));
+
+      throw err;
+    });
+  }
+}
+
+export const setPriority = (workshopToken, responseId, priority) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVE_SOLUTION_PRIORITY'));
+
+    return axiosInstance()
+    .put(`/api/v1/workshops/${workshopToken}/solutions/${responseId}/prioritize`, { solution_priority: priority })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_SOLUTION_PRIORITY'));
+
+      return dispatch(solutionsSlice.actions.setAllSolutionsResponses(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_SOLUTION_PRIORITY'));
 
       throw err;
     });
