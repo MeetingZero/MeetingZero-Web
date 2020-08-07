@@ -26,7 +26,7 @@ const ImpactEffort = () => {
 
   React.useEffect(() => {
     for (let i = 0; i < solutions.length; i++) {
-      if (!solutions[i].solution_priority) {
+      if (!solutions[i].my_solution_response_priority) {
         return setNewItemIndex(i);
       }
     }
@@ -40,7 +40,7 @@ const ImpactEffort = () => {
 
   const handleDrop = (solution, priority) => {
     // If priority is already set to drop target, do nothing
-    if (solution.solution_priority && solution.solution_priority === priority) {
+    if (solution.my_solution_response_priority && solution.my_solution_response_priority.solution_priority === priority) {
       return;
     }
 
@@ -92,7 +92,7 @@ const ImpactEffort = () => {
 
             <div className="d-flex flex-wrap">
               {solutions.map((solution, index) => {
-                if (solution.solution_priority === "Do Now") {
+                if (solution.my_solution_response_priority && solution.my_solution_response_priority.solution_priority === "Do Now") {
                   return (
                     <div key={solution.id} className="p-1">
                       <ImpactEffortItem
@@ -120,7 +120,7 @@ const ImpactEffort = () => {
 
             <div className="d-flex flex-wrap">
               {solutions.map((solution, index) => {
-                if (solution.solution_priority === "Make a Project") {
+                if (solution.my_solution_response_priority && solution.my_solution_response_priority.solution_priority === "Make a Project") {
                   return (
                     <div key={solution.id} className="p-1">
                       <ImpactEffortItem
@@ -150,7 +150,7 @@ const ImpactEffort = () => {
 
             <div className="d-flex flex-wrap">
               {solutions.map((solution, index) => {
-                if (solution.solution_priority === "Make a Task") {
+                if (solution.my_solution_response_priority && solution.my_solution_response_priority.solution_priority === "Make a Task") {
                   return (
                     <div key={solution.id} className="p-1">
                       <ImpactEffortItem
@@ -178,7 +178,7 @@ const ImpactEffort = () => {
 
             <div className="d-flex flex-wrap">
               {solutions.map((solution, index) => {
-                if (solution.solution_priority === "Forget for Now") {
+                if (solution.my_solution_response_priority && solution.my_solution_response_priority.solution_priority === "Forget for Now") {
                   return (
                     <div key={solution.id} className="p-1">
                       <ImpactEffortItem
@@ -227,7 +227,7 @@ const ImpactEffortItem = ({ position = "right", number, solution, showText, onDr
   }, [showText]);
 
   React.useEffect(() => {
-    if (!solution.solution_priority) {
+    if (!solution.my_solution_response_priority) {
       return setShowText(true);
     }
   }, [solution]);
