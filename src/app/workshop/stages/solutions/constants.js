@@ -1,1 +1,1 @@
-export const SOLUTIONS_RESPONSE_LIMIT = 15;
+export const SOLUTIONS_RESPONSE_LIMIT = 5;

@@ -88,7 +88,7 @@ const Responses = () => {
     <React.Fragment>
       <h1 className="h2 mt-5">Solutions</h1>
 
-      <h5 className="mb-4">Try to submit up to fifteen solutions.</h5>
+      <h5 className="mb-4">Try to submit up to five solutions.</h5>
 
       {opportunityQuestionResponse ?
         <blockquote className="mb-5">
