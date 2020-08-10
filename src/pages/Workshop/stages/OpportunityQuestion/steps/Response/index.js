@@ -3,15 +3,18 @@ import { useForm } from 'react-hook-form';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
+import RingTimer from 'library/RingTimer';
 
 import "./Response.scss";
 
 import * as opportunityQuestionActions from 'app/workshop/stages/opportunity_question/actions';
 import * as votingActions from 'app/voting/actions';
+import * as workshopActions from 'app/workshop/actions';
 
 const Response = ({ showBathroomBreak }) => {
   const params = useParams();
@@ -87,7 +90,9 @@ const Response = ({ showBathroomBreak }) => {
 
   return (
     <React.Fragment>
-      <BathroomBreakModal />
+      {showBathroomBreak === true ?
+        <BathroomBreakModal />
+      : null}
 
       <h1 className="h2 mt-5">Opportunity Question</h1>
 
@@ -161,15 +166,48 @@ const Response = ({ showBathroomBreak }) => {
 }
 
 const BathroomBreakModal = () => {
+  const dispatch = useDispatch();
+
   const [breakAccepted, setBreakAccepted] = React.useState(false);
 
   const startBathroomBreak = () => {
-    setBreakAccepted(true);
+    window
+    .localStorage
+    .setItem("breakStarted", moment().utc().toISOString());
+
+    return setBreakAccepted(true);
   }
+
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
+
+  const currentWorkshopStep = useSelector((state) => {
+    return state.Workshop.currentWorkshopStep;
+  });
+
+  const onTimerExpired = () => {
+    if (workshop.is_host) {
+      const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
+
+      dispatch(workshopActions.completeWorkshopStep(workshop.workshop_token, workshopStageStepId));
+
+      window.localStorage.removeItem("breakStarted");
+    }
+  }
+
+  React.useEffect(() => {
+    const breakStarted = window
+    .localStorage
+    .getItem("breakStarted");
+
+    if (breakStarted) {
+      return setBreakAccepted(true);
+    }
+  }, []);
 
   return (
     <div className="bathroom-break-modal-overlay">
-
       {breakAccepted === false ?
         <div className="bathroom-break-modal-wrapper">
           <h4 className="text-center mb-2">Do you want a bathroom break?</h4>
@@ -196,7 +234,21 @@ const BathroomBreakModal = () => {
 
       {breakAccepted === true ?
         <div className="bathroom-break-modal-wrapper">
-          <h4 className="text-center mb-2">Quick Bathroom Break</h4>
+          <h4 className="text-center">Quick Bathroom Break</h4>
+
+          <div className="small text-muted text-center mb-2">
+            Grab a healthy snack and beverage.
+          </div>
+
+          <div className="text-center">
+            <RingTimer
+              radius={75}
+              strokeWidth={4}
+              startTimestamp={window.localStorage.getItem("breakStarted")}
+              expireTimestamp={moment(window.localStorage.getItem("breakStarted")).utc().add(10, "minutes").toISOString()}
+              onTimerExpired={onTimerExpired}
+            />
+          </div>
         </div>
       : null}
     </div>
