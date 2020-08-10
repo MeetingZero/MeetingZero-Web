@@ -11,10 +11,16 @@ const OpportunityQuestion = () => {
 
   const currentStepKey = currentWorkshopStep.workshop_stage_step.key;
 
+  const [showBathroomBreak, setShowBathroomBreak] = React.useState(false);
+
+  const onTimerExpired = () => {
+    return setShowBathroomBreak(true);
+  }
+
   if (currentStepKey === "OPPORTUNITY_QUESTION_RESPONSE") {
     return (
-      <WorkshopApp>
-        <Response />
+      <WorkshopApp onTimerExpired={onTimerExpired}>
+        <Response showBathroomBreak={showBathroomBreak} />
       </WorkshopApp>
     );
   }

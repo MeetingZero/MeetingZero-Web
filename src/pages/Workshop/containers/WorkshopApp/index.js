@@ -10,7 +10,7 @@ import RingTimer from 'library/RingTimer';
 import logo from 'assets/images/logo.svg';
 import './WorkshopApp.scss';
 
-const LeftSidebar = ({ children }) => {
+const WorkshopApp = ({ children, onTimerExpired }) => {
   const dispatch = useDispatch();
 
   const currentWorkshopStep = useSelector((state) => {
@@ -52,7 +52,7 @@ const LeftSidebar = ({ children }) => {
             strokeWidth={4}
             startTimestamp={currentWorkshopStep.workshop_stage_step_start_time}
             expireTimestamp={currentWorkshopStep.workshop_stage_step_expire_time}
-            onTimerExpired={handleTimerExpired}
+            onTimerExpired={onTimerExpired || handleTimerExpired}
           />
         </div>
       </div>
@@ -60,4 +60,4 @@ const LeftSidebar = ({ children }) => {
   );
 }
 
-export default LeftSidebar;
+export default WorkshopApp;

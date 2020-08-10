@@ -8,10 +8,12 @@ import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
 
+import "./Response.scss";
+
 import * as opportunityQuestionActions from 'app/workshop/stages/opportunity_question/actions';
 import * as votingActions from 'app/voting/actions';
 
-const Response = () => {
+const Response = ({ showBathroomBreak }) => {
   const params = useParams();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
@@ -85,6 +87,8 @@ const Response = () => {
 
   return (
     <React.Fragment>
+      <BathroomBreakModal />
+
       <h1 className="h2 mt-5">Opportunity Question</h1>
 
       <h5 className="mb-4">As the host, you will propose the first opportunity question then the group will discuss your response.</h5>
@@ -153,6 +157,49 @@ const Response = () => {
         </div>
       }
     </React.Fragment>
+  );
+}
+
+const BathroomBreakModal = () => {
+  const [breakAccepted, setBreakAccepted] = React.useState(false);
+
+  const startBathroomBreak = () => {
+    setBreakAccepted(true);
+  }
+
+  return (
+    <div className="bathroom-break-modal-overlay">
+
+      {breakAccepted === false ?
+        <div className="bathroom-break-modal-wrapper">
+          <h4 className="text-center mb-2">Do you want a bathroom break?</h4>
+
+          <div className="row mb-2">
+            <div className="col-6">
+              <button className="btn btn-block btn-link">
+                No
+              </button>
+            </div>
+
+            <div className="col-6">
+              <button onClick={startBathroomBreak} className="btn btn-block btn-warning">
+                Yes
+              </button>
+            </div>
+          </div>
+
+          <div className="text-center small">
+            No one will see if you press yes <span role="img" aria-label="Winky Emoji">😉</span>
+          </div>
+        </div>
+      : null}
+
+      {breakAccepted === true ?
+        <div className="bathroom-break-modal-wrapper">
+          <h4 className="text-center mb-2">Quick Bathroom Break</h4>
+        </div>
+      : null}
+    </div>
   );
 }
 
