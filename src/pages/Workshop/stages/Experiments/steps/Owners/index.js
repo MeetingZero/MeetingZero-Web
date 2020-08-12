@@ -22,7 +22,7 @@ const Owners = () => {
 
       <h5 className="mb-4">Assigning responsibility to team members for this experiment</h5>
 
-      <div className="row">
+      <div className="row mb-3">
         <div className="col-4">
           <blockquote>
             <div className="text-muted small">
@@ -47,6 +47,16 @@ const Owners = () => {
               </div>
             : null}
           </blockquote>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-2">
+          Tasks
+        </div>
+
+        <div className="col-10">
+          Assignments
         </div>
       </div>
     </React.Fragment>
