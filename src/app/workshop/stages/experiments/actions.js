@@ -1,7 +1,7 @@
 import axiosInstance from '../../../../config/axios';
 
 import loadingSlice from '../../../loading/slice';
-import experimentSlice from './slice';
+import experimentsSlice from './slice';
 
 export const getHypothesis = (workshopToken) => {
   return (dispatch) => {
@@ -12,7 +12,7 @@ export const getHypothesis = (workshopToken) => {
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('GET_EXPERIMENT_HYPOTHESIS'));
 
-      return dispatch(experimentSlice.actions.setHypothesis(response.data));
+      return dispatch(experimentsSlice.actions.setHypothesis(response.data));
     })
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('GET_EXPERIMENT_HYPOTHESIS'));
@@ -35,7 +35,7 @@ export const saveHypothesis = (workshopToken, weBelieveText, willResultInText, s
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('SAVE_EXPERIMENT_HYPOTHESIS'));
 
-      return dispatch(experimentSlice.actions.setHypothesis(response.data));
+      return dispatch(experimentsSlice.actions.setHypothesis(response.data));
     })
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('SAVE_EXPERIMENT_HYPOTHESIS'));

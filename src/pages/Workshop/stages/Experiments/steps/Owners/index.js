@@ -13,7 +13,7 @@ const Owners = () => {
   }, [dispatch, params.workshop_token]);
 
   const hypothesis = useSelector((state) => {
-    return state.Experiment.hypothesis;
+    return state.Experiments.hypothesis;
   });
 
   return (

@@ -9,7 +9,7 @@ import problemsSlice from './workshop/stages/problems/slice';
 import reframeProblemSlice from './workshop/stages/reframe_problem/slice';
 import opportunityQuestionSlice from './workshop/stages/opportunity_question/slice';
 import solutionsSlice from './workshop/stages/solutions/slice';
-import experimentSlice from './workshop/stages/experiments/slice';
+import experimentsSlice from './workshop/stages/experiments/slice';
 
 export default configureStore({
   reducer: {
@@ -22,6 +22,6 @@ export default configureStore({
     ReframeProblem: reframeProblemSlice.reducer,
     OpportunityQuestion: opportunityQuestionSlice.reducer,
     Solutions: solutionsSlice.reducer,
-    Experiment: experimentSlice.reducer
+    Experiments: experimentsSlice.reducer
   }
 });

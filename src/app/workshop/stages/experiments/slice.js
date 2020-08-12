@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const experimentSlice = createSlice({
-  name: 'Workshop/Experiment',
+const experimentsSlice = createSlice({
+  name: 'Workshop/Experiments',
   initialState: {
     hypothesis: null
   },
@@ -14,4 +14,4 @@ const experimentSlice = createSlice({
   }
 });
 
-export default experimentSlice;
+export default experimentsSlice;
