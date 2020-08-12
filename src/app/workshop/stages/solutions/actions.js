@@ -79,12 +79,15 @@ export const getAllResponses = (workshopToken) => {
   }
 }
 
-export const setPriority = (workshopToken, responseId, priority) => {
+export const setPriority = (workshopToken, responseId, impactLevel, effortLevel) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('SAVE_SOLUTION_PRIORITY'));
 
     return axiosInstance()
-    .post(`/api/v1/workshops/${workshopToken}/solutions/${responseId}/prioritize`, { solution_priority: priority })
+    .post(`/api/v1/workshops/${workshopToken}/solutions/${responseId}/prioritize`, {
+      impact_level: impactLevel,
+      effort_level: effortLevel
+    })
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('SAVE_SOLUTION_PRIORITY'));
 
