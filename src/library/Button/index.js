@@ -1,30 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Button = (props) => {
-  if (props.href) {
+const Button = ({
+  type,
+  href,
+  className,
+  loading,
+  text,
+  disabled,
+  onClick
+}) => {
+  if (href) {
     return (
-      <Link to={props.href} className={props.className}>
-        {props.loading ?
+      <Link to={href} className={className}>
+        {loading ?
           <i className="fas fa-sync fa-spin mr-1" />
         : null}
 
-        {props.loading ? "Loading..." : props.text}
+        {loading ? "Loading..." : text}
       </Link>
     );
   } else {
     return (
       <button
-        className={props.className}
-        type={props.type || "button"}
-        disabled={props.loading || props.disabled ? 'disabled' : null}
-        onClick={props.onClick}
+        className={className}
+        type={type || "button"}
+        disabled={loading || disabled ? 'disabled' : null}
+        onClick={onClick}
       >
-        {props.loading ?
+        {loading ?
           <i className="fas fa-sync fa-spin mr-1" />
         : null}
 
-        {props.loading ? "Loading..." : props.text}
+        {loading ? "Loading..." : text}
       </button>
     );
   }
