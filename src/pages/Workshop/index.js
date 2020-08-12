@@ -28,8 +28,8 @@ const Solutions = React.lazy(() => {
   return import('./stages/Solutions');
 });
 
-const Experiment = React.lazy(() => {
-  return import('./stages/Experiment');
+const Experiments = React.lazy(() => {
+  return import('./stages/Experiments');
 });
 
 const Workshop = () => {
@@ -123,10 +123,10 @@ const Workshop = () => {
         <Solutions />
       </React.Suspense>
     );
-  } else if (currentWorkshopStageKey === "EXPERIMENT") {
+  } else if (currentWorkshopStageKey === "EXPERIMENTS") {
     return (
       <React.Suspense fallback={<LoadingScreen />}>
-        <Experiment />
+        <Experiments />
       </React.Suspense>
     );
   }

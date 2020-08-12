@@ -8,7 +8,7 @@ import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
 
-import * as experimentActions from 'app/workshop/stages/experiments/actions';
+import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 
 const Hypothesis = () => {
   const params = useParams();
@@ -25,12 +25,12 @@ const Hypothesis = () => {
 
   // Get hypothesis on page load for editing and validation purposes
   React.useEffect(() => {
-    dispatch(experimentActions.getHypothesis(params.workshop_token));
+    dispatch(experimentsActions.getHypothesis(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
   const onSubmit = (formData) => {
     dispatch(
-      experimentActions
+      experimentsActions
       .saveHypothesis(
         params.workshop_token,
         formData.we_believe_text,

@@ -3,21 +3,28 @@ import { useSelector } from 'react-redux';
 
 import WorkshopApp from 'pages/Workshop/containers/WorkshopApp';
 import Hypothesis from './steps/Hypothesis';
+import Owners from './steps/Owners';
 
-const Experiment = () => {
+const Experiments = () => {
   const currentWorkshopStep = useSelector((state) => {
     return state.Workshop.currentWorkshopStep;
   });
 
   const currentStepKey = currentWorkshopStep.workshop_stage_step.key;
 
-  if (currentStepKey === "EXPERIMENT_HYPOTHESIS") {
+  if (currentStepKey === "EXPERIMENTS_HYPOTHESIS") {
     return (
       <WorkshopApp>
         <Hypothesis />
       </WorkshopApp>
     );
+  } else if (currentStepKey === "EXPERIMENTS_OWNERS") {
+    return (
+      <WorkshopApp>
+        <Owners />
+      </WorkshopApp>
+    );
   }
 }
 
-export default Experiment;
+export default Experiments;
