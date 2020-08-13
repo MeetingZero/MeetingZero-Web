@@ -1,0 +1,45 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
+.raci-modal-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: lighten($yellow, 20);
+  padding: 4rem;
+  border-radius: 1rem;
+  border: $yellow 1px solid;
+  min-width: 700px;
+
+  .responsible-button {
+    background: #D6EBA8;
+  }
+
+  .accountable-button {
+    background: #A8C5EB;
+  }
+
+  .consulted-button {
+    background: #FAC594;
+  }
+
+  .informed-button {
+    background: #F6B1E3;
+  }
+}
+
+.raci-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.raci-modal-wrapper-enter {
+  animation: .5s fadeIn ease;
+}
+
+.raci-modal-wrapper-exit {
+  animation: .6s fadeOut ease;
+}

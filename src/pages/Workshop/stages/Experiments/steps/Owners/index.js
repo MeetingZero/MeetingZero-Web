@@ -1,10 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 
 import ProTip from 'library/ProTip';
 
+import "./Owners.scss";
+
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
+import * as workshopActions from 'app/workshop/actions';
 
 const Owners = () => {
   const params = useParams();
@@ -16,6 +20,14 @@ const Owners = () => {
 
   const hypothesis = useSelector((state) => {
     return state.Experiments.hypothesis;
+  });
+
+  React.useEffect(() => {
+    dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
+
+  const workshopMembers = useSelector((state) => {
+    return state.Workshop.workshopMembers;
   });
 
   return (
@@ -52,15 +64,33 @@ const Owners = () => {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-2">
-          Tasks
+      <div className="raci-matrix h-100">
+        <div className="row">
+          <div className="col-2"></div>
+
+          <div className="col-2 text-center">
+            <strong>Matt</strong>
+          </div>
+
+          <div className="col-2 text-center">
+            <strong>Arun</strong>
+          </div>
         </div>
 
-        <div className="col-10">
-          Assignments
+        <div className="row">
+          <div className="col-2">
+            <textarea className="form-control h-100" placeholder="Your Task" />
+          </div>
+
+          <div className="col-2">
+            <div className="d-flex h-100">
+              <button type="button" className="btn btn-link text-muted btn-block">+ Assign</button>
+            </div>
+          </div>
         </div>
       </div>
+
+      <RaciModal />
 
       <ProTip
         mainTitle="How this works"
@@ -97,6 +127,51 @@ const Owners = () => {
         }
       />
     </React.Fragment>
+  );
+}
+
+const RaciModal = () => {
+  const [isOpen, setIsOpen] = React.useState(true);
+
+  return (
+    <CSSTransition
+      in={isOpen}
+      timeout={500}
+      classNames="raci-modal-wrapper"
+      unmountOnExit
+    >
+      <div className="raci-modal-wrapper">
+        <i
+          onClick={(event) => {
+            event.stopPropagation();
+            setIsOpen(false);
+          }}
+          className="fa fa-close raci-modal-close text-muted"
+        />
+
+        <div className="font-weight-bold mb-3">
+          Select Matt's assignment for "make pasta".
+        </div>
+
+        <div className="row">
+          <div className="col-3">
+            <button className="btn btn-block responsible-button">Responsible</button>
+          </div>
+
+          <div className="col-3">
+            <button className="btn btn-block accountable-button">Accountable</button>
+          </div>
+
+          <div className="col-3">
+            <button className="btn btn-block consulted-button">Consulted</button>
+          </div>
+
+          <div className="col-3">
+            <button className="btn btn-block informed-button">Informed</button>
+          </div>
+        </div>
+      </div>
+    </CSSTransition>
   );
 }
 
