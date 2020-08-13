@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ProTip from 'library/ProTip';
+
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 
 const Owners = () => {
@@ -59,6 +61,41 @@ const Owners = () => {
           Assignments
         </div>
       </div>
+
+      <ProTip
+        mainTitle="How this works"
+        mainText={
+          <React.Fragment>
+            <p className="font-weight-bold">
+              Fill out this chart with all the tasks that are necessary to complete the experiment. Then, assign responsibility to each team member.
+            </p>
+
+            <p>
+              <div className="font-weight-bold">Responsible</div>
+            
+              <div>The team members who actually complete the task.</div>
+            </p>
+
+            <p>
+              <div className="font-weight-bold">Accountable</div>
+
+              <div>The person who delegates work and provides the final review on the task.</div>
+            </p>
+
+            <p>
+              <div className="font-weight-bold">Consulted</div>
+
+              <div>The people who provide input on a the task based on their domain of expertise.</div>
+            </p>
+
+            <p>
+              <div className="font-weight-bold">Informed</div>
+
+              <div>Make sure everyone else is in kept in the loop!</div>
+            </p>
+          </React.Fragment>
+        }
+      />
     </React.Fragment>
   );
 }

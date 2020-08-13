@@ -45,7 +45,7 @@ const Hypothesis = () => {
   });
 
   const hypothesis = useSelector((state) => {
-    return state.Experiment.hypothesis;
+    return state.Experiments.hypothesis;
   });
 
   React.useEffect(() => {
