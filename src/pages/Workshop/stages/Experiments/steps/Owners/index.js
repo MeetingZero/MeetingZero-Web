@@ -46,11 +46,11 @@ const Owners = () => {
 
   const [raciModalOpen, setRaciModalOpen] = React.useState(false);
   const [raciModalUserId, setRaciModalUserId] = React.useState(null);
-  const [raciModalTaskId, setRaciModalTaskId] = React.useState(null);
+  const [raciModalTask, setRaciModalTask] = React.useState(null);
 
-  const toggleRaciModal = (isOpen, userId, taskId) => {
+  const toggleRaciModal = (isOpen, userId, task) => {
     setRaciModalUserId(userId);
-    setRaciModalTaskId(taskId);
+    setRaciModalTask(task);
     setRaciModalOpen(isOpen);
   }
 
@@ -128,7 +128,7 @@ const Owners = () => {
         modalOpen={raciModalOpen}
         toggleRaciModal={toggleRaciModal}
         userId={raciModalUserId}
-        taskId={raciModalTaskId}
+        task={raciModalTask}
       />
 
       <ProTip

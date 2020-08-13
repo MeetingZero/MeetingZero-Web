@@ -1,23 +1,37 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 
-const RaciModal = ({ modalOpen, toggleRaciModal, userId, taskId }) => {
+const RaciModal = ({ modalOpen, toggleRaciModal, userId, task }) => {
   const params = useParams();
   const dispatch = useDispatch();
 
   const handleSubmit = (assignmentText) => {
     dispatch(
       experimentsActions
-      .saveTaskAssignment(params.workshop_token, taskId, userId, assignmentText)
+      .saveTaskAssignment(params.workshop_token, task.id, userId, assignmentText)
     )
     .then(() => {
       return toggleRaciModal(false);
     });
   }
+
+  const workshopMembers = useSelector((state) => {
+    return state.Workshop.workshopMembers;
+  });
+
+  const [currentWorkshopMember, setCurrentWorkshopMember] = React.useState(null);
+
+  React.useEffect(() => {
+    for (let i = 0; i < workshopMembers.length; i++) {
+      if (workshopMembers[i].user_id === userId) {
+        return setCurrentWorkshopMember(workshopMembers[i]);
+      }
+    }
+  }, [workshopMembers, userId]);
 
   return (
     <CSSTransition
@@ -35,9 +49,11 @@ const RaciModal = ({ modalOpen, toggleRaciModal, userId, taskId }) => {
           className="fa fa-close raci-modal-close text-muted"
         />
 
-        <div className="font-weight-bold mb-3">
-          Select Matt's assignment for "make pasta".
-        </div>
+        {currentWorkshopMember && task ?
+          <div className="font-weight-bold mb-3">
+            Select {currentWorkshopMember.user.first_name}'s assignment for "{task.response_text}".
+          </div>
+        : null}
 
         <div className="row">
           <div className="col-3">

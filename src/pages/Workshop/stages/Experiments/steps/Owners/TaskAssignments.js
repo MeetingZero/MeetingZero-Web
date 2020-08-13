@@ -75,14 +75,14 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
             <div className="d-flex h-100">
               {assignedTask ?
                 <button
-                  onClick={() => toggleRaciModal(true, wm.user_id, existingTask.id)}
+                  onClick={() => toggleRaciModal(true, wm.user_id, existingTask)}
                   className={`btn btn-block ${assignedTask.assignment_text.toLowerCase()}-button`}
                 >
                   {assignedTask.assignment_text}
                 </button>
               :
                 <button
-                  onClick={() => toggleRaciModal(true, wm.user_id, existingTask.id)}
+                  onClick={() => toggleRaciModal(true, wm.user_id, existingTask)}
                   type="button"
                   className="btn btn-link text-muted btn-block"
                   disabled={submittedTask ? false : true}
