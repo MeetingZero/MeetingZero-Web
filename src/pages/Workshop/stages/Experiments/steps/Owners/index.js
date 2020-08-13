@@ -9,6 +9,7 @@ import "./Owners.scss";
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import * as workshopActions from 'app/workshop/actions';
+import experimentsSlice from 'app/workshop/stages/experiments/slice';
 
 const Owners = () => {
   const params = useParams();
@@ -33,6 +34,10 @@ const Owners = () => {
   const experimentTasks = useSelector((state) => {
     return state.Experiments.experimentTasks;
   });
+
+  const addNewTask = () => {
+    dispatch(experimentsSlice.actions.addBlankExperimentTask());
+  }
 
   return (
     <React.Fragment>
@@ -81,25 +86,24 @@ const Owners = () => {
           })}
         </div>
 
-        {experimentTasks.map((experimentTask) => {
+        {experimentTasks.map((experimentTask, index) => {
           return (
-            <div className="row">
-              <div className="col-2">
-                <textarea className="form-control h-100" placeholder="Your Task" />
-              </div>
-
-              <div className="col-2">
-                <div className="d-flex h-100">
-                  <button type="button" className="btn btn-link text-muted btn-block">+ Assign</button>
-                </div>
-              </div>
-            </div>
+            <TaskAssignments
+              key={index}
+              existingTask={experimentTask}
+              allWorkshopMembers={workshopMembers}
+            />
           );
         })}
 
         <div className="row">
           <div className="col-2">
-            <button type="button" className="btn btn-link btn-block text-dark font-weight-bold">+ Add Task</button>
+            <button
+              onClick={addNewTask}
+              type="button"
+              className="btn btn-link btn-block text-dark font-weight-bold">
+                + Add Task
+              </button>
           </div>
         </div>
       </div>
@@ -141,6 +145,63 @@ const Owners = () => {
         }
       />
     </React.Fragment>
+  );
+}
+
+const TaskAssignments = ({ existingTask, allWorkshopMembers }) => {
+  const [task, setTask] = React.useState("");
+  const [submittedTask, setSubmittedTask] = React.useState(null);
+
+  React.useEffect(() => {
+    if (existingTask) {
+      setTask(existingTask.response_text);
+      setSubmittedTask(existingTask.response_text);
+    }
+  }, [existingTask]);
+
+  const handleSubmit = (event) => {
+    if (event.which === 13) {
+      setSubmittedTask(task);
+    }
+  }
+
+  return (
+    <div className="row mb-2">
+      <div className="col-2">
+        {submittedTask ?
+          <div
+            onClick={() => setSubmittedTask(null)}
+            className="border border-success rounded p-1 cursor-pointer"
+          >
+            {submittedTask}
+          </div>
+        :
+          <textarea
+            onChange={(event) => setTask(event.target.value)}
+            onKeyDown={handleSubmit}
+            className="form-control h-100"
+            placeholder="Your Task"
+            value={task}
+          />
+        }
+      </div>
+
+      {allWorkshopMembers.map((wm) => {
+        return (
+          <div key={wm.id} className="col-2">
+            <div className="d-flex h-100">
+              <button
+                type="button"
+                className="btn btn-link text-muted btn-block"
+                disabled={submittedTask ? false : true}
+              >
+                  + Assign
+                </button>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 

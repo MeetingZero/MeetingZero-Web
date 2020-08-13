@@ -16,6 +16,11 @@ const experimentsSlice = createSlice({
       state.experimentTasks = action.payload;
 
       return state;
+    },
+    addBlankExperimentTask: (state, action) => {
+      state.experimentTasks = [...state.experimentTasks, null];
+
+      return state;
     }
   }
 });
