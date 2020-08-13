@@ -89,7 +89,7 @@ const Owners = () => {
       </div>
 
       <div className="raci-matrix h-100">
-        <div className="row">
+        <div className="row mb-3">
           <div className="col-2"></div>
 
           {workshopMembers.map((wm) => {
