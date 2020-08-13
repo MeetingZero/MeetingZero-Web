@@ -40,6 +40,10 @@ const Owners = () => {
     return state.Experiments.experimentTasks;
   });
 
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
+
   const addNewTask = () => {
     dispatch(experimentsSlice.actions.addBlankExperimentTask());
   }
@@ -112,16 +116,18 @@ const Owners = () => {
           );
         })}
 
-        <div className="row">
-          <div className="col-2">
-            <button
-              onClick={addNewTask}
-              type="button"
-              className="btn btn-link btn-block text-dark font-weight-bold">
-                + Add Task
-              </button>
+        {workshop.is_host ?
+          <div className="row">
+            <div className="col-2">
+              <button
+                onClick={addNewTask}
+                type="button"
+                className="btn btn-link btn-block text-dark font-weight-bold">
+                  + Add Task
+                </button>
+            </div>
           </div>
-        </div>
+        : null}
       </div>
 
       <RaciModal

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 
@@ -37,6 +37,10 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
       }
     }
   }
+
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
 
   return (
     <div className="row mb-2">
@@ -81,14 +85,18 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
                   {assignedTask.assignment_text}
                 </button>
               :
-                <button
-                  onClick={() => toggleRaciModal(true, wm.user_id, existingTask)}
-                  type="button"
-                  className="btn btn-link text-muted btn-block"
-                  disabled={submittedTask ? false : true}
-                >
-                  + Assign
-                </button>
+                <React.Fragment>
+                  {workshop.is_host ?
+                    <button
+                      onClick={() => toggleRaciModal(true, wm.user_id, existingTask)}
+                      type="button"
+                      className="btn btn-link text-muted btn-block"
+                      disabled={submittedTask ? false : true}
+                    >
+                      + Assign
+                    </button>
+                  : null}
+                </React.Fragment>
               }
             </div>
           </div>
