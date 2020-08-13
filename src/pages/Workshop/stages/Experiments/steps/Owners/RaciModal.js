@@ -13,7 +13,10 @@ const RaciModal = ({ modalOpen, toggleRaciModal, userId, taskId }) => {
     dispatch(
       experimentsActions
       .saveTaskAssignment(params.workshop_token, taskId, userId, assignmentText)
-    );
+    )
+    .then(() => {
+      return toggleRaciModal(false);
+    });
   }
 
   return (

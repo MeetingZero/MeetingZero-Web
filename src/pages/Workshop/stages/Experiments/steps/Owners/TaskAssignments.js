@@ -60,17 +60,36 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
       </div>
 
       {allWorkshopMembers.map((wm) => {
+        let assignedTask = null;
+
+        if (existingTask) {
+          for (let i = 0; i < existingTask.experiment_task_assignments.length; i++) {
+            if (existingTask.experiment_task_assignments[i].user_id === wm.user_id) {
+              assignedTask = existingTask.experiment_task_assignments[i];
+            }
+          }
+        }
+
         return (
           <div key={wm.id} className="col-2">
             <div className="d-flex h-100">
-              <button
-                onClick={() => toggleRaciModal(true, wm.user_id, existingTask.id)}
-                type="button"
-                className="btn btn-link text-muted btn-block"
-                disabled={submittedTask ? false : true}
-              >
+              {assignedTask ?
+                <button
+                  onClick={() => toggleRaciModal(true, wm.user_id, existingTask.id)}
+                  className={`btn btn-block ${assignedTask.assignment_text.toLowerCase()}-button`}
+                >
+                  {assignedTask.assignment_text}
+                </button>
+              :
+                <button
+                  onClick={() => toggleRaciModal(true, wm.user_id, existingTask.id)}
+                  type="button"
+                  className="btn btn-link text-muted btn-block"
+                  disabled={submittedTask ? false : true}
+                >
                   + Assign
                 </button>
+              }
             </div>
           </div>
         );
