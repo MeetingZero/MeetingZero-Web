@@ -105,3 +105,25 @@ export const updateTask = (workshopToken, taskId, newTask) => {
     });
   }
 }
+
+export const saveTaskAssignment = (workshopToken, taskId, userId, assignmentText) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVE_EXPERIMENT_TASK_ASSIGNMENT'));
+
+    return axiosInstance()
+    .post(`/api/v1/workshops/${workshopToken}/experiments/tasks/${taskId}/assignments`, {
+      user_id: userId,
+      assignment_text: assignmentText
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_EXPERIMENT_TASK_ASSIGNMENT'));
+
+      return dispatch(experimentsSlice.actions.setExperimentTasks(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_EXPERIMENT_TASK_ASSIGNMENT'));
+
+      throw err;
+    });
+  }
+}

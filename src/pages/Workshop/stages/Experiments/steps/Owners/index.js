@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { CSSTransition } from 'react-transition-group';
 
+import TaskAssignments from './TaskAssignments';
+import RaciModal from './RaciModal';
 import ProTip from 'library/ProTip';
 
 import "./Owners.scss";
@@ -41,6 +42,16 @@ const Owners = () => {
 
   const addNewTask = () => {
     dispatch(experimentsSlice.actions.addBlankExperimentTask());
+  }
+
+  const [raciModalOpen, setRaciModalOpen] = React.useState(false);
+  const [raciModalUserId, setRaciModalUserId] = React.useState(null);
+  const [raciModalTaskId, setRaciModalTaskId] = React.useState(null);
+
+  const toggleRaciModal = (isOpen, userId, taskId) => {
+    setRaciModalUserId(userId);
+    setRaciModalTaskId(taskId);
+    setRaciModalOpen(isOpen);
   }
 
   return (
@@ -96,6 +107,7 @@ const Owners = () => {
               key={index}
               existingTask={experimentTask}
               allWorkshopMembers={workshopMembers}
+              toggleRaciModal={toggleRaciModal}
             />
           );
         })}
@@ -112,7 +124,12 @@ const Owners = () => {
         </div>
       </div>
 
-      <RaciModal />
+      <RaciModal
+        modalOpen={raciModalOpen}
+        toggleRaciModal={toggleRaciModal}
+        userId={raciModalUserId}
+        taskId={raciModalTaskId}
+      />
 
       <ProTip
         mainTitle="How this works"
@@ -149,125 +166,6 @@ const Owners = () => {
         }
       />
     </React.Fragment>
-  );
-}
-
-const TaskAssignments = ({ existingTask, allWorkshopMembers }) => {
-  const params = useParams();
-  const dispatch = useDispatch();
-
-  const [task, setTask] = React.useState("");
-  const [submittedTask, setSubmittedTask] = React.useState(null);
-
-  React.useEffect(() => {
-    if (existingTask) {
-      setTask(existingTask.response_text);
-      setSubmittedTask(existingTask.response_text);
-    }
-  }, [existingTask]);
-
-  const handleSubmit = (event) => {
-    if (event.which === 13) {
-      if (existingTask) {
-        dispatch(
-          experimentsActions
-          .updateTask(params.workshop_token, existingTask.id, task)
-        ).then(() => {
-          setSubmittedTask(task);
-        });
-      } else {
-        dispatch(
-          experimentsActions
-          .saveTask(params.workshop_token, task)
-        ).then(() => {
-          setSubmittedTask(task);
-        });
-      }
-    }
-  }
-
-  return (
-    <div className="row mb-2">
-      <div className="col-2">
-        {submittedTask ?
-          <div
-            onClick={() => setSubmittedTask(null)}
-            className="border border-success rounded p-1 cursor-pointer"
-          >
-            {submittedTask}
-          </div>
-        :
-          <textarea
-            onChange={(event) => setTask(event.target.value)}
-            onKeyDown={handleSubmit}
-            className="form-control h-100"
-            placeholder="Your Task"
-            value={task}
-          />
-        }
-      </div>
-
-      {allWorkshopMembers.map((wm) => {
-        return (
-          <div key={wm.id} className="col-2">
-            <div className="d-flex h-100">
-              <button
-                type="button"
-                className="btn btn-link text-muted btn-block"
-                disabled={submittedTask ? false : true}
-              >
-                  + Assign
-                </button>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-const RaciModal = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  return (
-    <CSSTransition
-      in={isOpen}
-      timeout={500}
-      classNames="raci-modal-wrapper"
-      unmountOnExit
-    >
-      <div className="raci-modal-wrapper">
-        <i
-          onClick={(event) => {
-            event.stopPropagation();
-            setIsOpen(false);
-          }}
-          className="fa fa-close raci-modal-close text-muted"
-        />
-
-        <div className="font-weight-bold mb-3">
-          Select Matt's assignment for "make pasta".
-        </div>
-
-        <div className="row">
-          <div className="col-3">
-            <button className="btn btn-block responsible-button">Responsible</button>
-          </div>
-
-          <div className="col-3">
-            <button className="btn btn-block accountable-button">Accountable</button>
-          </div>
-
-          <div className="col-3">
-            <button className="btn btn-block consulted-button">Consulted</button>
-          </div>
-
-          <div className="col-3">
-            <button className="btn btn-block informed-button">Informed</button>
-          </div>
-        </div>
-      </div>
-    </CSSTransition>
   );
 }
 
