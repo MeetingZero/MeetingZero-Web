@@ -44,3 +44,64 @@ export const saveHypothesis = (workshopToken, weBelieveText, willResultInText, s
     });
   }
 }
+
+export const getExperimentTasks = (workshopToken) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('GET_EXPERIMENT_TASKS'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops/${workshopToken}/experiments/tasks`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_EXPERIMENT_TASKS'));
+
+      return dispatch(experimentsSlice.actions.setExperimentTasks(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_EXPERIMENT_TASKS'));
+
+      throw err;
+    });
+  }
+}
+
+export const saveTask = (workshopToken, newTask) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVE_EXPERIMENT_TASK'));
+
+    return axiosInstance()
+    .post(`/api/v1/workshops/${workshopToken}/experiments/tasks`, {
+      response_text: newTask
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_EXPERIMENT_TASK'));
+
+      return dispatch(experimentsSlice.actions.setExperimentTasks(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_EXPERIMENT_TASK'));
+
+      throw err;
+    });
+  }
+}
+
+export const updateTask = (workshopToken, taskId, newTask) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVE_EXPERIMENT_TASK'));
+
+    return axiosInstance()
+    .put(`/api/v1/workshops/${workshopToken}/experiments/tasks/${taskId}`, {
+      response_text: newTask
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_EXPERIMENT_TASK'));
+
+      return dispatch(experimentsSlice.actions.setExperimentTasks(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_EXPERIMENT_TASK'));
+
+      throw err;
+    });
+  }
+}

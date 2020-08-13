@@ -19,6 +19,10 @@ const Owners = () => {
     dispatch(experimentsActions.getHypothesis(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
+  React.useEffect(() => {
+    dispatch(experimentsActions.getExperimentTasks(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
+
   const hypothesis = useSelector((state) => {
     return state.Experiments.hypothesis;
   });
@@ -149,6 +153,9 @@ const Owners = () => {
 }
 
 const TaskAssignments = ({ existingTask, allWorkshopMembers }) => {
+  const params = useParams();
+  const dispatch = useDispatch();
+
   const [task, setTask] = React.useState("");
   const [submittedTask, setSubmittedTask] = React.useState(null);
 
@@ -161,7 +168,21 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers }) => {
 
   const handleSubmit = (event) => {
     if (event.which === 13) {
-      setSubmittedTask(task);
+      if (existingTask) {
+        dispatch(
+          experimentsActions
+          .updateTask(params.workshop_token, existingTask.id, task)
+        ).then(() => {
+          setSubmittedTask(task);
+        });
+      } else {
+        dispatch(
+          experimentsActions
+          .saveTask(params.workshop_token, task)
+        ).then(() => {
+          setSubmittedTask(task);
+        });
+      }
     }
   }
 

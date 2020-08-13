@@ -4,7 +4,7 @@ const experimentsSlice = createSlice({
   name: 'Workshop/Experiments',
   initialState: {
     hypothesis: null,
-    experimentTasks: [null]
+    experimentTasks: []
   },
   reducers: {
     setHypothesis: (state, action) => {
@@ -13,7 +13,11 @@ const experimentsSlice = createSlice({
       return state;
     },
     setExperimentTasks: (state, action) => {
-      state.experimentTasks = action.payload;
+      if (action.payload.length > 0) {
+        state.experimentTasks = action.payload;
+      } else {
+        state.experimentTasks = [null];
+      }
 
       return state;
     },
