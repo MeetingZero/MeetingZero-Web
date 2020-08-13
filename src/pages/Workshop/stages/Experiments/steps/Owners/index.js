@@ -30,6 +30,10 @@ const Owners = () => {
     return state.Workshop.workshopMembers;
   });
 
+  const experimentTasks = useSelector((state) => {
+    return state.Experiments.experimentTasks;
+  });
+
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Owners</h1>
@@ -68,24 +72,34 @@ const Owners = () => {
         <div className="row">
           <div className="col-2"></div>
 
-          <div className="col-2 text-center">
-            <strong>Matt</strong>
-          </div>
-
-          <div className="col-2 text-center">
-            <strong>Arun</strong>
-          </div>
+          {workshopMembers.map((wm) => {
+            return (
+              <div key={wm.id} className="col-2 text-center">
+                <strong>{wm.user.first_name}</strong>
+              </div>
+            );
+          })}
         </div>
+
+        {experimentTasks.map((experimentTask) => {
+          return (
+            <div className="row">
+              <div className="col-2">
+                <textarea className="form-control h-100" placeholder="Your Task" />
+              </div>
+
+              <div className="col-2">
+                <div className="d-flex h-100">
+                  <button type="button" className="btn btn-link text-muted btn-block">+ Assign</button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
 
         <div className="row">
           <div className="col-2">
-            <textarea className="form-control h-100" placeholder="Your Task" />
-          </div>
-
-          <div className="col-2">
-            <div className="d-flex h-100">
-              <button type="button" className="btn btn-link text-muted btn-block">+ Assign</button>
-            </div>
+            <button type="button" className="btn btn-link btn-block text-dark font-weight-bold">+ Add Task</button>
           </div>
         </div>
       </div>
@@ -131,7 +145,7 @@ const Owners = () => {
 }
 
 const RaciModal = () => {
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <CSSTransition
