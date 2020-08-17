@@ -93,12 +93,12 @@ const Owners = () => {
       </div>
 
       <div className="raci-matrix h-100">
-        <div className="row mb-3">
+        <div className="row">
           <div className="col-2"></div>
 
-          {workshopMembers.map((wm) => {
+          {workshopMembers.map((wm, index) => {
             return (
-              <div key={wm.id} className="col-2 text-center">
+              <div key={wm.id} className={`col-2 text-center border border-top-0 py-2 ${index + 1 < workshopMembers.length ? "border-right-0" : null}`}>
                 <strong>{wm.user.first_name}</strong>
               </div>
             );
