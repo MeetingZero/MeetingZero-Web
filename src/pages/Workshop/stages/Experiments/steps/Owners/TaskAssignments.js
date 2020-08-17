@@ -44,7 +44,7 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
 
   return (
     <div className="row">
-      <div className="col-2 py-2">
+      <div className="col-2 py-1">
         {submittedTask ?
           <div
             onClick={() => setSubmittedTask(null)}
@@ -75,7 +75,7 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
         }
 
         return (
-          <div key={wm.id} className={`col-2 border-left py-2 ${index + 1 === allWorkshopMembers.length ? "border-right" : null}`}>
+          <div key={wm.id} className={`col-2 border-left py-1 ${index + 1 === allWorkshopMembers.length ? "border-right" : null}`}>
             <div className="d-flex h-100">
               {assignedTask ?
                 <button
