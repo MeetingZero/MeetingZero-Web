@@ -47,8 +47,12 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
       <div className="col-2 py-1">
         {submittedTask ?
           <div
-            onClick={() => setSubmittedTask(null)}
-            className="border border-success rounded p-1 cursor-pointer h-100"
+            onClick={() => {
+              if (workshop.is_host) {
+                setSubmittedTask(null)
+              }
+            }}
+            className={`border border-success rounded p-1 h-100 ${workshop.is_host ? "cursor-pointer" : null}`}
           >
             {submittedTask}
           </div>
@@ -83,7 +87,11 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
             <div className="d-flex h-100">
               {assignedTask ?
                 <button
-                  onClick={() => toggleRaciModal(true, wm.user_id, existingTask)}
+                  onClick={() => {
+                    if (workshop.is_host) {
+                      toggleRaciModal(true, wm.user_id, existingTask)
+                    }
+                  }}
                   className={`btn btn-block ${assignedTask.assignment_text.toLowerCase()}-button`}
                 >
                   {assignedTask.assignment_text}
