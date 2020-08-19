@@ -12,14 +12,14 @@ const MultiVoter = ({ workshopToken, votingItems, modelName, handleUpdateData })
   const [viewIndex, setViewIndex] = React.useState(null);
 
   React.useEffect(() => {
-    // Set the view index to the problem that doesn't have a vote yet
+    // Set the view index to the voting item that doesn't have a vote yet
     for (let i = 0; i < votingItems.length; i++) {
       if (viewIndex === null && !votingItems[i].star_voting_vote) {
         return setViewIndex(i);
       }
     }
 
-    // If all problems have votes and nothing is currently selected, show the last one
+    // If all voting items have votes and nothing is currently selected, show the last one
     if (viewIndex === null && votingItems.length > 0) {
       return setViewIndex(votingItems.length - 1);
     }
