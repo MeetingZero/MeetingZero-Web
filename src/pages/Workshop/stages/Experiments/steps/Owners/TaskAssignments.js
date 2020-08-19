@@ -53,13 +53,17 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
             {submittedTask}
           </div>
         :
-          <textarea
-            onChange={(event) => setTask(event.target.value)}
-            onKeyDown={handleSubmit}
-            className="form-control h-100"
-            placeholder="Your Task"
-            value={task}
-          />
+          <React.Fragment>
+            {workshop.is_host ?
+              <textarea
+                onChange={(event) => setTask(event.target.value)}
+                onKeyDown={handleSubmit}
+                className="form-control h-100"
+                placeholder="Your Task"
+                value={task}
+              />
+            : null}
+          </React.Fragment>
         }
       </div>
 

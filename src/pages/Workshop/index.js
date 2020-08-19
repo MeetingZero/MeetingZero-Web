@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { cableConsumer } from 'config/cableConsumer';
 import workshopSlice from 'app/workshop/slice';
+import experimentsSlice from 'app/workshop/stages/experiments/slice';
 import * as workshopActions from 'app/workshop/actions';
 
 import LoadingScreen from 'library/LoadingScreen';
@@ -49,6 +50,12 @@ const Workshop = () => {
             workshopSlice
             .actions
             .setCurrentWorkshopStep(data.current_workshop_director)
+          );
+        } else if (data.experiment_tasks) {
+          dispatch(
+            experimentsSlice
+            .actions
+            .setExperimentTasks(data.experiment_tasks)
           );
         }
       },
