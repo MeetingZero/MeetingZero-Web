@@ -34,6 +34,7 @@ const Vote = () => {
       <h5 className="mb-4">Evaluate the importance of each item addressed. Once everyone is finished, you will be redirected to the results.</h5>
 
       <StarVoter
+        workshopToken={params.workshop_token}
         votingItems={allProblemsResponses}
         modelName="ProblemResponse"
         handleUpdateData={updateProblemsResponses}
