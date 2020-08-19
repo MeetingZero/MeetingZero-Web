@@ -28,7 +28,7 @@ const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", cal
             />
 
             {mainText ?
-              <div className={cn("px-3 pt-3", mainText ? null : "pb-3")}>
+              <div className={cn("p-3", mainText ? null : "pb-3")}>
                 <div className="text-muted small mb-1">
                   {mainTitle}
                 </div>
