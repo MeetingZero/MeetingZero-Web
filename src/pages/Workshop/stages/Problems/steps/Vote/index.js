@@ -24,7 +24,11 @@ const Vote = () => {
   });
 
   const updateProblemsResponses = (responseData) => {
-    dispatch(problemsSlice.actions.setAllProblemsResponses(responseData))
+    dispatch(
+      problemsSlice
+      .actions
+      .setAllProblemsResponses(responseData)
+    )
   }
 
   return (
