@@ -26,6 +26,30 @@ export const saveVote = (workshopToken, resourceId, resourceModelName, voteNum) 
   }
 }
 
+export const saveExclusiveVote = (workshopToken, resourceId, resourceModelName) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVE_VOTE'));
+
+    return axiosInstance()
+    .post(`/api/v1/workshops/${workshopToken}/star_voting_votes`, {
+      resource_id: resourceId,
+      resource_model_name: resourceModelName,
+      vote_number: 5,
+      save_exclusive: true
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_VOTE'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVE_VOTE'));
+
+      throw err;
+    });
+  }
+}
+
 export const updateVote = (workshopToken, resourceId, resourceModelName, voteId, voteNum) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('SAVE_VOTE'));
