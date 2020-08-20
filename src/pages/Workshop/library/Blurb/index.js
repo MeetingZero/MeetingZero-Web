@@ -15,7 +15,7 @@ const Blurb = ({ title, text }) => {
   });
 
   return (
-    <React.Fragment>
+    <div className="blurb-container">
       {discussionAllowed ?
         <img src={talking} className="blurb-icon ml-auto mb-1" alt="Discussion Allowed" />
       :
@@ -31,7 +31,7 @@ const Blurb = ({ title, text }) => {
           {text}
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 

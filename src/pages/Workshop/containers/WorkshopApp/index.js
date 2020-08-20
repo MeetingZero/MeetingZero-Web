@@ -33,11 +33,11 @@ const WorkshopApp = ({ children, onTimerExpired }) => {
     <div className="container-fluid container-fixed">
       <div className="row">
         <div className="col-3 vh-100">
-          <img src={logo} className="workshop-logo" alt="Workshop Logo" />
+          <div className="workshop-sidebar-container">
+            <img src={logo} className="workshop-logo" alt="Workshop Logo" />
 
-          <div className="workshop-left-sidebar-bottom">
             <WorkshopSidebar />
-
+            
             <Blurb title="Workshop Purpose" text={workshop.purpose} />
           </div>
         </div>

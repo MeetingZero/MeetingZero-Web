@@ -1,10 +1,16 @@
-@import "../../../../assets/vendor/bootstrap/functions";
-@import "../../../../assets/vendor/bootstrap/variables";
+@import "src/assets/vendor/bootstrap/functions";
+@import "src/assets/vendor/bootstrap/variables";
 
 .workshop-sidebar-pills {
-  padding: 0;
+  padding: 3rem;
+  padding-bottom: 0;
   list-style: none;
   overflow-y: scroll;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  border-right: $gray-300 1px solid;
+  margin-bottom: 0;
 
   > li {
     margin-bottom: 1.5rem;

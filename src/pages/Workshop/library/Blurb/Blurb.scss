@@ -1,3 +1,15 @@
+@import "src/assets/vendor/bootstrap/functions";
+@import "src/assets/vendor/bootstrap/variables";
+
+.blurb-container {
+  padding: 3rem;
+  padding-top: 0;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  border-right: $gray-300 1px solid;
+}
+
 .blurb-icon {
   display: block;
   width: 6rem;

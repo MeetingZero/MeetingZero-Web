@@ -1,17 +1,21 @@
-@import "../../../../assets/vendor/bootstrap/functions";
-@import "../../../../assets/vendor/bootstrap/variables";
-@import "../../../../assets/vendor/bootstrap/mixins/breakpoints";
+@import "src/assets/vendor/bootstrap/functions";
+@import "src/assets/vendor/bootstrap/variables";
+@import "src/assets/vendor/bootstrap/mixins/breakpoints";
 
 .workshop-logo {
   display: block;
   width: 100%;
   max-width: 10rem;
   margin-top: 3rem;
+  margin-bottom: 1rem;
   margin-left: 3rem;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
 }
 
-.workshop-left-sidebar-bottom {
-  border-right: $gray-300 1px solid;
-  width: 100%;
-  padding: 3rem;
+.workshop-sidebar-container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
