@@ -92,7 +92,7 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
                       toggleRaciModal(true, wm.user_id, existingTask)
                     }
                   }}
-                  className={`btn btn-block ${assignedTask.assignment_text.toLowerCase()}-button`}
+                  className={`btn btn-block btn-square ${assignedTask.assignment_text.toLowerCase()}-button`}
                 >
                   {assignedTask.assignment_text}
                 </button>
@@ -102,7 +102,7 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
                     <button
                       onClick={() => toggleRaciModal(true, wm.user_id, existingTask)}
                       type="button"
-                      className="btn btn-link text-muted btn-block"
+                      className="btn btn-link text-muted btn-block btn-square"
                       disabled={submittedTask ? false : true}
                     >
                       + Assign

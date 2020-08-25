@@ -64,7 +64,7 @@ const WorkshopStart = () => {
 
   return (
     <Squiggle>
-      <div className="feather-card mt-10 mb-3">
+      <div className="feather-card shadow mt-10 mb-3">
         <h4 className="font-weight-normal mb-1">Workshop Purpose</h4>
 
         <div>
@@ -73,7 +73,7 @@ const WorkshopStart = () => {
       </div>
 
       {workshop && workshop.is_host ?
-        <div className="feather-card mb-10">
+        <div className="feather-card shadow mb-10">
           <h4 className="font-weight-normal mb-1">Attendees</h4>
 
           <div>
