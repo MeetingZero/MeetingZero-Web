@@ -12,7 +12,7 @@ const Squiggle = ({ children }) => {
             <img src={logo} className="squiggle-logo" alt="Squiggle Logo" />
           </div>
 
-          <div className="col-7">
+          <div className="col-7 vh-100 overflow-y-scroll">
             {children}
           </div>
         </div>
