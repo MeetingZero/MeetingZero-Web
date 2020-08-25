@@ -120,12 +120,15 @@ export const startWorkshop = (workshopToken) => {
   }
 }
 
-export const validateWorkshop = (workshopToken) => {
+export const validateWorkshop = (workshopToken, userId, email) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('VALIDATING_WORKSHOP'));
 
     return axiosInstance()
-    .get(`/api/v1/workshops/${workshopToken}/validate`)
+    .post(`/api/v1/workshops/${workshopToken}/validate`, {
+      email,
+      user_id: userId
+    })
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('VALIDATING_WORKSHOP'));
 

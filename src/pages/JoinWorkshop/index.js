@@ -23,7 +23,7 @@ const JoinWorkshop = () => {
 
     setWorkshopError(undefined);
 
-    dispatch(workshopActions.validateWorkshop(workshopToken))
+    dispatch(workshopActions.validateWorkshop(workshopToken, currentUser.id, currentUser.email))
     .then(() => {
       history.push(`/workshop/${workshopToken}/start`);
     })
