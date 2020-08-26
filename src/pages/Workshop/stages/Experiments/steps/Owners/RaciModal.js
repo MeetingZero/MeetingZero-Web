@@ -59,7 +59,7 @@ const RaciModal = ({ modalOpen, toggleRaciModal, userId, task }) => {
           <div className="col-3">
             <button
               onClick={() => handleSubmit("Responsible")}
-              className="btn btn-block responsible-button"
+              className="btn btn-block btn-square responsible-button"
             >
               Responsible
             </button>
@@ -68,7 +68,7 @@ const RaciModal = ({ modalOpen, toggleRaciModal, userId, task }) => {
           <div className="col-3">
             <button
               onClick={() => handleSubmit("Accountable")}
-              className="btn btn-block accountable-button"
+              className="btn btn-block btn-square accountable-button"
             >
               Accountable
             </button>
@@ -77,7 +77,7 @@ const RaciModal = ({ modalOpen, toggleRaciModal, userId, task }) => {
           <div className="col-3">
             <button
               onClick={() => handleSubmit("Consulted")}
-              className="btn btn-block consulted-button"
+              className="btn btn-block btn-square consulted-button"
             >
               Consulted
             </button>
@@ -86,7 +86,7 @@ const RaciModal = ({ modalOpen, toggleRaciModal, userId, task }) => {
           <div className="col-3">
             <button
               onClick={() => handleSubmit("Informed")}
-              className="btn btn-block informed-button"
+              className="btn btn-block btn-square informed-button"
             >
               Informed
             </button>

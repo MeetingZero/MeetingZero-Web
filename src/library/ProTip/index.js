@@ -40,7 +40,7 @@ const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", cal
             : null}
 
             {calloutText ?
-              <div className="px-2 pb-2">
+              <div className="p-2">
                 <div className="pro-tip-example-text pt-4 pb-2 px-2">
                   <div className="text-muted small mb-1">
                     {calloutTitle}

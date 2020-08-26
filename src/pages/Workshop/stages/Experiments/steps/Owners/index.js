@@ -2,15 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import TaskAssignments from './TaskAssignments';
-import RaciModal from './RaciModal';
+import RaciMatrix from './RaciMatrix';
 import ProTip from 'library/ProTip';
 
-import "./Owners.scss";
-
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
-import * as workshopActions from 'app/workshop/actions';
-import experimentsSlice from 'app/workshop/stages/experiments/slice';
 
 const Owners = () => {
   const params = useParams();
@@ -20,43 +15,9 @@ const Owners = () => {
     dispatch(experimentsActions.getHypothesis(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
-  React.useEffect(() => {
-    dispatch(experimentsActions.getExperimentTasks(params.workshop_token));
-  }, [dispatch, params.workshop_token]);
-
   const hypothesis = useSelector((state) => {
     return state.Experiments.hypothesis;
   });
-
-  React.useEffect(() => {
-    dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
-  }, [dispatch, params.workshop_token]);
-
-  const workshopMembers = useSelector((state) => {
-    return state.Workshop.workshopMembers;
-  });
-
-  const experimentTasks = useSelector((state) => {
-    return state.Experiments.experimentTasks;
-  });
-
-  const workshop = useSelector((state) => {
-    return state.Workshop.workshop;
-  });
-
-  const addNewTask = () => {
-    dispatch(experimentsSlice.actions.addBlankExperimentTask());
-  }
-
-  const [raciModalOpen, setRaciModalOpen] = React.useState(false);
-  const [raciModalUserId, setRaciModalUserId] = React.useState(null);
-  const [raciModalTask, setRaciModalTask] = React.useState(null);
-
-  const toggleRaciModal = (isOpen, userId, task) => {
-    setRaciModalUserId(userId);
-    setRaciModalTask(task);
-    setRaciModalOpen(isOpen);
-  }
 
   return (
     <React.Fragment>
@@ -92,49 +53,8 @@ const Owners = () => {
         </div>
       </div>
 
-      <div className="raci-matrix h-100">
-        <div className="row">
-          <div className="col-2"></div>
-
-          {workshopMembers.map((wm, index) => {
-            return (
-              <div key={wm.id} className={`col-2 text-center border border-top-0 py-1 ${index + 1 < workshopMembers.length ? "border-right-0" : null}`}>
-                <strong>{wm.user.first_name}</strong>
-              </div>
-            );
-          })}
-        </div>
-
-        {experimentTasks.map((experimentTask, index) => {
-          return (
-            <TaskAssignments
-              key={index}
-              existingTask={experimentTask}
-              allWorkshopMembers={workshopMembers}
-              toggleRaciModal={toggleRaciModal}
-            />
-          );
-        })}
-
-        {workshop.is_host ?
-          <div className="row">
-            <div className="col-2">
-              <button
-                onClick={addNewTask}
-                type="button"
-                className="btn btn-link btn-block text-dark font-weight-bold">
-                  + Add Task
-                </button>
-            </div>
-          </div>
-        : null}
-      </div>
-
-      <RaciModal
-        modalOpen={raciModalOpen}
-        toggleRaciModal={toggleRaciModal}
-        userId={raciModalUserId}
-        task={raciModalTask}
+      <RaciMatrix
+        workshopToken={params.workshop_token}
       />
 
       <ProTip
