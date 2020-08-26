@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -12,6 +13,7 @@ import './WorkshopApp.scss';
 
 const WorkshopApp = ({ children, onTimerExpired }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const currentWorkshopStep = useSelector((state) => {
     return state.Workshop.currentWorkshopStep;
@@ -25,7 +27,18 @@ const WorkshopApp = ({ children, onTimerExpired }) => {
     if (workshop.is_host) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
-      dispatch(workshopActions.completeWorkshopStep(workshop.workshop_token, workshopStageStepId));
+      dispatch(
+        workshopActions
+        .completeWorkshopStep(
+          workshop.workshop_token,
+          workshopStageStepId
+        )
+      )
+      .then((response) => {
+        if (response.workshop_complete) {
+          history.push(`/all-workshops/${workshop.workshop_token}`);
+        }
+      });
     }
   }
 
