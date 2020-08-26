@@ -21,17 +21,21 @@ const VoterReview = ({ workshopToken, modelName }) => {
     <React.Fragment>
       {starVotingResults ?
         <React.Fragment>
-          <h5 className="mb-1">The Winner</h5>
+          <h5 className="mb-2">The Winner</h5>
 
           <div className="bg-primary text-white rounded px-3 py-1 mb-4 shadow">
             {starVotingResults.runoff_winner.resource.response_text}
           </div>
 
-          <h5 className="mb-1">The Runner Up</h5>
+          {starVotingResults.runoff_runner_up ?
+            <React.Fragment>
+              <h5 className="mb-2">The Runner Up</h5>
 
-          <div className="feather-card rounded shadow">
-            {starVotingResults.runoff_runner_up.resource.response_text}
-          </div>
+              <div className="feather-card rounded shadow">
+                {starVotingResults.runoff_runner_up.resource.response_text}
+              </div>
+            </React.Fragment>
+          : null}
         </React.Fragment>
       : null}
     </React.Fragment>
