@@ -10,7 +10,7 @@ import * as workshopActions from 'app/workshop/actions';
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import experimentsSlice from 'app/workshop/stages/experiments/slice';
 
-const RaciMatrix = ({ workshopToken }) => {
+const RaciMatrix = ({ workshopToken, editable = true }) => {
   const dispatch = useDispatch();
 
   const [raciModalOpen, setRaciModalOpen] = React.useState(false);
@@ -69,11 +69,12 @@ const RaciMatrix = ({ workshopToken }) => {
               existingTask={experimentTask}
               allWorkshopMembers={workshopMembers}
               toggleRaciModal={toggleRaciModal}
+              editable={editable}
             />
           );
         })}
 
-        {workshop.is_host ?
+        {workshop.is_host && editable ?
           <div className="row">
             <div className="col-2">
               <button

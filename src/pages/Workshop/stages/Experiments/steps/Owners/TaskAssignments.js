@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 
-const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) => {
+const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal, editable }) => {
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -48,17 +48,17 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
         {submittedTask ?
           <div
             onClick={() => {
-              if (workshop.is_host) {
+              if (workshop.is_host && editable) {
                 setSubmittedTask(null)
               }
             }}
-            className={`border border-success rounded p-1 h-100 ${workshop.is_host ? "cursor-pointer" : null}`}
+            className={`border border-success rounded p-1 h-100 ${workshop.is_host && editable ? "cursor-pointer" : null}`}
           >
             {submittedTask}
           </div>
         :
           <React.Fragment>
-            {workshop.is_host ?
+            {workshop.is_host && editable ?
               <textarea
                 onChange={(event) => setTask(event.target.value)}
                 onKeyDown={handleSubmit}
@@ -88,7 +88,7 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
               {assignedTask ?
                 <button
                   onClick={() => {
-                    if (workshop.is_host) {
+                    if (workshop.is_host && editable) {
                       toggleRaciModal(true, wm.user_id, existingTask)
                     }
                   }}
@@ -98,7 +98,7 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal }) 
                 </button>
               :
                 <React.Fragment>
-                  {workshop.is_host ?
+                  {workshop.is_host && editable ?
                     <button
                       onClick={() => toggleRaciModal(true, wm.user_id, existingTask)}
                       type="button"
