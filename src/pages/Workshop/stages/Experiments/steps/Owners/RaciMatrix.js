@@ -44,29 +44,35 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
       user: {
         first_name: "Hello World"
       }
-    })
-    .concat({
+    }, {
       id: 3,
       user: {
         first_name: "Hello World 2"
       }
-    })
-    .concat({
-      id: 3,
+    }, {
+      id: 4,
       user: {
         first_name: "Hello World 3"
       }
-    })
-    .concat({
-      id: 4,
+    }, {
+      id: 5,
       user: {
         first_name: "Hello World 4"
       }
-    })
-    .concat({
-      id: 5,
+    }, {
+      id: 6,
       user: {
         first_name: "Hello World 5"
+      }
+    }, {
+      id: 7,
+      user: {
+        first_name: "Hello World 6"
+      }
+    }, {
+      id: 8,
+      user: {
+        first_name: "Hello World 7"
       }
     })
   });
@@ -80,14 +86,30 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
   });
 
   const [leftBound, setLeftBound] = React.useState(0);
-  const [rightBound, setRightBound] = React.useState(4);
+  const [rightBound, setRightBound] = React.useState(5);
 
   const toggleForward = () => {
-    
+    const slicedMembers = workshopMembers
+    .slice(leftBound + 5, rightBound + 5);
+
+    if (!slicedMembers[0]) {
+      return false;
+    }
+
+    setLeftBound(leftBound + 5);
+    setRightBound(rightBound + 5);
   }
 
   const toggleBackward = () => {
-    
+    const slicedMembers = workshopMembers
+    .slice(leftBound - 5, rightBound - 5);
+
+    if (!slicedMembers[0]) {
+      return false;
+    }
+
+    setLeftBound(leftBound - 5);
+    setRightBound(rightBound - 5);
   }
 
   const mappableMembers = workshopMembers.slice(leftBound, rightBound);
@@ -98,9 +120,9 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
         <div className="row">
           <div className="col-2"></div>
 
-          {mappableMembers.map((wm, index) => {
+          {mappableMembers.map((mm, index) => {
             return (
-              <div key={wm.id} className={`col-2 text-center border border-top-0 py-1 ${index + 1 < mappableMembers.length ? "border-right-0" : null}`}>
+              <div key={mm.id} className={`col-2 text-center border border-top-0 py-1 ${index + 1 < mappableMembers.length ? "border-right-0" : ""}`}>
                 {workshopMembers.length > 5 && index === 0 ?
                   <i onClick={toggleBackward} className="fa fa-chevron-left raci-toggle-left text-muted" />
                 : null}
@@ -109,7 +131,7 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
                   <i onClick={toggleForward} className="fa fa-chevron-right raci-toggle-right text-muted" />
                 : null}
 
-                <strong>{wm.user.first_name}</strong>
+                <strong>{mm.user.first_name}</strong>
               </div>
             );
           })}
