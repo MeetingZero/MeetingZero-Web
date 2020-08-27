@@ -82,6 +82,25 @@ export const getWorkshop = (workshopToken) => {
   }
 }
 
+export const getMyWorkshops = () => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('GET_MY_WORKSHOPS'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_MY_WORKSHOPS'));
+
+      return dispatch(workshopSlice.actions.setMyWorkshops(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_MY_WORKSHOPS'));
+
+      throw err;
+    });
+  }
+}
+
 export const getWorkshopMembers = (workshopToken) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('GET_WORKSHOP_MEMBERS'));

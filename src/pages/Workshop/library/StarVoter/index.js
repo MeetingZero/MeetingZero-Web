@@ -33,7 +33,7 @@ const StarVoter = ({ workshopToken, votingItems, modelName, handleUpdateData }) 
         );
       });
     }
-  }, [dispatch, modelName, votingItems.length, workshopToken, currentWorkshopStep.workshop_stage_step_id]);
+  }, [dispatch, modelName, votingItems, workshopToken, currentWorkshopStep.workshop_stage_step_id]);
 
   if (votingItems.length > 2) {
     return (
