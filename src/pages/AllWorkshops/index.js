@@ -22,7 +22,6 @@ const AllWorkshops = () => {
       <div className="row">
         <div className="col-3 vh-100 bg-info">
           {myWorkshops.map((myWorkshop) => {
-            console.log(myWorkshop)
             return (
               <div key={myWorkshop.id}>
                 {myWorkshop.date_time_planned ?
