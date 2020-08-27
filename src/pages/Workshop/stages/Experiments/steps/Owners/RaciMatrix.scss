@@ -43,3 +43,19 @@
 .raci-modal-wrapper-exit {
   animation: .6s fadeOut ease;
 }
+
+.raci-toggle-left, .raci-toggle-right {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.raci-toggle-left {
+  left: -2rem;
+}
+
+.raci-toggle-right {
+  right: -2rem;
+}

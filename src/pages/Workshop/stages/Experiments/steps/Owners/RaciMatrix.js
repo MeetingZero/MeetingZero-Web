@@ -36,7 +36,39 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
   }
 
   const workshopMembers = useSelector((state) => {
-    return state.Workshop.workshopMembers;
+    return state
+    .Workshop
+    .workshopMembers
+    .concat({
+      id: 2,
+      user: {
+        first_name: "Hello World"
+      }
+    })
+    .concat({
+      id: 3,
+      user: {
+        first_name: "Hello World 2"
+      }
+    })
+    .concat({
+      id: 3,
+      user: {
+        first_name: "Hello World 3"
+      }
+    })
+    .concat({
+      id: 4,
+      user: {
+        first_name: "Hello World 4"
+      }
+    })
+    .concat({
+      id: 5,
+      user: {
+        first_name: "Hello World 5"
+      }
+    })
   });
 
   const experimentTasks = useSelector((state) => {
@@ -47,15 +79,36 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
     return state.Workshop.workshop;
   });
 
+  const [leftBound, setLeftBound] = React.useState(0);
+  const [rightBound, setRightBound] = React.useState(4);
+
+  const toggleForward = () => {
+    
+  }
+
+  const toggleBackward = () => {
+    
+  }
+
+  const mappableMembers = workshopMembers.slice(leftBound, rightBound);
+
   return (
     <React.Fragment>
       <div className="raci-matrix h-100">
         <div className="row">
           <div className="col-2"></div>
 
-          {workshopMembers.map((wm, index) => {
+          {mappableMembers.map((wm, index) => {
             return (
-              <div key={wm.id} className={`col-2 text-center border border-top-0 py-1 ${index + 1 < workshopMembers.length ? "border-right-0" : null}`}>
+              <div key={wm.id} className={`col-2 text-center border border-top-0 py-1 ${index + 1 < mappableMembers.length ? "border-right-0" : null}`}>
+                {workshopMembers.length > 5 && index === 0 ?
+                  <i onClick={toggleBackward} className="fa fa-chevron-left raci-toggle-left text-muted" />
+                : null}
+
+                {workshopMembers.length > 5 && index === mappableMembers.length - 1 ?
+                  <i onClick={toggleForward} className="fa fa-chevron-right raci-toggle-right text-muted" />
+                : null}
+
                 <strong>{wm.user.first_name}</strong>
               </div>
             );
@@ -67,7 +120,7 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
             <TaskAssignments
               key={index}
               existingTask={experimentTask}
-              allWorkshopMembers={workshopMembers}
+              mappableMembers={mappableMembers}
               toggleRaciModal={toggleRaciModal}
               editable={editable}
             />

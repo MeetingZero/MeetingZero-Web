@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 
-const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal, editable }) => {
+const TaskAssignments = ({ existingTask, mappableMembers, toggleRaciModal, editable }) => {
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -71,7 +71,7 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal, ed
         }
       </div>
 
-      {allWorkshopMembers.map((wm, index) => {
+      {mappableMembers.map((wm, index) => {
         let assignedTask = null;
 
         if (existingTask) {
@@ -83,7 +83,7 @@ const TaskAssignments = ({ existingTask, allWorkshopMembers, toggleRaciModal, ed
         }
 
         return (
-          <div key={wm.id} className={`col-2 border-left py-1 ${index + 1 === allWorkshopMembers.length ? "border-right" : null}`}>
+          <div key={wm.id} className={`col-2 border-left py-1 ${index + 1 === mappableMembers.length ? "border-right" : null}`}>
             <div className="d-flex h-100">
               {assignedTask ?
                 <button
