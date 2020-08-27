@@ -15,13 +15,13 @@ const StarVoter = ({ workshopToken, votingItems, modelName, handleUpdateData }) 
   });
 
   React.useEffect(() => {
-    // If there is only 1 item to vote on, just calculate votes and complete the current step
+    // If there is only 1 item to vote on, save the new voting result and complete the current step
     if (votingItems.length === 1) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
       dispatch(
         votingActions
-        .calculateVotingResults(workshopToken, modelName)
+        .saveVotingResult(workshopToken, modelName, votingItems[0].id, 5)
       )
       .then(() => {
         dispatch(
