@@ -78,7 +78,7 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
 
   return (
     <React.Fragment>
-      <div className="raci-matrix h-100">
+      <div className="raci-matrix">
         <div className="row">
           <div className="col-2"></div>
 
