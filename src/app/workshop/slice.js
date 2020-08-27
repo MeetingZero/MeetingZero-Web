@@ -31,7 +31,9 @@ const workshopSlice = createSlice({
       return state;
     },
     setMyWorkshops: (state, action) => {
-      state.myWorkshops = action.payload;
+      state.myWorkshops = action.payload.map((ap) => {
+        return ap.workshop;
+      });
 
       return state;
     }
