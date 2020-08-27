@@ -36,45 +36,7 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
   }
 
   const workshopMembers = useSelector((state) => {
-    return state
-    .Workshop
-    .workshopMembers
-    .concat({
-      id: 2,
-      user: {
-        first_name: "Hello World"
-      }
-    }, {
-      id: 3,
-      user: {
-        first_name: "Hello World 2"
-      }
-    }, {
-      id: 4,
-      user: {
-        first_name: "Hello World 3"
-      }
-    }, {
-      id: 5,
-      user: {
-        first_name: "Hello World 4"
-      }
-    }, {
-      id: 6,
-      user: {
-        first_name: "Hello World 5"
-      }
-    }, {
-      id: 7,
-      user: {
-        first_name: "Hello World 6"
-      }
-    }, {
-      id: 8,
-      user: {
-        first_name: "Hello World 7"
-      }
-    })
+    return state.Workshop.workshopMembers;
   });
 
   const experimentTasks = useSelector((state) => {
