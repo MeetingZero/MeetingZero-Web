@@ -139,7 +139,7 @@ ReactDOM.render(
                 <Workshop />
               </Route>
 
-              <Route exact path='/all-workshops/:workshop_token'>
+              <Route exact path='/all-workshops/:workshop_token?'>
                 <AllWorkshops />
               </Route>
             </Restricted>

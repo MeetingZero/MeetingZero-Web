@@ -1,5 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import WorkshopSummary from './WorkshopSummary';
 
@@ -7,6 +9,8 @@ import * as workshopActions from 'app/workshop/actions';
 
 const AllWorkshops = () => {
   const dispatch = useDispatch();
+  const params = useParams();
+  const history = useHistory();
 
   React.useEffect(() => {
     dispatch(
@@ -19,21 +23,29 @@ const AllWorkshops = () => {
     return state.Workshop.myWorkshops;
   });
 
-  const [viewIndex, setViewIndex] = React.useState(null);
+  const [currentWorkshop, setCurrentWorkshop] = React.useState(null);
 
   React.useEffect(() => {
-    if (myWorkshops.length > 0 && viewIndex === null) {
-      return setViewIndex(0);
+    if (!params.workshop_token && myWorkshops && myWorkshops.length > 0) {
+      return history.push(`/all-workshops/${myWorkshops[0].workshop_token}`);
+    } else if (params.workshop_token && myWorkshops && myWorkshops.length > 0) {
+      for (let i = 0; i < myWorkshops.length; i++) {
+        if (myWorkshops[i].workshop_token === params.workshop_token) {
+          return setCurrentWorkshop(myWorkshops[i]);
+        }
+      }
     }
-  }, [myWorkshops, viewIndex]);
+  }, [myWorkshops, params.workshop_token, history]);
 
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
         <div className="col-3 vh-100 bg-info">
+          <h5 className="font-weight-normal mb-3">Past Workshops</h5>
+
           {myWorkshops.map((myWorkshop) => {
             return (
-              <div key={myWorkshop.id}>
+              <Link to={`/all-workshops/${myWorkshop.workshop_token}`} key={myWorkshop.id}>
                 {myWorkshop.date_time_planned ?
                   <div className="small text-muted">
                     {myWorkshop.date_time_planned}
@@ -43,15 +55,15 @@ const AllWorkshops = () => {
                 <div className="mt-1 mb-3">
                   {myWorkshop.purpose}
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
 
         <div className="col-9 vh-100">
-          {viewIndex !== null ?
+          {currentWorkshop !== null ?
             <WorkshopSummary
-              workshop={myWorkshops[viewIndex]}
+              workshop={currentWorkshop}
             />
           : null}
         </div>
