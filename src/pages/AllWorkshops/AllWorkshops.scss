@@ -1,0 +1,20 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
+.all-workshops-links {
+  padding: 1rem;
+  padding-left: 0;
+  color: $dark;
+
+  &.active {
+    &:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 5px;
+      background-color: $primary;
+      border-radius: 1rem;
+      margin-top: 1rem;
+    }
+  }
+}

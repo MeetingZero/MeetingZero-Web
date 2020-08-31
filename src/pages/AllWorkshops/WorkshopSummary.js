@@ -24,7 +24,7 @@ const WorkshopSummary = ({ workshop }) => {
   }
 
   return (
-    <React.Fragment>
+    <div className="p-5">
       <h5 className="font-weight-normal mb-2">Original Problem</h5>
 
       <div className="feather-card shadow mb-8">
@@ -57,7 +57,7 @@ const WorkshopSummary = ({ workshop }) => {
           editable={false}
         />
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 

@@ -5,6 +5,8 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import WorkshopSummary from './WorkshopSummary';
 
+import './AllWorkshops.scss';
+
 import * as workshopActions from 'app/workshop/actions';
 
 const AllWorkshops = () => {
@@ -41,18 +43,22 @@ const AllWorkshops = () => {
     <div className="container-fluid container-fixed">
       <div className="row">
         <div className="col-3 vh-100 bg-info">
-          <h5 className="font-weight-normal mb-3">Past Workshops</h5>
+          <h5 className="font-weight-normal mb-3 mt-5">Past Workshops</h5>
 
           {myWorkshops.map((myWorkshop) => {
             return (
-              <Link to={`/all-workshops/${myWorkshop.workshop_token}`} key={myWorkshop.id}>
+              <Link
+                key={myWorkshop.id}
+                to={`/all-workshops/${myWorkshop.workshop_token}`}
+                className={`d-block all-workshops-links ${params.workshop_token === myWorkshop.workshop_token ? "active" : ""}`}
+              >
                 {myWorkshop.date_time_planned ?
                   <div className="small text-muted">
                     {myWorkshop.date_time_planned}
                   </div>
                 : null}
 
-                <div className="mt-1 mb-3">
+                <div className="mt-1 font-weight-bold">
                   {myWorkshop.purpose}
                 </div>
               </Link>
@@ -60,7 +66,7 @@ const AllWorkshops = () => {
           })}
         </div>
 
-        <div className="col-9 vh-100">
+        <div className="col-9 vh-100 overflow-y-scroll">
           {currentWorkshop !== null ?
             <WorkshopSummary
               workshop={currentWorkshop}
