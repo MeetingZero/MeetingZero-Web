@@ -7,7 +7,8 @@ const workshopSlice = createSlice({
     currentWorkshopStep: null,
     workshop: null,
     workshopMembers: [],
-    myWorkshops: []
+    myWorkshops: [],
+    workshopSummary: null
   },
   reducers: {
     setWorkshopDirector: (state, action) => {
@@ -34,6 +35,11 @@ const workshopSlice = createSlice({
       state.myWorkshops = action.payload.map((ap) => {
         return ap.workshop;
       });
+
+      return state;
+    },
+    setWorkshopSummary: (state, action) => {
+      state.workshopSummary = action.payload;
 
       return state;
     }

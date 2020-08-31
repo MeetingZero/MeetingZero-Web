@@ -181,3 +181,22 @@ export const completeWorkshopStep = (workshopToken, workshopStageStepId) => {
     });
   }
 }
+
+export const getWorkshopSummary = (workshopToken) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('GET_WORKSHOP_SUMMARY'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops/${workshopToken}/summary`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_WORKSHOP_SUMMARY'));
+
+      return dispatch(workshopSlice.actions.setWorkshopSummary(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_WORKSHOP_SUMMARY'));
+
+      throw err;
+    });
+  }
+}

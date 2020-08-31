@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import WorkshopSummary from './WorkshopSummary';
+
 import * as workshopActions from 'app/workshop/actions';
 
 const AllWorkshops = () => {
@@ -16,6 +18,14 @@ const AllWorkshops = () => {
   const myWorkshops = useSelector((state) => {
     return state.Workshop.myWorkshops;
   });
+
+  const [viewIndex, setViewIndex] = React.useState(null);
+
+  React.useEffect(() => {
+    if (myWorkshops.length > 0 && viewIndex === null) {
+      return setViewIndex(0);
+    }
+  }, [myWorkshops, viewIndex]);
 
   return (
     <div className="container-fluid container-fixed">
@@ -39,7 +49,11 @@ const AllWorkshops = () => {
         </div>
 
         <div className="col-9 vh-100">
-          Content
+          {viewIndex !== null ?
+            <WorkshopSummary
+              workshop={myWorkshops[viewIndex]}
+            />
+          : null}
         </div>
       </div>
     </div>

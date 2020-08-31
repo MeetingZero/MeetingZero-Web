@@ -18,6 +18,10 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
   const [raciModalTask, setRaciModalTask] = React.useState(null);
 
   React.useEffect(() => {
+    dispatch(workshopActions.getWorkshop(workshopToken));
+  }, [dispatch, workshopToken]);
+  
+  React.useEffect(() => {
     dispatch(workshopActions.getWorkshopMembers(workshopToken));
   }, [dispatch, workshopToken]);
 
@@ -75,6 +79,10 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
   }
 
   const mappableMembers = workshopMembers.slice(leftBound, rightBound);
+
+  if (!workshop) {
+    return null;
+  }
 
   return (
     <React.Fragment>
