@@ -100,3 +100,22 @@ export const setPriority = (workshopToken, responseId, impactLevel, effortLevel)
     });
   }
 }
+
+export const getSolutionsForVoting = (workshopToken) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('GET_SOLUTIONS_FOR_VOTING'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops/${workshopToken}/solutions/voting`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_SOLUTIONS_FOR_VOTING'));
+
+      return dispatch(solutionsSlice.actions.setSolutionsForVoting(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_SOLUTIONS_FOR_VOTING'));
+
+      throw err;
+    });
+  }
+}

@@ -6,7 +6,8 @@ const solutionsSlice = createSlice({
   name: 'Workshop/Solutions',
   initialState: {
     mySolutionsResponses: [null],
-    allSolutionsResponses: []
+    allSolutionsResponses: [],
+    solutionsForVoting: []
   },
   reducers: {
     setMySolutionsResponses: (state, action) => {
@@ -21,6 +22,11 @@ const solutionsSlice = createSlice({
     },
     setAllSolutionsResponses: (state, action) => {
       state.allSolutionsResponses = action.payload;
+
+      return state;
+    },
+    setSolutionsForVoting: (state, action) => {
+      state.solutionsForVoting = action.payload;
 
       return state;
     }
