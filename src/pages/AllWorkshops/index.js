@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams, useHistory } from 'react-router-dom';
+import moment from 'moment';
 
 import WorkshopSummary from './WorkshopSummary';
 
@@ -54,11 +55,11 @@ const AllWorkshops = () => {
               >
                 {myWorkshop.date_time_planned ?
                   <div className="small text-muted">
-                    {myWorkshop.date_time_planned}
+                    {moment(myWorkshop.date_time_planned).utc().format('MMMM Do YYYY, h:mm A')}
                   </div>
                 : null}
 
-                <div className="mt-1 font-weight-bold">
+                <div className="font-weight-bold">
                   {myWorkshop.purpose}
                 </div>
               </Link>
