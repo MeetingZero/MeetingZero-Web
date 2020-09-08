@@ -6,7 +6,6 @@ import StarVoter from 'pages/Workshop/library/StarVoter';
 
 import * as solutionsActions from 'app/workshop/stages/solutions/actions';
 import * as opportunityQuestionActions from 'app/workshop/stages/opportunity_question/actions';
-import solutionsSlice from 'app/workshop/stages/solutions/slice';
 
 const Vote = () => {
   const params = useParams();
@@ -31,11 +30,10 @@ const Vote = () => {
     return state.Solutions.solutionsForVoting;
   });
 
-  const updateSolutionsForVoting = (responseData) => {
+  const updateSolutionsForVoting = () => {
     dispatch(
-      solutionsSlice
-      .actions
-      .setSolutionsForVoting(responseData)
+      solutionsActions
+      .getSolutionsForVoting(params.workshop_token)
     );
   }
 
