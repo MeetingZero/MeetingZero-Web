@@ -99,7 +99,7 @@ const MultiVoter = ({ workshopToken, votingItems, modelName, handleUpdateData })
               minText='Not important'
               maxText='Very important'
               onVote={(voteNum) => submitVote(voteNum)}
-              startingVote={votingItems[viewIndex].star_voting_vote ? votingItems[viewIndex].star_voting_vote.vote_number : 0}
+              startingVote={votingItems[viewIndex].star_voting_vote}
             />
           </div>
         </React.Fragment>

@@ -31,7 +31,7 @@ const Vote = () => {
   });
 
   const updateSolutionsForVoting = () => {
-    dispatch(
+    return dispatch(
       solutionsActions
       .getSolutionsForVoting(params.workshop_token)
     );

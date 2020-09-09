@@ -11,7 +11,7 @@ const BubbleVoter = ({ minText, maxText, onVote, startingVote }) => {
     if (startingVote === null || startingVote === undefined) {
       setVoteSelected(0);
     } else {
-      setVoteSelected(startingVote);
+      setVoteSelected(startingVote.vote_number);
     }
   }, [startingVote]);
 
