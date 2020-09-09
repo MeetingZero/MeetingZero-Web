@@ -214,7 +214,7 @@ const BathroomBreakModal = () => {
 
           <div className="row mb-2">
             <div className="col-6">
-              <button className="btn btn-block btn-link">
+              <button onClick={onTimerExpired} className="btn btn-block btn-link">
                 No
               </button>
             </div>
