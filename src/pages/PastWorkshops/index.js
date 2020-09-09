@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { useParams, useHistory } from 'react-router-dom';
 import moment from 'moment';
 
+import Button from 'library/Button';
 import WorkshopSummary from './WorkshopSummary';
 
 import './PastWorkshops.scss';
 
 import * as workshopActions from 'app/workshop/actions';
 
-const AllWorkshops = () => {
+const PastWorkshops = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const history = useHistory();
@@ -40,6 +41,12 @@ const AllWorkshops = () => {
     }
   }, [myWorkshops, params.workshop_token, history]);
 
+  const handleSignOut = () => {
+    window.localStorage.removeItem("authToken");
+
+    history.push("/");
+  }
+
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
@@ -68,6 +75,24 @@ const AllWorkshops = () => {
         </div>
 
         <div className="col-9 vh-100 overflow-y-scroll">
+          <div className="d-flex justify-content-end px-5 mt-3">
+            <div>
+              <Link to="/create-workshop" className="btn btn-block btn-link btn-square">
+                Create Workshop
+              </Link>
+            </div>
+
+            <div>
+              <Link to="/join-workshop" className="btn btn-block btn-link btn-square ml-2">
+                Join Workshop
+              </Link>
+            </div>
+
+            <div>
+              <Button onClick={handleSignOut} className="btn btn-block btn-link btn-square ml-2" text="Sign Out" />
+            </div>
+          </div>
+
           {currentWorkshop !== null ?
             <WorkshopSummary
               workshop={currentWorkshop}
@@ -79,4 +104,4 @@ const AllWorkshops = () => {
   );
 }
 
-export default AllWorkshops;
+export default PastWorkshops;
