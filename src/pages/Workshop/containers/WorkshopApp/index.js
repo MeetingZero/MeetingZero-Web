@@ -36,7 +36,7 @@ const WorkshopApp = ({ children, onTimerExpired }) => {
       )
       .then((response) => {
         if (response.workshop_complete) {
-          history.push(`/all-workshops/${workshop.workshop_token}`);
+          history.push(`/past-workshops/${workshop.workshop_token}`);
         }
       });
     }

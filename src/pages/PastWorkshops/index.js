@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import WorkshopSummary from './WorkshopSummary';
 
-import './AllWorkshops.scss';
+import './PastWorkshops.scss';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -30,7 +30,7 @@ const AllWorkshops = () => {
 
   React.useEffect(() => {
     if (!params.workshop_token && myWorkshops && myWorkshops.length > 0) {
-      return history.push(`/all-workshops/${myWorkshops[0].workshop_token}`);
+      return history.push(`/past-workshops/${myWorkshops[0].workshop_token}`);
     } else if (params.workshop_token && myWorkshops && myWorkshops.length > 0) {
       for (let i = 0; i < myWorkshops.length; i++) {
         if (myWorkshops[i].workshop_token === params.workshop_token) {
@@ -50,8 +50,8 @@ const AllWorkshops = () => {
             return (
               <Link
                 key={myWorkshop.id}
-                to={`/all-workshops/${myWorkshop.workshop_token}`}
-                className={`d-block all-workshops-links ${params.workshop_token === myWorkshop.workshop_token ? "active" : ""}`}
+                to={`/past-workshops/${myWorkshop.workshop_token}`}
+                className={`d-block past-workshops-links ${params.workshop_token === myWorkshop.workshop_token ? "active" : ""}`}
               >
                 {myWorkshop.date_time_planned ?
                   <div className="small text-muted">

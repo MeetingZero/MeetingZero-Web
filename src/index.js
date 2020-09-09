@@ -88,9 +88,9 @@ const Workshop = lazy(() => {
   .then(([moduleExports]) => moduleExports);
 });
 
-const AllWorkshops = lazy(() => {
+const PastWorkshops = lazy(() => {
   return Promise.all([
-    import('./pages/AllWorkshops'),
+    import('./pages/PastWorkshops'),
     new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
   ])
   .then(([moduleExports]) => moduleExports);
@@ -139,8 +139,8 @@ ReactDOM.render(
                 <Workshop />
               </Route>
 
-              <Route exact path='/all-workshops/:workshop_token?'>
-                <AllWorkshops />
+              <Route exact path='/past-workshops/:workshop_token?'>
+                <PastWorkshops />
               </Route>
             </Restricted>
           </Switch>
