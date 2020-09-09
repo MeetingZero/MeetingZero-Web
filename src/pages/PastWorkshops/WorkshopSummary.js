@@ -55,6 +55,16 @@ const WorkshopSummary = ({ workshop }) => {
         </React.Fragment>
       : null}
 
+      {workshopSummary.winning_solution ?
+        <React.Fragment>
+          <h5 className="font-weight-normal mb-2">Winning Solution</h5>
+
+          <div className="feather-card shadow mb-8">
+            {workshopSummary.winning_solution.response_text}
+          </div>
+        </React.Fragment>
+      : null}
+
       {workshopSummary.experiment_hypothesis ?
         <React.Fragment>
           <h5 className="font-weight-normal mb-2">Hypothesis</h5>
