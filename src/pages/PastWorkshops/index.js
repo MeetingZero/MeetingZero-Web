@@ -62,7 +62,7 @@ const PastWorkshops = () => {
               >
                 {myWorkshop.date_time_planned ?
                   <div className="small text-muted">
-                    {moment(myWorkshop.date_time_planned).utc().format('MMMM Do YYYY, h:mm A')}
+                    {moment(myWorkshop.date_time_planned).format('MMMM Do YYYY, h:mm A')}
                   </div>
                 : null}
 
