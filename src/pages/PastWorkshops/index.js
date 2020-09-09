@@ -9,6 +9,8 @@ import WorkshopSummary from './WorkshopSummary';
 
 import './PastWorkshops.scss';
 
+import logoImg from 'assets/images/logo.svg';
+
 import * as workshopActions from 'app/workshop/actions';
 
 const PastWorkshops = () => {
@@ -51,6 +53,12 @@ const PastWorkshops = () => {
     <div className="container-fluid container-fixed">
       <div className="row">
         <div className="col-3 vh-100 bg-info">
+          <Link to="/dashboard" className="d-flex align-items-end my-3 text-decoration-none">
+            <img src={logoImg} className="img-fluid d-block" style={{width: 100}} alt="Logo" />
+
+            <h1 className="text-primary font-weight-normal ml-2">MeetingZero</h1>
+          </Link>
+
           <h5 className="font-weight-normal mb-3 mt-5">Past Workshops</h5>
 
           {myWorkshops.map((myWorkshop) => {
