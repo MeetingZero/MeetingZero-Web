@@ -33,6 +33,10 @@ const Experiments = React.lazy(() => {
   return import('./stages/Experiments');
 });
 
+const WorkshopDone = React.lazy(() => {
+  return import('./stages/WorkshopDone');
+});
+
 const Workshop = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -99,6 +103,16 @@ const Workshop = () => {
   }
 
   const currentWorkshopStageKey = currentWorkshopStep.workshop_stage.key;
+
+  console.log(currentWorkshopStep)
+
+  if (currentWorkshopStep.completed === true) {
+    return (
+      <React.Suspense fallback={<LoadingScreen />}>
+        <WorkshopDone />
+      </React.Suspense>
+    );
+  }
 
   if (currentWorkshopStageKey === "WHATS_WORKING") {
     return (
