@@ -46,7 +46,7 @@ const Login = () => {
 
     dispatch(userActions.loginUser(email, password))
     .then(() => {
-      history.push('/join-workshop');
+      history.push('/dashboard');
     })
     .catch((err) => {
       setLoginError(err);

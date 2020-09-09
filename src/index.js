@@ -56,6 +56,14 @@ const ResetPassword = lazy(() => {
   .then(([moduleExports]) => moduleExports);
 });
 
+const Dashboard = lazy(() => {
+  return Promise.all([
+    import('./pages/Dashboard'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
 const JoinWorkshop = lazy(() => {
   return Promise.all([
     import('./pages/JoinWorkshop'),
@@ -123,6 +131,10 @@ ReactDOM.render(
             </Route>
 
             <Restricted>
+              <Route exact path='/dashboard'>
+                <Dashboard />
+              </Route>
+
               <Route exact path='/join-workshop'>
                 <JoinWorkshop />
               </Route>
