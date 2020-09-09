@@ -54,7 +54,7 @@ const CreateWorkshop = () => {
     <LogoSplitLayout>
       <div className="p-2">
         <div className="text-right mb-5">
-          <Button href="/join-workshop" text="Cancel" />
+          <Button href="/dashboard" text="Cancel" />
         </div>
 
         <div className="container">
