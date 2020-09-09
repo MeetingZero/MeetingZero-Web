@@ -65,14 +65,18 @@ const WorkshopSummary = ({ workshop }) => {
         </React.Fragment>
       : null}
 
-      <h5 className="font-weight-normal mb-2">RACI Matrix</h5>
+      {workshopSummary.experiment_tasks.length > 0 ?
+        <React.Fragment>
+          <h5 className="font-weight-normal mb-2">RACI Matrix</h5>
 
-      <div>
-        <RaciMatrix
-          workshopToken={workshop.workshop_token}
-          editable={false}
-        />
-      </div>
+          <div>
+            <RaciMatrix
+              workshopToken={workshop.workshop_token}
+              editable={false}
+            />
+          </div>
+        </React.Fragment>
+      : null}
     </div>
   );
 }

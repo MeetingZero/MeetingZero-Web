@@ -80,7 +80,13 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
 
   const mappableMembers = workshopMembers.slice(leftBound, rightBound);
 
+  // Don't show this if workshop isn't loaded
   if (!workshop) {
+    return null;
+  }
+
+  // If the RACI matrix isn't editable and there aren't any tasks just don't show it
+  if (!editable && experimentTasks[0] === null || experimentTasks[0] === undefined) {
     return null;
   }
 
