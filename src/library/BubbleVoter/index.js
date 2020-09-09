@@ -16,7 +16,8 @@ const BubbleVoter = ({ minText, maxText, onVote, startingVote }) => {
   }, [startingVote]);
 
   const handleVote = (voteNum) => {
-    setVoteSelected(voteNum);
+    // TODO: Set this back to voteNum. Doesn't work when handleUpdateData is an async call :(
+    setVoteSelected(0);
     setVoteHovered(null);
 
     if (onVote) {
