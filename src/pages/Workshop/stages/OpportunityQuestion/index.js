@@ -13,8 +13,14 @@ const OpportunityQuestion = () => {
 
   const [showBathroomBreak, setShowBathroomBreak] = React.useState(false);
 
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
+
   const onTimerExpired = () => {
-    return setShowBathroomBreak(true);
+    if (workshop.is_host) {
+      return setShowBathroomBreak(true);
+    }
   }
 
   if (currentStepKey === "OPPORTUNITY_QUESTION_RESPONSE") {

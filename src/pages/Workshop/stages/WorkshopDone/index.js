@@ -6,7 +6,11 @@ const WorkshopDone = () => {
 
   return (
     <div className="absolute-center-y text-center">
-      <h1 className="text-center display-2 mb-3">Thanks! Your workshop is now complete.</h1>
+      <h1 className="text-center display-2 mb-1">Thanks! Your workshop is now complete.</h1>
+
+      <h5 className="text-center mb-3">
+        Please check your email for a short survey of your experience. Thank you for using MeetingZero!
+      </h5>
 
       <Link to={`/past-workshops/${params.workshop_token}`} className="btn btn-primary px-2 py-2">
         View Workshop Summary
