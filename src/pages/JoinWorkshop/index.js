@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import LogoSplitLayout from 'layouts/LogoSplit';
 import Button from 'library/Button';
@@ -39,8 +39,18 @@ const JoinWorkshop = () => {
   return (
     <LogoSplitLayout>
       <div className="p-2">
-        <div className="text-right">
-          <Button href="/create-workshop" text="Create workshop" />
+        <div className="d-flex justify-content-end px-5">
+          <div>
+            <Link to="/create-workshop" className="btn btn-block btn-link btn-square">
+              Create Workshop
+            </Link>
+          </div>
+
+          <div>
+            <Link to="/dashboard" className="btn btn-block btn-link btn-square ml-2">
+              Dashboard
+            </Link>
+          </div>
         </div>
 
         <div className="container-small mt-10 absolute-center-y">
