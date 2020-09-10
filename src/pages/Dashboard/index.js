@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import LogoSplitLayout from 'layouts/LogoSplit';
 import Button from 'library/Button';
 
+import './Dashboard.scss';
+
 import notepadImg from 'assets/images/notepad.svg';
 import puzzleImg from 'assets/images/puzzle.svg';
 import twinsImg from 'assets/images/twins.svg';
@@ -38,7 +40,7 @@ const Dashboard = () => {
           <div className="row">
             <div className="col-4">
               <Link to="/past-workshops" className="d-block">
-                <img src={notepadImg} className="img-fluid d-block mx-auto mb-2" alt="Notepad" />
+                <img src={notepadImg} className="dashboard-images img-fluid d-block mx-auto mb-2" alt="Notepad" />
 
                 <h5 className="text-center text-dark">Past Workshops</h5>
               </Link>
@@ -46,7 +48,7 @@ const Dashboard = () => {
 
             <div className="col-4">
               <Link to="/create-workshop" className="d-block">
-                <img src={puzzleImg} className="img-fluid d-block mx-auto mb-2" alt="Puzzle" />
+                <img src={puzzleImg} className="dashboard-images img-fluid d-block mx-auto mb-2" alt="Puzzle" />
 
                 <h5 className="text-center text-dark">Create Workshop</h5>
               </Link>
@@ -54,7 +56,7 @@ const Dashboard = () => {
 
             <div className="col-4">
               <Link to="/join-workshop" className="d-block">
-                <img src={twinsImg} className="img-fluid d-block mx-auto mb-2" alt="Twins" />
+                <img src={twinsImg} className="dashboard-images img-fluid d-block mx-auto mb-2" alt="Twins" />
 
                 <h5 className="text-center text-dark">Join Workshop</h5>
               </Link>
