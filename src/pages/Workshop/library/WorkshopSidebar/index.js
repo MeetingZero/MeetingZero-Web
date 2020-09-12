@@ -14,6 +14,24 @@ const WorkshopSidebar = () => {
     return state.Workshop.currentWorkshopStep;
   });
 
+  const refMap = {};
+
+  Object.keys(workshopDirectorGroup).forEach((key) => {
+    const workshopDirector = workshopDirectorGroup[key];
+
+    if (!refMap[workshopDirector[0].workshop_stage.key]) {
+      refMap[workshopDirector[0].workshop_stage.key] = React.createRef();
+    }
+  });
+
+  React.useEffect(() => {
+    if (refMap[currentWorkshopStep.workshop_stage.key]) {
+      refMap[currentWorkshopStep.workshop_stage.key]
+      .current
+      .scrollIntoView({ behavior: "smooth" });
+    }
+  }, [refMap, currentWorkshopStep.workshop_stage.key]);
+
   if (workshopDirectorGroup === 0 || !currentWorkshopStep) {
     return null;
   }
@@ -26,6 +44,7 @@ const WorkshopSidebar = () => {
         return (
           <li key={key}>
             <Button
+              ref={refMap[workshopDirector[0].workshop_stage.key]}
               href="#"
               text={workshopDirector[0].workshop_stage.name}
               className={currentWorkshopStep.workshop_stage_id === workshopDirector[0].workshop_stage_id ? 'active' : ''}
