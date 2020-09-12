@@ -82,33 +82,33 @@ const WorkshopStart = () => {
         </div>
       : null}
 
-      <ul className='requirements-list mb-4'>
-        <li>
+      <div className='requirements-list mb-4'>
+        <div>
           <img src={timeIcon} alt='Time Icon' /> <div>65 Minutes</div>
-        </li>
+        </div>
 
-        <li>
+        <div>
           <img src={bathroomIcon} alt='Bathroom Icon' /> <div>Bathroom break halfway through</div>
-        </li>
+        </div>
 
-        <li>
+        <div>
           <img src={anonymousIcon} alt='Anonymous Icon' /> <div>All responses are anonymous</div>
-        </li>
+        </div>
 
-        <li>
+        <div>
           <img src={soundIcon} alt='Sound Icon' /> <div>We work together, in silence, unless otherwise instructed</div>
-        </li>
+        </div>
 
-        <li>
+        <div>
           <img src={musicIcon} alt="Music Icon" /> <div>Non-lyrical music is a good way to remove the awkwardness of silence</div>
-        </li>
+        </div>
 
-        <li>
+        <div>
           <img src={lightbulbIcon} alt='Light Bulb Icon' /> <div>View Pro Tips for guidance, and follow along with an example in which building owners improve their tenets' experience</div>
-        </li>
-      </ul>
+        </div>
+      </div>
 
-      <div className="text-right pr-8">
+      <div className="text-right mb-4">
         {workshop && workshop.is_host ?
           <Button
             onClick={startWorkshop}
@@ -117,7 +117,7 @@ const WorkshopStart = () => {
             loading={isLoading}
           />
         :
-          <div>Waiting for host to start the meeting...</div>
+          <div>Waiting for host to start the workshop...</div>
         }
       </div>
     </Squiggle>
