@@ -12,7 +12,8 @@ const Textarea = ({
 }) => {
   const userInput = useWatch({
     control,
-    name: name
+    name: name,
+    defaultValue: ""
   });
 
   React.useEffect(() => {
