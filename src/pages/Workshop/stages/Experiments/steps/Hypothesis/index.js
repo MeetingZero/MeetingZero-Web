@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
+import TextArea from 'library/TextArea';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import * as votingActions from 'app/voting/actions';
@@ -14,7 +15,7 @@ import * as votingActions from 'app/voting/actions';
 const Hypothesis = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, control, setValue } = useForm();
 
   const [weBelieveTextCharCountExceeded, setWeBelieveTextCharCountExceeded] = React.useState(false);
   const [willResultInTextCharCountExceeded, setWillResultInTextCharCountExceeded] = React.useState(false);
@@ -70,16 +71,19 @@ const Hypothesis = () => {
 
     if (hypothesis.we_believe_text) {
       setWeBelieveText(hypothesis.we_believe_text);
+      setValue("we_believe_text", hypothesis.we_believe_text);
     }
 
     if (hypothesis.will_result_in_text) {
       setWillResultInText(hypothesis.will_result_in_text);
+      setValue("will_result_in_text", hypothesis.will_result_in_text);
     }
 
     if (hypothesis.succeeded_when_text) {
       setSucceededWhenText(hypothesis.succeeded_when_text);
+      setValue("succeeded_when_text", hypothesis.succeeded_when_text);
     }
-  }, [hypothesis]);
+  }, [hypothesis, setValue]);
 
   return (
     <React.Fragment>
@@ -100,13 +104,13 @@ const Hypothesis = () => {
       {workshop.is_host ?
         <React.Fragment>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <textarea
-              onChange={(event) => setWeBelieveText(event.target.value)}
-              value={weBelieveText}
-              ref={register({ required: true, maxLength: 140 })}
+            <TextArea
+              control={control}
+              register={register({ required: true, maxLength: 140 })}
               name="we_believe_text"
-              className={cn("form-control mb-1", weBelieveTextCharCountExceeded ? 'bg-scary' : null)}
               placeholder="We believe <this capability>..."
+              className={cn("mb-1", weBelieveTextCharCountExceeded ? 'bg-scary' : '')}
+              onUserInput={(userInput) => setWeBelieveText(userInput)}
             />
 
             {errors.we_believe_text ?
@@ -123,13 +127,13 @@ const Hypothesis = () => {
               />
             </div>
 
-            <textarea
-              onChange={(event) => setWillResultInText(event.target.value)}
-              value={willResultInText}
-              ref={register({ required: true, maxLength: 140 })}
+            <TextArea
+              control={control}
+              register={register({ required: true, maxLength: 140 })}
               name="will_result_in_text"
-              className={cn("form-control mb-1", willResultInTextCharCountExceeded ? 'bg-scary' : null)}
               placeholder="Will result in <this outcome>..."
+              className={cn("mb-1", willResultInTextCharCountExceeded ? 'bg-scary' : '')}
+              onUserInput={(userInput) => setWillResultInText(userInput)}
             />
 
             {errors.will_result_in_text ?
@@ -146,13 +150,13 @@ const Hypothesis = () => {
               />
             </div>
 
-            <textarea
-              onChange={(event) => setSucceededWhenText(event.target.value)}
-              value={succeededWhenText}
-              ref={register({ required: true, maxLength: 140 })}
+            <TextArea
+              control={control}
+              register={register({ required: true, maxLength: 140 })}
               name="succeeded_when_text"
-              className={cn("form-control mb-1", succeededWhenTextCharCountExceeded ? 'bg-scary' : null)}
               placeholder="We will know we have succeeded when <we see this measurable signal>..."
+              className={cn("mb-1", succeededWhenTextCharCountExceeded ? 'bg-scary' : '')}
+              onUserInput={(userInput) => setSucceededWhenText(userInput)}
             />
 
             {errors.succeeded_when_text ?
