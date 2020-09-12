@@ -25,7 +25,7 @@ const Review = () => {
 
       <h5 className="mb-5">See what your teammates said about how you all are succeeding.</h5>
 
-      <div className="vh-100 overflow-y-scroll">
+      <div className="overflow-y-scroll">
         {allWhatIsWorkingResponses.map((response) => {
           return (
             <div key={response.id} className="feather-card shadow mb-3">
