@@ -9,6 +9,7 @@ import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
+import * as votingActions from 'app/voting/actions';
 
 const Hypothesis = () => {
   const params = useParams();
@@ -26,6 +27,14 @@ const Hypothesis = () => {
   // Get hypothesis on page load for editing and validation purposes
   React.useEffect(() => {
     dispatch(experimentsActions.getHypothesis(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
+
+  // Get winning solution
+  React.useEffect(() => {
+    dispatch(
+      votingActions
+      .calculateVotingResults(params.workshop_token, "SolutionResponse")
+    );
   }, [dispatch, params.workshop_token]);
 
   const onSubmit = (formData) => {
@@ -50,6 +59,10 @@ const Hypothesis = () => {
 
   const workshop = useSelector((state) => {
     return state.Workshop.workshop;
+  });
+
+  const starVotingResults = useSelector((state) => {
+    return state.Voting.starVotingResults["SolutionResponse"];
   });
 
   React.useEffect(() => {
@@ -80,7 +93,7 @@ const Hypothesis = () => {
         </div>
 
         <div>
-          Winning solution goes here
+          {starVotingResults.runoff_winner.resource.response_text}
         </div>
       </blockquote>
 

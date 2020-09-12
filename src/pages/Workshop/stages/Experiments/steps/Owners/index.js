@@ -6,6 +6,7 @@ import RaciMatrix from './RaciMatrix';
 import ProTip from 'library/ProTip';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
+import * as votingActions from 'app/voting/actions';
 
 const Owners = () => {
   const params = useParams();
@@ -15,8 +16,20 @@ const Owners = () => {
     dispatch(experimentsActions.getHypothesis(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
+  // Get winning solution
+  React.useEffect(() => {
+    dispatch(
+      votingActions
+      .calculateVotingResults(params.workshop_token, "SolutionResponse")
+    );
+  }, [dispatch, params.workshop_token]);
+
   const hypothesis = useSelector((state) => {
     return state.Experiments.hypothesis;
+  });
+
+  const starVotingResults = useSelector((state) => {
+    return state.Voting.starVotingResults["SolutionResponse"];
   });
 
   return (
@@ -33,7 +46,7 @@ const Owners = () => {
             </div>
 
             <div>
-              This will be the winning solution once that functionality is in
+              {starVotingResults.runoff_winner.resource.response_text}
             </div>
           </blockquote>
         </div>
