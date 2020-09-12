@@ -7,13 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
+import TextArea from 'library/TextArea';
 
 import * as problemsActions from 'app/workshop/stages/problems/actions';
 
 const Responses = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, control, setValue } = useForm();
 
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [viewIndex, setViewIndex] = React.useState(0);
@@ -70,10 +71,12 @@ const Responses = () => {
   React.useEffect(() => {
     if (myProblemsResponses[viewIndex]) {
       setResponseText(myProblemsResponses[viewIndex].response_text);
+      setValue("response_text", myProblemsResponses[viewIndex].response_text);
     } else {
       setResponseText("");
+      setValue("response_text", "");
     }
-  }, [viewIndex, myProblemsResponses]);
+  }, [viewIndex, myProblemsResponses, setValue]);
 
   return (
     <React.Fragment>
@@ -100,13 +103,13 @@ const Responses = () => {
       : null}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <textarea
-          onChange={(event) => setResponseText(event.target.value)}
-          value={responseText}
-          ref={register({ required: true, maxLength: 140 })}
+        <TextArea
+          control={control}
+          register={register({ required: true, maxLength: 140 })}
           name="response_text"
-          className={cn("form-control mb-1", charCountExceeded ? 'bg-scary' : null)}
           placeholder="Keep it positive"
+          className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
+          onUserInput={(userInput) => setResponseText(userInput)}
         />
 
         {errors.response_text ?

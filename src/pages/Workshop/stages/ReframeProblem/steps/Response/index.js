@@ -8,6 +8,7 @@ import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
 import InfoTip from 'library/InfoTip';
+import TextArea from 'library/TextArea';
 
 import * as reframeProblemActions from 'app/workshop/stages/reframe_problem/actions';
 import * as votingActions from 'app/voting/actions';
@@ -15,7 +16,7 @@ import * as votingActions from 'app/voting/actions';
 const Response = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, control, setValue } = useForm();
 
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [responseText, setResponseText] = React.useState("");
@@ -75,10 +76,12 @@ const Response = () => {
   React.useEffect(() => {
     if (myReframeProblemResponse) {
       setResponseText(myReframeProblemResponse.response_text);
+      setValue("response_text", myReframeProblemResponse.response_text);
     } else {
       setResponseText("");
+      setValue("response_text", "");
     }
-  }, [myReframeProblemResponse]);
+  }, [myReframeProblemResponse, setValue]);
 
   return (
     <React.Fragment>
@@ -101,13 +104,13 @@ const Response = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <textarea
-          onChange={(event) => setResponseText(event.target.value)}
-          value={responseText}
-          ref={register({ required: true, maxLength: 140 })}
+        <TextArea
+          control={control}
+          register={register({ required: true, maxLength: 140 })}
           name="response_text"
-          className={cn("form-control mb-1", charCountExceeded ? 'bg-scary' : null)}
           placeholder="What is one other way to understand this problem?"
+          className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
+          onUserInput={(userInput) => setResponseText(userInput)}
         />
 
         {errors.response_text ?

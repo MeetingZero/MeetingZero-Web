@@ -9,6 +9,7 @@ import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
 import RingTimer from 'library/RingTimer';
+import TextArea from 'library/TextArea';
 
 import "./Response.scss";
 
@@ -19,7 +20,7 @@ import * as workshopActions from 'app/workshop/actions';
 const Response = ({ showBathroomBreak }) => {
   const params = useParams();
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, control, setValue } = useForm();
 
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [responseText, setResponseText] = React.useState("");
@@ -83,10 +84,12 @@ const Response = ({ showBathroomBreak }) => {
   React.useEffect(() => {
     if (opportunityQuestionResponse) {
       setResponseText(opportunityQuestionResponse.response_text);
+      setValue("response_text", opportunityQuestionResponse.response_text);
     } else {
       setResponseText("");
+      setValue("response_text", "");
     }
-  }, [opportunityQuestionResponse]);
+  }, [opportunityQuestionResponse, setValue]);
 
   return (
     <React.Fragment>
@@ -117,13 +120,13 @@ const Response = ({ showBathroomBreak }) => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            <textarea
-              onChange={(event) => setResponseText(event.target.value)}
-              value={responseText}
-              ref={register({ required: true, maxLength: 140 })}
+            <TextArea
+              control={control}
+              register={register({ required: true, maxLength: 140 })}
               name="response_text"
-              className={cn("form-control mb-1", charCountExceeded ? 'bg-scary' : null)}
               placeholder="Start by typing How Might We..."
+              className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
+              onUserInput={(userInput) => setResponseText(userInput)}
             />
 
             {errors.response_text ?

@@ -36,7 +36,6 @@ const Responses = () => {
       )
       .then(() => {
         setResponseText("");
-        setValue("response_text", "");
       });
     } else {
       dispatch(
@@ -49,7 +48,6 @@ const Responses = () => {
       )
       .then(() => {
         setResponseText("");
-        setValue("response_text", "");
       });
     }
   }
