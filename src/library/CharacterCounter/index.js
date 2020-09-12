@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 const CharacterCounter = ({
   className,
-  inputString,
+  inputString = "",
   maxChars,
   warningChars = 100,
   onExceed

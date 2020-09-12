@@ -10,13 +10,14 @@ import LogoSplitLayout from 'layouts/LogoSplit';
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import TagsInput from 'library/TagsInput';
+import TextArea from 'library/TextArea';
 
 import * as workshopActions from 'app/workshop/actions';
 
 const CreateWorkshop = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, control } = useForm();
 
   const [emails, setEmails] = React.useState([]);
   const [workshopPurpose, setWorkshopPurpose] = React.useState("");
@@ -32,10 +33,6 @@ const CreateWorkshop = () => {
     .then((newWorkshop) => {
       history.push(`/workshop/${newWorkshop.workshop_token}/start`);
     });
-  }
-
-  const handleChange = (event) => {
-    setWorkshopPurpose(event.target.value);
   }
 
   const handleExceed = (isExceeded) => {
@@ -63,7 +60,14 @@ const CreateWorkshop = () => {
               Create Workshop
             </div>
 
-            <textarea onChange={handleChange} ref={register({ required: true, maxLength: 140 })} name="purpose" className={cn("form-control mb-1", charCountExceeded ? 'bg-scary' : null)} placeholder="State a broad topic..."></textarea>
+            <TextArea
+              control={control}
+              register={register({ required: true, maxLength: 140 })}
+              name="purpose"
+              placeholder="State a broad topic..."
+              className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
+              onUserInput={(userInput) => setWorkshopPurpose(userInput)}
+            />
 
             <div className="row mb-10">
               <div className="col-6">
