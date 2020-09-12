@@ -54,9 +54,9 @@ const PastWorkshops = () => {
       <div className="row">
         <div className="col-3 vh-100 bg-info">
           <Link to="/dashboard" className="d-flex align-items-end my-3 text-decoration-none">
-            <img src={logoImg} className="img-fluid d-block" style={{width: 100}} alt="Logo" />
+            <img src={logoImg} className="img-fluid d-block" style={{width: 80}} alt="Logo" />
 
-            <h1 className="text-primary font-weight-normal ml-2">MeetingZero</h1>
+            <h2 className="text-primary font-weight-normal ml-2 d-none d-xl-block">MeetingZero</h2>
           </Link>
 
           <h5 className="font-weight-normal mb-3 mt-5">Past Workshops</h5>
