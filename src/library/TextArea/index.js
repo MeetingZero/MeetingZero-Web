@@ -19,7 +19,7 @@ const Textarea = ({
     if (onUserInput) {
       onUserInput(userInput);
     }
-  }, [userInput]);
+  }, [userInput, onUserInput]);
 
   return (
     <textarea

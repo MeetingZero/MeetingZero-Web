@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
-import TextArea from 'library/CharInput';
+import TextArea from 'library/TextArea';
 
 import * as whatIsWorkingActions from 'app/workshop/stages/what_is_working/actions';
 
@@ -76,7 +76,7 @@ const Responses = () => {
       setResponseText("");
       setValue("response_text", "");
     }
-  }, [viewIndex, myWhatIsWorkingResponses]);
+  }, [viewIndex, myWhatIsWorkingResponses, setValue]);
 
   return (
     <React.Fragment>
@@ -110,7 +110,6 @@ const Responses = () => {
           placeholder="Keep it positive"
           className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
           onUserInput={(userInput) => setResponseText(userInput)}
-          defaultValue={responseText}
         />
 
         {errors.response_text ?
