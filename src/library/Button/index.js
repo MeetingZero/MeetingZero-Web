@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 
-const Button = ({
-  type,
-  href,
-  className,
-  loading,
-  text,
-  disabled,
-  onClick
-}) => {
+const Button = forwardRef((props, ref) => {
+  const {
+    type,
+    href,
+    className,
+    loading,
+    text,
+    disabled,
+    onClick
+  } = props;
+
   if (href) {
     return (
-      <Link to={href} className={className}>
+      <Link to={href} onClick={onClick} className={className} ref={ref}>
         {loading ?
           <i className="fas fa-sync fa-spin mr-1" />
         : null}
@@ -27,6 +29,7 @@ const Button = ({
         type={type || "button"}
         disabled={loading || disabled ? 'disabled' : null}
         onClick={onClick}
+        ref={ref}
       >
         {loading ?
           <i className="fas fa-sync fa-spin mr-1" />
@@ -36,6 +39,6 @@ const Button = ({
       </button>
     );
   }
-}
+});
 
 export default Button;

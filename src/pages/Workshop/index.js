@@ -104,8 +104,6 @@ const Workshop = () => {
 
   const currentWorkshopStageKey = currentWorkshopStep.workshop_stage.key;
 
-  console.log(currentWorkshopStep)
-
   if (currentWorkshopStep.completed === true) {
     return (
       <React.Suspense fallback={<LoadingScreen />}>
