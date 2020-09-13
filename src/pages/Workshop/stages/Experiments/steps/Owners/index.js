@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RaciMatrix from './RaciMatrix';
 import ProTip from 'library/ProTip';
+import AddTimeModal from 'pages/Workshop/library/AddTimeModal';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import * as votingActions from 'app/voting/actions';
 
-const Owners = () => {
+const Owners = ({ showAddTimeModal }) => {
   const params = useParams();
   const dispatch = useDispatch();
 
@@ -45,9 +46,9 @@ const Owners = () => {
               Winning Solution:
             </div>
 
-            <div>
+            {/* <div>
               {starVotingResults.runoff_winner.resource.response_text}
-            </div>
+            </div> */}
           </blockquote>
         </div>
 
@@ -104,6 +105,12 @@ const Owners = () => {
           </React.Fragment>
         }
       />
+
+      {showAddTimeModal ?
+        <AddTimeModal workshopToken={params.workshop_token} />
+      : null}
+
+      <AddTimeModal workshopToken={params.workshop_token} />
     </React.Fragment>
   );
 }

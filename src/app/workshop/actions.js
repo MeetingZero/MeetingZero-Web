@@ -200,3 +200,24 @@ export const getWorkshopSummary = (workshopToken) => {
     });
   }
 }
+
+export const addTime = (workshopToken, secondsToAdd) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('ADDING_TIME_TO_WORKSHOP'));
+
+    return axiosInstance()
+    .put(`/api/v1/workshops/${workshopToken}/director/add_time_to_current`, {
+      seconds_to_add: secondsToAdd
+    })
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('ADDING_TIME_TO_WORKSHOP'));
+
+      return response;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('ADDING_TIME_TO_WORKSHOP'));
+
+      throw err.response.data;
+    });
+  }
+}
