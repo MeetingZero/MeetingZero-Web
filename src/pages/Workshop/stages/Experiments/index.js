@@ -31,6 +31,8 @@ const Experiments = () => {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
       dispatch(workshopActions.completeWorkshopStep(workshop.workshop_token, workshopStageStepId));
+
+      window.localStorage.removeItem("timeAdded");
     }
   }
 

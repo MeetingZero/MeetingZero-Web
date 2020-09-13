@@ -36,6 +36,10 @@ const AddTimeModal = ({ workshopToken, setAddTimeModalVisible }) => {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
       dispatch(workshopActions.completeWorkshopStep(workshop.workshop_token, workshopStageStepId));
+
+      setAddTimeModalVisible(false);
+
+      window.localStorage.removeItem("timeAdded");
     }
   }
 
