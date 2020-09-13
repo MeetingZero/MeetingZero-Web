@@ -46,9 +46,11 @@ const Owners = ({ showAddTimeModal }) => {
               Winning Solution:
             </div>
 
-            {/* <div>
-              {starVotingResults.runoff_winner.resource.response_text}
-            </div> */}
+            {starVotingResults ?
+              <div>
+                {starVotingResults.runoff_winner.resource.response_text}
+              </div>
+            : null}
           </blockquote>
         </div>
 
