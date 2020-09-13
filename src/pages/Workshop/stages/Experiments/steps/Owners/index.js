@@ -33,6 +33,16 @@ const Owners = ({ showAddTimeModal }) => {
     return state.Voting.starVotingResults["SolutionResponse"];
   });
 
+  const [addTimeModalVisible, setAddTimeModalVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const timeAdded = window.localStorage.getItem("timeAdded");
+
+    if (showAddTimeModal && !timeAdded) {
+      setAddTimeModalVisible(showAddTimeModal);
+    }
+  }, [showAddTimeModal]);
+
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Owners</h1>
@@ -108,11 +118,9 @@ const Owners = ({ showAddTimeModal }) => {
         }
       />
 
-      {showAddTimeModal ?
-        <AddTimeModal workshopToken={params.workshop_token} />
+      {addTimeModalVisible ?
+        <AddTimeModal workshopToken={params.workshop_token} setAddTimeModalVisible={setAddTimeModalVisible} />
       : null}
-
-      <AddTimeModal workshopToken={params.workshop_token} />
     </React.Fragment>
   );
 }

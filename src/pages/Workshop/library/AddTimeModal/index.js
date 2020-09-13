@@ -8,14 +8,19 @@ import Button from 'library/Button';
 
 import * as workshopActions from 'app/workshop/actions';
 
-const AddTimeModal = ({ workshopToken }) => {
+const AddTimeModal = ({ workshopToken, setAddTimeModalVisible }) => {
   const dispatch = useDispatch();
 
   const handleAddTime = () => {
     dispatch(
       workshopActions
       .addTime(workshopToken, 300)
-    );
+    )
+    .then(() => {
+      window.localStorage.setItem("timeAdded", "true");
+
+      setAddTimeModalVisible(false);
+    });
   }
 
   const workshop = useSelector((state) => {
