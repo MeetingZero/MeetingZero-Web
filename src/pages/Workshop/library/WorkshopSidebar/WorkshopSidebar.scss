@@ -34,4 +34,18 @@
       border-radius: 3rem;
     }
   }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      width: .5rem;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background-color: $gray-200;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary;
+    }
+  }
 }
