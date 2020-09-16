@@ -127,3 +127,22 @@ export const saveTaskAssignment = (workshopToken, taskId, userId, assignmentText
     });
   }
 }
+
+export const removeTask = (workshopToken, taskId) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('REMOVING_EXPERIMENT_TASK'));
+
+    return axiosInstance()
+    .delete(`/api/v1/workshops/${workshopToken}/experiments/tasks/${taskId}`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('REMOVING_EXPERIMENT_TASK'));
+
+      return dispatch(experimentsSlice.actions.setExperimentTasks(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('REMOVING_EXPERIMENT_TASK'));
+
+      throw err;
+    });
+  }
+}

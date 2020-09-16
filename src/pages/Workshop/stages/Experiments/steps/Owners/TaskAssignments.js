@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
+import experimentsSlice from 'app/workshop/stages/experiments/slice';
 
 const TaskAssignments = ({ existingTask, mappableMembers, toggleRaciModal, editable }) => {
   const params = useParams();
@@ -42,33 +43,57 @@ const TaskAssignments = ({ existingTask, mappableMembers, toggleRaciModal, edita
     return state.Workshop.workshop;
   });
 
+  const handleRemoveRow = () => {
+    if (existingTask === null) {
+      return dispatch(experimentsSlice.actions.removeBlankExperimentTask());
+    }
+
+    return dispatch(
+      experimentsActions
+      .removeTask(params.workshop_token, existingTask.id)
+    )
+    .then(() => {
+      setSubmittedTask(null);
+      setTask("");
+    });
+  }
+
   return (
     <div className="row">
-      <div className="col-2 py-1">
-        {submittedTask ?
-          <div
-            onClick={() => {
-              if (workshop.is_host && editable) {
-                setSubmittedTask(null)
-              }
-            }}
-            className={`border border-success rounded p-1 h-100 ${workshop.is_host && editable ? "cursor-pointer" : null}`}
-          >
-            {submittedTask}
-          </div>
-        :
-          <React.Fragment>
-            {workshop.is_host && editable ?
-              <textarea
-                onChange={(event) => setTask(event.target.value)}
-                onKeyDown={handleSubmit}
-                className="form-control h-100"
-                placeholder="Your Task"
-                value={task}
-              />
-            : null}
-          </React.Fragment>
-        }
+      <div className="col-3 py-1">
+        <div className="position-relative">
+          {workshop.is_host && editable ?
+            <i
+              className="fa fa-trash-o text-danger delete-row-button"
+              onClick={handleRemoveRow}
+            />
+          : null}
+
+          {submittedTask ?
+            <div
+              onClick={() => {
+                if (workshop.is_host && editable) {
+                  setSubmittedTask(null)
+                }
+              }}
+              className={`border border-success rounded p-1 h-100 ${workshop.is_host && editable ? "cursor-pointer" : null}`}
+            >
+              {submittedTask}
+            </div>
+          :
+            <React.Fragment>
+              {workshop.is_host && editable ?
+                <textarea
+                  onChange={(event) => setTask(event.target.value)}
+                  onKeyDown={handleSubmit}
+                  className="form-control h-100"
+                  placeholder="Your Task"
+                  value={task}
+                />
+              : null}
+            </React.Fragment>
+          }
+        </div>
       </div>
 
       {mappableMembers.map((wm, index) => {
@@ -83,7 +108,7 @@ const TaskAssignments = ({ existingTask, mappableMembers, toggleRaciModal, edita
         }
 
         return (
-          <div key={wm.id} className={`col-2 border-left py-1 ${index + 1 === mappableMembers.length ? "border-right" : null}`}>
+          <div key={wm.id} className={`col-3 border-left py-1 ${index + 1 === mappableMembers.length ? "border-right" : null}`}>
             <div className="d-flex h-100">
               {assignedTask ?
                 <button

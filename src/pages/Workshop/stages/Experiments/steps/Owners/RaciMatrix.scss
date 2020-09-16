@@ -59,3 +59,11 @@
 .raci-toggle-right {
   right: -2rem;
 }
+
+.delete-row-button {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 1rem);
+  transform: translate(0, -50%);
+  cursor: pointer;
+}

@@ -94,11 +94,11 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
     <React.Fragment>
       <div className="raci-matrix">
         <div className="row">
-          <div className="col-2"></div>
+          <div className="col-3"></div>
 
           {mappableMembers.map((mm, index) => {
             return (
-              <div key={mm.id} className={`col-2 text-center border border-top-0 py-1 ${index + 1 < mappableMembers.length ? "border-right-0" : ""}`}>
+              <div key={mm.id} className={`col-3 text-center border border-top-0 py-1 ${index + 1 < mappableMembers.length ? "border-right-0" : ""}`}>
                 {workshopMembers.length > 5 && index === 0 ?
                   <i onClick={toggleBackward} className="fa fa-chevron-left raci-toggle-left text-muted" />
                 : null}
@@ -127,7 +127,7 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
 
         {workshop.is_host && editable ?
           <div className="row">
-            <div className="col-2">
+            <div className="col-3">
               <button
                 onClick={addNewTask}
                 type="button"

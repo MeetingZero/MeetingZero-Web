@@ -25,6 +25,13 @@ const experimentsSlice = createSlice({
       state.experimentTasks = [...state.experimentTasks, null];
 
       return state;
+    },
+    removeBlankExperimentTask: (state, action) => {
+      const lastItem = state.experimentTasks[state.experimentTasks.length - 1];
+
+      if (lastItem === null) {
+        state.experimentTasks.pop();
+      }
     }
   }
 });
