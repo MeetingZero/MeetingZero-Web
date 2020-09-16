@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Overlay, Tooltip } from 'react-bootstrap';
 
 import noTalking from 'assets/images/no_talking.svg';
 import talking from 'assets/images/talking.svg';
@@ -14,12 +15,59 @@ const Blurb = ({ title, text }) => {
     .discussion_allowed;
   });
 
+  const noTalkingRef = React.useRef(null);
+  const discussionAllowedRef = React.useRef(null);
+  const [showNoTalkingTooltip, setShowNoTalkingTooltip] = React.useState(false);
+  const [showDiscussionAllowedTooltip, setShowDiscussionAllowedTooltip] = React.useState(false);
+
   return (
     <div className="blurb-container">
       {discussionAllowed ?
-        <img src={talking} className="blurb-icon ml-auto mb-1" alt="Discussion Allowed" />
+        <React.Fragment>
+          <Overlay
+            target={discussionAllowedRef.current}
+            show={showDiscussionAllowedTooltip}
+            placement="top"
+          >
+            {(props) => (
+              <Tooltip {...props}>
+                You can talk now
+              </Tooltip>
+            )}
+          </Overlay>
+
+          <img
+            src={talking}
+            ref={discussionAllowedRef}
+            onMouseEnter={() => setShowDiscussionAllowedTooltip(true)}
+            onMouseLeave={() => setShowDiscussionAllowedTooltip(false)}
+            className="blurb-icon ml-auto mb-1"
+            alt="Discussion Allowed"
+          />
+        </React.Fragment>
       :
-        <img src={noTalking} className="blurb-icon ml-auto mb-1" alt="No Discussion" />
+        <React.Fragment>
+          <Overlay
+            target={noTalkingRef.current}
+            show={showNoTalkingTooltip}
+            placement="top"
+          >
+            {(props) => (
+              <Tooltip {...props}>
+                No talking during this step
+              </Tooltip>
+            )}
+          </Overlay>
+
+          <img
+            src={noTalking}
+            ref={noTalkingRef}
+            onMouseEnter={() => setShowNoTalkingTooltip(true)}
+            onMouseLeave={() => setShowNoTalkingTooltip(false)}
+            className="blurb-icon ml-auto mb-1"
+            alt="No Discussion"
+          />
+        </React.Fragment>
       }
 
       <div className="border border-primary p-2 rounded shadow">
