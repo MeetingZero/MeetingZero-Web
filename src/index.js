@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import store from './app/store';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Bootstrap library
@@ -156,6 +156,8 @@ ReactDOM.render(
               </Route>
             </Restricted>
           </Switch>
+
+          <Redirect exact from="/" to="/sign-up" />
         </Suspense>
       </Router>
     </Provider>
