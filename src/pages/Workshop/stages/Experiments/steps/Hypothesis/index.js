@@ -121,7 +121,7 @@ const Hypothesis = () => {
               </div>
             : null}
 
-            <div className="text-right mb-4">
+            <div className="text-right mb-2">
               <CharacterCounter
                 inputString={weBelieveText}
                 maxChars={140}
@@ -144,7 +144,7 @@ const Hypothesis = () => {
               </div>
             : null}
 
-            <div className="text-right mb-4">
+            <div className="text-right mb-2">
               <CharacterCounter
                 inputString={willResultInText}
                 maxChars={140}

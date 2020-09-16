@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import ProTip from 'library/ProTip';
 import StarVoter from 'pages/Workshop/library/StarVoter';
 
 import * as solutionsActions from 'app/workshop/stages/solutions/actions';
@@ -60,6 +61,10 @@ const Vote = () => {
         votingItems={solutionsForVoting}
         modelName="SolutionResponse"
         handleUpdateData={updateSolutionsForVoting}
+      />
+
+      <ProTip
+        mainText="If you're stuck, go with your gut."
       />
     </React.Fragment>
   );

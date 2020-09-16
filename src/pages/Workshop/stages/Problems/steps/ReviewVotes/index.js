@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import VoterReview from 'pages/Workshop/library/StarVoter/VoterReview';
-import ProTip from 'library/ProTip';
 
 const ReviewVotes = () => {
   const params = useParams();
@@ -14,10 +13,6 @@ const ReviewVotes = () => {
       <VoterReview
         workshopToken={params.workshop_token}
         modelName="ProblemResponse"
-      />
-
-      <ProTip
-        calloutText="Winning Reframe: Waiting for the elevators is annoying"
       />
     </React.Fragment>
   );
