@@ -10,6 +10,8 @@ import * as workshopActions from 'app/workshop/actions';
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import experimentsSlice from 'app/workshop/stages/experiments/slice';
 
+const MAX_MEMBERS_SHOWN = 3;
+
 const RaciMatrix = ({ workshopToken, editable = true }) => {
   const dispatch = useDispatch();
 
@@ -52,30 +54,30 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
   });
 
   const [leftBound, setLeftBound] = React.useState(0);
-  const [rightBound, setRightBound] = React.useState(5);
+  const [rightBound, setRightBound] = React.useState(MAX_MEMBERS_SHOWN);
 
   const toggleForward = () => {
     const slicedMembers = workshopMembers
-    .slice(leftBound + 5, rightBound + 5);
+    .slice(leftBound + MAX_MEMBERS_SHOWN, rightBound + MAX_MEMBERS_SHOWN);
 
     if (!slicedMembers[0]) {
       return false;
     }
 
-    setLeftBound(leftBound + 5);
-    setRightBound(rightBound + 5);
+    setLeftBound(leftBound + MAX_MEMBERS_SHOWN);
+    setRightBound(rightBound + MAX_MEMBERS_SHOWN);
   }
 
   const toggleBackward = () => {
     const slicedMembers = workshopMembers
-    .slice(leftBound - 5, rightBound - 5);
+    .slice(leftBound - MAX_MEMBERS_SHOWN, rightBound - MAX_MEMBERS_SHOWN);
 
     if (!slicedMembers[0]) {
       return false;
     }
 
-    setLeftBound(leftBound - 5);
-    setRightBound(rightBound - 5);
+    setLeftBound(leftBound - MAX_MEMBERS_SHOWN);
+    setRightBound(rightBound - MAX_MEMBERS_SHOWN);
   }
 
   const mappableMembers = workshopMembers.slice(leftBound, rightBound);
@@ -99,11 +101,11 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
           {mappableMembers.map((mm, index) => {
             return (
               <div key={mm.id} className={`col-3 text-center border border-top-0 py-1 ${index + 1 < mappableMembers.length ? "border-right-0" : ""}`}>
-                {workshopMembers.length > 5 && index === 0 ?
+                {workshopMembers.length > MAX_MEMBERS_SHOWN && index === 0 ?
                   <i onClick={toggleBackward} className="fa fa-chevron-left raci-toggle-left text-muted" />
                 : null}
 
-                {workshopMembers.length > 5 && index === mappableMembers.length - 1 ?
+                {workshopMembers.length > MAX_MEMBERS_SHOWN && index === mappableMembers.length - 1 ?
                   <i onClick={toggleForward} className="fa fa-chevron-right raci-toggle-right text-muted" />
                 : null}
 
