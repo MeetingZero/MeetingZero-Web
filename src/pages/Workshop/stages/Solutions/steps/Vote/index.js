@@ -41,7 +41,7 @@ const Vote = () => {
     <React.Fragment>
       <h1 className="h2 mt-5">Vote</h1>
 
-      <h5 className="mb-4">Evaluate the importance of each solution addressed. Once everyone is finished, you will be redirected to the results.</h5>
+      <h5 className="mb-4">Evaluate the importance of each solution addressed.</h5>
 
       {opportunityQuestionResponse ?
         <blockquote className="mb-5">

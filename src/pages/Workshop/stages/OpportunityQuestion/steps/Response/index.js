@@ -99,7 +99,7 @@ const Response = ({ showBathroomBreak }) => {
 
       <h1 className="h2 mt-5">Opportunity Question</h1>
 
-      <h5 className="mb-4">As the host, you will propose the first opportunity question then the group will discuss your response.</h5>
+      <h5 className="mb-4">As the host, you will propose the first opportunity question. The group will then discuss your response.</h5>
 
       {starVotingResults ?
         <blockquote className="mb-5">

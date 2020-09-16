@@ -141,7 +141,7 @@ const Responses = () => {
         mainText={
           <React.Fragment>
             <p>
-              Keep your statements related to the meeting objective.
+              Keep your statements related to the workshop purpose.
             </p>
 
             <p>

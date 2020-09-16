@@ -82,7 +82,7 @@ const Responses = () => {
     <React.Fragment>
       <h1 className="h2 mt-5">Problems</h1>
 
-      <h5 className="mb-4">Up to two short statements of applicable annoyances, challenges, or inefficiencies.</h5>
+      <h5 className="mb-4">One or two short statements of applicable annoyances, challenges, or inefficiencies.</h5>
 
       {myProblemsResponses.length > 1 ?
         <div className="mb-2">

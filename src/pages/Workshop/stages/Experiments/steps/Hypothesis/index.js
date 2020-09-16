@@ -89,7 +89,7 @@ const Hypothesis = () => {
     <React.Fragment>
       <h1 className="h2 mt-5">Experiments</h1>
 
-      <h5 className="mb-4">Create a hypothesis that you can test in 1-2 weeks.</h5>
+      <h5 className="mb-4">Create a hypothesis that you can test in less than 4 weeks (ideally 1-2 weeks).</h5>
 
       <blockquote className="mb-4">
         <div className="text-muted small">
@@ -133,7 +133,7 @@ const Hypothesis = () => {
               control={control}
               register={register({ required: true, maxLength: 140 })}
               name="will_result_in_text"
-              placeholder="Will result in <this outcome>..."
+              placeholder="Will result in <this outcome>."
               className={cn("mb-1", willResultInTextCharCountExceeded ? 'bg-scary' : '')}
               onUserInput={(userInput) => setWillResultInText(userInput)}
             />

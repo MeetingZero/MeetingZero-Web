@@ -159,7 +159,7 @@ const Responses = () => {
       </form>
 
       <ProTip
-        mainText="What solutions (features/functionality) have the highest chance of creating the desired change in your user(s)’s behavior?"
+        mainText="What solutions (features/functionality) have the highest chance of creating the desired change in your users' behavior?"
         calloutText="Put up mirrors in elevator banks."
       />
     </React.Fragment>

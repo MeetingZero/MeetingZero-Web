@@ -34,7 +34,7 @@ const Vote = () => {
     <React.Fragment>
       <h1 className="h2 mt-5">Vote</h1>
 
-      <h5 className="mb-4">Evaluate the importance of each item addressed. Once everyone is finished, you will be redirected to the results.</h5>
+      <h5 className="mb-4">Evaluate the importance of each item addressed.</h5>
 
       <StarVoter
         workshopToken={params.workshop_token}
