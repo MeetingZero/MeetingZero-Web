@@ -15,9 +15,11 @@
   bottom: 100%;
   left: 100%;
   min-width: 70rem;
+  max-height: calc(100vh - 20rem);
   background-color: $cyan;
   padding: 2rem;
   border: $primary 1px solid;
+  overflow-y: scroll;
 }
 
 .info-tip-box-close {

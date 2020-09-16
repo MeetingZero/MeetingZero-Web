@@ -10,7 +10,7 @@ const InfoTip = ({ title, text, styles }) => {
 
   return (
     <div
-      onClick={() => setIsOpen(true)}
+      onClick={() => setIsOpen(!isOpen)}
       className="info-tip-icon-container"
       style={styles}
     >

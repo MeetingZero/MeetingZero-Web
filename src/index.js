@@ -156,8 +156,6 @@ ReactDOM.render(
               </Route>
             </Restricted>
           </Switch>
-
-          <Redirect exact from="/" to="/sign-up" />
         </Suspense>
       </Router>
     </Provider>
