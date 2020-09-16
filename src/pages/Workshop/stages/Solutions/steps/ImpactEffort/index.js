@@ -8,6 +8,7 @@ import Button from 'library/Button';
 import "./ImpactEffort.scss";
 
 import * as solutionsActions from 'app/workshop/stages/solutions/actions';
+import * as opportunityQuestionActions from 'app/workshop/stages/opportunity_question/actions';
 
 const ImpactEffort = () => {
   const params = useParams();
@@ -64,11 +65,31 @@ const ImpactEffort = () => {
     return setViewIndex(allSolutions.length - 1);
   }, [allSolutions]);
 
+  React.useEffect(() => {
+    dispatch(opportunityQuestionActions.getResponse(params.workshop_token));
+  }, [dispatch, params.workshop_token]);
+
+  const opportunityQuestionResponse = useSelector((state) => {
+    return state.OpportunityQuestion.opportunityQuestionResponse;
+  });
+
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Evaluate Solutions</h1>
 
       <h5 className="mb-4">Grade each solution on how much impact it will have if implemented and how much efforit it will take to implement.</h5>
+
+      {opportunityQuestionResponse ?
+        <blockquote className="mb-5">
+          <div className="text-muted small">
+            Winning Opportunity:
+          </div>
+
+          <div>
+            {opportunityQuestionResponse.response_text}
+          </div>
+        </blockquote>
+      : null}
 
       {allSolutions.length > 1 ?
         <div className="row mb-1">
