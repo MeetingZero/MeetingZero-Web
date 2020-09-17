@@ -1,10 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Slider from 'react-rangeslider';
 
 import ProTip from 'library/ProTip';
 import Button from 'library/Button';
 
+import "react-rangeslider/lib/index.css";
 import "./ImpactEffort.scss";
 
 import * as solutionsActions from 'app/workshop/stages/solutions/actions';
@@ -73,6 +75,19 @@ const ImpactEffort = () => {
     return state.OpportunityQuestion.opportunityQuestionResponse;
   });
 
+  const sliderLabels = {
+    1: "1",
+    2: "2",
+    3: "3",
+    4: "4",
+    5: "5",
+    6: "6",
+    7: "7",
+    8: "8",
+    9: "9",
+    10: "10"
+  };
+
   return (
     <React.Fragment>
       <h1 className="h2 mt-5">Evaluate Solutions</h1>
@@ -119,21 +134,20 @@ const ImpactEffort = () => {
             {viewIndex + 1}/{allSolutions.length}
           </div>
 
-          <div className="border border-info rounded p-1 mb-10">
+          <div className="border border-info rounded p-1 mb-5">
             {allSolutions[viewIndex].response_text}
           </div>
 
           <div className="row mb-5">
             <div className="col-6">
-              <div className="ie-slider-container mb-4">
-                <input
-                  type="range"
-                  className="ie-slider mb-2"
-                  step="1"
-                  min="1"
-                  max="10"
+              <div className="ie-slider-container mb-7">
+                <Slider
+                  min={1}
+                  max={10}
+                  labels={sliderLabels}
                   value={impactValue}
-                  onChange={(event) => setImpactValue(event.target.value)}
+                  onChange={setImpactValue}
+                  className="ie-slider mb-2"
                 />
 
                 <div className="left-handle">
@@ -145,29 +159,20 @@ const ImpactEffort = () => {
                 </div>
               </div>
 
-              {/* <div className="d-flex">
-                {[1,2,3,4,5,6,7,8,9,10].map((i) => {
-                  return (
-                    <div key={i} className="flex-grow-1 flex-shrink-0 text-center">{i}</div>
-                  );
-                })}
-              </div> */}
-
               <div className="h5 text-center">
                 Impact
               </div>
             </div>
 
             <div className="col-6">
-              <div className="ie-slider-container mb-4">
-                <input
-                  type="range"
-                  className="ie-slider mb-2"
-                  step="1"
-                  min="1"
-                  max="10"
+              <div className="ie-slider-container mb-7">
+                <Slider
+                  min={1}
+                  max={10}
+                  labels={sliderLabels}
                   value={effortValue}
-                  onChange={(event) => setEffortValue(event.target.value)}
+                  onChange={setEffortValue}
+                  className="ie-slider mb-2"
                 />
 
                 <div className="left-handle">
@@ -178,14 +183,6 @@ const ImpactEffort = () => {
                   High Effort
                 </div>
               </div>
-
-              {/* <div className="d-flex">
-                {[1,2,3,4,5,6,7,8,9,10].map((i) => {
-                  return (
-                    <div key={i} className="flex-grow-1 flex-shrink-0 text-center">{i}</div>
-                  );
-                })}
-              </div> */}
 
               <div className="h5 text-center">
                 Effort

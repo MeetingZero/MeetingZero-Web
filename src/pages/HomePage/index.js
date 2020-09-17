@@ -7,7 +7,7 @@ import homeArrowsImg from "assets/images/home_arrows.png";
 
 const HomePage = () => {
   return (
-    <div className="container">
+    <div className="container-fluid p-3">
       <div className="text-right mt-3">
         <Link to="/login">
           Log In
