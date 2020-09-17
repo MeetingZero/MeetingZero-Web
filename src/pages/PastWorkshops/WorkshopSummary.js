@@ -25,19 +25,9 @@ const WorkshopSummary = ({ workshop }) => {
 
   return (
     <div className="p-5">
-      {workshopSummary.winning_problem ?
-        <React.Fragment>
-          <h5 className="font-weight-normal mb-2">Original Problem</h5>
-
-          <div className="feather-card shadow mb-8">
-            {workshopSummary.winning_problem.response_text}
-          </div>
-        </React.Fragment>
-      : null}
-
       {workshopSummary.winning_reframed_problem ?
         <React.Fragment>
-          <h5 className="font-weight-normal mb-2">Reframed Problem</h5>
+          <h5 className="font-weight-normal mb-2">Winning Problem</h5>
 
           <div className="feather-card shadow mb-8">
             {workshopSummary.winning_reframed_problem.response_text}
