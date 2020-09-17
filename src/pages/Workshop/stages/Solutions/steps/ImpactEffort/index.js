@@ -146,6 +146,7 @@ const ImpactEffort = () => {
                   max={10}
                   labels={sliderLabels}
                   value={impactValue}
+                  tooltip={false}
                   onChange={setImpactValue}
                   className="ie-slider mb-2"
                 />
@@ -171,6 +172,7 @@ const ImpactEffort = () => {
                   max={10}
                   labels={sliderLabels}
                   value={effortValue}
+                  tooltip={false}
                   onChange={setEffortValue}
                   className="ie-slider mb-2"
                 />
