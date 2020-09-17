@@ -60,12 +60,16 @@ export const getMyResponse = (workshopToken) => {
   }
 }
 
-export const getAllResponses = (workshopToken) => {
+export const getAllResponses = (workshopToken, voting = false) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('GET_ALL_REFRAME_PROBLEM_RESPONSES'));
 
     return axiosInstance()
-    .get(`/api/v1/workshops/${workshopToken}/reframe_problem`)
+    .get(`/api/v1/workshops/${workshopToken}/reframe_problem`, {
+      params: {
+        voting
+      }
+    })
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('GET_ALL_REFRAME_PROBLEM_RESPONSES'));
 

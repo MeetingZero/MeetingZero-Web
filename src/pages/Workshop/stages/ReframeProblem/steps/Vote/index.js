@@ -14,7 +14,7 @@ const Vote = () => {
   React.useEffect(() => {
     dispatch(
       reframeProblemActions
-      .getAllResponses(params.workshop_token)
+      .getAllResponses(params.workshop_token, true)
     );
   }, [dispatch, params.workshop_token]);
 
