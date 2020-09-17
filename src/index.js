@@ -10,9 +10,11 @@ import 'assets/vendor/bootstrap/bootstrap.scss';
 // Animate.css library
 import 'animate.css';
 
-import * as Misc from 'constants/misc';
+import HomePage from 'pages/HomePage';
 import LoadingScreen from 'library/LoadingScreen';
 import Restricted from 'routes/Restricted';
+
+import * as Misc from 'constants/misc';
 
 // Application pages
 
@@ -110,6 +112,10 @@ ReactDOM.render(
       <Router>
         <Suspense fallback={<LoadingScreen />}>
           <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+
             <Route exact path='/login'>
               <Login />
             </Route>
