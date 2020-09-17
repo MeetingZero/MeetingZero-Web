@@ -7,6 +7,7 @@ import Vote from './steps/Vote';
 import ReviewVotes from './steps/ReviewVotes';
 
 import * as workshopActions from 'app/workshop/actions';
+import * as reframeProblemActions from 'app/workshop/stages/reframe_problem/actions';
 import * as votingActions from 'app/voting/actions';
 
 const ReframeProblem = () => {
@@ -22,7 +23,7 @@ const ReframeProblem = () => {
     return state.Workshop.workshop;
   });
 
-  const onTimerExpired = () => {
+  const onVoteTimerExpired = () => {
     if (workshop.is_host) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
@@ -36,15 +37,29 @@ const ReframeProblem = () => {
     }
   }
 
+  const onResponseTimerExpired = () => {
+    if (workshop.is_host) {
+      const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
+      
+      dispatch(
+        reframeProblemActions
+        .getAllResponses(workshop.workshop_token, true)
+      )
+      .then(() => {
+        dispatch(workshopActions.completeWorkshopStep(workshop.workshop_token, workshopStageStepId));
+      });
+    }
+  }
+
   if (currentStepKey === "REFRAME_PROBLEM_RESPONSE") {
     return (
-      <WorkshopApp>
+      <WorkshopApp onTimerExpired={onResponseTimerExpired}>
         <Response />
       </WorkshopApp>
     );
   } else if (currentStepKey === "REFRAME_PROBLEM_VOTE") {
     return (
-      <WorkshopApp onTimerExpired={onTimerExpired}>
+      <WorkshopApp onTimerExpired={onVoteTimerExpired}>
         <Vote />
       </WorkshopApp>
     );
