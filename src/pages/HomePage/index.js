@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from 'library/Button';
 
@@ -10,7 +11,49 @@ import handImg from "assets/images/hand_image.png";
 import largeGreenCheckImg from "assets/images/large_green_check.png";
 import largeRedXImg from "assets/images/large_red_x.svg";
 
+import axiosInstance from "config/axios";
+import loadingSlice from 'app/loading/slice';
+
 const HomePage = () => {
+  const dispatch = useDispatch();
+
+  const [emailAddress, setEmailAddress] = React.useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState(null);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setErrorMessage(null);
+
+    if (emailAddress.length === 0) {
+      return setErrorMessage("Please enter a valid email address.");
+    }
+
+    dispatch(loadingSlice.actions.startLoading('SAVING_EMAIL_ADDRESS'));
+
+    return axiosInstance()
+    .post('/api/v1/email_submissions', { email: emailAddress })
+    .then(() => {
+      dispatch(loadingSlice.actions.stopLoading('SAVING_EMAIL_ADDRESS'));
+
+      setEmailAddress("");
+
+      return setShowSuccessMessage(true);
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVING_EMAIL_ADDRESS'));
+
+      setErrorMessage("This email is already registered.");
+
+      throw err;
+    });
+  }
+
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("SAVING_EMAIL_ADDRESS") >= 0;
+  });
+
   return (
     <div className="container-fluid px-0">
       <div className="text-right p-3">
@@ -19,7 +62,7 @@ const HomePage = () => {
         </Link>
       </div>
 
-      <div className="d-flex align-items-end my-3 text-decoration-none mb-3 p-3">
+      <div className="d-flex align-items-end my-3 text-decoration-none p-3">
         <img src={logoImg} className="img-fluid" style={{width: 100}} alt="Logo" />
 
         <div>
@@ -42,19 +85,36 @@ const HomePage = () => {
             Get access to our early release!
           </div>
 
-          <div className="homepage-email-input">
-            <input
-              type="email"
-              className="form-control"
-              placeholder="email address"
-            />
+          <form onSubmit={handleSubmit}>
+            <div className="homepage-email-input">
+              <input
+                onChange={(event) => setEmailAddress(event.target.value)}
+                value={emailAddress}
+                type="email"
+                className="form-control"
+                placeholder="email address"
+              />
 
-            <Button
-              type="submit"
-              className="btn btn-primary"
-              text="Submit"
-            />
-          </div>
+              <Button
+                type="submit"
+                className="btn btn-primary"
+                text="Submit"
+                loading={isLoading}
+              />
+            </div>
+
+            {showSuccessMessage ?
+              <div className="text-success mt-1">
+                Thank you! Your submission has been received!
+              </div>
+            : null}
+
+            {errorMessage ?
+              <div className="text-danger mt-1">
+                {errorMessage}
+              </div>
+            : null}
+          </form>
         </div>
 
         <div className="col-md-6 mt-5">
@@ -281,7 +341,7 @@ const HomePage = () => {
           &copy; MeetingZero - All rights reserved.
         </div>
 
-        <a href="" className="text-white d-block text-center text-decoration-underline">
+        <a href="https://meetingzero.s3.us-west-2.amazonaws.com/meetingzero_terms.pdf" className="text-white d-block text-center text-decoration-underline">
           Privacy Policy
         </a>
       </div>
