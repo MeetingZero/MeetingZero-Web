@@ -7,6 +7,8 @@
 // See also https://github.com/twbs/bootstrap/issues/18178
 .img-fluid {
   @include img-fluid();
+  display: block;
+  width: 100%;
 }
 
 
