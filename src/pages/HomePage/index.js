@@ -25,6 +25,7 @@ const HomePage = () => {
     event.preventDefault();
 
     setErrorMessage(null);
+    setShowSuccessMessage(false);
 
     if (emailAddress.length === 0) {
       return setErrorMessage("Please enter a valid email address.");
