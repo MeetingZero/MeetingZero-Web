@@ -22,3 +22,24 @@
     flex-basis: 20%;
   }
 }
+
+.homepage-banner {
+  background-size: cover;
+  color: $white;
+  padding: 10rem;
+  padding-top: 20rem;
+}
+
+.homepage-banner-content {
+  width: 100%;
+  max-width: 200px;
+  position: relative;
+
+  .homepage-banner-content-text {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+  }
+}
