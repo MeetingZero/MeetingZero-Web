@@ -141,7 +141,7 @@ const HomePage = () => {
         <div className="row">
           <div className="col-md-6">
             <div className="homepage-banner-content mx-auto">
-              <img src={largeGreenCheckImg} className="img-fluid" />
+              <img src={largeGreenCheckImg} className="img-fluid" alt="Green Check" />
 
               <div className="homepage-banner-content-text">
                 <h3>Creates</h3>
@@ -159,7 +159,7 @@ const HomePage = () => {
 
           <div className="col-md-6">
             <div className="homepage-banner-content mx-auto">
-              <img src={largeRedXImg} className="img-fluid" />
+              <img src={largeRedXImg} className="img-fluid" alt="Red X" />
 
               <div className="homepage-banner-content-text">
                 <h3>Destroys</h3>
@@ -291,7 +291,7 @@ const HomePage = () => {
           </p>
 
           <p>
-            These inefficiencies cost an estimated <a href="https://meeting-report.com/" target="_blank" className="text-info text-decoration-underline">$400 billion</a> a year in the US.
+            These inefficiencies cost an estimated <a href="https://meeting-report.com/" target="_blank" rel="noopener noreferrer" className="text-info text-decoration-underline">$400 billion</a> a year in the US.
           </p>
 
           <p>
