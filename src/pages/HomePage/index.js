@@ -19,7 +19,7 @@ const HomePage = () => {
         </Link>
       </div>
 
-      <div className="d-flex align-items-end my-3 text-decoration-none mb-5 p-3">
+      <div className="d-flex align-items-end my-3 text-decoration-none mb-3 p-3">
         <img src={logoImg} className="img-fluid" style={{width: 100}} alt="Logo" />
 
         <div>
@@ -30,7 +30,7 @@ const HomePage = () => {
       </div>
 
       <div className="row p-3">
-        <div className="col-md-6">
+        <div className="col-md-6 mt-5">
           <img
             src={homeArrowsImg}
             className="img-fluid mb-4"
@@ -57,7 +57,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-6 mt-5">
           <div className="embed-responsive embed-responsive-16by9">
             <iframe
               src="https://www.youtube.com/embed/k1bkmZz8yd4"
@@ -216,8 +216,8 @@ const HomePage = () => {
       </div>
 
       <div className="bg-primary p-3">
-        <div className="container-small text-white">
-          <h3>Why we're here</h3>
+        <div className="container text-white mb-10">
+          <h2 className="mb-3">Why we're here</h2>
 
           <p>
             The way teams work together is fundamentally broken. No matter the team or company size, the horrors of teamwork stay the same:
@@ -231,7 +231,7 @@ const HomePage = () => {
           </p>
 
           <p>
-            These inefficiencies cost an estimated <a href="https://meeting-report.com/" target="_blank" className="text-cyan">$400 billion</a> a year in the US.
+            These inefficiencies cost an estimated <a href="https://meeting-report.com/" target="_blank" className="text-info text-decoration-underline">$400 billion</a> a year in the US.
           </p>
 
           <p>
@@ -245,7 +245,45 @@ const HomePage = () => {
           <p>
             We are here to do exactly that.
           </p>
+
+          <div className="border-top my-3" />
+
+          <h2 className="mb-3">Who we're helping</h2>
+
+          <p>
+            Without a set of tools and processes in place, meetings inevitably go off-topic and devolve into unstructured discussions. The introverts and juniors in the room don’t feel comfortable speaking up, even if they think they might have the right solution, and often times leaders find it hard to align on decisions.
+          </p>
+
+          <p>
+            One person does all the talking. Everyone understands the problems differently. No tangible outcomes are produced, and another meeting is needed. Meetings like this are deadly to productive work, not only because they are excruciatingly dull to be in, but also because they don’t do their main job: Providing alignment and clear next steps for a project.
+          </p>
+
+          <div className="border-top my-3" />
+
+          <h2 className="mb-3">How we're making your life easier</h2>
+
+          <p>
+            MeetingZero fundamentally changes the way collaborative work is done.
+          </p>
+
+          <p>
+            It streamlines processes to eliminate unstructured discussion to help teams do their best work.
+          </p>
+
+          <p>
+            If you want to easily get your team to a place where synchronous working sessions are more productive, check out MeetingZero.
+          </p>
+
+          <div className="border-top my-3" />
         </div>
+
+        <div className="text-center text-white">
+          &copy; MeetingZero - All rights reserved.
+        </div>
+
+        <a href="" className="text-white d-block text-center text-decoration-underline">
+          Privacy Policy
+        </a>
       </div>
     </div>
   );
