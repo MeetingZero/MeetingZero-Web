@@ -10,6 +10,7 @@ const MultiVoter = ({ workshopToken, votingItems, modelName, handleUpdateData })
   const dispatch = useDispatch();
 
   const [viewIndex, setViewIndex] = React.useState(null);
+  const [allItemsVoted, setAllItemsVoted] = React.useState(false);
 
   React.useEffect(() => {
     // Set the view index to the voting item that doesn't have a vote yet
@@ -24,6 +25,16 @@ const MultiVoter = ({ workshopToken, votingItems, modelName, handleUpdateData })
       return setViewIndex(votingItems.length - 1);
     }
   }, [votingItems, viewIndex]);
+
+  React.useEffect(() => {
+    for (let i = 0; i < votingItems.length; i++) {
+      if (votingItems[i].star_voting_vote === null) {
+        return setAllItemsVoted(false);
+      }
+    }
+
+    return setAllItemsVoted(true);
+  }, [votingItems]);
 
   const submitVote = (voteNum) => {
     if (votingItems[viewIndex].star_voting_vote === null) {
@@ -102,6 +113,12 @@ const MultiVoter = ({ workshopToken, votingItems, modelName, handleUpdateData })
               startingVote={votingItems[viewIndex].star_voting_vote}
             />
           </div>
+
+          {allItemsVoted ?
+            <div className="text-center mt-4 h6">
+              You've voted on all of the responses
+            </div>
+          : null}
         </React.Fragment>
       : null}
     </React.Fragment>
