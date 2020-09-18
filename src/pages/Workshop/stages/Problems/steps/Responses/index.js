@@ -107,7 +107,7 @@ const Responses = () => {
           control={control}
           register={register({ required: true, maxLength: 140 })}
           name="response_text"
-          placeholder="Keep it positive"
+          placeholder="What's preventing the business and/or users from achieving their goals?"
           className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
           onUserInput={(userInput) => setResponseText(userInput)}
         />

@@ -100,7 +100,7 @@ const Response = () => {
       : null}
 
       <div className="mb-5">
-        Ask yourself and answer the question, "so what?" as it relates to the problem (you get one response)
+        Ask yourself and answer the question, "so what?" as it relates to the problem (you get one response).
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
