@@ -24,6 +24,14 @@ const Response = ({ showBathroomBreak }) => {
 
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [responseText, setResponseText] = React.useState("");
+  const [showConfirmSubmission, setShowConfirmSubmission] = React.useState(false);
+  const [shouldShowBathroomBreak, setShouldShowBathroomBreak] = React.useState(false);
+
+  React.useEffect(() => {
+    if (showBathroomBreak === true) {
+      return setShouldShowBathroomBreak(true);
+    }
+  }, [showBathroomBreak]);
 
   React.useEffect(() => {
     dispatch(votingActions.calculateVotingResults(params.workshop_token, "ReframeProblemResponse"));
@@ -45,6 +53,7 @@ const Response = ({ showBathroomBreak }) => {
       )
       .then(() => {
         setResponseText("");
+        setShowConfirmSubmission(true);
       });
     } else {
       dispatch(
@@ -57,6 +66,7 @@ const Response = ({ showBathroomBreak }) => {
       )
       .then(() => {
         setResponseText("");
+        setShowConfirmSubmission(true);
       });
     }
   }
@@ -93,8 +103,15 @@ const Response = ({ showBathroomBreak }) => {
 
   return (
     <React.Fragment>
-      {showBathroomBreak === true ?
+      {shouldShowBathroomBreak === true ?
         <BathroomBreakModal />
+      : null}
+
+      {showConfirmSubmission === true ?
+        <ConfirmSubmissionModal
+          setShowConfirmSubmission={setShowConfirmSubmission}
+          setShouldShowBathroomBreak={setShouldShowBathroomBreak}
+        />
       : null}
 
       <h1 className="h2 mt-5">Opportunity Question</h1>
@@ -146,7 +163,7 @@ const Response = ({ showBathroomBreak }) => {
             <div>
               <Button
                 type="submit"
-                text={opportunityQuestionResponse === null ? "Submit" : "Update"}
+                text="Submit"
                 className="btn btn-primary px-5 rounded"
                 disabled={responseText.length === 0}
                 loading={isLoading}
@@ -210,9 +227,9 @@ const BathroomBreakModal = () => {
   }, []);
 
   return (
-    <div className="bathroom-break-modal-overlay">
+    <div className="simple-modal-overlay">
       {breakAccepted === false ?
-        <div className="bathroom-break-modal-wrapper">
+        <div className="simple-modal-wrapper">
           <h4 className="text-center mb-2">Do you want a bathroom break?</h4>
 
           <div className="row mb-2">
@@ -223,7 +240,7 @@ const BathroomBreakModal = () => {
             </div>
 
             <div className="col-6">
-              <button onClick={startBathroomBreak} className="btn btn-block btn-warning">
+              <button onClick={startBathroomBreak} className="btn btn-block btn-warning btn-square">
                 Yes
               </button>
             </div>
@@ -236,7 +253,7 @@ const BathroomBreakModal = () => {
       : null}
 
       {breakAccepted === true ?
-        <div className="bathroom-break-modal-wrapper">
+        <div className="simple-modal-wrapper">
           <h4 className="text-center">Quick Bathroom Break</h4>
 
           <div className="small text-muted text-center mb-2">
@@ -254,6 +271,46 @@ const BathroomBreakModal = () => {
           </div>
         </div>
       : null}
+    </div>
+  );
+}
+
+const ConfirmSubmissionModal = ({
+  setShowConfirmSubmission,
+  setShouldShowBathroomBreak
+}) => {
+  return (
+    <div className="simple-modal-overlay">
+      <div className="simple-modal-wrapper">
+        <h4 className="text-center">Submit?</h4>
+
+        <div className="small text-muted text-center mb-3">
+          You won't be able to edit this
+        </div>
+
+        <div className="row mb-2">
+          <div className="col-6">
+            <button
+              onClick={() => setShowConfirmSubmission(false)}
+              className="btn btn-block btn-link"
+            >
+              No
+            </button>
+          </div>
+
+          <div className="col-6">
+            <button
+              onClick={() => {
+                setShowConfirmSubmission(false);
+                setShouldShowBathroomBreak(true);
+              }}
+              className="btn btn-block btn-warning btn-square"
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

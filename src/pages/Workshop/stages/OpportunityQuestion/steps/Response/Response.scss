@@ -1,7 +1,7 @@
 @import "assets/vendor/bootstrap/_functions";
 @import "assets/vendor/bootstrap/_variables";
 
-.bathroom-break-modal-overlay {
+.simple-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 9;
 }
 
-.bathroom-break-modal-wrapper {
+.simple-modal-wrapper {
   position: fixed;
   top: 50%;
   left: 50%;
