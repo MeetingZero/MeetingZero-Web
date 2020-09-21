@@ -85,7 +85,7 @@ const WorkshopStart = () => {
       <div className='requirements-list mb-4'>
         {workshop ?
           <div>
-            <img src={timeIcon} alt='Time Icon' /> <div>~ {workshop.total_time / 60} Minutes</div>
+            <img src={timeIcon} alt='Time Icon' /> <div>Roughly {workshop.total_time / 60} Minutes</div>
           </div>
         : null}
 
