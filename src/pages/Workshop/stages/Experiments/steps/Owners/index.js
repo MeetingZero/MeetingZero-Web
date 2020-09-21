@@ -47,7 +47,7 @@ const Owners = ({ showAddTimeModal }) => {
     <React.Fragment>
       <h1 className="h2 mt-5">Owners</h1>
 
-      <h5 className="mb-4">Assigning responsibility to team members for this experiment</h5>
+      <h5 className="mb-4">Assigning responsibility to team members for this experiment.</h5>
 
       <div className="row mb-3">
         <div className="col-4">

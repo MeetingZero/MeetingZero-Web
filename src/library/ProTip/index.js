@@ -10,7 +10,7 @@ const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", cal
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <div onClick={() => setIsOpen(true)} className={cn("pro-tip-lightbulb-container", position)}>
+    <div onClick={() => setIsOpen(!isOpen)} className={cn("pro-tip-lightbulb-container", position)}>
       <div className="position-relative">
         <CSSTransition
           in={isOpen}

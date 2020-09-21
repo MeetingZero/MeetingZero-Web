@@ -92,7 +92,7 @@ const ImpactEffort = () => {
     <React.Fragment>
       <h1 className="h2 mt-5">Evaluate Solutions</h1>
 
-      <h5 className="mb-4">Grade each solution on how much impact it will have if implemented and how much efforit it will take to implement.</h5>
+      <h5 className="mb-4">Grade each solution on how much impact it will have if implemented and how much effort it will take to implement.</h5>
 
       {opportunityQuestionResponse ?
         <blockquote className="mb-5">

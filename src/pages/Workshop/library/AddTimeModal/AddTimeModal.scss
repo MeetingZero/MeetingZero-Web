@@ -11,4 +11,8 @@
   border-radius: 1rem;
   border: $primary 1px solid;
   min-width: 700px;
+
+  .add-time-modal-icon {
+    max-width: 64px;
+  }
 }

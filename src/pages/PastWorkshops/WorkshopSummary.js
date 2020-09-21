@@ -67,7 +67,7 @@ const WorkshopSummary = ({ workshop }) => {
 
       {workshopSummary.experiment_tasks.length > 0 ?
         <React.Fragment>
-          <h5 className="font-weight-normal mb-2">RACI Matrix</h5>
+          <h5 className="font-weight-normal mb-2">Owners and Tasks</h5>
 
           <div>
             <RaciMatrix
