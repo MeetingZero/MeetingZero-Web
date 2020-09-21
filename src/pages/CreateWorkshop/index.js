@@ -30,8 +30,9 @@ const CreateWorkshop = () => {
     .toISOString();
 
     dispatch(workshopActions.createWorkshop(formData, emails, dateTimeSelectedUtc))
-    .then((newWorkshop) => {
-      history.push(`/workshop/${newWorkshop.workshop_token}/start`);
+    .then(() => {
+      // history.push(`/workshop/${newWorkshop.workshop_token}/start`);
+      history.push("/create-workshop-confirmation");
     });
   }
 

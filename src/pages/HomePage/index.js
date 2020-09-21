@@ -73,7 +73,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="row p-3">
+      <div className="row p-3 no-gutters">
         <div className="col-md-6 mt-5">
           <img
             src={homeArrowsImg}

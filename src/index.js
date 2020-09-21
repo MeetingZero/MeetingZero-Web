@@ -82,6 +82,14 @@ const CreateWorkshop = lazy(() => {
   .then(([moduleExports]) => moduleExports);
 });
 
+const CreateWorkshopConfirmation = lazy(() => {
+  return Promise.all([
+    import('./pages/CreateWorkshopConfirmation'),
+    new Promise(resolve => window.setTimeout(resolve, Misc.LAZY_LOADING_MIN_TIMEOUT))
+  ])
+  .then(([moduleExports]) => moduleExports);
+});
+
 const WorkshopStart = lazy(() => {
   return Promise.all([
     import('./pages/WorkshopStart'),
@@ -147,6 +155,10 @@ ReactDOM.render(
 
               <Route exact path='/create-workshop'>
                 <CreateWorkshop />
+              </Route>
+
+              <Route exact path='/create-workshop-confirmation'>
+                <CreateWorkshopConfirmation />
               </Route>
 
               <Route exact path='/workshop/:workshop_token/start'>

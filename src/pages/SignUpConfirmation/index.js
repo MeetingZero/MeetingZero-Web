@@ -11,6 +11,8 @@ const SignUpConfirmation = () => {
     if (!window.sessionStorage.getItem("signUpEmail")) {
       history.push("/login");
     }
+
+    return () => window.sessionStorage.removeItem("signUpEmail");
   }, [history]);
 
   return (
