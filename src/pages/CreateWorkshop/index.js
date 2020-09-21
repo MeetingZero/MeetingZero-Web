@@ -23,8 +23,15 @@ const CreateWorkshop = () => {
   const [workshopPurpose, setWorkshopPurpose] = React.useState("");
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [dateTimeSelected, setDateTimeSelected] = React.useState(null);
+  const [showError, setShowError] = React.useState(false);
+  const [showWarning, setShowWarning] = React.useState(false);
 
   const onSubmit = (formData) => {
+    if (emails.length < 3 || emails.length > 9) {
+      setShowWarning(false);
+      return setShowError(true);
+    }
+
     const dateTimeSelectedUtc = moment(dateTimeSelected)
     .utc()
     .toISOString();
@@ -45,6 +52,13 @@ const CreateWorkshop = () => {
   });
 
   const handleEmailChange = (emails) => {
+    setShowError(false);
+    setShowWarning(false);
+
+    if (emails.length < 5) {
+      setShowWarning(true);
+    }
+
     return setEmails(emails);
   }
 
@@ -97,8 +111,26 @@ const CreateWorkshop = () => {
               placeholder="Invite Attendees"
             />
 
-            <div className="text-right mb-2">
-              Separate emails with the tab or enter key
+            <div className="row mb-2">
+              <div className="col-6">
+                  {showError ?
+                    <div className="text-danger">
+                      There must be between 3 and 9 people in this workshop
+                    </div>
+                  : null}
+
+                  {showWarning ?
+                    <div className="text-warning">
+                      MeetingZero works best with more than 5 people
+                    </div>
+                  : null}
+              </div>
+
+              <div className="col-6">
+                <div className="text-right mb-2">
+                  Separate emails with the tab or enter key
+                </div>
+              </div>
             </div>
 
             <div className="mb-2">
