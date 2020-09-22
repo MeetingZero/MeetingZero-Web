@@ -76,7 +76,7 @@ const HomePage = () => {
       </div>
 
       <div className="row p-3 no-gutters">
-        <div className="col-md-6 mt-5">
+        <div className="col-md-6 mt-5 px-1">
           <img
             src={homeArrowsImg}
             className="img-fluid mb-4"
@@ -84,26 +84,28 @@ const HomePage = () => {
             alt="Arrow Diagram"
           />
 
-          <div className="mb-1">
-            Get access to our early release!
-          </div>
-
           <form onSubmit={handleSubmit}>
-            <div className="homepage-email-input">
-              <input
-                onChange={(event) => setEmailAddress(event.target.value)}
-                value={emailAddress}
-                type="email"
-                className="form-control"
-                placeholder="email address"
-              />
+            <input
+              onChange={(event) => setEmailAddress(event.target.value)}
+              value={emailAddress}
+              type="email"
+              className="form-control mb-2 home-page-email-input"
+              placeholder="email address"
+            />
 
-              <Button
-                type="submit"
-                className="btn btn-primary"
-                text="Submit"
-                loading={isLoading}
-              />
+            <div className="row align-items-end">
+              <div className="col-xl-3 col-lg-5 mt-1">
+                <Button
+                  type="submit"
+                  className="btn btn-primary btn-block px-4"
+                  text="Sign Up"
+                  loading={isLoading}
+                />
+              </div>
+
+              <div className="col-xl-9 col-lg-7 mt-1">
+                Already have an account? <Link to="/login">Login</Link>
+              </div>
             </div>
 
             {errorMessage ?
@@ -114,7 +116,7 @@ const HomePage = () => {
           </form>
         </div>
 
-        <div className="col-md-6 mt-5">
+        <div className="col-md-6 mt-5 px-1">
           <div className="embed-responsive embed-responsive-16by9">
             <iframe
               src="https://www.youtube.com/embed/k1bkmZz8yd4"
