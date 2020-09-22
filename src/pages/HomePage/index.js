@@ -47,6 +47,10 @@ const HomePage = () => {
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('SAVING_EMAIL_ADDRESS'));
 
+      if (err.response.data.error === "USER_EXISTS") {
+        return history.push("/login");
+      }
+
       setErrorMessage("This email is already registered.");
 
       throw err;
