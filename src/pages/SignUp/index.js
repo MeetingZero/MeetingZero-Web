@@ -12,7 +12,17 @@ import * as Regex from 'constants/regex';
 const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { register, handleSubmit, errors, setError } = useForm();
+  const { register, handleSubmit, errors, setError, setValue } = useForm();
+
+  React.useEffect(() => {
+    const emailAddress = window.localStorage.getItem("signupEmail");
+
+    if (emailAddress) {
+      setValue("email", emailAddress);
+    }
+
+    return () => window.localStorage.removeItem("signupEmail");
+  }, [setValue]);
 
   const onSubmit = (formData) => {
     if (formData.password !== formData.confirm_password) {

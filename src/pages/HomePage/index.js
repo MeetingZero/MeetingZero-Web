@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Button from 'library/Button';
 
@@ -16,16 +17,15 @@ import loadingSlice from 'app/loading/slice';
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [emailAddress, setEmailAddress] = React.useState("");
-  const [showSuccessMessage, setShowSuccessMessage] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     setErrorMessage(null);
-    setShowSuccessMessage(false);
 
     if (emailAddress.length === 0) {
       return setErrorMessage("Please enter a valid email address.");
@@ -38,9 +38,11 @@ const HomePage = () => {
     .then(() => {
       dispatch(loadingSlice.actions.stopLoading('SAVING_EMAIL_ADDRESS'));
 
+      window.localStorage.setItem("signupEmail", emailAddress);
+
       setEmailAddress("");
 
-      return setShowSuccessMessage(true);
+      return history.push("/sign-up");
     })
     .catch((err) => {
       dispatch(loadingSlice.actions.stopLoading('SAVING_EMAIL_ADDRESS'));
@@ -103,12 +105,6 @@ const HomePage = () => {
                 loading={isLoading}
               />
             </div>
-
-            {showSuccessMessage ?
-              <div className="text-success mt-1">
-                Thank you! Your submission has been received!
-              </div>
-            : null}
 
             {errorMessage ?
               <div className="text-danger mt-1">
