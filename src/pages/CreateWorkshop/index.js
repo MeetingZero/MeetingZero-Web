@@ -36,7 +36,11 @@ const CreateWorkshop = () => {
     .utc()
     .toISOString();
 
-    dispatch(workshopActions.createWorkshop(formData, emails, dateTimeSelectedUtc))
+    if (!dateTimeSelected) {
+      return;
+    }
+
+    return dispatch(workshopActions.createWorkshop(formData, emails, dateTimeSelectedUtc))
     .then(() => {
       // history.push(`/workshop/${newWorkshop.workshop_token}/start`);
       history.push("/create-workshop-confirmation");
