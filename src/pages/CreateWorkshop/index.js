@@ -27,7 +27,7 @@ const CreateWorkshop = () => {
   const [showWarning, setShowWarning] = React.useState(false);
 
   const onSubmit = (formData) => {
-    if (emails.length < 3 || emails.length > 9) {
+    if (emails.length < 2 || emails.length > 8) {
       setShowWarning(false);
       return setShowError(true);
     }
