@@ -1,9 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
-import Button from 'library/Button';
 
 import "./HomePage.scss";
 import logoImg from "assets/images/logo.svg";
@@ -12,68 +8,15 @@ import handImg from "assets/images/hand_image.png";
 import largeGreenCheckImg from "assets/images/large_green_check.png";
 import largeRedXImg from "assets/images/large_red_x.svg";
 
-import axiosInstance from "config/axios";
-import loadingSlice from 'app/loading/slice';
-
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [errorMessage, setErrorMessage] = React.useState(null);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    setErrorMessage(null);
-
-    if (emailAddress.length === 0) {
-      return setErrorMessage("Please enter a valid email address.");
-    }
-
-    dispatch(loadingSlice.actions.startLoading('SAVING_EMAIL_ADDRESS'));
-
-    return axiosInstance()
-    .post('/api/v1/email_submissions', { email: emailAddress })
-    .then(() => {
-      dispatch(loadingSlice.actions.stopLoading('SAVING_EMAIL_ADDRESS'));
-
-      window.localStorage.setItem("signupEmail", emailAddress);
-
-      setEmailAddress("");
-
-      return history.push("/sign-up");
-    })
-    .catch((err) => {
-      dispatch(loadingSlice.actions.stopLoading('SAVING_EMAIL_ADDRESS'));
-
-      if (err.response.data.error === "USER_EXISTS") {
-        return history.push("/login");
-      }
-
-      setErrorMessage("This email is already registered.");
-
-      throw err;
-    });
-  }
-
-  const isLoading = useSelector((state) => {
-    return state.Loading.indexOf("SAVING_EMAIL_ADDRESS") >= 0;
-  });
 
   return (
     <div className="container-fluid px-0">
-      <div className="text-right p-3">
-        <Link to="/login">
-          Log In
-        </Link>
-      </div>
-
-      <div className="d-flex align-items-end my-3 text-decoration-none p-3">
+      <div className="d-flex align-items-end mb-lg-3 text-decoration-none p-3">
         <img src={logoImg} className="img-fluid" style={{width: 100}} alt="Logo" />
 
         <div>
-          <h1 className="text-primary font-weight-normal ml-2 d-none d-xl-block">MeetingZero</h1>
+          <h1 className="text-primary font-weight-normal ml-2">MeetingZero</h1>
 
           <h3 className="h5 ml-4 d-none d-xl-block text-primary font-weight-normal">Your team’s digital facilitator for all your real-time collaborative needs.</h3>
         </div>
@@ -83,41 +26,20 @@ const HomePage = () => {
         <div className="col-md-6 mt-5 px-1">
           <img
             src={homeArrowsImg}
-            className="img-fluid mb-4"
+            className="img-fluid mb-6"
             style={{maxWidth: 800}}
             alt="Arrow Diagram"
           />
 
-          <form onSubmit={handleSubmit}>
-            <input
-              onChange={(event) => setEmailAddress(event.target.value)}
-              value={emailAddress}
-              type="email"
-              className="form-control mb-2 home-page-email-input"
-              placeholder="email address"
-            />
+          <div className="mb-2 text-center text-md-left">
+            <Link to="/sign-up" className="btn btn-primary px-5">
+              Sign Up
+            </Link>
+          </div>
 
-            <div className="row align-items-end">
-              <div className="col-xl-3 col-lg-5 mt-1">
-                <Button
-                  type="submit"
-                  className="btn btn-primary btn-block px-4"
-                  text="Sign Up"
-                  loading={isLoading}
-                />
-              </div>
-
-              <div className="col-xl-9 col-lg-7 mt-1">
-                Already have an account? <Link to="/login">Login</Link>
-              </div>
-            </div>
-
-            {errorMessage ?
-              <div className="text-danger mt-1">
-                {errorMessage}
-              </div>
-            : null}
-          </form>
+          <div className="text-center text-md-left">
+            Already have an account? <Link to="/login">Login</Link>
+          </div>
         </div>
 
         <div className="col-md-6 mt-5 px-1">
@@ -144,7 +66,7 @@ const HomePage = () => {
         <div className="row">
           <div className="col-md-6">
             <div className="homepage-banner-content mx-auto">
-              <img src={largeGreenCheckImg} className="img-fluid" alt="Green Check" />
+              <img src={largeGreenCheckImg} className="img-fluid d-none d-md-block" alt="Green Check" />
 
               <div className="homepage-banner-content-text">
                 <h3>Creates</h3>
@@ -162,7 +84,7 @@ const HomePage = () => {
 
           <div className="col-md-6">
             <div className="homepage-banner-content mx-auto">
-              <img src={largeRedXImg} className="img-fluid" alt="Red X" />
+              <img src={largeRedXImg} className="img-fluid d-none d-md-block" alt="Red X" />
 
               <div className="homepage-banner-content-text">
                 <h3>Destroys</h3>
@@ -183,8 +105,8 @@ const HomePage = () => {
       <div className="container p-5">
         <h1 className="text-center font-weight-bold mb-3">How MeetingZero Works</h1>
 
-        <div className="row mb-3">
-          <div className="col-md-4">
+        <div className="row">
+          <div className="col-md-4 mt-3">
             <div className="d-flex align-items-center">
               <div className="h3">
                 1
@@ -196,7 +118,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-4 mt-3">
             <div className="d-flex align-items-center">
               <div className="h3">
                 2
@@ -208,7 +130,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-4 mt-3">
             <div className="d-flex align-items-center">
               <div className="h3">
                 3
@@ -221,8 +143,8 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="row mb-3">
-          <div className="col-md-4">
+        <div className="row">
+          <div className="col-md-4 mt-3">
             <div className="d-flex align-items-center">
               <div className="h3">
                 4
@@ -234,7 +156,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-4 mt-3">
             <div className="d-flex align-items-center">
               <div className="h3">
                 5
@@ -246,7 +168,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-4 mt-3">
             <div className="d-flex align-items-center">
               <div className="h3">
                 6
@@ -260,7 +182,7 @@ const HomePage = () => {
         </div>
 
         <div className="row">
-          <div className="col-md-4"></div>
+          <div className="col-md-4 mt-3"></div>
 
           <div className="col-md-4">
             <div className="d-flex align-items-center">

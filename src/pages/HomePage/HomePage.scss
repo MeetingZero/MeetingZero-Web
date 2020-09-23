@@ -1,17 +1,12 @@
 @import "assets/vendor/bootstrap/_functions";
 @import "assets/vendor/bootstrap/_variables";
-
-.home-page-email-input {
-  border: none;
-  border-bottom: $black 1px solid;
-  border-radius: 0;
-}
+@import "assets/vendor/bootstrap/_mixins";
 
 .homepage-banner {
   background-size: cover;
   color: $white;
-  padding: 10rem;
-  padding-top: 20rem;
+  padding: 5rem;
+  padding-top: 30rem;
 }
 
 .homepage-banner-content {
@@ -20,10 +15,16 @@
   position: relative;
 
   .homepage-banner-content-text {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translate(-50%, -50%);
-    width: 250px;
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-top: 2rem;
+    }
   }
 }
