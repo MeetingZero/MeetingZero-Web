@@ -16,9 +16,9 @@ const HomePage = () => {
         <img src={logoImg} className="img-fluid" style={{width: 100}} alt="Logo" />
 
         <div>
-          <h1 className="text-primary font-weight-normal ml-2 d-none d-xl-block">MeetingZero</h1>
+          <h1 className="text-primary font-weight-normal ml-2 homepage-logo-text">MeetingZero</h1>
 
-          <h3 className="h5 ml-4 d-none d-xl-block text-primary font-weight-normal">Your team’s digital facilitator for all your real-time collaborative needs.</h3>
+          <h3 className="h5 ml-2 ml-lg-4 text-primary font-weight-normal homepage-logo-subtext">Your team’s digital meeting facilitator.</h3>
         </div>
       </div>
 
@@ -33,7 +33,7 @@ const HomePage = () => {
 
           <div className="mb-2 text-center text-md-left">
             <Link to="/sign-up" className="btn btn-primary px-5">
-              Sign Up
+              Sign up
             </Link>
           </div>
 

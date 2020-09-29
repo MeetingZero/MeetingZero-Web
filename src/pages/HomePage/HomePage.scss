@@ -28,3 +28,15 @@
     }
   }
 }
+
+.homepage-logo-text {
+  @include media-breakpoint-down(md) {
+    font-size: 2.5rem;
+  }
+}
+
+.homepage-logo-subtext {
+  @include media-breakpoint-down(md) {
+    font-size: 1.5rem;
+  }
+}
