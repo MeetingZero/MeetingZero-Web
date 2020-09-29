@@ -184,7 +184,7 @@ const HomePage = () => {
         <div className="row">
           <div className="col-md-4 mt-3"></div>
 
-          <div className="col-md-4">
+          <div className="col-md-4 mt-3">
             <div className="d-flex align-items-center">
               <div className="h3">
                 7
@@ -196,7 +196,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="col-md-4"></div>
+          <div className="col-md-4 mt-3"></div>
         </div>
       </div>
 
