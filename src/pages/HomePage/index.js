@@ -18,7 +18,7 @@ const HomePage = () => {
         <div>
           <h1 className="text-primary font-weight-normal ml-2 homepage-logo-text">MeetingZero</h1>
 
-          <h3 className="h5 ml-2 ml-lg-4 text-primary font-weight-normal homepage-logo-subtext">Your team’s digital meeting facilitator.</h3>
+          <h3 className="h5 ml-2 ml-lg-4 text-primary font-weight-normal homepage-logo-subtext">Your team’s digital meeting facilitator</h3>
         </div>
       </div>
 
