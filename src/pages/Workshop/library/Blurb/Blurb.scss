@@ -17,19 +17,33 @@
 }
 
 .blurb-callout {
-  width: 250px;
   position: absolute;
   bottom: 100%;
   left: calc(100% - 20px);
   padding: 2rem;
   padding-top: 4rem;
-  text-align: center;
   border-radius: $border-radius;
   z-index: 9999;
 
   &.blurb-callout-danger {
+    width: 250px;
     background-color: $danger;
     color: $white;
+    text-align: center;
+
+    .blurb-callout-button {
+      color: $white;
+    }
+  }
+
+  &.blurb-callout-success {
+    width: 450px;
+    background-color: $white;
+    border: $success 2px solid;
+
+    .blurb-callout-button {
+      color: $danger;
+    }
   }
 }
 
@@ -39,7 +53,6 @@
   right: 10px;
   background: none;
   border: none;
-  color: $white;
   text-align: right;
   font-size: 1.4rem;
   padding: 0;

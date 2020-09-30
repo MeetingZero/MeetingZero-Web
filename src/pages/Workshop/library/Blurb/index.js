@@ -37,6 +37,8 @@ const Blurb = ({ title, text }) => {
       blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionNotAllowed");
     }
 
+    console.log(blurbCalloutViewed);
+
     if (blurbCalloutViewed && blurbCalloutViewed[workshop.workshop_token]) {
       setShowBlurbCallout(false);
     } else {
@@ -46,14 +48,20 @@ const Blurb = ({ title, text }) => {
 
   const handleHideBlurbCallout = () => {
     if (discussionAllowed) {
+      const blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionAllowed") || {};
+
       cookies.set("blurbCalloutViewedDiscussionAllowed", {
+        ...blurbCalloutViewed,
         [workshop.workshop_token]: true
       }, {
         path: "/",
         expires: moment().add(1, "month").toDate()
       });
     } else {
+      const blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionNotAllowed") || {};
+
       cookies.set("blurbCalloutViewedDiscussionNotAllowed", {
+        ...blurbCalloutViewed,
         [workshop.workshop_token]: true
       }, {
         path: "/",
@@ -83,11 +91,27 @@ const Blurb = ({ title, text }) => {
           <img
             src={talking}
             ref={discussionAllowedRef}
-            onMouseEnter={() => setShowDiscussionAllowedTooltip(true)}
+            onMouseEnter={() => {
+              handleHideBlurbCallout();
+              setShowDiscussionAllowedTooltip(true);
+            }}
             onMouseLeave={() => setShowDiscussionAllowedTooltip(false)}
             className="blurb-icon ml-auto mb-1"
             alt="Discussion Allowed"
           />
+
+          {showBlurbCallout ?
+            <div className="blurb-callout blurb-callout-success">
+              <button
+                onClick={handleHideBlurbCallout}
+                className="blurb-callout-button"
+              >
+                Close
+              </button>
+
+              As the host, please collaborate with all participants on this step. This will ensure that everyone is on the same page and moving forward together. As the host, you need to ensure the conversation remains focused and guided.
+            </div>
+          : null}
         </React.Fragment>
       :
         <React.Fragment>
@@ -117,7 +141,10 @@ const Blurb = ({ title, text }) => {
 
           {showBlurbCallout ?
             <div className="blurb-callout blurb-callout-danger">
-              <button className="blurb-callout-button">
+              <button
+                onClick={handleHideBlurbCallout}
+                className="blurb-callout-button"
+              >
                 Close
               </button>
 
