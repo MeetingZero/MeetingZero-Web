@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import StarVoter from 'pages/Workshop/library/StarVoter';
+import ProTip from 'library/ProTip';
 
 import * as reframeProblemActions from 'app/workshop/stages/reframe_problem/actions';
 import reframeProblemSlice from 'app/workshop/stages/reframe_problem/slice';
@@ -41,6 +42,10 @@ const Vote = () => {
         votingItems={allReframeProblemResponses}
         modelName="ReframeProblemResponse"
         handleUpdateData={updateReframeProblemResponses}
+      />
+
+      <ProTip
+        mainText="If you're stuck, go with your gut."
       />
     </React.Fragment>
   );
