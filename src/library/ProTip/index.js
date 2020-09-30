@@ -8,9 +8,16 @@ import './ProTip.scss';
 
 const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", calloutText, position = "bottom-right" }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [shouldBounce, setShouldBounce] = React.useState(true);
 
   return (
-    <div onClick={() => setIsOpen(!isOpen)} className={cn("pro-tip-lightbulb-container", position)}>
+    <div
+      onClick={() => {
+        setIsOpen(!isOpen);
+        setShouldBounce(false);
+      }}
+      className={cn("pro-tip-lightbulb-container", position)}
+    >
       <div className="position-relative">
         <CSSTransition
           in={isOpen}
@@ -57,7 +64,7 @@ const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", cal
 
         <img
           src={lightBulb}
-          className="pro-tip-lightbulb"
+          className={cn("pro-tip-lightbulb", shouldBounce ? "bounce" : null)}
           alt="Pro Tip Lightbulb"
         />
       </div>
