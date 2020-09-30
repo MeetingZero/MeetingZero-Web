@@ -21,13 +21,16 @@
   position: absolute;
   bottom: 100%;
   left: calc(100% - 20px);
-  background-color: $danger;
   padding: 2rem;
   padding-top: 4rem;
-  color: $white;
   text-align: center;
   border-radius: $border-radius;
   z-index: 9999;
+
+  &.blurb-callout-danger {
+    background-color: $danger;
+    color: $white;
+  }
 }
 
 .blurb-callout-button {
