@@ -70,6 +70,14 @@ const Blurb = ({ title, text }) => {
         </React.Fragment>
       }
 
+      <div className="blurb-callout">
+        <button className="blurb-callout-button">
+          Close
+        </button>
+
+        This icon means no talking during this step.
+      </div>
+
       <div className="border border-primary p-2 rounded shadow">
         <div className="text-muted mb-1">
           {title}
