@@ -37,8 +37,6 @@ const Blurb = ({ title, text }) => {
       blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionNotAllowed");
     }
 
-    console.log(blurbCalloutViewed);
-
     if (blurbCalloutViewed && blurbCalloutViewed[workshop.workshop_token]) {
       setShowBlurbCallout(false);
     } else {
