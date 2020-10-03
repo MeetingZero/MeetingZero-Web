@@ -86,8 +86,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "deploy-staging": "REACT_APP_ENV=staging npm run build && aws s3 sync ./build s3://meetingzero-app-staging --acl public-read",
-    "deploy-production": "npm run build && aws s3 sync ./build s3://meetingzero-app-production --acl public-read"
+    "deploy-staging": "REACT_APP_ENV=staging npm run build && aws s3 sync ./build s3://meetingzero-staging --acl public-read",
+    "deploy-production": "npm run build && aws s3 sync ./build s3://meetingzero-production --acl public-read"
   },
   "eslintConfig": {
     "extends": "react-app"
