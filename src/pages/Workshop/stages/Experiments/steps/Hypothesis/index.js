@@ -10,6 +10,7 @@ import ProTip from 'library/ProTip';
 import TextArea from 'library/TextArea';
 
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
+import * as workshopActions from 'app/workshop/actions';
 import * as votingActions from 'app/voting/actions';
 
 const Hypothesis = () => {
@@ -20,6 +21,7 @@ const Hypothesis = () => {
   const [weBelieveTextCharCountExceeded, setWeBelieveTextCharCountExceeded] = React.useState(false);
   const [willResultInTextCharCountExceeded, setWillResultInTextCharCountExceeded] = React.useState(false);
   const [succeededWhenTextCharCountExceeded, setSucceededWhenTextCharCountExceeded] = React.useState(false);
+  const [showConfirmSubmission, setShowConfirmSubmission] = React.useState(false);
 
   const [weBelieveText, setWeBelieveText] = React.useState("");
   const [willResultInText, setWillResultInText] = React.useState("");
@@ -47,7 +49,24 @@ const Hypothesis = () => {
         formData.will_result_in_text,
         formData.succeeded_when_text
       )
-    );
+    )
+    .then(() => {
+      setShowConfirmSubmission(true);
+    });
+  }
+
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
+
+  const currentWorkshopStep = useSelector((state) => {
+    return state.Workshop.currentWorkshopStep;
+  });
+
+  const completeWorkshopStep = () => {
+    const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
+
+    dispatch(workshopActions.completeWorkshopStep(workshop.workshop_token, workshopStageStepId));
   }
 
   const isLoading = useSelector((state) => {
@@ -56,10 +75,6 @@ const Hypothesis = () => {
 
   const hypothesis = useSelector((state) => {
     return state.Experiments.hypothesis;
-  });
-
-  const workshop = useSelector((state) => {
-    return state.Workshop.workshop;
   });
 
   const starVotingResults = useSelector((state) => {
@@ -87,6 +102,13 @@ const Hypothesis = () => {
 
   return (
     <React.Fragment>
+      {showConfirmSubmission === true ?
+        <ConfirmSubmissionModal
+          setShowConfirmSubmission={setShowConfirmSubmission}
+          completeWorkshopStep={completeWorkshopStep}
+        />
+      : null}
+
       <h1 className="h2 mt-5">Experiments</h1>
 
       <h5 className="mb-4">Create a hypothesis that you can test in less than 4 weeks (ideally 1-2 weeks).</h5>
@@ -221,6 +243,46 @@ const Hypothesis = () => {
         </div>
       }
     </React.Fragment>
+  );
+}
+
+const ConfirmSubmissionModal = ({
+  setShowConfirmSubmission,
+  completeWorkshopStep
+}) => {
+  return (
+    <div className="simple-modal-overlay">
+      <div className="simple-modal-wrapper">
+        <h4 className="text-center">Submit?</h4>
+
+        <div className="small text-muted text-center mb-3">
+          You won't be able to edit this
+        </div>
+
+        <div className="row mb-2">
+          <div className="col-6">
+            <button
+              onClick={() => setShowConfirmSubmission(false)}
+              className="btn btn-block btn-link"
+            >
+              No
+            </button>
+          </div>
+
+          <div className="col-6">
+            <button
+              onClick={() => {
+                setShowConfirmSubmission(false);
+                completeWorkshopStep();
+              }}
+              className="btn btn-block btn-warning btn-square"
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
