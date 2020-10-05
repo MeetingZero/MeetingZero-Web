@@ -267,7 +267,7 @@ const HomePage = () => {
         </div>
 
         <a
-          href="https://meetingzero-assets.s3.us-west-1.amazonaws.com/meetingzero_terms.pdf"
+          href="https://meetingzero-assets.s3.us-west-1.amazonaws.com/meetingzero_privacy_policy.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white d-block text-center text-decoration-underline"

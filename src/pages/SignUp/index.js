@@ -9,6 +9,8 @@ import Button from 'library/Button';
 import * as userActions from 'app/user/actions';
 import * as Regex from 'constants/regex';
 
+import "./SignUp.scss";
+
 const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -92,13 +94,29 @@ const SignUp = () => {
             </div>
 
             <div className="mb-4">
-              <input ref={register} type="password" name="confirm_password" className="form-control" placeholder="Confirm password" />
+              <input ref={register({ required: true })} type="password" name="confirm_password" className="form-control" placeholder="Confirm password" />
 
               {errors.confirm_password ?
                 <div className="small text-danger">
                   Passwords must match
                 </div>
               : null}
+            </div>
+
+            <div className="mb-4">
+              <div className="form-group form-check terms-agree-checkbox">
+                <input
+                  ref={register({ required: true })}
+                  type="checkbox"
+                  name="terms_agree"
+                  className="form-check-input"
+                  id="terms-agree"
+                />
+
+                <label className={cn("form-check-label", errors.terms_agree ? "text-danger" : null)} htmlFor="terms-agree">
+                  I agree to MeetingZero's <a href="https://meetingzero-assets.s3.us-west-1.amazonaws.com/meetingzero_privacy_policy.pdf" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>
+                </label>
+              </div>
             </div>
 
             <div className="text-center">
