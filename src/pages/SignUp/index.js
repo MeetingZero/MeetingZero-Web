@@ -114,7 +114,7 @@ const SignUp = () => {
                 />
 
                 <label className={cn("form-check-label", errors.terms_agree ? "text-danger" : null)} htmlFor="terms-agree">
-                  I agree to MeetingZero's <a href="https://meetingzero-assets.s3.us-west-1.amazonaws.com/meetingzero_privacy_policy.pdf" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>
+                  I agree to MeetingZero's <a href="https://meetingzero-assets.s3.us-west-1.amazonaws.com/meetingzero_terms_of_use.pdf" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>
                 </label>
               </div>
             </div>
