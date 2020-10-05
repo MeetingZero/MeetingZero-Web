@@ -266,7 +266,12 @@ const HomePage = () => {
           &copy; MeetingZero - All rights reserved.
         </div>
 
-        <a href="https://meetingzero-assets.s3.us-west-1.amazonaws.com/meetingzero_terms.pdf" className="text-white d-block text-center text-decoration-underline">
+        <a
+          href="https://meetingzero-assets.s3.us-west-1.amazonaws.com/meetingzero_terms.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white d-block text-center text-decoration-underline"
+        >
           Privacy Policy
         </a>
       </div>
