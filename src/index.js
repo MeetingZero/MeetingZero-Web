@@ -10,6 +10,9 @@ import 'assets/vendor/bootstrap/bootstrap.scss';
 // Animate.css library
 import 'animate.css';
 
+// Common application SCSS
+import 'assets/scss/common.scss';
+
 import HomePage from 'pages/HomePage';
 import LoadingScreen from 'library/LoadingScreen';
 import Restricted from 'routes/Restricted';

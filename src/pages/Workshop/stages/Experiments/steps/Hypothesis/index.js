@@ -9,8 +9,6 @@ import CharacterCounter from 'library/CharacterCounter';
 import ProTip from 'library/ProTip';
 import TextArea from 'library/TextArea';
 
-import './Hypothesis.scss';
-
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import * as workshopActions from 'app/workshop/actions';
 import * as votingActions from 'app/voting/actions';

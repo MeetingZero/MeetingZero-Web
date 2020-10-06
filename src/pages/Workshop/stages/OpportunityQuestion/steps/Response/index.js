@@ -11,8 +11,6 @@ import ProTip from 'library/ProTip';
 import RingTimer from 'library/RingTimer';
 import TextArea from 'library/TextArea';
 
-import "./Response.scss";
-
 import * as opportunityQuestionActions from 'app/workshop/stages/opportunity_question/actions';
 import * as votingActions from 'app/voting/actions';
 import * as workshopActions from 'app/workshop/actions';
