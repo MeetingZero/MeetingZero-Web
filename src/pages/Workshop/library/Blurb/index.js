@@ -27,34 +27,29 @@ const Blurb = ({ title, text }) => {
   const [showNoTalkingTooltip, setShowNoTalkingTooltip] = React.useState(false);
   const [showDiscussionAllowedTooltip, setShowDiscussionAllowedTooltip] = React.useState(false);
   const [showBlurbCallout, setShowBlurbCallout] = React.useState(false);
+  const [showBCDA, setShowBCDA] = React.useState(true);
 
   React.useEffect(() => {
-    let blurbCalloutViewed;
-
     if (discussionAllowed) {
-      blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionAllowed");
+      if (showBCDA) {
+        setShowBlurbCallout(true);
+      } else {
+        setShowBlurbCallout(false);
+      }
     } else {
-      blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionNotAllowed");
-    }
+      const blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionNotAllowed");
 
-    if (blurbCalloutViewed && blurbCalloutViewed[workshop.workshop_token]) {
-      setShowBlurbCallout(false);
-    } else {
-      setShowBlurbCallout(true);
+      if (blurbCalloutViewed && blurbCalloutViewed[workshop.workshop_token]) {
+        setShowBlurbCallout(false);
+      } else {
+        setShowBlurbCallout(true);
+      }
     }
-  }, [discussionAllowed, workshop.workshop_token]);
+  }, [discussionAllowed, workshop.workshop_token, showBCDA]);
 
   const handleHideBlurbCallout = () => {
     if (discussionAllowed) {
-      const blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionAllowed") || {};
-
-      cookies.set("blurbCalloutViewedDiscussionAllowed", {
-        ...blurbCalloutViewed,
-        [workshop.workshop_token]: true
-      }, {
-        path: "/",
-        expires: moment().add(1, "month").toDate()
-      });
+      setShowBCDA(false);
     } else {
       const blurbCalloutViewed = cookies.get("blurbCalloutViewedDiscussionNotAllowed") || {};
 
@@ -98,7 +93,7 @@ const Blurb = ({ title, text }) => {
             alt="Discussion Allowed"
           />
 
-          {showBlurbCallout ?
+          {showBlurbCallout && workshop.is_host ?
             <div className="blurb-callout blurb-callout-success">
               <button
                 onClick={handleHideBlurbCallout}
