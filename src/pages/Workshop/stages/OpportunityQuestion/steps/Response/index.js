@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import { debounce } from 'lodash';
 
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
@@ -14,6 +15,7 @@ import TextArea from 'library/TextArea';
 import * as opportunityQuestionActions from 'app/workshop/stages/opportunity_question/actions';
 import * as votingActions from 'app/voting/actions';
 import * as workshopActions from 'app/workshop/actions';
+import { cableConsumer } from 'config/cableConsumer';
 
 const Response = ({ showBathroomBreak }) => {
   const params = useParams();
@@ -24,6 +26,8 @@ const Response = ({ showBathroomBreak }) => {
   const [responseText, setResponseText] = React.useState("");
   const [showConfirmSubmission, setShowConfirmSubmission] = React.useState(false);
   const [shouldShowBathroomBreak, setShouldShowBathroomBreak] = React.useState(false);
+  const [workshopRelayChannel, setWorkshopRelayChannel] = React.useState(null);
+  const [hostResponseText, setHostResponseText] = React.useState(null);
 
   React.useEffect(() => {
     if (showBathroomBreak === true) {
@@ -99,6 +103,36 @@ const Response = ({ showBathroomBreak }) => {
     }
   }, [opportunityQuestionResponse, setValue]);
 
+  React.useEffect(() => {
+    const workshopRelayChannelInstance = cableConsumer(params.workshop_token)
+    .subscriptions
+    .create({
+      channel: 'WorkshopRelayChannel',
+      workshop_token: params.workshop_token
+    }, {
+      received: (data) => {
+        setHostResponseText(data.hostResponseText);
+      },
+      connected: () => {
+        console.log("WORKSHOP RELAY CONNECTED!");
+
+        setWorkshopRelayChannel(workshopRelayChannelInstance);
+      }
+    });
+  }, [params.workshop_token, dispatch]);
+
+  const debouncedRelay = debounce(() => {
+    return workshopRelayChannel.send({ hostResponseText: responseText });
+  }, 1000);
+
+  const handleUserInput = (userInput) => {
+    setResponseText(userInput);
+
+    if (workshopRelayChannel) {
+      return debouncedRelay();
+    }
+  }
+
   return (
     <React.Fragment>
       {shouldShowBathroomBreak === true ?
@@ -114,7 +148,7 @@ const Response = ({ showBathroomBreak }) => {
 
       <h1 className="h2 mt-5">Opportunity Question</h1>
 
-      <h5 className="mb-4">As the host, you will propose the first opportunity question. The group will then discuss your response.</h5>
+      <h5 className="mb-4">The host will propose the first opportunity question. The group will then discuss the response.</h5>
 
       {starVotingResults ?
         <blockquote className="mb-5">
@@ -141,7 +175,7 @@ const Response = ({ showBathroomBreak }) => {
               name="response_text"
               placeholder="Start by typing How Might We..."
               className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
-              onUserInput={(userInput) => setResponseText(userInput)}
+              onUserInput={handleUserInput}
             />
 
             {errors.response_text ?
@@ -175,9 +209,17 @@ const Response = ({ showBathroomBreak }) => {
           />
         </React.Fragment>
       :
-        <div className="jumbotron text-center bg-info border border-primary">
-          <h4>The host will write out the opportunity question, and then the group will discuss the host's proposed response.</h4>
-        </div>
+        <React.Fragment>
+          {hostResponseText ?
+            <div className="border border-info rounded p-1 mb-5">
+                {hostResponseText}
+            </div>
+          : null}
+
+          <div className="jumbotron text-center bg-info border border-primary">
+            <h4>The host will write out the opportunity question, and then the group will discuss the host's proposed response.</h4>
+          </div>
+        </React.Fragment>
       }
     </React.Fragment>
   );
