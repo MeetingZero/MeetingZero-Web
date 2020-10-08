@@ -121,17 +121,15 @@ const Response = ({ showBathroomBreak }) => {
     });
   }, [params.workshop_token, dispatch]);
 
-  const debouncedRelay = debounce(() => {
+  const debouncedRelay = React.useCallback(debounce(() => {
     return workshopRelayChannel.send({ hostResponseText: responseText });
-  }, 1000);
+  }, 1000), [workshopRelayChannel, responseText]);
 
-  const handleUserInput = (userInput) => {
-    setResponseText(userInput);
+  React.useEffect(() => {
+    debouncedRelay();
 
-    if (workshopRelayChannel) {
-      return debouncedRelay();
-    }
-  }
+    return debouncedRelay.cancel;
+  }, [debouncedRelay, responseText]);
 
   return (
     <React.Fragment>
@@ -175,7 +173,7 @@ const Response = ({ showBathroomBreak }) => {
               name="response_text"
               placeholder="Start by typing How Might We..."
               className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
-              onUserInput={handleUserInput}
+              onUserInput={(userInput) => setResponseText(userInput)}
             />
 
             {errors.response_text ?
