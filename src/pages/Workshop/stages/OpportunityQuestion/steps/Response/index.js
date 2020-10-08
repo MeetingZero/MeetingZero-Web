@@ -28,6 +28,7 @@ const Response = ({ showBathroomBreak }) => {
   const [shouldShowBathroomBreak, setShouldShowBathroomBreak] = React.useState(false);
   const [workshopRelayChannel, setWorkshopRelayChannel] = React.useState(null);
   const [hostResponseText, setHostResponseText] = React.useState(null);
+  const [showJumbotron, setShowJumbotron] = React.useState(true);
 
   React.useEffect(() => {
     if (showBathroomBreak === true) {
@@ -214,9 +215,18 @@ const Response = ({ showBathroomBreak }) => {
             </div>
           : null}
 
-          <div className="jumbotron text-center bg-info border border-primary">
-            <h4>The host will write out the opportunity question, and then the group will discuss the host's proposed response.</h4>
-          </div>
+          {showJumbotron ?
+            <div className="jumbotron text-center bg-info border border-primary pt-0">
+              <button
+                onClick={() => setShowJumbotron(false)}
+                className="btn btn-block btn-link text-right p-1"
+              >
+                Close
+              </button>
+
+              <h4>The host will write out the opportunity question, and then the group will discuss the host's proposed response.</h4>
+            </div>
+          : null}
         </React.Fragment>
       }
     </React.Fragment>
