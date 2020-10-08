@@ -52,7 +52,7 @@ const PastWorkshops = () => {
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
-        <div className="col-3 vh-100 bg-info">
+        <div className="col-3 vh-100 bg-info overflow-y-scroll">
           <Link to="/dashboard" className="d-flex align-items-end my-3 text-decoration-none">
             <img src={logoImg} className="img-fluid d-block" style={{width: 80}} alt="Logo" />
 
