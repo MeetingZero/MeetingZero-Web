@@ -136,8 +136,8 @@ const PastWorkshops = lazy(() => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Sentry.ErrorBoundary fallback={<ErrorPage />}>
+    <Sentry.ErrorBoundary fallback={<ErrorPage />}>
+      <Provider store={store}>
         <Router>
           <Suspense fallback={<LoadingScreen />}>
             <Switch>
@@ -197,8 +197,8 @@ ReactDOM.render(
             </Switch>
           </Suspense>
         </Router>
-      </Sentry.ErrorBoundary>
-    </Provider>
+      </Provider>
+    </Sentry.ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );
