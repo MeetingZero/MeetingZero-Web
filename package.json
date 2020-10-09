@@ -9,6 +9,8 @@
     "@babel/core": "7.9.0",
     "@rails/actioncable": "^6.0.3-2",
     "@reduxjs/toolkit": "^1.1.0",
+    "@sentry/react": "^5.25.0",
+    "@sentry/tracing": "^5.25.0",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

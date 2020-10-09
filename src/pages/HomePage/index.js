@@ -9,7 +9,6 @@ import largeGreenCheckImg from "assets/images/large_green_check.png";
 import largeRedXImg from "assets/images/large_red_x.svg";
 
 const HomePage = () => {
-
   return (
     <div className="container-fluid px-0">
       <div className="d-flex align-items-end mb-lg-3 text-decoration-none p-3">
