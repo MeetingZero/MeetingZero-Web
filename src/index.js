@@ -24,14 +24,17 @@ import * as Misc from 'constants/misc';
 import { SENTRY_URL } from 'constants/endpoints';
 
 // Sentry.io integration for error catching
+// Applicable for production and staging only
 
-Sentry.init({
-  dsn: SENTRY_URL,
-  integrations: [
-    new Integrations.BrowserTracing()
-  ],
-  tracesSampleRate: 1.0
-});
+if (process.env.NODE_ENV === 'production' || process.env.REACT_APP_ENV === 'staging') {
+  Sentry.init({
+    dsn: SENTRY_URL,
+    integrations: [
+      new Integrations.BrowserTracing()
+    ],
+    tracesSampleRate: 1.0
+  });
+}
 
 // Application pages
 
