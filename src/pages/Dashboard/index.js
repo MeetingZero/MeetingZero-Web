@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import LogoSplitLayout from 'layouts/LogoSplit';
@@ -13,8 +12,6 @@ import puzzleImg from 'assets/images/puzzle.svg';
 import twinsImg from 'assets/images/twins.svg';
 
 const Dashboard = () => {
-  const history = useHistory();
-
   const currentUser = useSelector((state) => {
     return state.User.currentUser;
   });
@@ -22,7 +19,7 @@ const Dashboard = () => {
   const handleSignOut = () => {
     window.localStorage.removeItem("authToken");
 
-    history.push("/");
+    window.location.href = "/";
   }
 
   return (
