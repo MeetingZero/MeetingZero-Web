@@ -49,13 +49,14 @@ export const saveVotingResult = (workshopToken, resourceModelName, resourceId, v
   }
 }
 
-export const saveExclusiveVote = (workshopToken, resourceId, resourceModelName) => {
+export const saveExclusiveVote = (workshopToken, resourceId, otherResourceId, resourceModelName) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('SAVE_VOTE'));
 
     return axiosInstance()
     .post(`/api/v1/workshops/${workshopToken}/star_voting_votes`, {
       resource_id: resourceId,
+      other_resource_id: otherResourceId,
       resource_model_name: resourceModelName,
       vote_number: 5,
       save_exclusive: true

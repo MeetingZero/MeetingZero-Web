@@ -4,6 +4,8 @@ import store from './app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 
 // Bootstrap library
 import 'assets/vendor/bootstrap/bootstrap.scss';
@@ -16,8 +18,23 @@ import 'assets/scss/common.scss';
 import HomePage from 'pages/HomePage';
 import LoadingScreen from 'library/LoadingScreen';
 import Restricted from 'routes/Restricted';
+import ErrorPage from 'pages/ErrorPage';
 
 import * as Misc from 'constants/misc';
+import { SENTRY_URL } from 'constants/endpoints';
+
+// Sentry.io integration for error catching
+// Applicable for production and staging only
+
+if (process.env.NODE_ENV === 'production' || process.env.REACT_APP_ENV === 'staging') {
+  Sentry.init({
+    dsn: SENTRY_URL,
+    integrations: [
+      new Integrations.BrowserTracing()
+    ],
+    tracesSampleRate: 1.0
+  });
+}
 
 // Application pages
 
@@ -119,67 +136,69 @@ const PastWorkshops = lazy(() => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <Suspense fallback={<LoadingScreen />}>
-          <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-
-            <Route exact path='/login'>
-              <Login />
-            </Route>
-
-            <Route exact path='/sign-up'>
-              <SignUp />
-            </Route>
-
-            <Route exact path='/signup-confirmation'>
-              <SignUpConfirmation />
-            </Route>
-
-            <Route exact path='/forgot-password'>
-              <ForgotPassword />
-            </Route>
-
-            <Route exact path='/reset-password'>
-              <ResetPassword />
-            </Route>
-
-            <Restricted>
-              <Route exact path='/dashboard'>
-                <Dashboard />
+    <Sentry.ErrorBoundary fallback={<ErrorPage />}>
+      <Provider store={store}>
+        <Router>
+          <Suspense fallback={<LoadingScreen />}>
+            <Switch>
+              <Route exact path="/">
+                <HomePage />
               </Route>
 
-              <Route exact path='/join-workshop'>
-                <JoinWorkshop />
+              <Route exact path='/login'>
+                <Login />
               </Route>
 
-              <Route exact path='/create-workshop'>
-                <CreateWorkshop />
+              <Route exact path='/sign-up'>
+                <SignUp />
               </Route>
 
-              <Route exact path='/create-workshop-confirmation'>
-                <CreateWorkshopConfirmation />
+              <Route exact path='/signup-confirmation'>
+                <SignUpConfirmation />
               </Route>
 
-              <Route exact path='/workshop/:workshop_token/start'>
-                <WorkshopStart />
+              <Route exact path='/forgot-password'>
+                <ForgotPassword />
               </Route>
 
-              <Route exact path='/workshop/:workshop_token'>
-                <Workshop />
+              <Route exact path='/reset-password'>
+                <ResetPassword />
               </Route>
 
-              <Route exact path='/past-workshops/:workshop_token?'>
-                <PastWorkshops />
-              </Route>
-            </Restricted>
-          </Switch>
-        </Suspense>
-      </Router>
-    </Provider>
+              <Restricted>
+                <Route exact path='/dashboard'>
+                  <Dashboard />
+                </Route>
+
+                <Route exact path='/join-workshop'>
+                  <JoinWorkshop />
+                </Route>
+
+                <Route exact path='/create-workshop'>
+                  <CreateWorkshop />
+                </Route>
+
+                <Route exact path='/create-workshop-confirmation'>
+                  <CreateWorkshopConfirmation />
+                </Route>
+
+                <Route exact path='/workshop/:workshop_token/start'>
+                  <WorkshopStart />
+                </Route>
+
+                <Route exact path='/workshop/:workshop_token'>
+                  <Workshop />
+                </Route>
+
+                <Route exact path='/past-workshops/:workshop_token?'>
+                  <PastWorkshops />
+                </Route>
+              </Restricted>
+            </Switch>
+          </Suspense>
+        </Router>
+      </Provider>
+    </Sentry.ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );

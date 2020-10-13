@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import "./HomePage.scss";
 import logoImg from "assets/images/logo.svg";
@@ -8,7 +9,28 @@ import handImg from "assets/images/hand_image.png";
 import largeGreenCheckImg from "assets/images/large_green_check.png";
 import largeRedXImg from "assets/images/large_red_x.svg";
 
+import * as userActions from 'app/user/actions';
+
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  // If there is an auth token, check it and redirect to dashboard
+  React.useEffect(() => {
+    if (window.localStorage.getItem("authToken")) {
+      dispatch(userActions.getUser());
+    }
+  }, [dispatch]);
+
+  const currentUser = useSelector((state) => {
+    return state.User.currentUser;
+  });
+
+  React.useEffect(() => {
+    if (currentUser && currentUser.loggedIn === true) {
+      return history.push("/dashboard");
+    }
+  }, [currentUser, history]);
 
   return (
     <div className="container-fluid px-0">

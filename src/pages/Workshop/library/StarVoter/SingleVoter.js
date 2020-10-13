@@ -10,12 +10,13 @@ const SingleVoter = ({ workshopToken, votingItems, modelName, handleUpdateData }
   const dispatch = useDispatch();
 
   const submitVote = (votingItem) => {
-    if (votingItem.star_voting_vote === null) {
+    if (votingItem.star_voting_vote === null || (votingItem.star_voting_vote && votingItem.star_voting_vote.vote_number === 1)) {
       dispatch(
         votingActions
         .saveExclusiveVote(
           workshopToken,
           votingItem.id,
+          votingItems.filter(vi => vi.id !== votingItem.id)[0].id,
           modelName
         )
       )
@@ -30,7 +31,7 @@ const SingleVoter = ({ workshopToken, votingItems, modelName, handleUpdateData }
   return (
     <React.Fragment>
       {votingItems.map((votingItem) => {
-        const isSelected = votingItem.star_voting_vote ? true : false;
+        const isSelected = votingItem.star_voting_vote && votingItem.star_voting_vote.vote_number === 5 ? true : false;
 
         return (
           <div key={votingItem.id} className="row mb-4">
