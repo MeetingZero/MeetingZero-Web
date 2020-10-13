@@ -8,6 +8,7 @@ import LogoSplitLayout from 'layouts/LogoSplit';
 import Button from 'library/Button';
 import * as userActions from 'app/user/actions';
 import * as Regex from 'constants/regex';
+import { createErrorString } from 'helpers/formatErrorMessages';
 
 import "./SignUp.scss";
 
@@ -15,6 +16,8 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { register, handleSubmit, errors, setError, setValue } = useForm();
+
+  const [signupError, setSignupError] = React.useState(null);
 
   React.useEffect(() => {
     const emailAddress = window.localStorage.getItem("signupEmail");
@@ -38,7 +41,10 @@ const SignUp = () => {
       .sessionStorage
       .setItem("signUpEmail", formData.email);
 
-      history.push("/signup-confirmation");
+      return history.push("/signup-confirmation");
+    })
+    .catch((err) => {
+      return setSignupError(err);
     });
   }
 
@@ -54,6 +60,10 @@ const SignUp = () => {
         </div>
 
         <div className="container-small absolute-center-y">
+          <div className="text-danger mb-3">
+            {createErrorString(signupError)}
+          </div>
+
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row mb-4">
               <div className="col-md-6 mb-4 mb-md-0">
