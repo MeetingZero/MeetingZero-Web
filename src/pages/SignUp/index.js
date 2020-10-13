@@ -64,7 +64,7 @@ const SignUp = () => {
             {createErrorString(signupError)}
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="mb-2">
             <div className="row mb-4">
               <div className="col-md-6 mb-4 mb-md-0">
                 <input ref={register({ required: true })} type="text" name="first_name" className="form-control" placeholder="First name" />
@@ -133,6 +133,22 @@ const SignUp = () => {
               <Button className="btn btn-primary px-5" text="Sign up" type="submit" loading={isLoading} />
             </div>
           </form>
+
+          <div className="text-center bottom-terms">
+            <i className="fa fa-lock mb-1" />
+
+            <div>
+              We will never sell your data or use it to target you
+            </div>
+
+            <div>
+              Everything you post in MeetingZero is secure and will never be public
+            </div>
+
+            <div>
+              You shall not access the Site in order to build a similar or competitive website, product, or service
+            </div>
+          </div>
         </div>
       </div>
     </LogoSplitLayout>

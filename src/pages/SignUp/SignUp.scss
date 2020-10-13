@@ -1,8 +1,19 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
 .terms-agree-checkbox {
   padding-left: 2.5rem;
 
   input {
     margin-left: -2.5rem;
     margin-top: .5rem;
+  }
+}
+
+.bottom-terms {
+  i {
+    display: block;
+    color: $primary;
+    font-size: 3rem;
   }
 }
