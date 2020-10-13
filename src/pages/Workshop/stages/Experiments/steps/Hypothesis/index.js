@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { debounce } from 'lodash';
 
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
@@ -12,6 +13,7 @@ import TextArea from 'library/TextArea';
 import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import * as workshopActions from 'app/workshop/actions';
 import * as votingActions from 'app/voting/actions';
+import { cableConsumer } from 'config/cableConsumer';
 
 const Hypothesis = () => {
   const params = useParams();
@@ -22,6 +24,8 @@ const Hypothesis = () => {
   const [willResultInTextCharCountExceeded, setWillResultInTextCharCountExceeded] = React.useState(false);
   const [succeededWhenTextCharCountExceeded, setSucceededWhenTextCharCountExceeded] = React.useState(false);
   const [showConfirmSubmission, setShowConfirmSubmission] = React.useState(false);
+  const [workshopRelayChannel, setWorkshopRelayChannel] = React.useState(null);
+  const [showJumbotron, setShowJumbotron] = React.useState(true);
 
   const [weBelieveText, setWeBelieveText] = React.useState("");
   const [willResultInText, setWillResultInText] = React.useState("");
@@ -99,6 +103,50 @@ const Hypothesis = () => {
       setValue("succeeded_when_text", hypothesis.succeeded_when_text);
     }
   }, [hypothesis, setValue]);
+
+  React.useEffect(() => {
+    const workshopRelayChannelInstance = cableConsumer(params.workshop_token)
+    .subscriptions
+    .create({
+      channel: 'WorkshopRelayChannel',
+      workshop_token: params.workshop_token
+    }, {
+      received: (data) => {
+        if (workshop.is_host) { return; }
+
+        if (data.weBelieveText) {
+          setWeBelieveText(data.weBelieveText);
+        }
+
+        if (data.willResultInText) {
+          setWillResultInText(data.willResultInText);
+        }
+
+        if (data.succeededWhenText) {
+          setSucceededWhenText(data.succeededWhenText);
+        }
+      },
+      connected: () => {
+        console.log("WORKSHOP RELAY CONNECTED!");
+
+        setWorkshopRelayChannel(workshopRelayChannelInstance);
+      }
+    });
+  }, [params.workshop_token, workshop.is_host]);
+
+  const debouncedRelay = React.useCallback(debounce(() => {
+    return workshopRelayChannel.send({
+      weBelieveText,
+      willResultInText,
+      succeededWhenText
+    });
+  }, 1000), [workshopRelayChannel, weBelieveText, willResultInText, succeededWhenText]);
+
+  React.useEffect(() => {
+    debouncedRelay();
+
+    return debouncedRelay.cancel;
+  }, [debouncedRelay, weBelieveText, willResultInText, succeededWhenText]);
 
   return (
     <React.Fragment>
@@ -238,9 +286,49 @@ const Hypothesis = () => {
           />
         </React.Fragment>
       :
-        <div className="jumbotron text-center bg-info border border-primary">
-          <h4>The group will break silence and discuss out loud while the host writes it out.</h4>
-        </div>
+        <React.Fragment>
+          {weBelieveText.length ?
+            <React.Fragment>
+              <h5 className="mb-1">We believe...</h5>
+
+              <div className="border border-info rounded p-1 mb-5">
+                {weBelieveText}
+              </div>
+            </React.Fragment>
+          : null}
+
+          {willResultInText.length ?
+            <React.Fragment>
+              <h5 className="mb-1">Will result in...</h5>
+              
+              <div className="border border-info rounded p-1 mb-5">
+                {willResultInText}
+              </div>
+            </React.Fragment>
+          : null}
+
+          {succeededWhenText.length ?
+            <React.Fragment>
+              <h5 className="mb-1">We will know we have succeeded when...</h5>
+
+              <div className="border border-info rounded p-1 mb-5">
+                {succeededWhenText}
+              </div>
+            </React.Fragment>
+          : null}
+
+          {showJumbotron ?
+            <div className="jumbotron text-center bg-info border border-primary pt-0">
+              <button
+                onClick={() => setShowJumbotron(false)}
+                className="btn btn-block btn-link text-right p-1"
+              >
+                Close
+              </button>
+              <h4>The group will break silence and discuss out loud while the host writes it out.</h4>
+            </div>
+          : null}
+        </React.Fragment>
       }
     </React.Fragment>
   );
