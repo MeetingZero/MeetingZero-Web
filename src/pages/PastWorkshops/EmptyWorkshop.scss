@@ -1,0 +1,10 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
+.past-workshops-empty {
+  i {
+    display: block;
+    font-size: 10rem;
+    color: $primary;
+  }
+}

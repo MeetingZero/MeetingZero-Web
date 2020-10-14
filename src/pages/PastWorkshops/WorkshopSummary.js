@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RaciMatrix from 'pages/Workshop/stages/Experiments/steps/Owners/RaciMatrix';
 import PulseLoader from 'library/PulseLoader';
+import EmptyWorkshop from './EmptyWorkshop';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -26,14 +27,16 @@ const WorkshopSummary = ({ workshop }) => {
 
   if (!workshopSummary || isLoading) {
     return (
-      <PulseLoader className="mx-auto absolute-center-y" />
+      <PulseLoader
+        size="50rem"
+      />
     );
   }
 
   // Show empty state for workshop without any results
   if (!workshopSummary.winning_reframed_problem && !workshopSummary.opportunity_question && !workshopSummary.winning_solution && !workshopSummary.experiment_hypothesis && workshopSummary.experiment_tasks.length === 0) {
     return (
-      <div>Empty</div>
+      <EmptyWorkshop />
     );
   }
 
