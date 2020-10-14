@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RaciMatrix from 'pages/Workshop/stages/Experiments/steps/Owners/RaciMatrix';
+import PulseLoader from 'library/PulseLoader';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -19,8 +20,21 @@ const WorkshopSummary = ({ workshop }) => {
     return state.Workshop.workshopSummary;
   });
 
-  if (!workshopSummary) {
-    return null;
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("GET_WORKSHOP_SUMMARY") >= 0;
+  });
+
+  if (!workshopSummary || isLoading) {
+    return (
+      <PulseLoader className="mx-auto absolute-center-y" />
+    );
+  }
+
+  // Show empty state for workshop without any results
+  if (!workshopSummary.winning_reframed_problem && !workshopSummary.opportunity_question && !workshopSummary.winning_solution && !workshopSummary.experiment_hypothesis && workshopSummary.experiment_tasks.length === 0) {
+    return (
+      <div>Empty</div>
+    );
   }
 
   return (
