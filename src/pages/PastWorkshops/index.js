@@ -46,7 +46,7 @@ const PastWorkshops = () => {
   const handleSignOut = () => {
     window.localStorage.removeItem("authToken");
 
-    history.push("/");
+    window.location.href = "/";
   }
 
   return (
