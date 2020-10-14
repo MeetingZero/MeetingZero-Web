@@ -77,6 +77,10 @@ const Workshop = () => {
     return state.Workshop.workshop;
   });
 
+  const workshopDirector = useSelector((state) => {
+    return state.Workshop.workshopDirector;
+  });
+
   React.useEffect(() => {
     dispatch(
       workshopActions
@@ -98,8 +102,10 @@ const Workshop = () => {
     );
   }, [dispatch, params.workshop_token]);
 
-  if (!currentWorkshopStep || !workshop) {
-    return null;
+  if (!currentWorkshopStep || !workshop || !workshopDirector) {
+    return (
+      <LoadingScreen />
+    );
   }
 
   const currentWorkshopStageKey = currentWorkshopStep.workshop_stage.key;

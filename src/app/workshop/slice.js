@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const workshopSlice = createSlice({
   name: 'Workshop',
   initialState: {
-    workshopDirector: [],
+    workshopDirector: null,
     currentWorkshopStep: null,
     workshop: null,
     workshopMembers: [],
