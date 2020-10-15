@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  workshopDirector: null,
+  currentWorkshopStep: null,
+  workshop: null,
+  workshopMembers: [],
+  myWorkshops: [],
+  workshopSummary: null
+}
+
 const workshopSlice = createSlice({
   name: 'Workshop',
-  initialState: {
-    workshopDirector: null,
-    currentWorkshopStep: null,
-    workshop: null,
-    workshopMembers: [],
-    myWorkshops: [],
-    workshopSummary: null
-  },
+  initialState,
   reducers: {
     setWorkshopDirector: (state, action) => {
       state.workshopDirector = action.payload;
@@ -40,6 +42,11 @@ const workshopSlice = createSlice({
     },
     setWorkshopSummary: (state, action) => {
       state.workshopSummary = action.payload;
+
+      return state;
+    },
+    reset: (state) => {
+      state = initialState;
 
       return state;
     }

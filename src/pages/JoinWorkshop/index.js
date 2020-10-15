@@ -6,6 +6,7 @@ import LogoSplitLayout from 'layouts/LogoSplit';
 import Button from 'library/Button';
 
 import * as workshopActions from 'app/workshop/actions';
+import workshopSlice from 'app/workshop/slice';
 
 const JoinWorkshop = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ const JoinWorkshop = () => {
     event.preventDefault();
 
     setWorkshopError(undefined);
+
+    // Reset workshop slice to prevent any issues with previous workshops
+    dispatch(workshopSlice.actions.reset());
 
     dispatch(workshopActions.validateWorkshop(workshopToken, currentUser.id, currentUser.email))
     .then(() => {
