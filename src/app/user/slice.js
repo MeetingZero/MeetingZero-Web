@@ -21,7 +21,9 @@ const userSlice = createSlice({
       };
 
       return state;
-    }
+    },
+
+    resetAll: () => {}
   }
 });
 

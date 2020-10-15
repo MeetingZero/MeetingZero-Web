@@ -9,6 +9,8 @@ import Button from 'library/Button';
 import * as userActions from 'app/user/actions';
 import { createErrorString } from 'helpers/formatErrorMessages';
 
+import userSlice from 'app/user/slice';
+
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -44,9 +46,11 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    dispatch(userSlice.actions.resetAll());
+    
     dispatch(userActions.loginUser(email, password))
     .then(() => {
-      history.push('/dashboard');
+      return history.push('/dashboard');
     })
     .catch((err) => {
       setLoginError(err);

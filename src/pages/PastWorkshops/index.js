@@ -12,6 +12,7 @@ import './PastWorkshops.scss';
 import logoImg from 'assets/images/logo.svg';
 
 import * as workshopActions from 'app/workshop/actions';
+import userSlice from 'app/user/slice';
 
 const PastWorkshops = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,8 @@ const PastWorkshops = () => {
 
   const handleSignOut = () => {
     window.localStorage.removeItem("authToken");
+
+    dispatch(userSlice.actions.resetAll());
 
     window.location.href = "/";
   }

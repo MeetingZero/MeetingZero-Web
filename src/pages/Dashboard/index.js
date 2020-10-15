@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import LogoSplitLayout from 'layouts/LogoSplit';
@@ -11,13 +11,19 @@ import notepadImg from 'assets/images/notepad.svg';
 import puzzleImg from 'assets/images/puzzle.svg';
 import twinsImg from 'assets/images/twins.svg';
 
+import userSlice from 'app/user/slice';
+
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
   const currentUser = useSelector((state) => {
     return state.User.currentUser;
   });
 
   const handleSignOut = () => {
     window.localStorage.removeItem("authToken");
+
+    dispatch(userSlice.actions.resetAll());
 
     window.location.href = "/";
   }
