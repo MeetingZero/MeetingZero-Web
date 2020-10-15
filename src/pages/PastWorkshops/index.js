@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom';
 import { useParams, useHistory } from 'react-router-dom';
 import moment from 'moment';
 
-import Button from 'library/Button';
 import WorkshopSummary from './WorkshopSummary';
+import SignOutButton from 'library/SignOutButton';
 
 import './PastWorkshops.scss';
 
 import logoImg from 'assets/images/logo.svg';
 
 import * as workshopActions from 'app/workshop/actions';
-import userSlice from 'app/user/slice';
 
 const PastWorkshops = () => {
   const dispatch = useDispatch();
@@ -43,14 +42,6 @@ const PastWorkshops = () => {
       }
     }
   }, [myWorkshops, params.workshop_token, history]);
-
-  const handleSignOut = () => {
-    window.localStorage.removeItem("authToken");
-
-    dispatch(userSlice.actions.resetAll());
-
-    window.location.href = "/";
-  }
 
   return (
     <div className="container-fluid container-fixed">
@@ -100,7 +91,7 @@ const PastWorkshops = () => {
             </div>
 
             <div>
-              <Button onClick={handleSignOut} className="btn btn-block btn-link btn-square ml-2" text="Sign Out" />
+              <SignOutButton className="btn btn-block btn-link btn-square ml-2" />
             </div>
           </div>
 

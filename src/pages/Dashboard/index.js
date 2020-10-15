@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import LogoSplitLayout from 'layouts/LogoSplit';
-import Button from 'library/Button';
+import SignOutButton from 'library/SignOutButton';
 
 import './Dashboard.scss';
 
@@ -11,28 +11,16 @@ import notepadImg from 'assets/images/notepad.svg';
 import puzzleImg from 'assets/images/puzzle.svg';
 import twinsImg from 'assets/images/twins.svg';
 
-import userSlice from 'app/user/slice';
-
 const Dashboard = () => {
-  const dispatch = useDispatch();
-
   const currentUser = useSelector((state) => {
     return state.User.currentUser;
   });
-
-  const handleSignOut = () => {
-    window.localStorage.removeItem("authToken");
-
-    dispatch(userSlice.actions.resetAll());
-
-    window.location.href = "/";
-  }
 
   return (
     <LogoSplitLayout>
       <div className="p-2">
         <div className="text-right">
-          <Button onClick={handleSignOut} text="Sign Out" className="btn btn-link" />
+          <SignOutButton className="btn btn-link btn-square" />
         </div>
 
         <div className="container-small mt-10 absolute-center-y">
