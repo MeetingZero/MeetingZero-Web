@@ -274,7 +274,7 @@ const HomePage = () => {
           </p>
 
           <p>
-            It streamlines processes to eliminate unstructured discussion to help teams do their best work.
+            It streamlines processes to eliminate unstructured discussions to help teams do their best work.
           </p>
 
           <p>
