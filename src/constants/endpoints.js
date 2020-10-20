@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development') {
   wsUrl = 'ws://localhost:8080/cable';
 } else if (process.env.REACT_APP_ENV === 'staging') {
   baseUrl = 'https://api-staging.meetingzero.net';
-  wsUrl = 'wss://api-staging.meetingzero.net/cable';
+  wsUrl = 'wss://ws-staging.meetingzero.net/cable';
 } else if (process.env.NODE_ENV === 'production') {
   baseUrl = 'https://api.meetingzero.net';
   wsUrl = 'wss://api.meetingzero.net/cable';
