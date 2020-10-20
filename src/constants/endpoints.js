@@ -3,7 +3,7 @@ let wsUrl;
 
 if (process.env.NODE_ENV === 'development') {
   baseUrl = 'http://localhost:3000';
-  wsUrl = 'http://localhost:8080/cable';
+  wsUrl = 'ws://localhost:8080/cable';
 } else if (process.env.REACT_APP_ENV === 'staging') {
   baseUrl = 'https://api-staging.meetingzero.net';
   wsUrl = 'wss://api-staging.meetingzero.net/cable';
