@@ -5,7 +5,7 @@ import { BASE_URL } from '../constants/endpoints';
 export default function() {
   let config = {
     baseURL: BASE_URL,
-    timeout: 10000
+    timeout: 30000
   };
 
   const authToken = window

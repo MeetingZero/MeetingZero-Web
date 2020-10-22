@@ -14,6 +14,7 @@ import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import * as workshopActions from 'app/workshop/actions';
 import * as votingActions from 'app/voting/actions';
 import { cableConsumer } from 'config/cableConsumer';
+import { TYPING_DEBOUNCE_TIMEOUT } from 'constants/misc';
 
 const Hypothesis = () => {
   const params = useParams();
@@ -140,7 +141,7 @@ const Hypothesis = () => {
       willResultInText,
       succeededWhenText
     });
-  }, 1000), [workshopRelayChannel, weBelieveText, willResultInText, succeededWhenText]);
+  }, TYPING_DEBOUNCE_TIMEOUT), [workshopRelayChannel, weBelieveText, willResultInText, succeededWhenText]);
 
   React.useEffect(() => {
     debouncedRelay();

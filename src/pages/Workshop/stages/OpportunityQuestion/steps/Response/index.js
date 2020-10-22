@@ -16,6 +16,7 @@ import * as opportunityQuestionActions from 'app/workshop/stages/opportunity_que
 import * as votingActions from 'app/voting/actions';
 import * as workshopActions from 'app/workshop/actions';
 import { cableConsumer } from 'config/cableConsumer';
+import { TYPING_DEBOUNCE_TIMEOUT } from 'constants/misc';
 
 const Response = ({ showBathroomBreak }) => {
   const params = useParams();
@@ -124,7 +125,7 @@ const Response = ({ showBathroomBreak }) => {
 
   const debouncedRelay = React.useCallback(debounce(() => {
     return workshopRelayChannel.send({ hostResponseText: responseText });
-  }, 1000), [workshopRelayChannel, responseText]);
+  }, TYPING_DEBOUNCE_TIMEOUT), [workshopRelayChannel, responseText]);
 
   React.useEffect(() => {
     debouncedRelay();
