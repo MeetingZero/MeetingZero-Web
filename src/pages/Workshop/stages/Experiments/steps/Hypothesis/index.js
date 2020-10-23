@@ -136,11 +136,13 @@ const Hypothesis = () => {
   }, [params.workshop_token, workshop.is_host]);
 
   const debouncedRelay = React.useCallback(debounce(() => {
-    return workshopRelayChannel.send({
-      weBelieveText,
-      willResultInText,
-      succeededWhenText
-    });
+    if (workshopRelayChannel) {
+      return workshopRelayChannel.send({
+        weBelieveText,
+        willResultInText,
+        succeededWhenText
+      });
+    }
   }, TYPING_DEBOUNCE_TIMEOUT), [workshopRelayChannel, weBelieveText, willResultInText, succeededWhenText]);
 
   React.useEffect(() => {

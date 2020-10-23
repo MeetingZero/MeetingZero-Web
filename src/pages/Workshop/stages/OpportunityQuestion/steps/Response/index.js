@@ -124,7 +124,9 @@ const Response = ({ showBathroomBreak }) => {
   }, [params.workshop_token, dispatch]);
 
   const debouncedRelay = React.useCallback(debounce(() => {
-    return workshopRelayChannel.send({ hostResponseText: responseText });
+    if (workshopRelayChannel) {
+      return workshopRelayChannel.send({ hostResponseText: responseText });
+    }
   }, TYPING_DEBOUNCE_TIMEOUT), [workshopRelayChannel, responseText]);
 
   React.useEffect(() => {
