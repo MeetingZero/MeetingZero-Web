@@ -3,13 +3,13 @@ let wsUrl;
 
 if (process.env.NODE_ENV === 'development') {
   baseUrl = 'http://localhost:3000';
-  wsUrl = 'ws://localhost:3000/cable';
+  wsUrl = 'ws://localhost:8080/cable';
 } else if (process.env.REACT_APP_ENV === 'staging') {
   baseUrl = 'https://api-staging.meetingzero.net';
-  wsUrl = 'wss://api-staging.meetingzero.net/cable';
+  wsUrl = 'wss://ws-staging.meetingzero.net';
 } else if (process.env.NODE_ENV === 'production') {
   baseUrl = 'https://api.meetingzero.net';
-  wsUrl = 'wss://api.meetingzero.net/cable';
+  wsUrl = 'wss://ws.meetingzero.net';
 }
 
 export const BASE_URL = baseUrl;
