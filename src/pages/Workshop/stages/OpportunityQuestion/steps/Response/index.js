@@ -152,7 +152,7 @@ const Response = ({ showBathroomBreak }) => {
 
       <h5 className="mb-4">The host will propose the first opportunity question. The group will then discuss the response.</h5>
 
-      {starVotingResults ?
+      {starVotingResults && starVotingResults.runoff_winner ?
         <blockquote className="mb-5">
           <div className="text-muted small">
             Winning Problem:

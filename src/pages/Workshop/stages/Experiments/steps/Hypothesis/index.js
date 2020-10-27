@@ -164,17 +164,17 @@ const Hypothesis = () => {
 
       <h5 className="mb-4">Create a hypothesis that you can test in less than 4 weeks (ideally 1-2 weeks).</h5>
 
-      <blockquote className="mb-4">
-        <div className="text-muted small">
-          Winning Solution:
-        </div>
+      {starVotingResults && starVotingResults.runoff_winner ?
+        <blockquote className="mb-4">
+          <div className="text-muted small">
+            Winning Solution:
+          </div>
 
-        {starVotingResults ?
           <div>
             {starVotingResults.runoff_winner.resource.response_text}
           </div>
-        : null}
-      </blockquote>
+        </blockquote>
+      : null}
 
       {workshop.is_host ?
         <React.Fragment>

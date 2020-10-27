@@ -87,7 +87,7 @@ const Response = () => {
     <React.Fragment>
       <h1 className="h2 mt-5 mb-5">Reframe Problem</h1>
 
-      {starVotingResults ?
+      {starVotingResults && starVotingResults.runoff_winner ?
         <blockquote className="mb-5">
           <div className="text-muted small">
             Problem to Reframe:

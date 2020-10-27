@@ -51,17 +51,17 @@ const Owners = ({ showAddTimeModal }) => {
 
       <div className="row mb-3">
         <div className="col-4">
-          <blockquote>
-            <div className="text-muted small">
-              Winning Solution:
-            </div>
+          {starVotingResults && starVotingResults.runoff_winner ?
+            <blockquote>
+              <div className="text-muted small">
+                Winning Solution:
+              </div>
 
-            {starVotingResults ?
               <div>
                 {starVotingResults.runoff_winner.resource.response_text}
               </div>
-            : null}
-          </blockquote>
+            </blockquote>
+          : null}
         </div>
 
         <div className="col-8">
