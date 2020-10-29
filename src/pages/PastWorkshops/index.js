@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import WorkshopSummary from './WorkshopSummary';
 import SignOutButton from 'library/SignOutButton';
+import EmptyWorkshop from './EmptyWorkshop';
 
 import './PastWorkshops.scss';
 
@@ -43,6 +44,10 @@ const PastWorkshops = () => {
     }
   }, [myWorkshops, params.workshop_token, history]);
 
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("GET_MY_WORKSHOPS") >= 0;
+  });
+
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
@@ -54,6 +59,12 @@ const PastWorkshops = () => {
           </Link>
 
           <h5 className="font-weight-normal mb-3 mt-5">Past Workshops</h5>
+
+          {myWorkshops.length === 0 && !isLoading ?
+            <div>
+              No workshops yet.
+            </div>
+          : null}
 
           {myWorkshops.map((myWorkshop) => {
             return (
@@ -99,6 +110,10 @@ const PastWorkshops = () => {
             <WorkshopSummary
               workshop={currentWorkshop}
             />
+          : null}
+
+          {myWorkshops.length === 0 && !isLoading ?
+            <EmptyWorkshop />
           : null}
         </div>
       </div>
