@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
   wsUrl = 'wss://ws-staging.meetingzero.net/cable';
 } else if (process.env.NODE_ENV === 'production') {
   baseUrl = 'https://api.meetingzero.net';
-  wsUrl = 'wss://api.meetingzero.net/cable';
+  wsUrl = 'wss://ws.meetingzero.net/cable';
 }
 
 export const BASE_URL = baseUrl;
