@@ -109,7 +109,7 @@ const RaciMatrix = ({ workshopToken, editable = true }) => {
                   <i onClick={toggleForward} className="fa fa-chevron-right raci-toggle-right text-muted" />
                 : null}
 
-                <strong>{mm.user.first_name}</strong>
+                <strong>{mm.user && mm.user.first_name}</strong>
               </div>
             );
           })}
