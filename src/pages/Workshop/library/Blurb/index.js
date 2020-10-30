@@ -58,7 +58,8 @@ const Blurb = ({ title, text }) => {
         [workshop.workshop_token]: true
       }, {
         path: "/",
-        expires: moment().add(1, "month").toDate()
+        expires: moment().add(1, "month").toDate(),
+        sameSite: "strict"
       });
     }
 
