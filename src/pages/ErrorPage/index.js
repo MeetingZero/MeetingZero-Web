@@ -12,7 +12,13 @@ const ErrorPage = () => {
       </h5>
 
       <div className="text-center">
-        <a href="/dashboard" className="h5">Go to Dashboard</a>
+        <button
+          onClick={() => window.location.reload()}
+          type="button"
+          className="btn btn-primary btn-square rounded px-3"
+        >
+          Click Here to Reload the Page
+        </button>
       </div>
     </div>
   );
