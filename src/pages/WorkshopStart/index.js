@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 
 import { cableConsumer } from 'config/cableConsumer';
 import * as workshopActions from 'app/workshop/actions';
@@ -36,6 +37,14 @@ const WorkshopStart = () => {
       received: (data) => {
         if (data.workshop) {
           return dispatch(workshopSlice.actions.setWorkshop(data.workshop));
+        }
+
+        if (data.workshop_members) {
+          return dispatch(
+            workshopSlice
+            .actions
+            .setWorkshopMembers(data.workshop_members)
+          );
         }
       },
       connected: () => {
@@ -130,6 +139,8 @@ const WorkshopMembers = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
+  const [readyMembers, setReadyMembers] = React.useState(0);
+
   React.useEffect(() => {
     dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
   }, [dispatch, params.workshop_token]);
@@ -138,16 +149,27 @@ const WorkshopMembers = () => {
     return state.Workshop.workshopMembers;
   });
 
+  React.useEffect(() => {
+    let readyMembersNum = 0;
+
+    workshopMembers.forEach((wm) => {
+      if (wm.online) {
+        readyMembersNum += 1;
+      }
+    });
+
+    setReadyMembers(readyMembersNum);
+  }, [workshopMembers]);
+
   return (
     <React.Fragment>
       {workshopMembers.map((member, index) => {
         if (member.user) {
           return (
             <React.Fragment key={member.id}>
-              <span>
-                {member.user.first_name}
+              <span className={cn(member.online === false ? "text-muted" : null)}>
+                {member.user.first_name}{index + 1 < workshopMembers.length ? ", " : null}
               </span>
-              {index + 1 < workshopMembers.length ? ", " : null}
             </React.Fragment>
           );
         }
@@ -161,6 +183,10 @@ const WorkshopMembers = () => {
           </React.Fragment>
         );
       })}
+
+      <div className="small mt-1">
+        {readyMembers}/{workshopMembers.length} participants ready
+      </div>
     </React.Fragment>
   );
 }
