@@ -4,7 +4,6 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { debounce } from 'lodash';
 
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
@@ -16,7 +15,6 @@ import * as opportunityQuestionActions from 'app/workshop/stages/opportunity_que
 import * as votingActions from 'app/voting/actions';
 import * as workshopActions from 'app/workshop/actions';
 import { cableConsumer } from 'config/cableConsumer';
-import { TYPING_DEBOUNCE_TIMEOUT } from 'constants/misc';
 
 const Response = ({ showBathroomBreak }) => {
   const params = useParams();
@@ -123,17 +121,12 @@ const Response = ({ showBathroomBreak }) => {
     });
   }, [params.workshop_token, dispatch]);
 
-  const debouncedRelay = React.useCallback(debounce(() => {
-    if (workshopRelayChannel) {
-      return workshopRelayChannel.send({ hostResponseText: responseText });
-    }
-  }, TYPING_DEBOUNCE_TIMEOUT), [workshopRelayChannel, responseText]);
-
+  // When the response text changes, broadcast over the relay socket
   React.useEffect(() => {
-    debouncedRelay();
-
-    return debouncedRelay.cancel;
-  }, [debouncedRelay, responseText]);
+    if (workshopRelayChannel) {
+      workshopRelayChannel.send({ hostResponseText: responseText });
+    }
+  }, [responseText, workshopRelayChannel]);
 
   return (
     <React.Fragment>

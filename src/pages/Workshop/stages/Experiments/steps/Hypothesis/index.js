@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { debounce } from 'lodash';
 
 import Button from 'library/Button';
 import CharacterCounter from 'library/CharacterCounter';
@@ -14,7 +13,6 @@ import * as experimentsActions from 'app/workshop/stages/experiments/actions';
 import * as workshopActions from 'app/workshop/actions';
 import * as votingActions from 'app/voting/actions';
 import { cableConsumer } from 'config/cableConsumer';
-import { TYPING_DEBOUNCE_TIMEOUT } from 'constants/misc';
 
 const Hypothesis = () => {
   const params = useParams();
@@ -135,21 +133,15 @@ const Hypothesis = () => {
     });
   }, [params.workshop_token, workshop.is_host]);
 
-  const debouncedRelay = React.useCallback(debounce(() => {
+  React.useEffect(() => {
     if (workshopRelayChannel) {
-      return workshopRelayChannel.send({
+      workshopRelayChannel.send({
         weBelieveText,
         willResultInText,
         succeededWhenText
       });
     }
-  }, TYPING_DEBOUNCE_TIMEOUT), [workshopRelayChannel, weBelieveText, willResultInText, succeededWhenText]);
-
-  React.useEffect(() => {
-    debouncedRelay();
-
-    return debouncedRelay.cancel;
-  }, [debouncedRelay, weBelieveText, willResultInText, succeededWhenText]);
+  }, [succeededWhenText, weBelieveText, willResultInText, workshopRelayChannel]);
 
   return (
     <React.Fragment>
