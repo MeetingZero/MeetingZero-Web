@@ -139,7 +139,8 @@ const WorkshopMembers = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const [readyMembers, setReadyMembers] = React.useState(0);
+  const [workshopMembersNoHost, setWorkshopMembersNoHost] = React.useState([]);
+  const [readyMembers, setReadyMembers] = React.useState(1);
 
   React.useEffect(() => {
     dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
@@ -149,26 +150,40 @@ const WorkshopMembers = () => {
     return state.Workshop.workshopMembers;
   });
 
+  const currentUser = useSelector((state) => {
+    return state.User.currentUser;
+  });
+
+  React.useEffect(() => {
+    setWorkshopMembersNoHost(workshopMembers.filter((wm) => {
+      if (wm.user && wm.user.id === currentUser.id) {
+        return false;
+      }
+
+      return true;
+    }));
+  }, [currentUser.id, workshopMembers]);
+
   React.useEffect(() => {
     let readyMembersNum = 0;
 
-    workshopMembers.forEach((wm) => {
+    workshopMembersNoHost.forEach((wm) => {
       if (wm.online) {
         readyMembersNum += 1;
       }
     });
 
     setReadyMembers(readyMembersNum);
-  }, [workshopMembers]);
+  }, [workshopMembersNoHost]);
 
   return (
     <React.Fragment>
-      {workshopMembers.map((member, index) => {
+      {workshopMembersNoHost.map((member, index) => {
         if (member.user) {
           return (
             <React.Fragment key={member.id}>
               <span className={cn(member.online === false ? "text-muted" : null)}>
-                {member.user.first_name}{index + 1 < workshopMembers.length ? ", " : null}
+                {member.user.first_name}{index + 1 < workshopMembersNoHost.length ? ", " : null}
               </span>
             </React.Fragment>
           );
@@ -179,13 +194,13 @@ const WorkshopMembers = () => {
             <span>
               {member.email}
             </span>
-            {index + 1 < workshopMembers.length ? ", " : null}
+            {index + 1 < workshopMembersNoHost.length ? ", " : null}
           </React.Fragment>
         );
       })}
 
       <div className="small mt-1">
-        {readyMembers}/{workshopMembers.length} participants ready
+        {readyMembers}/{workshopMembersNoHost.length} participants ready
       </div>
     </React.Fragment>
   );
