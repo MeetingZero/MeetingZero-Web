@@ -49,7 +49,7 @@ const RaciModal = ({ modalOpen, toggleRaciModal, userId, task }) => {
           className="fa fa-close raci-modal-close text-muted"
         />
 
-        {currentWorkshopMember && task ?
+        {currentWorkshopMember && currentWorkshopMember.user && task ?
           <div className="font-weight-bold mb-3">
             Select {currentWorkshopMember.user.first_name}'s assignment for "{task.response_text}".
           </div>
