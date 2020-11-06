@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 
 import { cableConsumer } from 'config/cableConsumer';
 import * as workshopActions from 'app/workshop/actions';
@@ -37,6 +38,14 @@ const WorkshopStart = () => {
         if (data.workshop) {
           return dispatch(workshopSlice.actions.setWorkshop(data.workshop));
         }
+
+        if (data.workshop_members) {
+          return dispatch(
+            workshopSlice
+            .actions
+            .setWorkshopMembers(data.workshop_members)
+          );
+        }
       },
       connected: () => {
         console.log("WORKSHOP START CABLE CONNECTED!");
@@ -72,15 +81,13 @@ const WorkshopStart = () => {
         </div>
       </div>
 
-      {workshop && workshop.is_host ?
-        <div className="feather-card shadow mb-10">
-          <h4 className="font-weight-normal mb-1">Attendees</h4>
+      <div className="feather-card shadow mb-10">
+        <h4 className="font-weight-normal mb-1">Attendees</h4>
 
-          <div>
-            <WorkshopMembers />
-          </div>
+        <div>
+          <WorkshopMembers />
         </div>
-      : null}
+      </div>
 
       <div className='requirements-list mb-4'>
         {workshop ?
@@ -130,6 +137,9 @@ const WorkshopMembers = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
+  const [workshopMembersNoHost, setWorkshopMembersNoHost] = React.useState([]);
+  const [readyMembers, setReadyMembers] = React.useState(1);
+
   React.useEffect(() => {
     dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
   }, [dispatch, params.workshop_token]);
@@ -138,16 +148,41 @@ const WorkshopMembers = () => {
     return state.Workshop.workshopMembers;
   });
 
+  const currentUser = useSelector((state) => {
+    return state.User.currentUser;
+  });
+
+  React.useEffect(() => {
+    setWorkshopMembersNoHost(workshopMembers.filter((wm) => {
+      if (wm.user && wm.user.id === currentUser.id) {
+        return false;
+      }
+
+      return true;
+    }));
+  }, [currentUser.id, workshopMembers]);
+
+  React.useEffect(() => {
+    let readyMembersNum = 0;
+
+    workshopMembersNoHost.forEach((wm) => {
+      if (wm.online) {
+        readyMembersNum += 1;
+      }
+    });
+
+    setReadyMembers(readyMembersNum);
+  }, [workshopMembersNoHost]);
+
   return (
     <React.Fragment>
-      {workshopMembers.map((member, index) => {
+      {workshopMembersNoHost.map((member, index) => {
         if (member.user) {
           return (
             <React.Fragment key={member.id}>
-              <span>
-                {member.user.first_name}
+              <span className={cn(member.online === false ? "text-muted" : null)}>
+                {member.user.first_name}{index + 1 < workshopMembersNoHost.length ? ", " : null}
               </span>
-              {index + 1 < workshopMembers.length ? ", " : null}
             </React.Fragment>
           );
         }
@@ -157,10 +192,14 @@ const WorkshopMembers = () => {
             <span>
               {member.email}
             </span>
-            {index + 1 < workshopMembers.length ? ", " : null}
+            {index + 1 < workshopMembersNoHost.length ? ", " : null}
           </React.Fragment>
         );
       })}
+
+      <div className="small mt-1">
+        {readyMembers}/{workshopMembersNoHost.length} participants ready
+      </div>
     </React.Fragment>
   );
 }
