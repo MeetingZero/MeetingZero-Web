@@ -81,15 +81,13 @@ const WorkshopStart = () => {
         </div>
       </div>
 
-      {workshop && workshop.is_host ?
-        <div className="feather-card shadow mb-10">
-          <h4 className="font-weight-normal mb-1">Attendees</h4>
+      <div className="feather-card shadow mb-10">
+        <h4 className="font-weight-normal mb-1">Attendees</h4>
 
-          <div>
-            <WorkshopMembers />
-          </div>
+        <div>
+          <WorkshopMembers />
         </div>
-      : null}
+      </div>
 
       <div className='requirements-list mb-4'>
         {workshop ?
