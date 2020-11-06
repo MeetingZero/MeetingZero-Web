@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
+import queryString from 'query-string';
 
 import LogoSplitLayout from 'layouts/LogoSplit';
 import Button from 'library/Button';
@@ -16,8 +17,17 @@ const JoinWorkshop = () => {
     return state.User.currentUser;
   });
 
-  const [workshopToken, setWorkshopToken] = React.useState();
+  const [workshopToken, setWorkshopToken] = React.useState("");
   const [workshopError, setWorkshopError] = React.useState();
+
+  // Pre-populate workshop ID input with token if present
+  React.useEffect(() => {
+    const parsedQs = queryString.parse(window.location.search);
+
+    if (parsedQs.workshop_token) {
+      setWorkshopToken(parsedQs.workshop_token);
+    }
+  }, []);
 
   const onJoinWorkshop = (event) => {
     event.preventDefault();
@@ -63,7 +73,13 @@ const JoinWorkshop = () => {
           : null}
 
           <form onSubmit={onJoinWorkshop}>
-            <input onChange={(event) => setWorkshopToken(event.target.value)} type="text" className="form-control mb-1" placeholder="MeetingZero ID" />
+            <input
+              onChange={(event) => setWorkshopToken(event.target.value)}
+              type="text"
+              className="form-control mb-1"
+              placeholder="MeetingZero ID"
+              value={workshopToken}
+            />
 
             {workshopError ?
               <div className="small text-danger">
