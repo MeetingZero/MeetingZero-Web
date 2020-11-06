@@ -30,6 +30,10 @@ const Hypothesis = () => {
   const [willResultInText, setWillResultInText] = React.useState("");
   const [succeededWhenText, setSucceededWhenText] = React.useState("");
 
+  const [hostWeBelieveText, setHostWeBelieveText] = React.useState("");
+  const [hostWillResultInText, setHostWillResultInText] = React.useState("");
+  const [hostSucceededWhenText, setHostSucceededWhenText] = React.useState("");
+
   // Get hypothesis on page load for editing and validation purposes
   React.useEffect(() => {
     dispatch(experimentsActions.getHypothesis(params.workshop_token));
@@ -114,15 +118,15 @@ const Hypothesis = () => {
         if (workshop.is_host) { return; }
 
         if (data.weBelieveText) {
-          setWeBelieveText(data.weBelieveText);
+          setHostWeBelieveText(data.weBelieveText);
         }
 
         if (data.willResultInText) {
-          setWillResultInText(data.willResultInText);
+          setHostWillResultInText(data.willResultInText);
         }
 
         if (data.succeededWhenText) {
-          setSucceededWhenText(data.succeededWhenText);
+          setHostSucceededWhenText(data.succeededWhenText);
         }
       },
       connected: () => {
@@ -142,6 +146,8 @@ const Hypothesis = () => {
       });
     }
   }, [succeededWhenText, weBelieveText, willResultInText, workshopRelayChannel]);
+
+  console.log("RENDER");
 
   return (
     <React.Fragment>
@@ -282,32 +288,32 @@ const Hypothesis = () => {
         </React.Fragment>
       :
         <React.Fragment>
-          {weBelieveText.length ?
+          {hostWeBelieveText.length ?
             <React.Fragment>
               <h5 className="mb-1">We believe...</h5>
 
               <div className="border border-info rounded p-1 mb-5">
-                {weBelieveText}
+                {hostWeBelieveText}
               </div>
             </React.Fragment>
           : null}
 
-          {willResultInText.length ?
+          {hostWillResultInText.length ?
             <React.Fragment>
               <h5 className="mb-1">Will result in...</h5>
               
               <div className="border border-info rounded p-1 mb-5">
-                {willResultInText}
+                {hostWillResultInText}
               </div>
             </React.Fragment>
           : null}
 
-          {succeededWhenText.length ?
+          {hostSucceededWhenText.length ?
             <React.Fragment>
               <h5 className="mb-1">We will know we have succeeded when...</h5>
 
               <div className="border border-info rounded p-1 mb-5">
-                {succeededWhenText}
+                {hostSucceededWhenText}
               </div>
             </React.Fragment>
           : null}
