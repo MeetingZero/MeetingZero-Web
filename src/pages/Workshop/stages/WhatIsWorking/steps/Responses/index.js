@@ -11,14 +11,15 @@ import TextArea from 'library/TextArea';
 
 import * as whatIsWorkingActions from 'app/workshop/stages/what_is_working/actions';
 
+const MAX_ITEMS = 3;
+
 const Responses = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, control, setValue } = useForm();
 
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
-  const [viewIndex, setViewIndex] = React.useState(0);
-  const [responseText, setResponseText] = React.useState("");
+  const [responses, setResponses] = React.useState([...new Array(MAX_ITEMS)]);
 
   // Get my responses on page load for editing and validation purposes
   React.useEffect(() => {
@@ -26,7 +27,7 @@ const Responses = () => {
   }, [dispatch, params.workshop_token]);
 
   const onSubmit = (formData) => {
-    if (myWhatIsWorkingResponses[viewIndex] === null) {
+    if (true === true) {
       dispatch(
         whatIsWorkingActions
         .saveResponse(
@@ -35,19 +36,19 @@ const Responses = () => {
         )
       )
       .then(() => {
-        setResponseText("");
+        
       });
     } else {
       dispatch(
         whatIsWorkingActions
         .updateResponse(
           params.workshop_token,
-          myWhatIsWorkingResponses[viewIndex].id,
+          1,
           formData.response_text
         )
       )
       .then(() => {
-        setResponseText("");
+        
       });
     }
   }
@@ -65,18 +66,22 @@ const Responses = () => {
   });
 
   React.useEffect(() => {
-    setViewIndex(myWhatIsWorkingResponses.length - 1);
+    if (myWhatIsWorkingResponses.length < MAX_ITEMS) {
+      const numElementsToAdd = MAX_ITEMS - myWhatIsWorkingResponses.length;
+
+      setResponses([...myWhatIsWorkingResponses, ...new Array(numElementsToAdd)]);
+    } else if (myWhatIsWorkingResponses === MAX_ITEMS) {
+      setResponses(myWhatIsWorkingResponses);
+    }
   }, [myWhatIsWorkingResponses]);
 
   React.useEffect(() => {
-    if (myWhatIsWorkingResponses[viewIndex]) {
-      setResponseText(myWhatIsWorkingResponses[viewIndex].response_text);
-      setValue("response_text", myWhatIsWorkingResponses[viewIndex].response_text);
-    } else {
-      setResponseText("");
-      setValue("response_text", "");
-    }
-  }, [viewIndex, myWhatIsWorkingResponses, setValue]);
+    responses.forEach((response, index) => {
+      if (response) {
+        setValue(`response_text_${index}`, response.response_text);
+      }
+    });
+  }, [responses, setValue]);
 
   return (
     <React.Fragment>
@@ -84,58 +89,44 @@ const Responses = () => {
 
       <h5 className="mb-4">Up to three short statements of what's going well.</h5>
 
-      {myWhatIsWorkingResponses.length > 1 ?
-        <div className="mb-2">
-          <Button
-            onClick={() => setViewIndex(viewIndex - 1)}
-            text="Previous"
-            className="btn btn-link mr-3"
-            disabled={myWhatIsWorkingResponses[viewIndex - 1] === undefined}
-          />
+      {responses.map((response, index) => {
+        return (
+          <form key={index} onSubmit={handleSubmit(onSubmit)}>
+            <TextArea
+              control={control}
+              register={register({ required: true, maxLength: 140 })}
+              name={`response_text_${index}`}
+              placeholder="Keep it positive"
+              className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
+              onUserInput={(userInput) => console.log(userInput)}
+            />
 
-          <Button
-            onClick={() => setViewIndex(viewIndex + 1)}
-            text="Forward"
-            className="btn btn-link"
-            disabled={myWhatIsWorkingResponses[viewIndex + 1] === undefined}
-          />
-        </div>
-      : null}
+            {errors.response_text ?
+              <div className="small text-danger">
+                Please enter a response of 140 characters or less
+              </div>
+            : null}
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextArea
-          control={control}
-          register={register({ required: true, maxLength: 140 })}
-          name="response_text"
-          placeholder="Keep it positive"
-          className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
-          onUserInput={(userInput) => setResponseText(userInput)}
-        />
+            <div className="text-right">
+              <CharacterCounter
+                inputString={""}
+                maxChars={140}
+                onExceed={handleExceed}
+              />
+            </div>
 
-        {errors.response_text ?
-          <div className="small text-danger">
-            Please enter a response of 140 characters or less
-          </div>
-        : null}
-
-        <div className="text-right">
-          <CharacterCounter
-            inputString={responseText}
-            maxChars={140}
-            onExceed={handleExceed}
-          />
-        </div>
-
-        <div>
-          <Button
-            type="submit"
-            text={myWhatIsWorkingResponses[viewIndex] === null ? "Submit" : "Update"}
-            className="btn btn-primary px-5 rounded"
-            disabled={responseText.length === 0}
-            loading={isLoading}
-          />
-        </div>
-      </form>
+            <div>
+              <Button
+                type="submit"
+                text={"Submit"}
+                className="btn btn-primary px-5 rounded"
+                disabled={false}
+                loading={isLoading}
+              />
+            </div>
+          </form>
+        );
+      })}
 
       <ProTip
         mainText={

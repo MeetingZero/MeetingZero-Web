@@ -10,12 +10,7 @@ const whatIsWorkingSlice = createSlice({
   },
   reducers: {
     setMyWhatIsWorkingResponses: (state, action) => {
-      // Limit the what is working responses
-      if (action.payload.length < constants.WHAT_IS_WORKING_RESPONSE_LIMIT) {
-        state.myWhatIsWorkingResponses = [...action.payload, null];
-      } else {
-        state.myWhatIsWorkingResponses = action.payload;
-      }
+      state.myWhatIsWorkingResponses = action.payload;
 
       return state;
     },
