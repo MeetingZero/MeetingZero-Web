@@ -19,7 +19,7 @@ const Responses = () => {
   const { register, handleSubmit, errors, control, setValue } = useForm();
 
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
-  const [responses, setResponses] = React.useState([...new Array(MAX_ITEMS)]);
+  const [responses, setResponses] = React.useState([]);
 
   // Get my responses on page load for editing and validation purposes
   React.useEffect(() => {
