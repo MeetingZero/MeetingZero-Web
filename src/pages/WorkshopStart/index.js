@@ -38,14 +38,6 @@ const WorkshopStart = () => {
         if (data.workshop) {
           return dispatch(workshopSlice.actions.setWorkshop(data.workshop));
         }
-
-        if (data.workshop_members) {
-          return dispatch(
-            workshopSlice
-            .actions
-            .setWorkshopMembers(data.workshop_members)
-          );
-        }
       },
       connected: () => {
         console.log("WORKSHOP START CABLE CONNECTED!");
@@ -137,11 +129,17 @@ const WorkshopMembers = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const [workshopMembersNoHost, setWorkshopMembersNoHost] = React.useState([]);
+  const [otherWorkshopMembers, setOtherWorkshopMembers] = React.useState([]);
   const [readyMembers, setReadyMembers] = React.useState(1);
 
   React.useEffect(() => {
     dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
+
+    const getMembersInterval = window.setInterval(() => {
+      dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
+    }, 5000);
+
+    return () => window.clearInterval(getMembersInterval);
   }, [dispatch, params.workshop_token]);
 
   const workshopMembers = useSelector((state) => {
@@ -153,7 +151,7 @@ const WorkshopMembers = () => {
   });
 
   React.useEffect(() => {
-    setWorkshopMembersNoHost(workshopMembers.filter((wm) => {
+    setOtherWorkshopMembers(workshopMembers.filter((wm) => {
       if (wm.user && wm.user.id === currentUser.id) {
         return false;
       }
@@ -165,23 +163,23 @@ const WorkshopMembers = () => {
   React.useEffect(() => {
     let readyMembersNum = 0;
 
-    workshopMembersNoHost.forEach((wm) => {
+    otherWorkshopMembers.forEach((wm) => {
       if (wm.online) {
         readyMembersNum += 1;
       }
     });
 
     setReadyMembers(readyMembersNum);
-  }, [workshopMembersNoHost]);
+  }, [otherWorkshopMembers]);
 
   return (
     <React.Fragment>
-      {workshopMembersNoHost.map((member, index) => {
+      {otherWorkshopMembers.map((member, index) => {
         if (member.user) {
           return (
             <React.Fragment key={member.id}>
               <span className={cn(member.online === false ? "text-muted" : null)}>
-                {member.user.first_name}{index + 1 < workshopMembersNoHost.length ? ", " : null}
+                {member.user.first_name}{index + 1 < otherWorkshopMembers.length ? ", " : null}
               </span>
             </React.Fragment>
           );
@@ -192,13 +190,13 @@ const WorkshopMembers = () => {
             <span>
               {member.email}
             </span>
-            {index + 1 < workshopMembersNoHost.length ? ", " : null}
+            {index + 1 < otherWorkshopMembers.length ? ", " : null}
           </React.Fragment>
         );
       })}
 
       <div className="small mt-1">
-        {readyMembers}/{workshopMembersNoHost.length} participants ready
+        {readyMembers}/{otherWorkshopMembers.length} participants ready
       </div>
     </React.Fragment>
   );
