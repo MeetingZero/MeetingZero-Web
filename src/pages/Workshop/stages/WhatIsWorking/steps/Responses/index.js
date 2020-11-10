@@ -20,6 +20,7 @@ const Responses = () => {
 
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [responses, setResponses] = React.useState([]);
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
   // Get my responses on page load for editing and validation purposes
   React.useEffect(() => {
@@ -97,8 +98,10 @@ const Responses = () => {
               register={register({ required: true, maxLength: 140 })}
               name={`response_text_${index}`}
               placeholder="Keep it positive"
-              className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
+              className={cn(charCountExceeded ? 'bg-scary' : '', activeIndex === index ? 'mb-1' : 'mb-4')}
               onUserInput={(userInput) => console.log(userInput)}
+              onFocus={() => setActiveIndex(index)}
+              watchAll={true}
             />
 
             {errors.response_text ?
@@ -107,23 +110,27 @@ const Responses = () => {
               </div>
             : null}
 
-            <div className="text-right">
-              <CharacterCounter
-                inputString={""}
-                maxChars={140}
-                onExceed={handleExceed}
-              />
-            </div>
+            {activeIndex === index ?
+              <React.Fragment>
+                <div className="text-right">
+                  <CharacterCounter
+                    inputString={""}
+                    maxChars={140}
+                    onExceed={handleExceed}
+                  />
+                </div>
 
-            <div>
-              <Button
-                type="submit"
-                text={"Submit"}
-                className="btn btn-primary px-5 rounded"
-                disabled={false}
-                loading={isLoading}
-              />
-            </div>
+                <div>
+                  <Button
+                    type="submit"
+                    text={"Submit"}
+                    className={"btn btn-primary px-5 rounded mb-4"}
+                    disabled={false}
+                    loading={isLoading}
+                  />
+                </div>
+              </React.Fragment>
+            : null}
           </form>
         );
       })}

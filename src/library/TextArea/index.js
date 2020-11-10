@@ -8,11 +8,14 @@ const Textarea = ({
   name,
   className,
   placeholder,
-  onUserInput
+  onUserInput,
+  onFocus,
+  onBlur,
+  watchAll
 }) => {
   const userInput = useWatch({
     control,
-    name: name,
+    name: watchAll ? undefined : name,
     defaultValue: ""
   });
 
@@ -28,6 +31,8 @@ const Textarea = ({
       name={name}
       className={cn("form-control", className)}
       placeholder={placeholder}
+      onFocus={onFocus}
+      onBlur={onBlur}
     />
   );
 }
