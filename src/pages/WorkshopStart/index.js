@@ -38,6 +38,14 @@ const WorkshopStart = () => {
         if (data.workshop) {
           return dispatch(workshopSlice.actions.setWorkshop(data.workshop));
         }
+
+        if (data.workshop_members) {
+          return dispatch(
+            workshopSlice
+            .actions
+            .setWorkshopMembers(data.workshop_members)
+          );
+        }
       },
       connected: () => {
         console.log("WORKSHOP START CABLE CONNECTED!");
