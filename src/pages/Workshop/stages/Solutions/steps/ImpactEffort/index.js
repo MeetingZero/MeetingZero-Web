@@ -138,7 +138,7 @@ const ImpactEffort = () => {
             {allSolutions[viewIndex].response_text}
           </div>
 
-          <div className="row mb-5">
+          <div className="row mb-5 no-select">
             <div className="col-6">
               <div className="ie-slider-container mb-7">
                 <Slider
