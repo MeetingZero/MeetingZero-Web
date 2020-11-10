@@ -19,7 +19,6 @@ const Responses = () => {
   const { register, handleSubmit, errors, control, setValue } = useForm();
 
   const [charCountExceeded, setCharCountExceeded] = React.useState(false);
-  const [responses, setResponses] = React.useState([]);
   const [activeIndex, setActiveIndex] = React.useState(0);
 
   // Get my responses on page load for editing and validation purposes
@@ -27,30 +26,24 @@ const Responses = () => {
     dispatch(whatIsWorkingActions.getMyResponses(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
-  const onSubmit = (formData) => {
-    if (true === true) {
+  const onSubmit = (formData, index) => {
+    if (myWhatIsWorkingResponses[index] === undefined) {
       dispatch(
         whatIsWorkingActions
         .saveResponse(
           params.workshop_token,
-          formData.response_text
+          formData[`response_text_${index}`]
         )
       )
-      .then(() => {
-        
-      });
     } else {
       dispatch(
         whatIsWorkingActions
         .updateResponse(
           params.workshop_token,
-          1,
-          formData.response_text
+          myWhatIsWorkingResponses[index].id,
+          formData[`response_text_${index}`]
         )
       )
-      .then(() => {
-        
-      });
     }
   }
 
@@ -67,22 +60,12 @@ const Responses = () => {
   });
 
   React.useEffect(() => {
-    if (myWhatIsWorkingResponses.length < MAX_ITEMS) {
-      const numElementsToAdd = MAX_ITEMS - myWhatIsWorkingResponses.length;
-
-      setResponses([...myWhatIsWorkingResponses, ...new Array(numElementsToAdd)]);
-    } else if (myWhatIsWorkingResponses === MAX_ITEMS) {
-      setResponses(myWhatIsWorkingResponses);
-    }
-  }, [myWhatIsWorkingResponses]);
-
-  React.useEffect(() => {
-    responses.forEach((response, index) => {
+    myWhatIsWorkingResponses.forEach((response, index) => {
       if (response) {
         setValue(`response_text_${index}`, response.response_text);
       }
     });
-  }, [responses, setValue]);
+  }, [myWhatIsWorkingResponses, setValue]);
 
   return (
     <React.Fragment>
@@ -90,16 +73,15 @@ const Responses = () => {
 
       <h5 className="mb-4">Up to three short statements of what's going well.</h5>
 
-      {responses.map((response, index) => {
+      {[...new Array(MAX_ITEMS)].map((response, index) => {
         return (
-          <form key={index} onSubmit={handleSubmit(onSubmit)}>
+          <form key={index} onSubmit={handleSubmit((formData) => onSubmit(formData, index))}>
             <TextArea
               control={control}
-              register={register({ required: true, maxLength: 140 })}
+              register={register({ maxLength: 140 })}
               name={`response_text_${index}`}
               placeholder="Keep it positive"
               className={cn(charCountExceeded ? 'bg-scary' : '', activeIndex === index ? 'mb-1' : 'mb-4')}
-              onUserInput={(userInput) => console.log(userInput)}
               onFocus={() => setActiveIndex(index)}
               watchAll={true}
             />
@@ -123,7 +105,7 @@ const Responses = () => {
                 <div>
                   <Button
                     type="submit"
-                    text={"Submit"}
+                    text={myWhatIsWorkingResponses[index] ? "Update" : "Submit"}
                     className={"btn btn-primary px-5 rounded mb-4"}
                     disabled={false}
                     loading={isLoading}
