@@ -142,12 +142,6 @@ const WorkshopMembers = () => {
 
   React.useEffect(() => {
     dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
-
-    const getMembersInterval = window.setInterval(() => {
-      dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
-    }, 5000);
-
-    return () => window.clearInterval(getMembersInterval);
   }, [dispatch, params.workshop_token]);
 
   const workshopMembers = useSelector((state) => {
