@@ -86,6 +86,10 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
 
     window.setTimeout(() => {
       if (onCompleteStep) {
+        setReadyUp(false);
+        setShowConfirmation(false);
+        setProceeding(false);
+        
         return onCompleteStep();
       }
 
