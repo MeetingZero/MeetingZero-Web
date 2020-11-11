@@ -14,6 +14,27 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
 
   const [showConfirmation, setShowConfirmation] = React.useState(false);
   const [readyUp, setReadyUp] = React.useState(false);
+  const [proceeding, setProceeding] = React.useState(false);
+
+  const isLoadingSave = useSelector((state) => {
+    return state.Loading.indexOf("SAVING_READY_MEMBER") >= 0;
+  });
+
+  const isLoadingGoBack = useSelector((state) => {
+    return state.Loading.indexOf("DELETING_READY_MEMBER") >= 0;
+  });
+
+  const readyWorkshopMembers = useSelector((state) => {
+    return state.Workshop.readyWorkshopMembers;
+  });
+
+  const currentUser = useSelector((state) => {
+    return state.User.currentUser;
+  });
+
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
 
   const handleReadyUp = () => {
     dispatch(workshopActions.saveReadyMember(workshopToken, workshopDirectorId))
@@ -30,25 +51,9 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
     });
   }
 
-  const isLoadingSave = useSelector((state) => {
-    return state.Loading.indexOf("SAVING_READY_MEMBER") >= 0;
-  });
-
-  const isLoadingGoBack = useSelector((state) => {
-    return state.Loading.indexOf("DELETING_READY_MEMBER") >= 0;
-  });
-
   React.useEffect(() => {
     dispatch(workshopActions.getReadyMembers(workshopToken, workshopDirectorId));
   }, [dispatch, workshopToken, workshopDirectorId]);
-
-  const readyWorkshopMembers = useSelector((state) => {
-    return state.Workshop.readyWorkshopMembers;
-  });
-
-  const currentUser = useSelector((state) => {
-    return state.User.currentUser;
-  });
 
   // If user is ready when page loads for the current stage step, trigger readyup
   React.useEffect(() => {
@@ -60,6 +65,43 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
     });
   }, [readyWorkshopMembers, workshopDirectorId, currentUser.id]);
 
+  React.useEffect(() => {
+    if (!workshop.is_host) {
+      return;
+    }
+
+    if (readyWorkshopMembers.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < readyWorkshopMembers.length; i++) {
+      const rwm = readyWorkshopMembers[i];
+
+      if (!rwm.ready_workshop_member || rwm.ready_workshop_member.workshop_director_id !== workshopDirectorId) {
+        return;
+      }
+    }
+
+    setProceeding(true);
+
+    window.setTimeout(() => {
+      dispatch(
+        workshopActions
+        .completeWorkshopStep(
+          workshopToken,
+          workshopDirectorId
+        )
+      )
+    }, 1000);
+  }, [readyWorkshopMembers, workshop.is_host, workshopDirectorId, dispatch, workshopToken]);
+
+  // When the workshop director ID changes, hide all move on steps
+  React.useEffect(() => {
+    setReadyUp(false);
+    setShowConfirmation(false);
+    setProceeding(false);
+  }, [workshopDirectorId]);
+
   return (
     <React.Fragment>
       {readyUp ?
@@ -69,7 +111,11 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
       <div className="move-on-container">
         {readyUp ?
           <div className="move-on-dialog border border-black shadow p-3 mb-2">
-            <div className="h5 mb-2">Waiting on the group</div>
+            {proceeding ?
+              <div className="h5 mb-2">Proceeding to the next step...</div>
+            :
+              <div className="h5 mb-2">Waiting on the group</div>
+            }
 
             <ReadyMembers className="mb-2" />
 
