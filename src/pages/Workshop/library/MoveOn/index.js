@@ -22,8 +22,19 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
     });
   }
 
-  const isLoading = useSelector((state) => {
+  const handleGoBack = () => {
+    dispatch(workshopActions.deleteReadyMember(workshopToken, workshopDirectorId))
+    .then(() => {
+      setReadyUp(false);
+    });
+  }
+
+  const isLoadingSave = useSelector((state) => {
     return state.Loading.indexOf("SAVING_READY_MEMBER") >= 0;
+  });
+
+  const isLoadingGoBack = useSelector((state) => {
+    return state.Loading.indexOf("DELETING_READY_MEMBER") >= 0;
   });
 
   return (
@@ -44,12 +55,12 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
             <div className="h5 mb-2">Forgot you had something else to fill out?</div>
 
             <div>
-              <button
-                onClick={() => setReadyUp(false)}
+              <Button
+                onClick={handleGoBack}
                 className="btn btn-primary btn-square rounded px-4"
-              >
-                Go back
-              </button>
+                text="Go back"
+                loading={isLoadingGoBack}
+              />
             </div>
           </div>
         : null}
@@ -76,7 +87,7 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
                 onClick={handleReadyUp}
                 className="btn btn-primary btn-square rounded px-4"
                 text="I'm ready"
-                loading={isLoading}
+                loading={isLoadingSave}
               />
             </div>
           </div>

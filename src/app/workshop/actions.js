@@ -240,3 +240,22 @@ export const saveReadyMember = (workshopToken, workshopDirectorId) => {
     });
   }
 }
+
+export const deleteReadyMember = (workshopToken, workshopDirectorId) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('DELETING_READY_MEMBER'));
+
+    return axiosInstance()
+    .delete(`/api/v1/workshops/${workshopToken}/director/${workshopDirectorId}/workshop_stage_step_ready`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('DELETING_READY_MEMBER'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('DELETING_READY_MEMBER'));
+
+      throw err.response.data;
+    });
+  }
+}
