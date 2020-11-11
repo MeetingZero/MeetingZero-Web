@@ -1,5 +1,14 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
 .move-on-container {
   position: fixed;
   bottom: 130px;
   right: 50px;
+  z-index: 1055;
+}
+
+.move-on-dialog {
+  background-color: $white;
+  max-width: 60rem;
 }
