@@ -38,6 +38,28 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
     return state.Loading.indexOf("DELETING_READY_MEMBER") >= 0;
   });
 
+  React.useEffect(() => {
+    dispatch(workshopActions.getReadyMembers(workshopToken, workshopDirectorId));
+  }, [dispatch, workshopToken, workshopDirectorId]);
+
+  const readyWorkshopMembers = useSelector((state) => {
+    return state.Workshop.readyWorkshopMembers;
+  });
+
+  const currentUser = useSelector((state) => {
+    return state.User.currentUser;
+  });
+
+  // If user is ready when page loads for the current stage step, trigger readyup
+  React.useEffect(() => {
+    readyWorkshopMembers.forEach((rwm) => {
+      if (rwm.ready_workshop_member && rwm.ready_workshop_member.workshop_director_id === workshopDirectorId && rwm.user_id === currentUser.id) {
+        setReadyUp(true);
+        setShowConfirmation(false);
+      }
+    });
+  }, [readyWorkshopMembers, workshopDirectorId, currentUser.id]);
+
   return (
     <React.Fragment>
       {readyUp ?
@@ -49,11 +71,7 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
           <div className="move-on-dialog border border-black shadow p-3 mb-2">
             <div className="h5 mb-2">Waiting on the group</div>
 
-            <ReadyMembers
-              workshopToken={workshopToken}
-              workshopDirectorId={workshopDirectorId}
-              className="mb-2"
-            />
+            <ReadyMembers className="mb-2" />
 
             <div className="h5 mb-2">Forgot you had something else to fill out?</div>
 

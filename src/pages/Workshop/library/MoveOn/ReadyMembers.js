@@ -1,20 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import * as workshopActions from 'app/workshop/actions';
-
-const ReadyMembers = ({
-  workshopToken,
-  workshopDirectorId,
-  className
-}) => {
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(workshopActions.getReadyMembers(workshopToken, workshopDirectorId));
-  }, [dispatch, workshopToken, workshopDirectorId]);
-
+const ReadyMembers = ({ className }) => {
   const readyWorkshopMembers = useSelector((state) => {
     return state.Workshop.readyWorkshopMembers;
   });
