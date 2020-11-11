@@ -67,6 +67,12 @@ const Workshop = () => {
             .actions
             .setWorkshopMembers(data.workshop_members)
           );
+        } else if (data.ready_workshop_members) {
+          return dispatch(
+            workshopSlice
+            .actions
+            .setReadyWorkshopMembers(data.ready_workshop_members)
+          );
         }
       },
       connected: () => {
