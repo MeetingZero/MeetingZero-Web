@@ -221,3 +221,22 @@ export const addTime = (workshopToken, secondsToAdd) => {
     });
   }
 }
+
+export const saveReadyMember = (workshopToken, workshopDirectorId) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVING_READY_MEMBER'));
+
+    return axiosInstance()
+    .post(`/api/v1/workshops/${workshopToken}/director/${workshopDirectorId}/workshop_stage_step_ready`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVING_READY_MEMBER'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVING_READY_MEMBER'));
+
+      throw err.response.data;
+    });
+  }
+}

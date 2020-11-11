@@ -69,7 +69,10 @@ const WorkshopApp = ({ children, onTimerExpired }) => {
             onTimerExpired={onTimerExpired || handleTimerExpired}
           />
 
-          <MoveOn />
+          <MoveOn
+            workshopToken={workshop.workshop_token}
+            workshopDirectorId={currentWorkshopStep.id}
+          />
         </div>
       </div>
     </div>

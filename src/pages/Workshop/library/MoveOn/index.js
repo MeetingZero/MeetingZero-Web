@@ -1,12 +1,30 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import OnlineMembers from './OnlineMembers';
+import Button from 'library/Button';
+
+import * as workshopActions from 'app/workshop/actions';
 
 import "./MoveOn.scss";
 
-const MoveOn = () => {
+const MoveOn = ({ workshopToken, workshopDirectorId }) => {
+  const dispatch = useDispatch();
+
   const [showConfirmation, setShowConfirmation] = React.useState(false);
   const [readyUp, setReadyUp] = React.useState(false);
+
+  const handleReadyUp = () => {
+    dispatch(workshopActions.saveReadyMember(workshopToken, workshopDirectorId))
+    .then(() => {
+      setReadyUp(true);
+      setShowConfirmation(false);
+    });
+  }
+
+  const isLoading = useSelector((state) => {
+    return state.Loading.indexOf("SAVING_READY_MEMBER") >= 0;
+  });
 
   return (
     <React.Fragment>
@@ -54,15 +72,12 @@ const MoveOn = () => {
             </div>
 
             <div>
-              <button
-                onClick={() => {
-                  setReadyUp(true);
-                  setShowConfirmation(false);
-                }}
+              <Button
+                onClick={handleReadyUp}
                 className="btn btn-primary btn-square rounded px-4"
-              >
-                I'm ready
-              </button>
+                text="I'm ready"
+                loading={isLoading}
+              />
             </div>
           </div>
         : null}
