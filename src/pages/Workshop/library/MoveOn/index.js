@@ -36,6 +36,10 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
     return state.Workshop.workshop;
   });
 
+  const currentWorkshopStep = useSelector((state) => {
+    return state.Workshop.currentWorkshopStep;
+  });
+
   const handleReadyUp = () => {
     dispatch(workshopActions.saveReadyMember(workshopToken, workshopDirectorId))
     .then(() => {
@@ -93,15 +97,17 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
         return onCompleteStep();
       }
 
+      const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
+
       dispatch(
         workshopActions
         .completeWorkshopStep(
           workshopToken,
-          workshopDirectorId
+          workshopStageStepId
         )
       )
     }, 1000);
-  }, [readyWorkshopMembers, workshop.is_host, workshopDirectorId, dispatch, workshopToken, onCompleteStep]);
+  }, [readyWorkshopMembers, workshop.is_host, dispatch, workshopToken, onCompleteStep, currentWorkshopStep.workshop_stage_step_id, workshopDirectorId]);
 
   // When the workshop director ID changes, hide all move on steps
   React.useEffect(() => {
