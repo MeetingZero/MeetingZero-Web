@@ -17,7 +17,7 @@ const OpportunityQuestion = () => {
     return state.Workshop.workshop;
   });
 
-  const onTimerExpired = () => {
+  const onCompleteStep = () => {
     if (workshop.is_host) {
       return setShowBathroomBreak(true);
     }
@@ -25,7 +25,7 @@ const OpportunityQuestion = () => {
 
   if (currentStepKey === "OPPORTUNITY_QUESTION_RESPONSE") {
     return (
-      <WorkshopApp onTimerExpired={onTimerExpired}>
+      <WorkshopApp onCompleteStep={onCompleteStep}>
         <Response showBathroomBreak={showBathroomBreak} />
       </WorkshopApp>
     );

@@ -24,7 +24,7 @@ const Solutions = () => {
     return state.Workshop.workshop;
   });
 
-  const onVoteTimerExpired = () => {
+  const onVoteCompleteStep = () => {
     if (workshop.is_host) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
@@ -38,7 +38,7 @@ const Solutions = () => {
     }
   }
 
-  const onImpactEffortTimerExpired = () => {
+  const onImpactEffortCompleteStep = () => {
     if (workshop.is_host) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
@@ -60,13 +60,13 @@ const Solutions = () => {
     );
   } else if (currentStepKey === "SOLUTIONS_IMPACT_EFFORT") {
     return (
-      <WorkshopApp onTimerExpired={onImpactEffortTimerExpired}>
+      <WorkshopApp onCompleteStep={onImpactEffortCompleteStep}>
         <ImpactEffort />
       </WorkshopApp>
     );
   } else if (currentStepKey === "SOLUTIONS_VOTE") {
     return (
-      <WorkshopApp onTimerExpired={onVoteTimerExpired}>
+      <WorkshopApp onCompleteStep={onVoteCompleteStep}>
         <Vote />
       </WorkshopApp>
     );

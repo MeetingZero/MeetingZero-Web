@@ -22,7 +22,7 @@ const Experiments = () => {
     return state.Workshop.workshop;
   });
 
-  const onTimerExpired = () => {
+  const onCompleteStep = () => {
     const timeAdded = window.localStorage.getItem("timeAdded");
 
     if (workshop.is_host && !timeAdded) {
@@ -44,7 +44,7 @@ const Experiments = () => {
     );
   } else if (currentStepKey === "EXPERIMENTS_OWNERS") {
     return (
-      <WorkshopApp onTimerExpired={onTimerExpired}>
+      <WorkshopApp onCompleteStep={onCompleteStep}>
         <Owners showAddTimeModal={showAddTimeModal} />
       </WorkshopApp>
     );

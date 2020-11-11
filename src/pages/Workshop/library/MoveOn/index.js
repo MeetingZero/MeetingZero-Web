@@ -9,7 +9,7 @@ import * as workshopActions from 'app/workshop/actions';
 
 import "./MoveOn.scss";
 
-const MoveOn = ({ workshopToken, workshopDirectorId }) => {
+const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
   const dispatch = useDispatch();
 
   const [showConfirmation, setShowConfirmation] = React.useState(false);
@@ -85,6 +85,10 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
     setProceeding(true);
 
     window.setTimeout(() => {
+      if (onCompleteStep) {
+        return onCompleteStep();
+      }
+
       dispatch(
         workshopActions
         .completeWorkshopStep(
@@ -93,7 +97,7 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
         )
       )
     }, 1000);
-  }, [readyWorkshopMembers, workshop.is_host, workshopDirectorId, dispatch, workshopToken]);
+  }, [readyWorkshopMembers, workshop.is_host, workshopDirectorId, dispatch, workshopToken, onCompleteStep]);
 
   // When the workshop director ID changes, hide all move on steps
   React.useEffect(() => {
@@ -119,16 +123,20 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
 
             <ReadyMembers className="mb-2" />
 
-            <div className="h5 mb-2">Forgot you had something else to fill out?</div>
+            {!proceeding ?
+              <React.Fragment>
+                <div className="h5 mb-2">Forgot you had something else to fill out?</div>
 
-            <div>
-              <Button
-                onClick={handleGoBack}
-                className="btn btn-primary btn-square rounded px-4"
-                text="Go back"
-                loading={isLoadingGoBack}
-              />
-            </div>
+                <div>
+                  <Button
+                    onClick={handleGoBack}
+                    className="btn btn-primary btn-square rounded px-4"
+                    text="Go back"
+                    loading={isLoadingGoBack}
+                  />
+                </div>
+              </React.Fragment>
+            : null}
           </div>
         : null}
 
