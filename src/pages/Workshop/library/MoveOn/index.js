@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import OnlineMembers from './OnlineMembers';
+import ReadyMembers from './ReadyMembers';
 import Button from 'library/Button';
 
 import * as workshopActions from 'app/workshop/actions';
@@ -48,7 +49,9 @@ const MoveOn = ({ workshopToken, workshopDirectorId }) => {
           <div className="move-on-dialog border border-black shadow p-3 mb-2">
             <div className="h5 mb-2">Waiting on the group</div>
 
-            <OnlineMembers
+            <ReadyMembers
+              workshopToken={workshopToken}
+              workshopDirectorId={workshopDirectorId}
               className="mb-2"
             />
 

@@ -13,7 +13,7 @@ const OnlineMembers = ({ className }) => {
     <div className={cn("online-members", className)}>
       {workshopMembers.map((wm) => {
         return (
-          <i key={wm.id} className={cn("fa fa-user", wm.online ? "text-muted" : "text-primary")} />
+          <i key={wm.id} className={cn("fa fa-user", wm.online ? "text-primary" : "text-muted")} />
         );
       })}
     </div>
