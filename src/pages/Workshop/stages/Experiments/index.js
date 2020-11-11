@@ -38,7 +38,7 @@ const Experiments = () => {
 
   if (currentStepKey === "EXPERIMENTS_HYPOTHESIS") {
     return (
-      <WorkshopApp>
+      <WorkshopApp allowMoveOn={false}>
         <Hypothesis />
       </WorkshopApp>
     );

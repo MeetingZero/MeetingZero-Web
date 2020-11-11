@@ -12,7 +12,7 @@ import MoveOn from 'pages/Workshop/library/MoveOn';
 import logo from 'assets/images/logo.svg';
 import './WorkshopApp.scss';
 
-const WorkshopApp = ({ children, onCompleteStep }) => {
+const WorkshopApp = ({ children, onCompleteStep, allowMoveOn = true }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -69,11 +69,13 @@ const WorkshopApp = ({ children, onCompleteStep }) => {
             onTimerExpired={onCompleteStep || handleTimerExpired}
           />
 
-          <MoveOn
-            workshopToken={workshop.workshop_token}
-            workshopDirectorId={currentWorkshopStep.id}
-            onCompleteStep={onCompleteStep}
-          />
+          {allowMoveOn ?
+            <MoveOn
+              workshopToken={workshop.workshop_token}
+              workshopDirectorId={currentWorkshopStep.id}
+              onCompleteStep={onCompleteStep}
+            />
+          : null}
         </div>
       </div>
     </div>

@@ -147,8 +147,6 @@ const Hypothesis = () => {
     }
   }, [succeededWhenText, weBelieveText, willResultInText, workshopRelayChannel]);
 
-  console.log("RENDER");
-
   return (
     <React.Fragment>
       {showConfirmSubmission === true ?

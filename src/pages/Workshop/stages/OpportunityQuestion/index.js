@@ -25,7 +25,10 @@ const OpportunityQuestion = () => {
 
   if (currentStepKey === "OPPORTUNITY_QUESTION_RESPONSE") {
     return (
-      <WorkshopApp onCompleteStep={onCompleteStep}>
+      <WorkshopApp
+        onCompleteStep={onCompleteStep}
+        allowMoveOn={false}
+      >
         <Response showBathroomBreak={showBathroomBreak} />
       </WorkshopApp>
     );
