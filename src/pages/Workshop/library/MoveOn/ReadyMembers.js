@@ -2,8 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import "./OnlineMembers.scss";
-
 import * as workshopActions from 'app/workshop/actions';
 
 const ReadyMembers = ({
@@ -22,7 +20,7 @@ const ReadyMembers = ({
   });
 
   return (
-    <div className={cn("online-members", className)}>
+    <div className={cn("move-on-members", className)}>
       {readyWorkshopMembers.map((rwm) => {
         return (
           <i
