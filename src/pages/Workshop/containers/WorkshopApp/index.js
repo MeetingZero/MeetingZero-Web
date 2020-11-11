@@ -7,6 +7,7 @@ import * as workshopActions from 'app/workshop/actions';
 import WorkshopSidebar from 'pages/Workshop/library/WorkshopSidebar';
 import Blurb from 'pages/Workshop/library/Blurb';
 import RingTimer from 'library/RingTimer';
+import MoveOn from 'pages/Workshop/library/MoveOn';
 
 import logo from 'assets/images/logo.svg';
 import './WorkshopApp.scss';
@@ -67,6 +68,8 @@ const WorkshopApp = ({ children, onTimerExpired }) => {
             expireTimestamp={currentWorkshopStep.workshop_stage_step_expire_time}
             onTimerExpired={onTimerExpired || handleTimerExpired}
           />
+
+          <MoveOn />
         </div>
       </div>
     </div>

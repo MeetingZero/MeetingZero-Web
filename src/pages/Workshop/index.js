@@ -61,6 +61,12 @@ const Workshop = () => {
             .actions
             .setExperimentTasks(data.experiment_tasks)
           );
+        } else if (data.workshop_members) {
+          return dispatch(
+            workshopSlice
+            .actions
+            .setWorkshopMembers(data.workshop_members)
+          );
         }
       },
       connected: () => {
@@ -100,6 +106,10 @@ const Workshop = () => {
       workshopActions
       .getWorkshop(params.workshop_token)
     );
+  }, [dispatch, params.workshop_token]);
+
+  React.useEffect(() => {
+    dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
   if (!currentWorkshopStep || !workshop || !workshopDirector) {
