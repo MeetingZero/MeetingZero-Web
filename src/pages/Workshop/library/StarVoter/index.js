@@ -14,9 +14,13 @@ const StarVoter = ({ workshopToken, votingItems, modelName, handleUpdateData }) 
     return state.Workshop.currentWorkshopStep;
   });
 
+  const workshop = useSelector((state) => {
+    return state.Workshop.workshop;
+  });
+
   React.useEffect(() => {
     // If there is only 1 item to vote on, save the new voting result and complete the current step
-    if (votingItems.length === 1) {
+    if (votingItems.length === 1 && workshop.is_host) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
       dispatch(
@@ -33,7 +37,7 @@ const StarVoter = ({ workshopToken, votingItems, modelName, handleUpdateData }) 
         );
       });
     }
-  }, [dispatch, modelName, votingItems, workshopToken, currentWorkshopStep.workshop_stage_step_id]);
+  }, [dispatch, modelName, votingItems, workshopToken, currentWorkshopStep.workshop_stage_step_id, workshop.is_host]);
 
   if (votingItems.length > 2) {
     return (
