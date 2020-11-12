@@ -36,28 +36,26 @@ const StarVoter = ({ workshopToken, votingItems, modelName, handleUpdateData }) 
           )
         );
       });
+    } else if (votingItems.length > 2) {
+      return (
+        <MultiVoter
+          workshopToken={workshopToken}
+          votingItems={votingItems}
+          modelName={modelName}
+          handleUpdateData={handleUpdateData}
+        />
+      );
+    } else if (votingItems.length === 2) {
+      return (
+        <SingleVoter
+          workshopToken={workshopToken}
+          votingItems={votingItems}
+          modelName={modelName}
+          handleUpdateData={handleUpdateData}
+        />
+      );
     }
-  }, [dispatch, modelName, votingItems, workshopToken, currentWorkshopStep.workshop_stage_step_id, workshop.is_host]);
-
-  if (votingItems.length > 2) {
-    return (
-      <MultiVoter
-        workshopToken={workshopToken}
-        votingItems={votingItems}
-        modelName={modelName}
-        handleUpdateData={handleUpdateData}
-      />
-    );
-  } else if (votingItems.length === 2) {
-    return (
-      <SingleVoter
-        workshopToken={workshopToken}
-        votingItems={votingItems}
-        modelName={modelName}
-        handleUpdateData={handleUpdateData}
-      />
-    );
-  }
+  }, [dispatch, modelName, votingItems, workshopToken, currentWorkshopStep.workshop_stage_step_id, workshop.is_host, handleUpdateData]);
 
   return null;
 }
