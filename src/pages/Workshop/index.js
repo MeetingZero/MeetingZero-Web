@@ -42,7 +42,7 @@ const Workshop = () => {
   const params = useParams();
 
   React.useEffect(() => {
-    cableConsumer(params.workshop_token)
+    const workshopChannelInstance = cableConsumer(params.workshop_token)
     .subscriptions
     .create({
       channel: 'WorkshopChannel',
@@ -79,6 +79,8 @@ const Workshop = () => {
         console.log("WORKSHOP CABLE CONNECTED!");
       }
     });
+
+    return () => workshopChannelInstance.unsubscribe();
   }, [params.workshop_token, dispatch]);
 
   const currentWorkshopStep = useSelector((state) => {

@@ -135,6 +135,11 @@ const Hypothesis = () => {
         setWorkshopRelayChannel(workshopRelayChannelInstance);
       }
     });
+
+    return () => {
+      setWorkshopRelayChannel(null);
+      workshopRelayChannelInstance.unsubscribe();
+    }
   }, [params.workshop_token, workshop.is_host]);
 
   React.useEffect(() => {
