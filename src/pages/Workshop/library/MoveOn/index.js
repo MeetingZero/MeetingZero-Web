@@ -6,6 +6,7 @@ import ReadyMembers from './ReadyMembers';
 import Button from 'library/Button';
 
 import * as workshopActions from 'app/workshop/actions';
+import workshopSlice from 'app/workshop/slice';
 
 import "./MoveOn.scss";
 
@@ -93,19 +94,22 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
         setReadyUp(false);
         setShowConfirmation(false);
         setProceeding(false);
-        
+
+        // Clear ready members
+        dispatch(workshopSlice.actions.setReadyWorkshopMembers([]))
+
         return onCompleteStep();
-      }
+      } else {
+        const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
-      const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
-
-      dispatch(
-        workshopActions
-        .completeWorkshopStep(
-          workshopToken,
-          workshopStageStepId
+        dispatch(
+          workshopActions
+          .completeWorkshopStep(
+            workshopToken,
+            workshopStageStepId
+          )
         )
-      )
+      }
     }, 1000);
   }, [readyWorkshopMembers, workshop.is_host, dispatch, workshopToken, onCompleteStep, currentWorkshopStep.workshop_stage_step_id, workshopDirectorId]);
 
