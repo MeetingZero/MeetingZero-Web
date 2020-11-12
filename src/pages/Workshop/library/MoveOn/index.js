@@ -16,6 +16,7 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
   const [showConfirmation, setShowConfirmation] = React.useState(false);
   const [readyUp, setReadyUp] = React.useState(false);
   const [proceeding, setProceeding] = React.useState(false);
+  const [confirmationDismissed, setConfirmationDismissed] = React.useState(false);
 
   const isLoadingSave = useSelector((state) => {
     return state.Loading.indexOf("SAVING_READY_MEMBER") >= 0;
@@ -56,6 +57,11 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
     });
   }
 
+  const handleCloseConfirmation = () => {
+    setShowConfirmation(false);
+    setConfirmationDismissed(true);
+  }
+
   React.useEffect(() => {
     dispatch(workshopActions.getReadyMembers(workshopToken, workshopDirectorId));
   }, [dispatch, workshopToken, workshopDirectorId]);
@@ -70,11 +76,18 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
     });
   }, [readyWorkshopMembers, workshopDirectorId, currentUser.id]);
 
+  // If any member ready's-up, trigger the confirmation message
   React.useEffect(() => {
-    if (!workshop.is_host) {
-      return;
-    }
+    const rwm = readyWorkshopMembers.filter(m => m.ready_workshop_member);
 
+    if (rwm.length && !readyUp && !confirmationDismissed) {
+      setShowConfirmation(true);
+    } else {
+      setShowConfirmation(false);
+    }
+  }, [readyWorkshopMembers, readyUp, confirmationDismissed]);
+
+  React.useEffect(() => {
     if (readyWorkshopMembers.length === 0) {
       return;
     }
@@ -89,6 +102,11 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
 
     setProceeding(true);
 
+    // Don't go any further if not the host
+    if (!workshop.is_host) {
+      return;
+    }
+
     window.setTimeout(() => {
       if (onCompleteStep) {
         setReadyUp(false);
@@ -96,7 +114,7 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
         setProceeding(false);
 
         // Clear ready members
-        dispatch(workshopSlice.actions.setReadyWorkshopMembers([]))
+        dispatch(workshopSlice.actions.setReadyWorkshopMembers([]));
 
         return onCompleteStep();
       } else {
@@ -109,6 +127,10 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
             workshopStageStepId
           )
         )
+        .then(() => {
+          // Clear ready members
+          dispatch(workshopSlice.actions.setReadyWorkshopMembers([]));
+        });
       }
     }, 1000);
   }, [readyWorkshopMembers, workshop.is_host, dispatch, workshopToken, onCompleteStep, currentWorkshopStep.workshop_stage_step_id, workshopDirectorId]);
@@ -158,7 +180,7 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
           <div className="move-on-dialog border border-black shadow px-3 pb-3 mb-2">
             <div className="text-right">
               <button
-                onClick={() => setShowConfirmation(false)}
+                onClick={handleCloseConfirmation}
                 className="btn small btn-link text-danger btn-square"
               >
                 Close
