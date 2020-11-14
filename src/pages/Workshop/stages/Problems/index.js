@@ -22,7 +22,7 @@ const Problems = () => {
     return state.Workshop.workshop;
   });
 
-  const onTimerExpired = () => {
+  const onCompleteStep = () => {
     if (workshop.is_host) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
@@ -44,7 +44,7 @@ const Problems = () => {
     );
   } else if (currentStepKey === "PROBLEMS_VOTE") {
     return (
-      <WorkshopApp onTimerExpired={onTimerExpired}>
+      <WorkshopApp onCompleteStep={onCompleteStep}>
         <Vote />
       </WorkshopApp>
     );

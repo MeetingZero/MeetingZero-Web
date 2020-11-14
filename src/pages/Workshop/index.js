@@ -42,7 +42,7 @@ const Workshop = () => {
   const params = useParams();
 
   React.useEffect(() => {
-    cableConsumer(params.workshop_token)
+    const workshopChannelInstance = cableConsumer(params.workshop_token)
     .subscriptions
     .create({
       channel: 'WorkshopChannel',
@@ -61,12 +61,26 @@ const Workshop = () => {
             .actions
             .setExperimentTasks(data.experiment_tasks)
           );
+        } else if (data.workshop_members) {
+          return dispatch(
+            workshopSlice
+            .actions
+            .setWorkshopMembers(data.workshop_members)
+          );
+        } else if (data.ready_workshop_members) {
+          return dispatch(
+            workshopSlice
+            .actions
+            .setReadyWorkshopMembers(data.ready_workshop_members)
+          );
         }
       },
       connected: () => {
         console.log("WORKSHOP CABLE CONNECTED!");
       }
     });
+
+    return () => workshopChannelInstance.unsubscribe();
   }, [params.workshop_token, dispatch]);
 
   const currentWorkshopStep = useSelector((state) => {
@@ -100,6 +114,10 @@ const Workshop = () => {
       workshopActions
       .getWorkshop(params.workshop_token)
     );
+  }, [dispatch, params.workshop_token]);
+
+  React.useEffect(() => {
+    dispatch(workshopActions.getWorkshopMembers(params.workshop_token));
   }, [dispatch, params.workshop_token]);
 
   if (!currentWorkshopStep || !workshop || !workshopDirector) {

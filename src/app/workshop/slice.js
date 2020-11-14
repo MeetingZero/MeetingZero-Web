@@ -5,6 +5,7 @@ const initialState = {
   currentWorkshopStep: null,
   workshop: null,
   workshopMembers: [],
+  readyWorkshopMembers: [],
   myWorkshops: [],
   workshopSummary: null
 }
@@ -30,6 +31,25 @@ const workshopSlice = createSlice({
     },
     setWorkshopMembers: (state, action) => {
       state.workshopMembers = action.payload;
+
+      return state;
+    },
+    setReadyWorkshopMembers: (state, action) => {
+      // Show ready members first
+      const memberMap = {
+        ready: [],
+        notReady: []
+      }
+
+      action.payload.forEach((rwm) => {
+        if (rwm.ready_workshop_member) {
+          memberMap.ready = [...memberMap.ready, rwm];
+        } else {
+          memberMap.notReady = [...memberMap.notReady, rwm];
+        }
+      });
+
+      state.readyWorkshopMembers = [...memberMap.ready, ...memberMap.notReady];
 
       return state;
     },

@@ -221,3 +221,60 @@ export const addTime = (workshopToken, secondsToAdd) => {
     });
   }
 }
+
+export const getReadyMembers = (workshopToken, workshopDirectorId) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('GET_READY_MEMBERS'));
+
+    return axiosInstance()
+    .get(`/api/v1/workshops/${workshopToken}/director/${workshopDirectorId}/workshop_stage_step_ready`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_READY_MEMBERS'));
+
+      return dispatch(workshopSlice.actions.setReadyWorkshopMembers(response.data));
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('GET_READY_MEMBERS'));
+
+      throw err.response.data;
+    });
+  }
+}
+
+export const saveReadyMember = (workshopToken, workshopDirectorId) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('SAVING_READY_MEMBER'));
+
+    return axiosInstance()
+    .post(`/api/v1/workshops/${workshopToken}/director/${workshopDirectorId}/workshop_stage_step_ready`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVING_READY_MEMBER'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('SAVING_READY_MEMBER'));
+
+      throw err.response.data;
+    });
+  }
+}
+
+export const deleteReadyMember = (workshopToken, workshopDirectorId) => {
+  return (dispatch) => {
+    dispatch(loadingSlice.actions.startLoading('DELETING_READY_MEMBER'));
+
+    return axiosInstance()
+    .delete(`/api/v1/workshops/${workshopToken}/director/${workshopDirectorId}/workshop_stage_step_ready`)
+    .then((response) => {
+      dispatch(loadingSlice.actions.stopLoading('DELETING_READY_MEMBER'));
+
+      return response.data;
+    })
+    .catch((err) => {
+      dispatch(loadingSlice.actions.stopLoading('DELETING_READY_MEMBER'));
+
+      throw err.response.data;
+    });
+  }
+}

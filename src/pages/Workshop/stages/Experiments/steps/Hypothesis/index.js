@@ -135,6 +135,11 @@ const Hypothesis = () => {
         setWorkshopRelayChannel(workshopRelayChannelInstance);
       }
     });
+
+    return () => {
+      setWorkshopRelayChannel(null);
+      workshopRelayChannelInstance.unsubscribe();
+    }
   }, [params.workshop_token, workshop.is_host]);
 
   React.useEffect(() => {
@@ -146,8 +151,6 @@ const Hypothesis = () => {
       });
     }
   }, [succeededWhenText, weBelieveText, willResultInText, workshopRelayChannel]);
-
-  console.log("RENDER");
 
   return (
     <React.Fragment>

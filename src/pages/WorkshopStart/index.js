@@ -28,7 +28,7 @@ const WorkshopStart = () => {
   }, [dispatch, params.workshop_token]);
 
   React.useEffect(() => {
-    cableConsumer(params.workshop_token)
+    const workshopChannelInstance = cableConsumer(params.workshop_token)
     .subscriptions
     .create({
       channel: 'WorkshopChannel',
@@ -51,6 +51,8 @@ const WorkshopStart = () => {
         console.log("WORKSHOP START CABLE CONNECTED!");
       }
     });
+
+    return () => workshopChannelInstance.unsubscribe();
   }, [params.workshop_token, dispatch]);
 
   const workshop = useSelector((state) => {
@@ -59,7 +61,7 @@ const WorkshopStart = () => {
 
   React.useEffect(() => {
     if (workshop && workshop.started_at) {
-      history.push(`/workshop/${params.workshop_token}`);
+      window.location.href = `/workshop/${params.workshop_token}`;
     }
   }, [workshop, params.workshop_token, history]);
 

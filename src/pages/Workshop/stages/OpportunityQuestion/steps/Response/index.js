@@ -111,6 +111,8 @@ const Response = ({ showBathroomBreak }) => {
       workshop_token: params.workshop_token
     }, {
       received: (data) => {
+        if (workshop.is_host) { return; }
+
         setHostResponseText(data.hostResponseText);
       },
       connected: () => {
@@ -119,7 +121,12 @@ const Response = ({ showBathroomBreak }) => {
         setWorkshopRelayChannel(workshopRelayChannelInstance);
       }
     });
-  }, [params.workshop_token, dispatch]);
+
+    return () => {
+      setWorkshopRelayChannel(null);
+      workshopRelayChannelInstance.unsubscribe();
+    }
+  }, [params.workshop_token, dispatch, workshop.is_host]);
 
   // When the response text changes, broadcast over the relay socket
   React.useEffect(() => {

@@ -23,7 +23,7 @@ const ReframeProblem = () => {
     return state.Workshop.workshop;
   });
 
-  const onVoteTimerExpired = () => {
+  const onVoteCompleteStep = () => {
     if (workshop.is_host) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
 
@@ -37,7 +37,7 @@ const ReframeProblem = () => {
     }
   }
 
-  const onResponseTimerExpired = () => {
+  const onResponseCompleteStep = () => {
     if (workshop.is_host) {
       const workshopStageStepId = currentWorkshopStep.workshop_stage_step_id;
       
@@ -53,13 +53,13 @@ const ReframeProblem = () => {
 
   if (currentStepKey === "REFRAME_PROBLEM_RESPONSE") {
     return (
-      <WorkshopApp onTimerExpired={onResponseTimerExpired}>
+      <WorkshopApp onCompleteStep={onResponseCompleteStep}>
         <Response />
       </WorkshopApp>
     );
   } else if (currentStepKey === "REFRAME_PROBLEM_VOTE") {
     return (
-      <WorkshopApp onTimerExpired={onVoteTimerExpired}>
+      <WorkshopApp onCompleteStep={onVoteCompleteStep}>
         <Vote />
       </WorkshopApp>
     );

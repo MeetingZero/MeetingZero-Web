@@ -22,7 +22,7 @@ const Experiments = () => {
     return state.Workshop.workshop;
   });
 
-  const onTimerExpired = () => {
+  const onTimerExpiredOverride = () => {
     const timeAdded = window.localStorage.getItem("timeAdded");
 
     if (workshop.is_host && !timeAdded) {
@@ -38,13 +38,13 @@ const Experiments = () => {
 
   if (currentStepKey === "EXPERIMENTS_HYPOTHESIS") {
     return (
-      <WorkshopApp>
+      <WorkshopApp allowMoveOn={false}>
         <Hypothesis />
       </WorkshopApp>
     );
   } else if (currentStepKey === "EXPERIMENTS_OWNERS") {
     return (
-      <WorkshopApp onTimerExpired={onTimerExpired}>
+      <WorkshopApp onTimerExpiredOverride={onTimerExpiredOverride}>
         <Owners showAddTimeModal={showAddTimeModal} />
       </WorkshopApp>
     );
