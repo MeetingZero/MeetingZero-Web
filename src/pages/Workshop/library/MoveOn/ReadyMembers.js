@@ -13,7 +13,7 @@ const ReadyMembers = ({ className }) => {
         return (
           <i
             key={rwm.id}
-            className={cn("fa", rwm.ready_workshop_member ? "fa-user text-primary" : "fa-user-times text-muted")}
+            className={cn("fa fa-user", rwm.ready_workshop_member ? "text-primary" : "text-muted")}
           />
         );
       })}

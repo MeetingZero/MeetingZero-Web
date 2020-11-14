@@ -6,15 +6,19 @@ import lightBulb from 'assets/images/light_bulb.svg';
 
 import './ProTip.scss';
 
-const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", calloutText, position = "bottom-right" }) => {
+const ProTip = ({
+  mainTitle = "Pro Tip",
+  mainText,
+  calloutTitle = "Example",
+  calloutText,
+  position = "bottom-right"
+}) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [shouldBounce, setShouldBounce] = React.useState(true);
 
   return (
     <div
       onClick={() => {
         setIsOpen(!isOpen);
-        setShouldBounce(false);
       }}
       className={cn("pro-tip-lightbulb-container", position)}
     >
@@ -64,7 +68,7 @@ const ProTip = ({ mainTitle = "Pro Tip", mainText, calloutTitle = "Example", cal
 
         <img
           src={lightBulb}
-          className={cn("pro-tip-lightbulb", shouldBounce ? "bounce" : null)}
+          className="pro-tip-lightbulb"
           alt="Pro Tip Lightbulb"
         />
       </div>

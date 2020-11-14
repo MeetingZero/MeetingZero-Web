@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import OnlineMembers from './OnlineMembers';
 import ReadyMembers from './ReadyMembers';
 import Button from 'library/Button';
 
@@ -214,9 +213,7 @@ const MoveOn = ({ workshopToken, workshopDirectorId, onCompleteStep }) => {
         : null}
 
         {!readyUp ?
-          <OnlineMembers
-            className="justify-content-end"
-          />
+          <ReadyMembers className="justify-content-end" />
         : null}
       </div>
     </React.Fragment>
