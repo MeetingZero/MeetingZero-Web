@@ -2,20 +2,22 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import cn from 'classnames';
+import PasswordStrengthBar from 'react-password-strength-bar';
 import queryString from 'query-string';
 
 import LogoSplitLayout from 'layouts/LogoSplit';
 import Button from 'library/Button';
 import * as userActions from 'app/user/actions';
-import * as Regex from 'constants/regex';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { register, handleSubmit, errors, setError } = useForm();
+  const { register, handleSubmit, errors, setError, watch } = useForm();
+
+  const passwordWatch = watch("password");
 
   const [queryStringData, setQueryStringData] = React.useState({});
+  const [passwordScore, setPasswordScore] = React.useState(0);
 
   React.useEffect(() => {
     setQueryStringData(queryString.parse(window.location.search));
@@ -24,6 +26,10 @@ const ResetPassword = () => {
   const onSubmit = (formData) => {
     if (formData.password !== formData.confirm_password) {
       return setError("confirm_password");
+    }
+
+    if (passwordScore < 3) {
+      return setError("password");
     }
 
     dispatch(userActions
@@ -52,11 +58,19 @@ const ResetPassword = () => {
           : null}
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            <input ref={register({ required: true, pattern: Regex.STRONG_PASSWORD })} type="password" name="password" className="form-control mb-1" placeholder="Password" />
+            {errors.password ?
+              <div className="small mb-1 text-danger">
+                Your password is too weak. Please try again with a stronger password.
+              </div>
+            : null}
 
-            <div className={cn("small mb-4", errors.password ? 'text-danger' : 'text-muted')}>
-              Must include: 8 characters minimum, 1 number or symbol
-            </div>
+            <input ref={register({ required: true })} type="password" name="password" className="form-control mb-1" placeholder="Password" />
+
+            <PasswordStrengthBar
+              password={passwordWatch}
+              onChangeScore={(score) => setPasswordScore(score)}
+              className="mb-2"
+            />
 
             <div className="mb-4">
               <input ref={register} type="password" name="confirm_password" className="form-control" placeholder="Confirm password" />
