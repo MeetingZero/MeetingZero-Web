@@ -59,6 +59,10 @@ const CreateWorkshop = () => {
     return setEmails(emails);
   }
 
+  const handlePSSChange = (pssKey) => {
+    console.log(pssKey);
+  }
+
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
@@ -81,7 +85,9 @@ const CreateWorkshop = () => {
                 </div>
               </div>
 
-              <ProblemSolvingStepList />
+              <ProblemSolvingStepList
+                handleChange={handlePSSChange}
+              />
 
               <LimitedTextarea
                 formInstance={formInstance}

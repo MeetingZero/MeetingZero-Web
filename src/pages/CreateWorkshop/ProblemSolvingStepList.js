@@ -23,7 +23,9 @@ const PROBLEM_SOLVING_STEP_LIST = [
   }
 ];
 
-const ProblemSolvingStepList = () => {
+const ProblemSolvingStepList = ({
+  handleChange
+}) => {
   return (
     <div className="mb-2">
       <div className="mb-2">
@@ -34,6 +36,7 @@ const ProblemSolvingStepList = () => {
         return (
           <div key={index} className="form-check mb-1">
             <input
+              onChange={(event) => handleChange(event.target.value)}
               className="form-check-input"
               type="radio"
               name="problem_solving_step"
