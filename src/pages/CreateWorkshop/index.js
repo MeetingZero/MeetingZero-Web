@@ -2,14 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import cn from 'classnames';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
 
 import Button from 'library/Button';
-import CharacterCounter from 'library/CharacterCounter';
 import TagsInput from 'library/TagsInput';
-import TextArea from 'library/TextArea';
+import LimitedTextarea from 'library/TextArea/LimitedTextarea';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -18,11 +16,9 @@ import "./CreateWorkshop.scss";
 const CreateWorkshop = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { register, handleSubmit, errors, control } = useForm();
+  const formInstance = useForm();
 
   const [emails, setEmails] = React.useState([]);
-  const [workshopPurpose, setWorkshopPurpose] = React.useState("");
-  const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [dateTimeSelected, setDateTimeSelected] = React.useState(null);
   const [showError, setShowError] = React.useState(false);
   const [showWarning, setShowWarning] = React.useState(false);
@@ -47,10 +43,6 @@ const CreateWorkshop = () => {
     });
   }
 
-  const handleExceed = (isExceeded) => {
-    setCharCountExceeded(isExceeded);
-  }
-
   const isLoading = useSelector((state) => {
     return state.Loading.indexOf("CREATING_NEW_WORKSHOP") >= 0;
   });
@@ -71,7 +63,7 @@ const CreateWorkshop = () => {
       <div className="row">
         <div className="col-8">
           <div className="p-2">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={formInstance.handleSubmit(onSubmit)}>
               <div className="row mb-5">
                 <div className="col-4"></div>
 
@@ -88,33 +80,13 @@ const CreateWorkshop = () => {
                 </div>
               </div>
 
-              <TextArea
-                control={control}
-                register={register({ required: true, maxLength: 140 })}
-                name="purpose"
+              <LimitedTextarea
+                formInstance={formInstance}
+                fieldName="purpose"
                 placeholder="State a broad topic..."
-                className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
-                onUserInput={(userInput) => setWorkshopPurpose(userInput)}
+                errorMessage="Please enter a workshop purpose of 140 characters or less"
+                marginBottom="10"
               />
-
-              <div className="row mb-10">
-                <div className="col-6">
-                  {errors.purpose ?
-                    <div className="small text-danger">
-                      Please enter a workshop name of 140 characters or less
-                    </div>
-                  : null}
-                </div>
-
-                <div className="col-6">
-                  <CharacterCounter
-                    className="text-right"
-                    maxChars={140}
-                    inputString={workshopPurpose}
-                    onExceed={handleExceed}
-                  />
-                </div>
-              </div>
 
               <TagsInput
                 className="form-control border-top-0 border-left-0 border-right-0 rounded-0 mb-1"
