@@ -61,7 +61,7 @@ const CreateWorkshop = () => {
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
-        <div className="col-8">
+        <div className="col-7">
           <div className="p-2">
             <form onSubmit={formInstance.handleSubmit(onSubmit)}>
               <div className="row mb-5">
@@ -140,7 +140,7 @@ const CreateWorkshop = () => {
           </div>
         </div>
 
-        <div className="create-workshop-helper-column col-4 vh-100">
+        <div className="create-workshop-helper-column col-5 vh-100">
           Column Here
         </div>
       </div>
