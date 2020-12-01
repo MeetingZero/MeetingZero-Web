@@ -8,6 +8,7 @@ import moment from 'moment';
 import Button from 'library/Button';
 import TagsInput from 'library/TagsInput';
 import LimitedTextarea from 'library/TextArea/LimitedTextarea';
+import ProblemSolvingStepList from './ProblemSolvingStepList';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -79,6 +80,8 @@ const CreateWorkshop = () => {
                   </div>
                 </div>
               </div>
+
+              <ProblemSolvingStepList />
 
               <LimitedTextarea
                 formInstance={formInstance}
