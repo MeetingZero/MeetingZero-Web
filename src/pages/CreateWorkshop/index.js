@@ -89,7 +89,7 @@ const CreateWorkshop = () => {
               />
 
               <TagsInput
-                className="form-control border-top-0 border-left-0 border-right-0 rounded-0 mb-1"
+                className="react-tagsinput-container mb-1"
                 value={emails}
                 onChange={handleEmailChange}
                 onlyUnique={true}

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactTagsInput from 'react-tagsinput';
 
-import './TagsInput.scss';
 import 'react-tagsinput/react-tagsinput.css';
+import './TagsInput.scss';
 
 const TagsInput = (props) => {
   return (
