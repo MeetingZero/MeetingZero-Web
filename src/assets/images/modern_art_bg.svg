@@ -1,0 +1,42 @@
+<svg width="552" height="794" viewBox="0 0 552 794" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<rect width="552" height="794" fill="white"/>
+<path d="M432 400V567" stroke="#4396F7" stroke-width="10" stroke-linecap="round"/>
+<path d="M463.5 401L463.5 519" stroke="#4396F7" stroke-width="10" stroke-linecap="round"/>
+<path d="M494.5 401L494.5 555" stroke="#4396F7" stroke-width="10" stroke-linecap="round"/>
+<path d="M525.5 401L525.5 478" stroke="#4396F7" stroke-width="10" stroke-linecap="round"/>
+<circle cx="339" cy="117" r="79" fill="#DDEDFE"/>
+<path d="M542.5 510C393.659 510 273 389.341 273 240.5C273 91.6593 393.659 -29 542.5 -29C691.341 -29 812 91.6593 812 240.5C812 385.775 697.052 504.204 553.146 509.794C549.615 509.931 546.065 510 542.5 510Z" stroke="#94C6FA" stroke-width="2"/>
+<path d="M0 567H152C211.647 567 260 615.353 260 675V675H0V567Z" fill="#BFDDFC"/>
+<circle cx="43" cy="652" r="5" fill="#233758"/>
+<circle cx="43" cy="668" r="5" fill="#233758"/>
+<circle cx="43" cy="684" r="5" fill="#233758"/>
+<circle cx="43" cy="700" r="5" fill="#233758"/>
+<circle cx="43" cy="716" r="5" fill="#233758"/>
+<circle cx="59" cy="652" r="5" fill="#233758"/>
+<circle cx="59" cy="668" r="5" fill="#233758"/>
+<circle cx="59" cy="684" r="5" fill="#233758"/>
+<circle cx="59" cy="700" r="5" fill="#233758"/>
+<circle cx="59" cy="716" r="5" fill="#233758"/>
+<circle cx="75" cy="652" r="5" fill="#233758"/>
+<circle cx="75" cy="668" r="5" fill="#233758"/>
+<circle cx="75" cy="684" r="5" fill="#233758"/>
+<circle cx="75" cy="700" r="5" fill="#233758"/>
+<circle cx="75" cy="716" r="5" fill="#233758"/>
+<circle cx="91" cy="652" r="5" fill="#233758"/>
+<circle cx="91" cy="668" r="5" fill="#233758"/>
+<circle cx="91" cy="684" r="5" fill="#233758"/>
+<circle cx="91" cy="700" r="5" fill="#233758"/>
+<circle cx="91" cy="716" r="5" fill="#233758"/>
+<circle cx="107" cy="652" r="5" fill="#233758"/>
+<circle cx="107" cy="668" r="5" fill="#233758"/>
+<circle cx="107" cy="684" r="5" fill="#233758"/>
+<circle cx="107" cy="700" r="5" fill="#233758"/>
+<circle cx="107" cy="716" r="5" fill="#233758"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="552" height="794" fill="white"/>
+</clipPath>
+</defs>
+</svg>
