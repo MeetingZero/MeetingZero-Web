@@ -10,7 +10,6 @@ const LimitedTextarea = ({
   fieldName,
   placeholder,
   errorMessage,
-  marginBottom,
   maxChars = 140
 }) => {
   const [fieldText, setFieldText] = React.useState("");
@@ -37,7 +36,7 @@ const LimitedTextarea = ({
         }}
       />
 
-      <div className={cn("row", marginBottom ? `mb-${marginBottom}` : null)}>
+      <div className="row">
         <div className="col-6">
           {formInstance.errors[fieldName] ?
             <div className="small text-danger">

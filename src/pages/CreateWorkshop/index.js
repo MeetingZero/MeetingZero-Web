@@ -7,8 +7,9 @@ import moment from 'moment';
 
 import Button from 'library/Button';
 import TagsInput from 'library/TagsInput';
-import LimitedTextarea from 'library/TextArea/LimitedTextarea';
+
 import ProblemSolvingStepList from './ProblemSolvingStepList';
+import GeneralTopic from './GeneralTopic';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -23,6 +24,7 @@ const CreateWorkshop = () => {
   const [dateTimeSelected, setDateTimeSelected] = React.useState(null);
   const [showError, setShowError] = React.useState(false);
   const [showWarning, setShowWarning] = React.useState(false);
+  const [problemSolvingStepSelected, setProblemSolvingStepSelected] = React.useState(null);
 
   const onSubmit = (formData) => {
     if (emails.length < 2 || emails.length > 8) {
@@ -59,10 +61,6 @@ const CreateWorkshop = () => {
     return setEmails(emails);
   }
 
-  const handlePSSChange = (pssKey) => {
-    console.log(pssKey);
-  }
-
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
@@ -86,16 +84,14 @@ const CreateWorkshop = () => {
               </div>
 
               <ProblemSolvingStepList
-                handleChange={handlePSSChange}
+                handleChange={(pssKey) => setProblemSolvingStepSelected(pssKey)}
               />
 
-              <LimitedTextarea
-                formInstance={formInstance}
-                fieldName="purpose"
-                placeholder="State a broad topic..."
-                errorMessage="Please enter a workshop purpose of 140 characters or less"
-                marginBottom="10"
-              />
+              {problemSolvingStepSelected && problemSolvingStepSelected === "GENERAL_TOPIC" ?
+                <GeneralTopic
+                  formInstance={formInstance}
+                />
+              : null}
 
               <TagsInput
                 className="react-tagsinput-container mb-1"

@@ -26,22 +26,51 @@ const PROBLEM_SOLVING_STEP_LIST = [
 const ProblemSolvingStepList = ({
   handleChange
 }) => {
+  const [problemSolvingStepSelected, setProblemSolvingStepSelected] = React.useState(null);
+  const [radioChecked, setRadioChecked] = React.useState(false);
+
   return (
     <div className="mb-2">
-      <div className="mb-2">
-        First off, where are you in your problem-solving process?
+      <div className="row mb-2">
+        <div className="col-6">
+          First off, where are you in your problem-solving process?
+        </div>
+
+        <div className="col-6 text-right">
+          {problemSolvingStepSelected ?
+            <button
+              onClick={() => {
+                setProblemSolvingStepSelected(null);
+                handleChange(null);
+                setRadioChecked(false);
+              }}
+              className="btn btn-link"
+            >
+              Edit
+            </button>
+          : null}
+        </div>
       </div>
 
       {PROBLEM_SOLVING_STEP_LIST.map((pss, index) => {
+        if (problemSolvingStepSelected && problemSolvingStepSelected !== pss.key) {
+          return null;
+        }
+
         return (
           <div key={index} className="form-check mb-1">
             <input
-              onChange={(event) => handleChange(event.target.value)}
+              onChange={(event) => {
+                setProblemSolvingStepSelected(event.target.value);
+                handleChange(event.target.value);
+                setRadioChecked(true);
+              }}
               className="form-check-input"
               type="radio"
               name="problem_solving_step"
               id={`pss-${index}`}
               value={pss.key}
+              checked={radioChecked}
             />
 
             <label className="form-check-label ml-1" htmlFor={`pss-${index}`}>
