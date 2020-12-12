@@ -4,21 +4,21 @@ import { HUMAN_COUNTING } from 'constants/englishNumbers';
 
 import LimitedTextarea from 'library/TextArea/LimitedTextarea';
 
-const ExistingProblems = ({
+const ExistingSolutions = ({
   formInstance
 }) => {
-  const [problems, setProblems] = React.useState([null, null, null]);
+  const [solutions, setSolutions] = React.useState([null, null, null]);
 
   const handleChange = (userInput, index) => {
-    if (userInput === problems[index]) {
+    if (userInput === solutions[index]) {
       return;
     }
 
-    const clonedProblems = [...problems];
+    const clonedSolutions = [...solutions];
 
-    clonedProblems[index] = userInput;
+    clonedSolutions[index] = userInput;
 
-    setProblems(clonedProblems);
+    setSolutions(clonedSolutions);
   }
 
   return (
@@ -28,16 +28,16 @@ const ExistingProblems = ({
           Give us a little more information
         </div>
 
-        {problems.map((problem, index) => {
+        {solutions.map((solution, index) => {
           return (
             <div key={index} className="mb-2">
               <LimitedTextarea
                 onUserInput={(userInput) => handleChange(userInput, index)}
                 formInstance={formInstance}
-                fieldName={`problem_${index}`}
+                fieldName={`solution_${index}`}
                 fieldRequired={index === 0}
-                placeholder={`${HUMAN_COUNTING[index + 1]} problem`}
-                errorMessage="Please enter a problem of 140 characters or less"
+                placeholder={`${HUMAN_COUNTING[index + 1]} solution`}
+                errorMessage="Please enter a solution of 140 characters or less"
               />
             </div>
           );
@@ -46,7 +46,7 @@ const ExistingProblems = ({
 
       <div className="text-right">
         <button
-          onClick={() => setProblems([...problems, null])}
+          onClick={() => setSolutions([...solutions, null])}
           type="button"
           className="btn btn-secondary btn-rounded px-2 py-1"
         >
@@ -64,4 +64,4 @@ const ExistingProblems = ({
   );
 }
 
-export default ExistingProblems;
+export default ExistingSolutions;
