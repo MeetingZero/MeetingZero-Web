@@ -53,7 +53,7 @@ const ExistingProblems = ({
         })}
       </div>
 
-      <div className="text-right">
+      <div className="text-right mb-4">
         <button
           onClick={() => setProblems([...problems, null])}
           type="button"

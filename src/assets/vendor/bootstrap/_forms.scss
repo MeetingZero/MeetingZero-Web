@@ -345,3 +345,9 @@ textarea.form-control {
     }
   }
 }
+
+.line-input {
+  border: none;
+  border-radius: 0;
+  border-bottom: $gray-600 1px solid;
+}

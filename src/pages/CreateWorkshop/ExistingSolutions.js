@@ -53,7 +53,7 @@ const ExistingSolutions = ({
         })}
       </div>
 
-      <div className="text-right">
+      <div className="text-right mb-4">
         <button
           onClick={() => setSolutions([...solutions, null])}
           type="button"

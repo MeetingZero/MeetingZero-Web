@@ -107,6 +107,12 @@ const CreateWorkshop = () => {
                 />
               : null}
 
+              <input
+                type="text"
+                className="form-control line-input mb-8"
+                placeholder="How can your teammates prepare? - Optional"
+              />
+
               <TagsInput
                 className="react-tagsinput-container mb-1"
                 value={emails}
