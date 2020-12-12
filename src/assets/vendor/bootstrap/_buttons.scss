@@ -86,6 +86,12 @@ fieldset:disabled a.btn {
     border-color: $primary !important;
     color: $primary !important;
   }
+
+  &:disabled {
+    background: $gray-200 !important;
+    border-color: $gray-200 !important;
+    color: $gray-600 !important;
+  }
 }
 
 .btn-hollow {

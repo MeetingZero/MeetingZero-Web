@@ -8,6 +8,7 @@ const ExistingSolutions = ({
   formInstance
 }) => {
   const [solutions, setSolutions] = React.useState([null, null, null]);
+  const [submitDisabled, setSubmitDisabled] = React.useState(true);
 
   const handleChange = (userInput, index) => {
     if (userInput === solutions[index]) {
@@ -20,6 +21,14 @@ const ExistingSolutions = ({
 
     setSolutions(clonedSolutions);
   }
+
+  React.useEffect(() => {
+    for (let i = 0; i < solutions.length; i++) {
+      if (solutions[i] && solutions[i].length) {
+        return setSubmitDisabled(false);
+      }
+    }
+  }, [solutions]);
 
   return (
     <React.Fragment>
@@ -49,6 +58,7 @@ const ExistingSolutions = ({
           onClick={() => setSolutions([...solutions, null])}
           type="button"
           className="btn btn-secondary btn-rounded px-2 py-1"
+          disabled={solutions.length === 27}
         >
           Add More
           <i className="fa fa-plus ml-1" />
@@ -56,6 +66,7 @@ const ExistingSolutions = ({
 
         <button
           className="btn btn-primary px-2 py-1 ml-2"
+          disabled={submitDisabled}
         >
           Submit
         </button>
