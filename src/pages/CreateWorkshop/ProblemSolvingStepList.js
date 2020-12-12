@@ -11,11 +11,7 @@ const PROBLEM_SOLVING_STEP_LIST = [
   },
   {
     key: "EXISTING_SOLUTIONS",
-    description: "I have a few solutions for a problem, but I don’t know which is the right one"
-  },
-  {
-    key: "ONE_EXISTING_SOLUTION",
-    description: "I want to create an experiment based on a solution I want to validate"
+    description: "I have one or more solutions for a problem, but I don’t know which is the right one"
   }
 ];
 

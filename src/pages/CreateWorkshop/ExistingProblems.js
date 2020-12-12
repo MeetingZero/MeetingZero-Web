@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { HUMAN_COUNTING } from 'constants/englishNumbers';
+
 import LimitedTextarea from 'library/TextArea/LimitedTextarea';
 
 const ExistingProblems = ({
   formInstance
 }) => {
-  const [problems, setProblems] = React.useState([null]);
+  const [problems, setProblems] = React.useState([null, null, null]);
 
   const handleChange = (userInput, index) => {
     if (userInput === problems[index]) {
@@ -33,7 +35,8 @@ const ExistingProblems = ({
                 onUserInput={(userInput) => handleChange(userInput, index)}
                 formInstance={formInstance}
                 fieldName={`problem_${index}`}
-                placeholder="What's this problem?"
+                fieldRequired={index === 0}
+                placeholder={`${HUMAN_COUNTING[index + 1]} problem`}
                 errorMessage="Please enter a problem of 140 characters or less"
               />
             </div>

@@ -8,6 +8,7 @@ const LimitedTextarea = ({
   formInstance,
   onUserInput,
   fieldName,
+  fieldRequired = true,
   placeholder,
   errorMessage,
   maxChars = 140
@@ -23,7 +24,7 @@ const LimitedTextarea = ({
     <React.Fragment>
       <TextArea
         control={formInstance.control}
-        register={formInstance.register({ required: true, maxLength: maxChars })}
+        register={formInstance.register({ required: fieldRequired, maxLength: maxChars })}
         name={fieldName}
         placeholder={placeholder}
         className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
