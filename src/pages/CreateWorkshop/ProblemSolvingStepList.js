@@ -7,11 +7,7 @@ const PROBLEM_SOLVING_STEP_LIST = [
   },
   {
     key: "EXISTING_PROBLEMS",
-    description: "I have a few problems, but I don’t know which is the right one to solve"
-  },
-  {
-    key: "ONE_EXISTING_PROBLEM",
-    description: "I have a problem I want my team to solve"
+    description: "I have one or more problems, but I don’t know which is the right one to solve"
   },
   {
     key: "EXISTING_SOLUTIONS",

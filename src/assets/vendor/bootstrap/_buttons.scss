@@ -74,6 +74,20 @@ fieldset:disabled a.btn {
   }
 }
 
+.btn-secondary {
+  border-color: $primary;
+  background: $white;
+  color: $primary;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: $white !important;
+    border-color: $primary !important;
+    color: $primary !important;
+  }
+}
+
 .btn-hollow {
   background: $white;
   color: $dark;
@@ -81,6 +95,10 @@ fieldset:disabled a.btn {
 
 .btn-square {
   border-radius: 0;
+}
+
+.btn-rounded {
+  border-radius: $border-radius;
 }
 
 

@@ -10,7 +10,7 @@ import TagsInput from 'library/TagsInput';
 
 import ProblemSolvingStepList from './ProblemSolvingStepList';
 import GeneralTopic from './GeneralTopic';
-import OneProblem from './OneProblem';
+import ExistingProblems from './ExistingProblems';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -94,8 +94,8 @@ const CreateWorkshop = () => {
                 />
               : null}
 
-              {problemSolvingStepSelected && problemSolvingStepSelected === "ONE_EXISTING_PROBLEM" ?
-                <OneProblem
+              {problemSolvingStepSelected && problemSolvingStepSelected === "EXISTING_PROBLEMS" ?
+                <ExistingProblems
                   formInstance={formInstance}
                 />
               : null}
