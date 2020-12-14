@@ -108,6 +108,8 @@ const CreateWorkshop = () => {
               : null}
 
               <input
+                ref={formInstance.register}
+                name="preparation_instructions"
                 type="text"
                 className="form-control line-input mb-8"
                 placeholder="How can your teammates prepare? - Optional"
