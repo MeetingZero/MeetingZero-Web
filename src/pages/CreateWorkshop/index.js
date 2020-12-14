@@ -12,6 +12,7 @@ import ProblemSolvingStepList from './ProblemSolvingStepList';
 import GeneralTopic from './GeneralTopic';
 import ExistingProblems from './ExistingProblems';
 import ExistingSolutions from './ExistingSolutions';
+import HelperText from './HelperText';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -168,7 +169,11 @@ const CreateWorkshop = () => {
         </div>
 
         <div className="create-workshop-helper-column col-5 vh-100">
-          Column Here
+          {problemSolvingStepSelected ?
+            <HelperText
+              pssKey={problemSolvingStepSelected}
+            />
+          : null}
         </div>
       </div>
     </div>
