@@ -15,7 +15,9 @@ export const createWorkshop = (workshop, emails, dateTimePlanned, problemSolving
       emails,
       date_time_planned: dateTimePlanned,
       workshop_stage_keys: WORKSHOP_STAGE_KEYS_PSS_MAP[problemSolvingStepSelected],
-      preparation_instructions: workshop.preparation_instructions
+      preparation_instructions: workshop.preparation_instructions,
+      existing_problems: workshop.existing_problems,
+      existing_solutions: workshop.existing_solutions
     })
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('CREATING_NEW_WORKSHOP'));

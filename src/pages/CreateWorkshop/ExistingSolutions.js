@@ -43,7 +43,7 @@ const ExistingSolutions = ({
               <LimitedTextarea
                 onUserInput={(userInput) => handleChange(userInput, index)}
                 formInstance={formInstance}
-                fieldName={`solutions[${index}]`}
+                fieldName={`existing_solutions[${index}]`}
                 fieldRequired={index === 0}
                 placeholder={`${HUMAN_COUNTING[index + 1]} solution`}
                 errorMessage="Please enter a solution of 140 characters or less"
