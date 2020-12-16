@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
+import cn from 'classnames';
 
 import Button from 'library/Button';
 import TagsInput from 'library/TagsInput';
@@ -28,8 +29,14 @@ const CreateWorkshop = () => {
   const [showError, setShowError] = React.useState(false);
   const [showWarning, setShowWarning] = React.useState(false);
   const [problemSolvingStepSelected, setProblemSolvingStepSelected] = React.useState(null);
+  const [showPssError, setShowPssError] = React.useState(false);
+  const [showPreparationHelperText, setShowPreparationHelperText] = React.useState(false);
 
   const onSubmit = (formData) => {
+    if (!problemSolvingStepSelected) {
+      return setShowPssError(true);
+    }
+    
     if (emails.length < 2 || emails.length > 8) {
       setShowWarning(false);
       return setShowError(true);
@@ -86,9 +93,21 @@ const CreateWorkshop = () => {
                 </div>
               </div>
 
-              <ProblemSolvingStepList
-                handleChange={(pssKey) => setProblemSolvingStepSelected(pssKey)}
-              />
+              <div className={cn(showPssError ? "mb-2" : "mb-4")}>
+                <ProblemSolvingStepList
+                  handleChange={(pssKey) => {
+                    setProblemSolvingStepSelected(pssKey);
+                    setShowPssError(false);
+                    setShowPreparationHelperText(false);
+                  }}
+                />
+              </div>
+
+              {showPssError ?
+                <div className="text-danger mb-2">
+                  Please select a step
+                </div>
+              : null}
 
               {problemSolvingStepSelected && problemSolvingStepSelected === "GENERAL_TOPIC" ?
                 <GeneralTopic
@@ -109,6 +128,7 @@ const CreateWorkshop = () => {
               : null}
 
               <input
+                onFocus={() => setShowPreparationHelperText(true)}
                 ref={formInstance.register}
                 name="preparation_instructions"
                 type="text"
@@ -169,9 +189,10 @@ const CreateWorkshop = () => {
         </div>
 
         <div className="create-workshop-helper-column col-5 vh-100">
-          {problemSolvingStepSelected ?
+          {problemSolvingStepSelected || showPreparationHelperText ?
             <HelperText
               pssKey={problemSolvingStepSelected}
+              showPreparation={showPreparationHelperText}
             />
           : null}
         </div>

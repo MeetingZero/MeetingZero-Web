@@ -22,7 +22,7 @@ const ProblemSolvingStepList = ({
   const [radioChecked, setRadioChecked] = React.useState(false);
 
   return (
-    <div className="mb-4">
+    <React.Fragment>
       <div className="row mb-2">
         <div className="col-6">
           First off, where are you in your problem-solving process?
@@ -71,7 +71,7 @@ const ProblemSolvingStepList = ({
           </div>
         );
       })}
-    </div>
+    </React.Fragment>
   );
 }
 
