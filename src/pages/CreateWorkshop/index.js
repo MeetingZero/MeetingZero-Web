@@ -129,7 +129,7 @@ const CreateWorkshop = () => {
 
               <input
                 onFocus={() => setShowPreparationHelperText(true)}
-                ref={formInstance.register}
+                ref={formInstance.register()}
                 name="preparation_instructions"
                 type="text"
                 className="form-control line-input mb-8"
