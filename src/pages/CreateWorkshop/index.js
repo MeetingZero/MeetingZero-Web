@@ -50,7 +50,7 @@ const CreateWorkshop = () => {
       return;
     }
 
-    return dispatch(workshopActions.createWorkshop(formData, emails, dateTimeSelectedUtc))
+    return dispatch(workshopActions.createWorkshop(formData, emails, dateTimeSelectedUtc, problemSolvingStepSelected))
     .then(() => {
       history.push("/create-workshop-confirmation");
     });
