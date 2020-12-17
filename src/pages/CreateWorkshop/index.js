@@ -188,7 +188,7 @@ const CreateWorkshop = () => {
           </div>
         </div>
 
-        <div className="create-workshop-helper-column col-5 vh-100">
+        <div className="create-workshop-helper-column col-5">
           {problemSolvingStepSelected || showPreparationHelperText ?
             <HelperText
               pssKey={problemSolvingStepSelected}

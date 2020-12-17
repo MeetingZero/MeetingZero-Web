@@ -3,15 +3,23 @@ import React from 'react';
 const PROBLEM_SOLVING_STEP_LIST = [
   {
     key: "GENERAL_TOPIC",
-    description: "I have a topic I want my team to explore"
+    description: "I have a broad topic I want my team to explore"
   },
   {
-    key: "EXISTING_PROBLEMS",
-    description: "I have one or more problems, but I don’t know which is the right one to solve"
+    key: "MANY_EXISTING_PROBLEMS",
+    description: "I have a few problems, but I don’t know which is the right one to solve"
   },
   {
-    key: "EXISTING_SOLUTIONS",
-    description: "I have one or more solutions for a problem, but I don’t know which is the right one"
+    key: "ONE_EXISTING_PROBLEM",
+    description: "I have a problem I want my team to solve"
+  },
+  {
+    key: "MANY_EXISTING_SOLUTIONS",
+    description: "I have a few solutions, but I don’t know which is the right one"
+  },
+  {
+    key: "ONE_EXISTING_SOLUTION",
+    description: "I want to create an experiment based on a solution I want to validate"
   }
 ];
 
