@@ -1,5 +1,7 @@
 import React from 'react';
 
+import StepOverlay from './StepOverlay';
+
 const PROBLEM_SOLVING_STEP_LIST = [
   {
     key: "GENERAL_TOPIC",
@@ -30,7 +32,12 @@ const ProblemSolvingStepList = ({
   const [radioChecked, setRadioChecked] = React.useState(false);
 
   return (
-    <React.Fragment>
+    <div className="position-relative">
+      <StepOverlay
+        text="Problem solving step"
+        show={true}
+      />
+
       <div className="row mb-2">
         <div className="col-6">
           First off, where are you in your problem-solving process?
@@ -79,7 +86,7 @@ const ProblemSolvingStepList = ({
           </div>
         );
       })}
-    </React.Fragment>
+    </div>
   );
 }
 

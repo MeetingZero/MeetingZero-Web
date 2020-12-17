@@ -14,6 +14,7 @@ import GeneralTopic from './GeneralTopic';
 import ExistingProblems from './ExistingProblems';
 import ExistingSolutions from './ExistingSolutions';
 import HelperText from './HelperText';
+import StepOverlay from './StepOverlay';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -93,6 +94,12 @@ const CreateWorkshop = () => {
                 </div>
               </div>
 
+              <div className="mb-4">
+                <select className="form-control">
+                  <option>Kickoff experiment</option>
+                </select>
+              </div>
+
               <div className={cn(showPssError ? "mb-2" : "mb-4")}>
                 <ProblemSolvingStepList
                   handleChange={(pssKey) => {
@@ -127,54 +134,75 @@ const CreateWorkshop = () => {
                 />
               : null}
 
-              <input
-                onFocus={() => setShowPreparationHelperText(true)}
-                ref={formInstance.register()}
-                name="preparation_instructions"
-                type="text"
-                className="form-control line-input mb-8"
-                placeholder="How can your teammates prepare? - Optional"
-              />
+              <div className="position-relative">
+                <StepOverlay
+                  text="Pre-workshop prep"
+                  show={true}
+                />
 
-              <TagsInput
-                className="react-tagsinput-container mb-1"
-                value={emails}
-                onChange={handleEmailChange}
-                onlyUnique={true}
-                placeholder="Invite Attendees"
-              />
+                <input
+                  onFocus={() => setShowPreparationHelperText(true)}
+                  ref={formInstance.register()}
+                  name="preparation_instructions"
+                  type="text"
+                  className="form-control line-input mb-8"
+                  placeholder="How can your teammates prepare? - Optional"
+                />
+              </div>
 
-              <div className="row mb-2">
-                <div className="col-6">
-                    {showError ?
-                      <div className="text-danger">
-                        There must be between 3 and 9 people in this workshop
-                      </div>
-                    : null}
+              <div className="position-relative">
+                <StepOverlay
+                  text="Invite attendees"
+                  show={true}
+                />
+                
+                <TagsInput
+                  className="react-tagsinput-container mb-1"
+                  value={emails}
+                  onChange={handleEmailChange}
+                  onlyUnique={true}
+                  placeholder="Invite Attendees"
+                />
 
-                    {showWarning ?
-                      <div className="text-warning">
-                        MeetingZero works best with more than 5 people
-                      </div>
-                    : null}
-                </div>
+                <div className="row mb-2">
+                  <div className="col-6">
+                      {showError ?
+                        <div className="text-danger">
+                          There must be between 3 and 9 people in this workshop
+                        </div>
+                      : null}
 
-                <div className="col-6">
-                  <div className="text-right mb-2">
-                    Separate emails with the tab or enter key
+                      {showWarning ?
+                        <div className="text-warning">
+                          MeetingZero works best with more than 5 people
+                        </div>
+                      : null}
+                  </div>
+
+                  <div className="col-6">
+                    <div className="text-right mb-2">
+                      Separate emails with the tab or enter key
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mb-2">
-                Select Date and Time
-              </div>
-
-              <div className="mb-5">
-                <DateTimePicker 
-                  value={dateTimeSelected}
-                  onChange={setDateTimeSelected}
+              <div className="position-relative">
+                <StepOverlay
+                  text="Select date and time"
+                  show={true}
                 />
+
+                <div className="mb-2">
+                  Select Date and Time
+                </div>
+
+                <div className="mb-5">
+                  <DateTimePicker 
+                    value={dateTimeSelected}
+                    onChange={setDateTimeSelected}
+                  />
+                </div>
               </div>
 
               <div className="text-center mb-1">
