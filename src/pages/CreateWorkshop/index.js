@@ -32,6 +32,7 @@ const CreateWorkshop = () => {
   const [problemSolvingStepSelected, setProblemSolvingStepSelected] = React.useState(null);
   const [showPssError, setShowPssError] = React.useState(false);
   const [showPreparationHelperText, setShowPreparationHelperText] = React.useState(false);
+  const [workshopType, setWorkshopType] = React.useState("");
 
   const onSubmit = (formData) => {
     if (!problemSolvingStepSelected) {
@@ -95,9 +96,12 @@ const CreateWorkshop = () => {
               </div>
 
               <div className="mb-4">
-                <select className="form-control">
-                  <option>Workshop type</option>
-                  <option>Kickoff experiment</option>
+                <select
+                  onChange={(event) => setWorkshopType(event.target.value)}
+                  className="form-control"
+                >
+                  <option value="">Workshop type</option>
+                  <option value="KICKOFF_EXPERIMENT">Kickoff experiment</option>
                 </select>
               </div>
 
@@ -108,6 +112,7 @@ const CreateWorkshop = () => {
                     setShowPssError(false);
                     setShowPreparationHelperText(false);
                   }}
+                  showOverlay={workshopType === ""}
                 />
               </div>
 
@@ -123,7 +128,7 @@ const CreateWorkshop = () => {
                 />
               : null}
 
-              {problemSolvingStepSelected && problemSolvingStepSelected === "EXISTING_PROBLEMS" ?
+              {problemSolvingStepSelected && problemSolvingStepSelected === "MANY_EXISTING_PROBLEMS" ?
                 <ExistingProblems
                   formInstance={formInstance}
                 />

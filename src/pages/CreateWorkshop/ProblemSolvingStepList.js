@@ -26,7 +26,8 @@ const PROBLEM_SOLVING_STEP_LIST = [
 ];
 
 const ProblemSolvingStepList = ({
-  handleChange
+  handleChange,
+  showOverlay
 }) => {
   const [problemSolvingStepSelected, setProblemSolvingStepSelected] = React.useState(null);
   const [radioChecked, setRadioChecked] = React.useState(false);
@@ -35,7 +36,7 @@ const ProblemSolvingStepList = ({
     <div className="position-relative">
       <StepOverlay
         text="Problem solving step"
-        show={false}
+        show={showOverlay}
       />
 
       <div className="row mb-2">
