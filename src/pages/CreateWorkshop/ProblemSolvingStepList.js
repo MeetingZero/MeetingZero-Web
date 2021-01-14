@@ -35,7 +35,7 @@ const ProblemSolvingStepList = ({
     <div className="position-relative">
       <StepOverlay
         text="Problem solving step"
-        show={true}
+        show={false}
       />
 
       <div className="row mb-2">

@@ -26,8 +26,32 @@ const HelperText = ({
             Broad topic
           </div>
 
-          <div>
+          <div className="mb-2">
             This is a statement. It is not an opinion, question, problem, assumption, or solution.
+          </div>
+
+          <div className="text-muted mb-2">
+            Workshop time: Maximum of ~54 minutes
+          </div>
+
+          <div className="mb-2">
+            Step 1 - Explore the problem space around a broad topic, vote across problems to select the initial winner, and then reframe the winning problem and vote again to come to a final decision on the problem to solve
+          </div>
+
+          <div className="mb-2">
+            Step 2 - Draft the opportunity question
+          </div>
+
+          <div className="mb-2">
+            Step 3 - Generate solutions, and then vote to find a winner to test
+          </div>
+
+          <div className="mb-2">
+            Step 4 - Create a hypothesis for an experiment to test
+          </div>
+
+          <div>
+            Step 5 - Assign tasks to team members
           </div>
         </React.Fragment>
       : null}
@@ -57,6 +81,18 @@ const HelperText = ({
             <li>We should increase the price of our enterprise membership to $20 per month</li>
             <li>We should add an interactive onboarding experience so first time users have a better sense of what our app does</li>
           </ul>
+        </React.Fragment>
+      : null}
+
+      {!pssKey ?
+        <React.Fragment>
+          <div className="text-muted mb-2">
+            Workshop type
+          </div>
+
+          <p>
+            To be outcome-driven, we recommend running this workshop every Monday morning (starting at any problem-solving stage step) and review results no longer than every other Friday afternoon.
+          </p>
         </React.Fragment>
       : null}
 

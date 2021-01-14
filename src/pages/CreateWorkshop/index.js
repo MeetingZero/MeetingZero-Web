@@ -96,6 +96,7 @@ const CreateWorkshop = () => {
 
               <div className="mb-4">
                 <select className="form-control">
+                  <option>Workshop type</option>
                   <option>Kickoff experiment</option>
                 </select>
               </div>
@@ -137,7 +138,7 @@ const CreateWorkshop = () => {
               <div className="position-relative">
                 <StepOverlay
                   text="Pre-workshop prep"
-                  show={true}
+                  show={false}
                 />
 
                 <input
@@ -153,7 +154,7 @@ const CreateWorkshop = () => {
               <div className="position-relative">
                 <StepOverlay
                   text="Invite attendees"
-                  show={true}
+                  show={false}
                 />
                 
                 <TagsInput
@@ -190,7 +191,7 @@ const CreateWorkshop = () => {
               <div className="position-relative">
                 <StepOverlay
                   text="Select date and time"
-                  show={true}
+                  show={false}
                 />
 
                 <div className="mb-2">
@@ -217,12 +218,10 @@ const CreateWorkshop = () => {
         </div>
 
         <div className="create-workshop-helper-column col-5">
-          {problemSolvingStepSelected || showPreparationHelperText ?
-            <HelperText
-              pssKey={problemSolvingStepSelected}
-              showPreparation={showPreparationHelperText}
-            />
-          : null}
+          <HelperText
+            pssKey={problemSolvingStepSelected}
+            showPreparation={showPreparationHelperText}
+          />
         </div>
       </div>
     </div>
