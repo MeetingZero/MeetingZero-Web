@@ -56,17 +56,53 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
-      {pssKey === "EXISTING_PROBLEMS" && !showPreparation ?
+      {pssKey === "MANY_EXISTING_PROBLEMS" && !showPreparation ?
         <React.Fragment>
-          <div className="h1 mb-2">
+          <div className="text-muted mb-2">
             Examples
           </div>
 
-          <ul>
-            <li>Users keep dropping off at our login page</li>
-            <li>Some of our CTAs are not color accessible</li>
-            <li>Our sales among 18-24 year olds are down 40% this quarter</li>
+          <ul className="mb-2">
+            <li>The conversion flow of our checkout</li>
+            <li>Our internal design process</li>
+            <li>Improving our office environment</li>
+            <li>How we organise events</li>
+            <li>Keeping up with our competition</li>
+            <li>Improving sales flow</li>
+            <li>Tactics for the next sales push</li>
           </ul>
+
+          <div className="text-muted mb-2">
+            Broad topic
+          </div>
+
+          <div className="mb-2">
+            This is a statement. It is not an opinion, question, problem, assumption, or solution.
+          </div>
+
+          <div className="text-muted mb-2">
+            Workshop time: Maximum of ~40 minutes
+          </div>
+
+          <div className="mb-2">
+            Step 1 - Vote across problems to select the initial winner, and then reframe the winning problem and vote again to come to a final decision on the problem to solve
+          </div>
+
+          <div className="mb-2">
+            Step 2 - Draft the opportunity question
+          </div>
+
+          <div className="mb-2">
+            Step 3 - Generate solutions, and then vote to find a winner to test
+          </div>
+
+          <div className="mb-2">
+            Step 4 - Create a hypothesis for an experiment to test
+          </div>
+
+          <div>
+            Step 5 - Assign tasks to team members
+          </div>
         </React.Fragment>
       : null}
 
