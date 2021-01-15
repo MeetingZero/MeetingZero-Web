@@ -2,16 +2,16 @@ import React from 'react';
 
 import LimitedTextarea from 'library/TextArea/LimitedTextarea';
 
-const GeneralTopic = ({
+const ExistingProblem = ({
   formInstance,
   setPssConfigComplete
 }) => {
-  const [purpose, setPurpose] = React.useState("");
+  const [existingProblem, setExistingProblem] = React.useState("");
 
   const handleSubmit = () => {
     const formValues = formInstance.getValues();
 
-    if (formValues.purpose.length > 0) {
+    if (formValues.existing_problems[0].length > 0) {
       setPssConfigComplete(true);
     }
   }
@@ -19,19 +19,23 @@ const GeneralTopic = ({
   return (
     <React.Fragment>
       <div className="mt-4 mb-2">
+        <div className="mb-1">
+          Give us a little more info
+        </div>
+
         <LimitedTextarea
           formInstance={formInstance}
-          fieldName="purpose"
-          placeholder="State a broad topic..."
-          errorMessage="Please enter a workshop purpose of 140 characters or less"
-          onUserInput={(userInput) => setPurpose(userInput)}
+          fieldName={`existing_problems[0]`}
+          placeholder="What's this problem?"
+          errorMessage="Please enter a problem of 140 characters or less"
+          onUserInput={(userInput) => setExistingProblem(userInput)}
         />
 
         <button
           onClick={handleSubmit}
           type="button"
           className="btn btn-secondary px-2 py-1"
-          disabled={purpose.length === 0}
+          disabled={existingProblem.length === 0}
         >
           Submit
         </button>
@@ -40,4 +44,4 @@ const GeneralTopic = ({
   );
 }
 
-export default GeneralTopic;
+export default ExistingProblem;

@@ -11,6 +11,7 @@ import TagsInput from 'library/TagsInput';
 
 import ProblemSolvingStepList from './ProblemSolvingStepList';
 import GeneralTopic from './GeneralTopic';
+import ExistingProblem from './ExistingProblem';
 import ExistingProblems from './ExistingProblems';
 import ExistingSolutions from './ExistingSolutions';
 import HelperText from './HelperText';
@@ -125,6 +126,13 @@ const CreateWorkshop = () => {
 
               {problemSolvingStepSelected && problemSolvingStepSelected === "GENERAL_TOPIC" ?
                 <GeneralTopic
+                  formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
+                />
+              : null}
+
+              {problemSolvingStepSelected && problemSolvingStepSelected === "ONE_EXISTING_PROBLEM" ?
+                <ExistingProblem
                   formInstance={formInstance}
                   setPssConfigComplete={setPssConfigComplete}
                 />
