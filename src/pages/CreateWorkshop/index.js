@@ -33,6 +33,7 @@ const CreateWorkshop = () => {
   const [showPssError, setShowPssError] = React.useState(false);
   const [showPreparationHelperText, setShowPreparationHelperText] = React.useState(false);
   const [workshopType, setWorkshopType] = React.useState("");
+  const [pssConfigComplete, setPssConfigComplete] = React.useState(false);
 
   const onSubmit = (formData) => {
     if (!problemSolvingStepSelected) {
@@ -125,6 +126,7 @@ const CreateWorkshop = () => {
               {problemSolvingStepSelected && problemSolvingStepSelected === "GENERAL_TOPIC" ?
                 <GeneralTopic
                   formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
                 />
               : null}
 
@@ -143,7 +145,7 @@ const CreateWorkshop = () => {
               <div className="position-relative">
                 <StepOverlay
                   text="Pre-workshop prep"
-                  show={false}
+                  show={!pssConfigComplete}
                 />
 
                 <input
@@ -159,7 +161,7 @@ const CreateWorkshop = () => {
               <div className="position-relative">
                 <StepOverlay
                   text="Invite attendees"
-                  show={false}
+                  show={true}
                 />
                 
                 <TagsInput
@@ -196,7 +198,7 @@ const CreateWorkshop = () => {
               <div className="position-relative">
                 <StepOverlay
                   text="Select date and time"
-                  show={false}
+                  show={true}
                 />
 
                 <div className="mb-2">
