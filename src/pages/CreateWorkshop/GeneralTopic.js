@@ -4,7 +4,7 @@ import LimitedTextarea from 'library/TextArea/LimitedTextarea';
 
 const GeneralTopic = ({
   formInstance,
-  setPssConfigComplete
+  generalTopicComplete
 }) => {
   const [purpose, setPurpose] = React.useState("");
 
@@ -12,7 +12,7 @@ const GeneralTopic = ({
     const formValues = formInstance.getValues();
 
     if (formValues.purpose.length > 0) {
-      setPssConfigComplete(true);
+      generalTopicComplete();
     }
   }
 

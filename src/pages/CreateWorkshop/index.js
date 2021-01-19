@@ -75,6 +75,12 @@ const CreateWorkshop = () => {
     return setEmails(emails);
   }
 
+  const generalTopicComplete = () => {
+    if (problemSolvingStepSelected === "GENERAL_TOPIC") {
+      setPssConfigComplete(true);
+    }
+  }
+
   const conditionToShowGeneralTopic = problemSolvingStepSelected &&
     (
       problemSolvingStepSelected === "GENERAL_TOPIC"
@@ -134,7 +140,7 @@ const CreateWorkshop = () => {
               {conditionToShowGeneralTopic ?
                 <GeneralTopic
                   formInstance={formInstance}
-                  setPssConfigComplete={setPssConfigComplete}
+                  generalTopicComplete={generalTopicComplete}
                 />
               : null}
 
