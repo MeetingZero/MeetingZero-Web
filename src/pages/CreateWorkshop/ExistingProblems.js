@@ -5,7 +5,8 @@ import { HUMAN_COUNTING } from 'constants/englishNumbers';
 import LimitedTextarea from 'library/TextArea/LimitedTextarea';
 
 const ExistingProblems = ({
-  formInstance
+  formInstance,
+  setPssConfigComplete
 }) => {
   const [problems, setProblems] = React.useState([null, null, null]);
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
@@ -71,6 +72,8 @@ const ExistingProblems = ({
         </button>
 
         <button
+          onClick={() => setPssConfigComplete(true)}
+          type="button"
           className="btn btn-primary px-2 py-1 ml-2"
           disabled={submitDisabled}
         >

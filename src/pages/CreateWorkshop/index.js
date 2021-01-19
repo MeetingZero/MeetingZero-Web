@@ -75,6 +75,13 @@ const CreateWorkshop = () => {
     return setEmails(emails);
   }
 
+  const conditionToShowGeneralTopic = problemSolvingStepSelected &&
+    (
+      problemSolvingStepSelected === "GENERAL_TOPIC"
+      ||
+      problemSolvingStepSelected === "MANY_EXISTING_PROBLEMS"
+    );
+
   return (
     <div className="container-fluid container-fixed">
       <div className="row">
@@ -124,7 +131,7 @@ const CreateWorkshop = () => {
                 </div>
               : null}
 
-              {problemSolvingStepSelected && problemSolvingStepSelected === "GENERAL_TOPIC" ?
+              {conditionToShowGeneralTopic ?
                 <GeneralTopic
                   formInstance={formInstance}
                   setPssConfigComplete={setPssConfigComplete}
@@ -141,6 +148,7 @@ const CreateWorkshop = () => {
               {problemSolvingStepSelected && problemSolvingStepSelected === "MANY_EXISTING_PROBLEMS" ?
                 <ExistingProblems
                   formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
                 />
               : null}
 
