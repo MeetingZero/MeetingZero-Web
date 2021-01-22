@@ -171,12 +171,14 @@ const CreateWorkshop = () => {
               {problemSolvingStepSelected && problemSolvingStepSelected === "MANY_EXISTING_SOLUTIONS" ?
                 <ExistingSolutions
                   formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
                 />
               : null}
 
               {problemSolvingStepSelected && problemSolvingStepSelected === "ONE_EXISTING_SOLUTION" ?
                 <ExistingSolution
                   formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
                 />
               : null}
 
