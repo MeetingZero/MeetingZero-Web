@@ -14,6 +14,7 @@ import GeneralTopic from './GeneralTopic';
 import ExistingProblem from './ExistingProblem';
 import ExistingProblems from './ExistingProblems';
 import ExistingSolutions from './ExistingSolutions';
+import ExistingSolution from './ExistingSolution';
 import HelperText from './HelperText';
 import StepOverlay from './StepOverlay';
 
@@ -158,8 +159,14 @@ const CreateWorkshop = () => {
                 />
               : null}
 
-              {problemSolvingStepSelected && problemSolvingStepSelected === "EXISTING_SOLUTIONS" ?
+              {problemSolvingStepSelected && problemSolvingStepSelected === "MANY_EXISTING_SOLUTIONS" ?
                 <ExistingSolutions
+                  formInstance={formInstance}
+                />
+              : null}
+
+              {problemSolvingStepSelected && problemSolvingStepSelected === "ONE_EXISTING_SOLUTION" ?
+                <ExistingSolution
                   formInstance={formInstance}
                 />
               : null}

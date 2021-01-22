@@ -2,16 +2,16 @@ import React from 'react';
 
 import LimitedTextarea from 'library/TextArea/LimitedTextarea';
 
-const ExistingProblem = ({
+const ExistingSolution = ({
   formInstance,
   setPssConfigComplete
 }) => {
-  const [existingProblem, setExistingProblem] = React.useState("");
+  const [existingSolution, setExistingSolution] = React.useState("");
 
   const handleSubmit = () => {
     const formValues = formInstance.getValues();
 
-    if (formValues.existing_problems[0].length > 0) {
+    if (formValues.existing_solutions[0].length > 0) {
       setPssConfigComplete(true);
     }
   }
@@ -25,17 +25,17 @@ const ExistingProblem = ({
 
         <LimitedTextarea
           formInstance={formInstance}
-          fieldName={`existing_problems[0].value`}
-          placeholder="What's this problem?"
-          errorMessage="Please enter a problem of 140 characters or less"
-          onUserInput={(userInput) => setExistingProblem(userInput)}
+          fieldName={`existing_solutions[0].value`}
+          placeholder="What's this solution?"
+          errorMessage="Please enter a solution of 140 characters or less"
+          onUserInput={(userInput) => setExistingSolution(userInput)}
         />
 
         <button
           onClick={handleSubmit}
           type="button"
           className="btn btn-secondary px-2 py-1"
-          disabled={existingProblem.length === 0}
+          disabled={existingSolution.length === 0}
         >
           Submit
         </button>
@@ -44,4 +44,4 @@ const ExistingProblem = ({
   );
 }
 
-export default ExistingProblem;
+export default ExistingSolution;
