@@ -182,6 +182,34 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
+      {pssKey === "ONE_EXISTING_SOLUTION" && !showPreparation ?
+        <React.Fragment>
+          <div className="text-muted mb-2">
+            Preparation and invitations
+          </div>
+
+          <div className="mb-2">
+            Is there anything you want your teammates to catch up on before this? Applicable metrics, any relevant articles, etc.?
+          </div>
+
+          <div className="mb-2">
+            Make sure you invite the right people. This works best with a cross-functional team between three and nine people.
+          </div>
+
+          <div className="text-muted mb-2">
+            Workshop time: Maximum of ~15 minutes
+          </div>
+
+          <div className="mb-2">
+            Step 1 - Create a hypothesis for an experiment to test
+          </div>
+
+          <div className="mb-2">
+            Step 2 - Assign tasks to team members
+          </div>
+        </React.Fragment>
+      : null}
+
       {!pssKey ?
         <React.Fragment>
           <div className="text-muted mb-2">
