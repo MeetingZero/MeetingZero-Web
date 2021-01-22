@@ -57,7 +57,15 @@ const CreateWorkshop = () => {
       return;
     }
 
-    return dispatch(workshopActions.createWorkshop(formData, emails, dateTimeSelectedUtc, problemSolvingStepSelected))
+    return dispatch(
+      workshopActions
+      .createWorkshop(
+        formData,
+        emails,
+        dateTimeSelectedUtc,
+        problemSolvingStepSelected
+      )
+    )
     .then(() => {
       history.push("/create-workshop-confirmation");
     });
@@ -252,11 +260,19 @@ const CreateWorkshop = () => {
 
               <div className="text-center mb-1">
                 <Button
-                  onClick={() => console.log(formInstance.getValues())}
-                  type="button"
+                  type="submit"
                   className="btn btn-primary px-5"
                   text="Create workshop"
                   loading={isLoading}
+                  disabled={
+                    !pssConfigComplete
+                      ||
+                    !preparationComplete
+                      ||
+                    !inviteComplete
+                      ||
+                    !dateTimeSelected
+                  }
                 />
               </div>
 
