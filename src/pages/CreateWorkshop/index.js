@@ -15,6 +15,7 @@ import ExistingProblem from './ExistingProblem';
 import ExistingProblems from './ExistingProblems';
 import ExistingSolutions from './ExistingSolutions';
 import ExistingSolution from './ExistingSolution';
+import Preparation from './Preparation';
 import HelperText from './HelperText';
 import StepOverlay from './StepOverlay';
 
@@ -33,9 +34,9 @@ const CreateWorkshop = () => {
   const [showWarning, setShowWarning] = React.useState(false);
   const [problemSolvingStepSelected, setProblemSolvingStepSelected] = React.useState(null);
   const [showPssError, setShowPssError] = React.useState(false);
-  const [showPreparationHelperText, setShowPreparationHelperText] = React.useState(false);
   const [workshopType, setWorkshopType] = React.useState("");
   const [pssConfigComplete, setPssConfigComplete] = React.useState(false);
+  const [preparationComplete, setPreparationComplete] = React.useState(false);
 
   const onSubmit = (formData) => {
     if (!problemSolvingStepSelected) {
@@ -126,7 +127,6 @@ const CreateWorkshop = () => {
                   handleChange={(pssKey) => {
                     setProblemSolvingStepSelected(pssKey);
                     setShowPssError(false);
-                    setShowPreparationHelperText(false);
                   }}
                   showOverlay={workshopType === ""}
                 />
@@ -177,36 +177,16 @@ const CreateWorkshop = () => {
                   show={!pssConfigComplete}
                 />
 
-                <input
-                  onFocus={() => setShowPreparationHelperText(true)}
-                  ref={formInstance.register()}
-                  name="preparation_instructions"
-                  type="text"
-                  className="form-control line-input mb-2"
-                  placeholder="How can your teammates prepare? - Optional"
+                <Preparation
+                  formInstance={formInstance}
+                  setPreparationComplete={setPreparationComplete}
                 />
-
-                <div className="text-right">
-                  <button
-                    type="button"
-                    className="btn btn-secondary btn-rounded px-2 py-1"
-                  >
-                    Skip
-                  </button>
-
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-rounded px-2 py-1 ml-2"
-                  >
-                    Submit
-                  </button>
-                </div>
               </div>
 
               <div className="position-relative">
                 <StepOverlay
                   text="Invite attendees"
-                  show={true}
+                  show={!preparationComplete}
                 />
                 
                 <TagsInput
@@ -278,7 +258,7 @@ const CreateWorkshop = () => {
         <div className="create-workshop-helper-column col-5">
           <HelperText
             pssKey={problemSolvingStepSelected}
-            showPreparation={showPreparationHelperText}
+            pssConfigComplete={pssConfigComplete}
           />
         </div>
       </div>

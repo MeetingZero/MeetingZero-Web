@@ -2,11 +2,11 @@ import React from 'react';
 
 const HelperText = ({
   pssKey,
-  showPreparation
+  pssConfigComplete
 }) => {
   return (
     <div className="border p-2 mx-auto bg-white rounded mt-10" style={{maxWidth: 370}}>
-      {pssKey === "GENERAL_TOPIC" && !showPreparation ?
+      {pssKey === "GENERAL_TOPIC" && !pssConfigComplete ?
         <React.Fragment>
           <div className="text-muted mb-2">
             Examples
@@ -56,7 +56,7 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
-      {pssKey === "MANY_EXISTING_PROBLEMS" && !showPreparation ?
+      {pssKey === "MANY_EXISTING_PROBLEMS" && !pssConfigComplete ?
         <React.Fragment>
           <div className="text-muted mb-2">
             Examples
@@ -106,7 +106,7 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
-      {pssKey === "ONE_EXISTING_PROBLEM" && !showPreparation ?
+      {pssKey === "ONE_EXISTING_PROBLEM" && !pssConfigComplete ?
         <React.Fragment>
           <div className="text-muted mb-2">
             Examples
@@ -144,7 +144,7 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
-      {pssKey === "MANY_EXISTING_SOLUTIONS" && !showPreparation ?
+      {pssKey === "MANY_EXISTING_SOLUTIONS" && !pssConfigComplete ?
         <React.Fragment>
           <div className="text-muted mb-2">
             The diagnosis: What is the nature of the challenge?
@@ -182,7 +182,7 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
-      {pssKey === "ONE_EXISTING_SOLUTION" && !showPreparation ?
+      {pssKey === "ONE_EXISTING_SOLUTION" && !pssConfigComplete ?
         <React.Fragment>
           <div className="text-muted mb-2">
             Preparation and invitations
@@ -222,7 +222,7 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
-      {showPreparation ?
+      {pssConfigComplete ?
         <React.Fragment>
           <div className="h1 mb-2">
             Preparation and invitations
