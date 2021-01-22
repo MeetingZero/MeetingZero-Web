@@ -144,17 +144,41 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
-      {pssKey === "EXISTING_SOLUTIONS" && !showPreparation ?
+      {pssKey === "MANY_EXISTING_SOLUTIONS" && !showPreparation ?
         <React.Fragment>
-          <div className="h1 mb-2">
+          <div className="text-muted mb-2">
+            The diagnosis: What is the nature of the challenge?
+          </div>
+
+          <div className="mb-2">
+            Make sure your problem statement is achievable and understandable.
+          </div>
+
+          <div className="text-muted mb-2">
             Examples
           </div>
 
-          <ul>
-            <li>I want to add a messaging feature</li>
-            <li>We should increase the price of our enterprise membership to $20 per month</li>
-            <li>We should add an interactive onboarding experience so first time users have a better sense of what our app does</li>
+          <ul className="mb-2">
+            <li>Users keep dropping off at our login page</li>
+            <li>Some of our CTAs are not color accessible</li>
+            <li>Our sales among 18-24 year olds are down 40% this quarter</li>
           </ul>
+
+          <div className="text-muted mb-2">
+            Workshop time: Maximum of ~20 minutes
+          </div>
+
+          <div className="mb-2">
+            Step 1 - Vote on solutions to find the winning one to test
+          </div>
+
+          <div className="mb-2">
+            Step 2 - Create a hypothesis for an experiment to test
+          </div>
+
+          <div className="mb-2">
+            Step 3 - Assign tasks to team members
+          </div>
         </React.Fragment>
       : null}
 
