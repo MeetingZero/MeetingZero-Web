@@ -37,6 +37,7 @@ const CreateWorkshop = () => {
   const [workshopType, setWorkshopType] = React.useState("");
   const [pssConfigComplete, setPssConfigComplete] = React.useState(false);
   const [preparationComplete, setPreparationComplete] = React.useState(false);
+  const [inviteComplete, setInviteComplete] = React.useState(false);
 
   const onSubmit = (formData) => {
     if (!problemSolvingStepSelected) {
@@ -183,7 +184,7 @@ const CreateWorkshop = () => {
                 />
               </div>
 
-              <div className="position-relative">
+              <div className="position-relative mb-3">
                 <StepOverlay
                   text="Invite attendees"
                   show={!preparationComplete}
@@ -213,17 +214,28 @@ const CreateWorkshop = () => {
                   </div>
 
                   <div className="col-6">
-                    <div className="text-right mb-2">
+                    <div className="text-right">
                       Separate emails with the tab or enter key
                     </div>
                   </div>
+                </div>
+
+                <div className="text-right">
+                  <button
+                    onClick={() => setInviteComplete(true)}
+                    type="button"
+                    className="btn btn-primary btn-rounded px-2 py-1 ml-2"
+                    disabled={emails.length < 2}
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
 
               <div className="position-relative">
                 <StepOverlay
                   text="Select date and time"
-                  show={true}
+                  show={!inviteComplete}
                 />
 
                 <div className="mb-2">
