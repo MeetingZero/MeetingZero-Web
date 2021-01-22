@@ -11,25 +11,17 @@ const ExistingProblems = ({
   const [problems, setProblems] = React.useState([null, null, null]);
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
 
-  const handleChange = (userInput, index) => {
-    if (userInput === problems[index]) {
-      return;
+  const handleChange = () => {
+    const existingProblems = formInstance
+    .getValues()
+    .existing_problems;
+
+    if (existingProblems[0] && existingProblems[0].length) {
+      return setSubmitDisabled(false);
     }
 
-    const clonedProblems = [...problems];
-
-    clonedProblems[index] = userInput;
-
-    setProblems(clonedProblems);
+    console.log(existingProblems)
   }
-
-  React.useEffect(() => {
-    for (let i = 0; i < problems.length; i++) {
-      if (problems[i] && problems[i].length) {
-        return setSubmitDisabled(false);
-      }
-    }
-  }, [problems]);
 
   return (
     <React.Fragment>
@@ -43,11 +35,12 @@ const ExistingProblems = ({
             <div key={index} className="mb-2">
               <div className="create-workshop-removable-input">
                 <i
+                  onClick={() => setProblems(problems.filter((p, i) => i !== index))}
                   className="fa fa-trash remove-toggle"
                 />
 
                 <LimitedTextarea
-                  onUserInput={(userInput) => handleChange(userInput, index)}
+                  onUserInput={handleChange}
                   formInstance={formInstance}
                   fieldName={`existing_problems[${index}]`}
                   fieldRequired={index === 0}
@@ -72,7 +65,10 @@ const ExistingProblems = ({
         </button>
 
         <button
-          onClick={() => setPssConfigComplete(true)}
+          onClick={() => {
+            console.log(formInstance.getValues())
+            setPssConfigComplete(true)
+          }}
           type="button"
           className="btn btn-primary px-2 py-1 ml-2"
           disabled={submitDisabled}
