@@ -240,7 +240,7 @@ const CreateWorkshop = () => {
                 </div>
               </div>
 
-              <div className="position-relative">
+              <div className="position-relative mb-4">
                 <StepOverlay
                   text="Select date and time"
                   show={!inviteComplete}
@@ -250,7 +250,7 @@ const CreateWorkshop = () => {
                   Select Date and Time
                 </div>
 
-                <div className="mb-5">
+                <div>
                   <DateTimePicker 
                     value={dateTimeSelected}
                     onChange={setDateTimeSelected}
@@ -258,7 +258,7 @@ const CreateWorkshop = () => {
                 </div>
               </div>
 
-              <div className="text-center mb-1">
+              <div className="text-center mb-2">
                 <Button
                   type="submit"
                   className="btn btn-primary px-5"
