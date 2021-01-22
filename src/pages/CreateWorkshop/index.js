@@ -172,7 +172,7 @@ const CreateWorkshop = () => {
                 />
               : null}
 
-              <div className="position-relative mb-8">
+              <div className="position-relative mb-4">
                 <StepOverlay
                   text="Pre-workshop prep"
                   show={!pssConfigComplete}
@@ -184,7 +184,7 @@ const CreateWorkshop = () => {
                 />
               </div>
 
-              <div className="position-relative mb-3">
+              <div className="position-relative mb-4">
                 <StepOverlay
                   text="Invite attendees"
                   show={!preparationComplete}
