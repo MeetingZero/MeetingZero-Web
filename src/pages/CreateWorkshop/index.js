@@ -105,7 +105,7 @@ const CreateWorkshop = () => {
         <div className="col-7 vh-100 overflow-y-scroll">
           <div className="p-2">
             <form onSubmit={formInstance.handleSubmit(onSubmit)}>
-              <div className="row mb-5">
+              <div className="row mb-4">
                 <div className="col-4"></div>
 
                 <div className="col-4">

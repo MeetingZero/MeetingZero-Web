@@ -12,7 +12,7 @@ const ExistingSolutions = ({
     <React.Fragment>
       <div className="mt-4 mb-2">
         <div className="mb-1">
-          Give us a little more information
+          What are your solutions you want to explore?
         </div>
 
         <DynamicTextarea
