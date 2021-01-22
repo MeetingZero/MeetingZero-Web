@@ -1,0 +1,15 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
+.removable-textarea {
+  position: relative;
+
+  i.remove-toggle {
+    position: absolute;
+    top: 50%;
+    left: -22px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: $pink;
+  }
+}

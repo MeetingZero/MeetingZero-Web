@@ -23,16 +23,3 @@
   z-index: $zindex-sticky;
   border-radius: $border-radius;
 }
-
-.create-workshop-removable-input {
-  position: relative;
-
-  i.remove-toggle {
-    position: absolute;
-    top: calc(50% - 15px);
-    left: -22px;
-    transform: translate(0, -50%);
-    cursor: pointer;
-    color: $pink;
-  }
-}
