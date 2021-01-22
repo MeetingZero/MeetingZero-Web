@@ -76,7 +76,7 @@ export const DynamicTextarea = ({
       });
     }
 
-    append(startingValueArray);
+    append(startingValueArray, false);
   }, [append, startingNumInputs]);
 
   return (
@@ -103,7 +103,7 @@ export const DynamicTextarea = ({
 
       <div className="text-right">
         <button
-          onClick={() => append({value: ""})}
+          onClick={() => append({value: ""}, true)}
           type="button"
           className="btn btn-secondary btn-rounded px-2 py-1"
         >

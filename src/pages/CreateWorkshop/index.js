@@ -164,7 +164,7 @@ const CreateWorkshop = () => {
                 />
               : null}
 
-              <div className="position-relative">
+              <div className="position-relative mb-8">
                 <StepOverlay
                   text="Pre-workshop prep"
                   show={!pssConfigComplete}
@@ -175,9 +175,25 @@ const CreateWorkshop = () => {
                   ref={formInstance.register()}
                   name="preparation_instructions"
                   type="text"
-                  className="form-control line-input mb-8"
+                  className="form-control line-input mb-2"
                   placeholder="How can your teammates prepare? - Optional"
                 />
+
+                <div className="text-right">
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-rounded px-2 py-1"
+                  >
+                    Skip
+                  </button>
+
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-rounded px-2 py-1 ml-2"
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
 
               <div className="position-relative">
@@ -236,7 +252,13 @@ const CreateWorkshop = () => {
               </div>
 
               <div className="text-center mb-1">
-                <Button type="submit" className="btn btn-primary px-5" text="Create workshop" loading={isLoading} />
+                <Button
+                  onClick={() => console.log(formInstance.getValues())}
+                  type="button"
+                  className="btn btn-primary px-5"
+                  text="Create workshop"
+                  loading={isLoading}
+                />
               </div>
 
               <div className="mx-auto text-center text-muted small" style={{maxWidth: 200}}>
