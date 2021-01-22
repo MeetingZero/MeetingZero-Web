@@ -106,6 +106,44 @@ const HelperText = ({
         </React.Fragment>
       : null}
 
+      {pssKey === "ONE_EXISTING_PROBLEM" && !showPreparation ?
+        <React.Fragment>
+          <div className="text-muted mb-2">
+            Examples
+          </div>
+
+          <ul className="mb-2">
+            <li>Users keep dropping off at our login page</li>
+            <li>Some of our CTAs are not color accessible</li>
+            <li>Our sales among 18-24 year olds are down 40% this quarter</li>
+          </ul>
+
+          <div className="text-muted mb-2">
+            Workshop time: Maximum of ~30 minutes
+          </div>
+
+          <div className="mb-2">
+            Step 1 - Reframe the problem, and then vote to come to a final decision on the problem to solve
+          </div>
+
+          <div className="mb-2">
+            Step 2 - Draft the opportunity question
+          </div>
+
+          <div className="mb-2">
+            Step 3 - Generate solutions, and then vote to find a winner to test
+          </div>
+
+          <div className="mb-2">
+            Step 4 - Create a hypothesis for an experiment to test
+          </div>
+
+          <div>
+            Step 5 - Assign tasks to team members
+          </div>
+        </React.Fragment>
+      : null}
+
       {pssKey === "EXISTING_SOLUTIONS" && !showPreparation ?
         <React.Fragment>
           <div className="h1 mb-2">
