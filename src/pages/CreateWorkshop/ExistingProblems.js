@@ -3,6 +3,7 @@ import React from 'react';
 import { HUMAN_COUNTING } from 'constants/englishNumbers';
 
 import LimitedTextarea from 'library/TextArea/LimitedTextarea';
+import { DynamicTextarea } from 'library/TextArea/index';
 
 const ExistingProblems = ({
   formInstance,
@@ -30,7 +31,19 @@ const ExistingProblems = ({
           Give us a little more information
         </div>
 
-        {problems.map((problem, index) => {
+        <div className="create-workshop-removable-input">
+          <i
+            className="fa fa-trash remove-toggle"
+          />
+
+          <DynamicTextarea
+            formInstance={formInstance}
+            name="existing_problems"
+            startingNumInputs={3}
+          />
+        </div>
+
+        {/* {problems.map((problem, index) => {
           return (
             <div key={index} className="mb-2">
               <div className="create-workshop-removable-input">
@@ -50,7 +63,7 @@ const ExistingProblems = ({
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
 
       <div className="text-right mb-4">
@@ -71,7 +84,7 @@ const ExistingProblems = ({
           }}
           type="button"
           className="btn btn-primary px-2 py-1 ml-2"
-          disabled={submitDisabled}
+          // disabled={submitDisabled}
         >
           Submit
         </button>
