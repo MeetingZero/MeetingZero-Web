@@ -3,9 +3,14 @@ import axiosInstance from '../../config/axios';
 import loadingSlice from '../loading/slice';
 import workshopSlice from '../workshop/slice';
 
-import { WORKSHOP_STAGE_KEYS_PSS_MAP } from './constants';
+import { WORKSHOP_STAGE_STEP_KEYS_PSS_MAP } from './constants';
 
-export const createWorkshop = (workshop, emails, dateTimePlanned, problemSolvingStepSelected) => {
+export const createWorkshop = (
+  workshop,
+  emails,
+  dateTimePlanned,
+  problemSolvingStepSelected
+) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('CREATING_NEW_WORKSHOP'));
 
@@ -14,7 +19,7 @@ export const createWorkshop = (workshop, emails, dateTimePlanned, problemSolving
       purpose: workshop.purpose,
       emails,
       date_time_planned: dateTimePlanned,
-      workshop_stage_keys: WORKSHOP_STAGE_KEYS_PSS_MAP[problemSolvingStepSelected],
+      workshop_stage_step_keys: WORKSHOP_STAGE_STEP_KEYS_PSS_MAP[problemSolvingStepSelected],
       preparation_instructions: workshop.preparation_instructions,
       existing_problems: workshop.existing_problems,
       existing_solutions: workshop.existing_solutions
