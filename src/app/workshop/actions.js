@@ -14,9 +14,18 @@ export const createWorkshop = (
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('CREATING_NEW_WORKSHOP'));
 
+    let workshopPurpose;
+
+    // If there is no purpose, use the first problem listed
+    if (workshop.purpose) {
+      workshopPurpose = workshop.purpose;
+    } else {
+      workshopPurpose = workshop.existing_problems[0].value;
+    }
+
     return axiosInstance()
     .post('/api/v1/workshops', {
-      purpose: workshop.purpose,
+      purpose: workshopPurpose,
       emails,
       date_time_planned: dateTimePlanned,
       workshop_stage_step_keys: WORKSHOP_STAGE_STEP_KEYS_PSS_MAP[problemSolvingStepSelected],

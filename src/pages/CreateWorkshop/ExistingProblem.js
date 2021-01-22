@@ -11,7 +11,7 @@ const ExistingProblem = ({
   const handleSubmit = () => {
     const formValues = formInstance.getValues();
 
-    if (formValues.existing_problems[0].length > 0) {
+    if (formValues.existing_problems[0].value.length > 0) {
       setPssConfigComplete(true);
     }
   }
