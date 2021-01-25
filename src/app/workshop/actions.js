@@ -28,9 +28,8 @@ export const createWorkshop = (
     if (workshop.existing_problems) {
       existingProblems = workshop
       .existing_problems
-      .map((p) => {
-        return p.value;
-      });
+      .filter(p => p.value !== "")
+      .map(p => p.value);
     }
 
     let existingSolutions;
@@ -38,9 +37,8 @@ export const createWorkshop = (
     if (workshop.existing_solutions) {
       existingSolutions = workshop
       .existing_solutions
-      .map((s) => {
-        return s.value;
-      });
+      .filter(s => s.value !== "")
+      .map(s => s.value);
     }
 
     return axiosInstance()
