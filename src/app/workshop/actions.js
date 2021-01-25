@@ -23,6 +23,26 @@ export const createWorkshop = (
       workshopPurpose = workshop.existing_problems[0].value;
     }
 
+    let existingProblems;
+
+    if (workshop.existing_problems) {
+      existingProblems = workshop
+      .existing_problems
+      .map((p) => {
+        return p.value;
+      });
+    }
+
+    let existingSolutions;
+
+    if (workshop.existing_solutions) {
+      existingSolutions = workshop
+      .existing_solutions
+      .map((s) => {
+        return s.value;
+      });
+    }
+
     return axiosInstance()
     .post('/api/v1/workshops', {
       purpose: workshopPurpose,
@@ -30,8 +50,8 @@ export const createWorkshop = (
       date_time_planned: dateTimePlanned,
       workshop_stage_step_keys: WORKSHOP_STAGE_STEP_KEYS_PSS_MAP[problemSolvingStepSelected],
       preparation_instructions: workshop.preparation_instructions,
-      existing_problems: workshop.existing_problems,
-      existing_solutions: workshop.existing_solutions
+      existing_problems: existingProblems,
+      existing_solutions: existingSolutions
     })
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('CREATING_NEW_WORKSHOP'));
