@@ -198,7 +198,7 @@ const CreateWorkshop = () => {
               <div className="position-relative mb-4">
                 <StepOverlay
                   text="Invite attendees"
-                  show={!preparationComplete}
+                  show={!preparationComplete || !pssConfigComplete}
                 />
                 
                 <TagsInput
@@ -246,7 +246,7 @@ const CreateWorkshop = () => {
               <div className="position-relative mb-4">
                 <StepOverlay
                   text="Select date and time"
-                  show={!inviteComplete}
+                  show={!inviteComplete || !pssConfigComplete}
                 />
 
                 <div className="mb-2">
