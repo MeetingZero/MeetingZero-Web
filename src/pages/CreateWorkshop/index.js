@@ -136,6 +136,7 @@ const CreateWorkshop = () => {
                   handleChange={(pssKey) => {
                     setProblemSolvingStepSelected(pssKey);
                     setShowPssError(false);
+                    setPssConfigComplete(false);
                   }}
                   showOverlay={workshopType === ""}
                 />
