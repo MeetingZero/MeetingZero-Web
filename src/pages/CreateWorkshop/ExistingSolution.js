@@ -7,7 +7,6 @@ const ExistingSolution = ({
   setPssConfigComplete
 }) => {
   const [existingSolution, setExistingSolution] = React.useState("");
-  const [existingProblem, setExistingProblem] = React.useState("");
 
   const handleSolutionSubmit = () => {
     const formValues = formInstance.getValues();
@@ -29,7 +28,6 @@ const ExistingSolution = ({
           fieldName={`existing_problems[0].value`}
           placeholder="What's this problem?"
           errorMessage="Please enter a problem of 140 characters or less"
-          onUserInput={(userInput) => setExistingProblem(userInput)}
         />
 
         <div className="mb-1">
