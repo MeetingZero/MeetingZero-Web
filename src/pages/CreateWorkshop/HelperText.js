@@ -5,7 +5,7 @@ const HelperText = ({
   pssConfigComplete
 }) => {
   return (
-    <div className="border p-2 mx-auto bg-white rounded mt-10" style={{maxWidth: 370}}>
+    <div className="border p-2 mx-auto bg-white rounded mt-2" style={{maxWidth: 500}}>
       {pssKey === "GENERAL_TOPIC" && !pssConfigComplete ?
         <React.Fragment>
           <div className="text-muted mb-2">

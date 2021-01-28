@@ -289,7 +289,7 @@ const CreateWorkshop = () => {
           </div>
         </div>
 
-        <div className="create-workshop-helper-column col-5">
+        <div className="create-workshop-helper-column col-5 vh-100">
           <HelperText
             pssKey={problemSolvingStepSelected}
             pssConfigComplete={pssConfigComplete}
