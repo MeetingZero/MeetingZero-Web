@@ -4,7 +4,8 @@ import LimitedTextarea from 'library/TextArea/LimitedTextarea';
 
 const GeneralTopic = ({
   formInstance,
-  generalTopicComplete
+  generalTopicComplete,
+  problemSolvingStepSelected
 }) => {
   const [purpose, setPurpose] = React.useState("");
 
@@ -27,14 +28,16 @@ const GeneralTopic = ({
           onUserInput={(userInput) => setPurpose(userInput)}
         />
 
-        <button
-          onClick={handleSubmit}
-          type="button"
-          className="btn btn-secondary px-2 py-1"
-          disabled={purpose.length === 0}
-        >
-          Submit
-        </button>
+        {problemSolvingStepSelected && problemSolvingStepSelected === "GENERAL_TOPIC" ?
+          <button
+            onClick={handleSubmit}
+            type="button"
+            className="btn btn-secondary px-2 py-1"
+            disabled={purpose.length === 0}
+          >
+            Submit
+          </button>
+        : null}
       </div>
     </React.Fragment>
   );

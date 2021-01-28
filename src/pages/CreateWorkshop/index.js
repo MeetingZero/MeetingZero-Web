@@ -97,6 +97,8 @@ const CreateWorkshop = () => {
       problemSolvingStepSelected === "GENERAL_TOPIC"
       ||
       problemSolvingStepSelected === "MANY_EXISTING_PROBLEMS"
+      ||
+      problemSolvingStepSelected === "MANY_EXISTING_SOLUTIONS"
     );
 
   return (
@@ -152,6 +154,7 @@ const CreateWorkshop = () => {
                 <GeneralTopic
                   formInstance={formInstance}
                   generalTopicComplete={generalTopicComplete}
+                  problemSolvingStepSelected={problemSolvingStepSelected}
                 />
               : null}
 

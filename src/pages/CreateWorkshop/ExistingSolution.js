@@ -32,16 +32,6 @@ const ExistingSolution = ({
           onUserInput={(userInput) => setExistingProblem(userInput)}
         />
 
-        <div className="mb-4">
-          <button
-            type="button"
-            className="btn btn-secondary px-2 py-1"
-            disabled={existingProblem.length === 0}
-          >
-            Submit
-          </button>
-        </div>
-
         <div className="mb-1">
           What's the solution you want to explore?
         </div>

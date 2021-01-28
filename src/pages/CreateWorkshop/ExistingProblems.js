@@ -10,7 +10,7 @@ const ExistingProblems = ({
 }) => {
   return (
     <React.Fragment>
-      <div className="mt-4 mb-2">
+      <div className="mb-2">
         <div className="mb-1">
           Give us a little more information
         </div>
