@@ -10,6 +10,10 @@ const StarVoter = ({
   modelName,
   handleUpdateData
 }) => {
+  if (!votingItems) {
+    return null;
+  }
+
   if (votingItems.length === 1) {
     return (
       <ZeroVoter

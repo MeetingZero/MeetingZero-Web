@@ -1,0 +1,23 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
+.create-workshop-helper-column {
+  background: url("../../assets/images/modern_art_bg.svg") no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-left: $gray-400 1px solid;
+}
+
+.create-workshop-step-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $secondary;
+  z-index: $zindex-sticky;
+  border-radius: $border-radius;
+}

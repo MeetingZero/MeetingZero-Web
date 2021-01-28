@@ -2,31 +2,48 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import cn from 'classnames';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
+import cn from 'classnames';
 
-import LogoSplitLayout from 'layouts/LogoSplit';
 import Button from 'library/Button';
-import CharacterCounter from 'library/CharacterCounter';
 import TagsInput from 'library/TagsInput';
-import TextArea from 'library/TextArea';
+
+import ProblemSolvingStepList from './ProblemSolvingStepList';
+import GeneralTopic from './GeneralTopic';
+import ExistingProblem from './ExistingProblem';
+import ExistingProblems from './ExistingProblems';
+import ExistingSolutions from './ExistingSolutions';
+import ExistingSolution from './ExistingSolution';
+import Preparation from './Preparation';
+import HelperText from './HelperText';
+import StepOverlay from './StepOverlay';
 
 import * as workshopActions from 'app/workshop/actions';
+
+import "./CreateWorkshop.scss";
 
 const CreateWorkshop = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { register, handleSubmit, errors, control } = useForm();
+  const formInstance = useForm();
 
   const [emails, setEmails] = React.useState([]);
-  const [workshopPurpose, setWorkshopPurpose] = React.useState("");
-  const [charCountExceeded, setCharCountExceeded] = React.useState(false);
   const [dateTimeSelected, setDateTimeSelected] = React.useState(null);
   const [showError, setShowError] = React.useState(false);
   const [showWarning, setShowWarning] = React.useState(false);
+  const [problemSolvingStepSelected, setProblemSolvingStepSelected] = React.useState(null);
+  const [showPssError, setShowPssError] = React.useState(false);
+  const [workshopType, setWorkshopType] = React.useState("");
+  const [pssConfigComplete, setPssConfigComplete] = React.useState(false);
+  const [preparationComplete, setPreparationComplete] = React.useState(false);
+  const [inviteComplete, setInviteComplete] = React.useState(false);
 
   const onSubmit = (formData) => {
+    if (!problemSolvingStepSelected) {
+      return setShowPssError(true);
+    }
+    
     if (emails.length < 2 || emails.length > 8) {
       setShowWarning(false);
       return setShowError(true);
@@ -40,15 +57,18 @@ const CreateWorkshop = () => {
       return;
     }
 
-    return dispatch(workshopActions.createWorkshop(formData, emails, dateTimeSelectedUtc))
+    return dispatch(
+      workshopActions
+      .createWorkshop(
+        formData,
+        emails,
+        dateTimeSelectedUtc,
+        problemSolvingStepSelected
+      )
+    )
     .then(() => {
-      // history.push(`/workshop/${newWorkshop.workshop_token}/start`);
       history.push("/create-workshop-confirmation");
     });
-  }
-
-  const handleExceed = (isExceeded) => {
-    setCharCountExceeded(isExceeded);
   }
 
   const isLoading = useSelector((state) => {
@@ -66,99 +86,217 @@ const CreateWorkshop = () => {
     return setEmails(emails);
   }
 
+  const generalTopicComplete = () => {
+    if (problemSolvingStepSelected === "GENERAL_TOPIC") {
+      setPssConfigComplete(true);
+    }
+  }
+
+  const conditionToShowGeneralTopic = problemSolvingStepSelected &&
+    (
+      problemSolvingStepSelected === "GENERAL_TOPIC"
+      ||
+      problemSolvingStepSelected === "MANY_EXISTING_PROBLEMS"
+      ||
+      problemSolvingStepSelected === "MANY_EXISTING_SOLUTIONS"
+    );
+
   return (
-    <LogoSplitLayout>
-      <div className="p-2">
-        <div className="text-right mb-5">
-          <Button href="/dashboard" text="Cancel" />
-        </div>
+    <div className="container-fluid container-fixed">
+      <div className="row">
+        <div className="col-7 vh-100 overflow-y-scroll">
+          <div className="p-2">
+            <form onSubmit={formInstance.handleSubmit(onSubmit)}>
+              <div className="row mb-4">
+                <div className="col-4"></div>
 
-        <div className="container">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-5 text-center">
-              Create Workshop
-            </div>
+                <div className="col-4">
+                  <h3 className="text-center font-weight-bold">
+                    Create Workshop
+                  </h3>
+                </div>
 
-            <TextArea
-              control={control}
-              register={register({ required: true, maxLength: 140 })}
-              name="purpose"
-              placeholder="State a broad topic..."
-              className={cn("mb-1", charCountExceeded ? 'bg-scary' : '')}
-              onUserInput={(userInput) => setWorkshopPurpose(userInput)}
-            />
-
-            <div className="row mb-10">
-              <div className="col-6">
-                {errors.purpose ?
-                  <div className="small text-danger">
-                    Please enter a workshop name of 140 characters or less
+                <div className="col-4">
+                  <div className="text-right">
+                    <Button href="/dashboard" text="Cancel" />
                   </div>
-                : null}
-              </div>
-
-              <div className="col-6">
-                <CharacterCounter
-                  className="text-right"
-                  maxChars={140}
-                  inputString={workshopPurpose}
-                  onExceed={handleExceed}
-                />
-              </div>
-            </div>
-
-            <TagsInput
-              className="form-control border-top-0 border-left-0 border-right-0 rounded-0 mb-1"
-              value={emails}
-              onChange={handleEmailChange}
-              onlyUnique={true}
-              placeholder="Invite Attendees"
-            />
-
-            <div className="row mb-2">
-              <div className="col-6">
-                  {showError ?
-                    <div className="text-danger">
-                      There must be between 3 and 9 people in this workshop
-                    </div>
-                  : null}
-
-                  {showWarning ?
-                    <div className="text-warning">
-                      MeetingZero works best with more than 5 people
-                    </div>
-                  : null}
-              </div>
-
-              <div className="col-6">
-                <div className="text-right mb-2">
-                  Separate emails with the tab or enter key
                 </div>
               </div>
-            </div>
 
-            <div className="mb-2">
-              Select Date and Time
-            </div>
+              <div className="mb-4">
+                <select
+                  onChange={(event) => setWorkshopType(event.target.value)}
+                  className="form-control"
+                >
+                  <option value="">Workshop type</option>
+                  <option value="KICKOFF_EXPERIMENT">Kickoff experiment</option>
+                </select>
+              </div>
 
-            <div className="mb-5">
-              <DateTimePicker 
-                value={dateTimeSelected}
-                onChange={setDateTimeSelected}
-              />
-            </div>
+              <div className={cn(showPssError ? "mb-2" : "mb-4")}>
+                <ProblemSolvingStepList
+                  handleChange={(pssKey) => {
+                    setProblemSolvingStepSelected(pssKey);
+                    setShowPssError(false);
+                    setPssConfigComplete(false);
+                  }}
+                  showOverlay={workshopType === ""}
+                />
+              </div>
 
-            <div className="text-center mb-1">
-              <Button type="submit" className="btn btn-primary px-5" text="Create workshop" loading={isLoading} />
-            </div>
+              {showPssError ?
+                <div className="text-danger mb-2">
+                  Please select a step
+                </div>
+              : null}
 
-            <div className="mx-auto text-center text-muted small" style={{maxWidth: 200}}>
-              Clicking create will send an invitation link and ID to members
-            </div>
-          </form>
+              {conditionToShowGeneralTopic ?
+                <GeneralTopic
+                  formInstance={formInstance}
+                  generalTopicComplete={generalTopicComplete}
+                  problemSolvingStepSelected={problemSolvingStepSelected}
+                />
+              : null}
+
+              {problemSolvingStepSelected && problemSolvingStepSelected === "ONE_EXISTING_PROBLEM" ?
+                <ExistingProblem
+                  formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
+                />
+              : null}
+
+              {problemSolvingStepSelected && problemSolvingStepSelected === "MANY_EXISTING_PROBLEMS" ?
+                <ExistingProblems
+                  formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
+                />
+              : null}
+
+              {problemSolvingStepSelected && problemSolvingStepSelected === "MANY_EXISTING_SOLUTIONS" ?
+                <ExistingSolutions
+                  formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
+                />
+              : null}
+
+              {problemSolvingStepSelected && problemSolvingStepSelected === "ONE_EXISTING_SOLUTION" ?
+                <ExistingSolution
+                  formInstance={formInstance}
+                  setPssConfigComplete={setPssConfigComplete}
+                />
+              : null}
+
+              <div className="position-relative mb-4">
+                <StepOverlay
+                  text="Pre-workshop prep"
+                  show={!pssConfigComplete}
+                />
+
+                <Preparation
+                  formInstance={formInstance}
+                  setPreparationComplete={setPreparationComplete}
+                />
+              </div>
+
+              <div className="position-relative mb-4">
+                <StepOverlay
+                  text="Invite attendees"
+                  show={!preparationComplete || !pssConfigComplete}
+                />
+                
+                <TagsInput
+                  className="react-tagsinput-container mb-1"
+                  value={emails}
+                  onChange={handleEmailChange}
+                  onlyUnique={true}
+                  placeholder="Invite Attendees"
+                />
+
+                <div className="row mb-2">
+                  <div className="col-6">
+                      {showError ?
+                        <div className="text-danger">
+                          There must be between 3 and 9 people in this workshop
+                        </div>
+                      : null}
+
+                      {showWarning ?
+                        <div className="text-warning">
+                          MeetingZero works best with more than 5 people
+                        </div>
+                      : null}
+                  </div>
+
+                  <div className="col-6">
+                    <div className="text-right">
+                      Separate emails with the tab or enter key
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-right">
+                  <button
+                    onClick={() => setInviteComplete(true)}
+                    type="button"
+                    className="btn btn-primary btn-rounded px-2 py-1 ml-2"
+                    disabled={emails.length < 2}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+
+              <div className="position-relative mb-4">
+                <StepOverlay
+                  text="Select date and time"
+                  show={!inviteComplete || !pssConfigComplete}
+                />
+
+                <div className="mb-2">
+                  Select Date and Time
+                </div>
+
+                <div>
+                  <DateTimePicker 
+                    value={dateTimeSelected}
+                    onChange={setDateTimeSelected}
+                  />
+                </div>
+              </div>
+
+              <div className="text-center mb-2">
+                <Button
+                  type="submit"
+                  className="btn btn-primary px-5"
+                  text="Create workshop"
+                  loading={isLoading}
+                  disabled={
+                    !pssConfigComplete
+                      ||
+                    !preparationComplete
+                      ||
+                    !inviteComplete
+                      ||
+                    !dateTimeSelected
+                  }
+                />
+              </div>
+
+              <div className="mx-auto text-center text-muted small" style={{maxWidth: 200}}>
+                Clicking create will send an invitation link and ID to members
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div className="create-workshop-helper-column col-5 vh-100">
+          <HelperText
+            pssKey={problemSolvingStepSelected}
+            pssConfigComplete={pssConfigComplete}
+          />
         </div>
       </div>
-    </LogoSplitLayout>
+    </div>
   );
 }
 

@@ -1,15 +1,21 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+
+.react-tagsinput-container {
+  border-bottom: $gray-600 1px solid;
+}
+
 .react-tagsinput-tag {
-  background-color: #cde69c;
-  border-radius: 2px;
-  border: 1px solid #a5d24a;
-  color: #638421;
+  background-color: $primary;
+  border-radius: $border-radius;
+  border: 1px solid $purple;
+  color: $white;
   display: inline-block;
   font-family: sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  padding: 5px;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  padding: 1rem;
 
   a:before {
     content: " ×";
@@ -20,13 +26,10 @@
 .react-tagsinput-input-field {
   background: transparent;
   border: 0;
-  color: #777;
+  color: $gray-600;
   font-family: sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  margin-bottom: 6px;
-  margin-top: 1px;
+  font-size: 1.3rem;
   outline: none;
-  padding: 5px;
-  width: 120px;
+  width: 12rem;
+  padding: 1rem;
 }

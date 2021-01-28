@@ -3,16 +3,53 @@ import axiosInstance from '../../config/axios';
 import loadingSlice from '../loading/slice';
 import workshopSlice from '../workshop/slice';
 
-export const createWorkshop = (workshop, emails, dateTimePlanned) => {
+import { WORKSHOP_STAGE_STEP_KEYS_PSS_MAP } from './constants';
+
+export const createWorkshop = (
+  workshop,
+  emails,
+  dateTimePlanned,
+  problemSolvingStepSelected
+) => {
   return (dispatch) => {
     dispatch(loadingSlice.actions.startLoading('CREATING_NEW_WORKSHOP'));
 
+    let workshopPurpose;
+
+    // If there is no purpose, use the first problem listed
+    if (workshop.purpose) {
+      workshopPurpose = workshop.purpose;
+    } else {
+      workshopPurpose = workshop.existing_problems[0].value;
+    }
+
+    let existingProblems;
+
+    if (workshop.existing_problems) {
+      existingProblems = workshop
+      .existing_problems
+      .filter(p => p.value !== "")
+      .map(p => p.value);
+    }
+
+    let existingSolutions;
+
+    if (workshop.existing_solutions) {
+      existingSolutions = workshop
+      .existing_solutions
+      .filter(s => s.value !== "")
+      .map(s => s.value);
+    }
+
     return axiosInstance()
     .post('/api/v1/workshops', {
-      purpose: workshop.purpose,
-      template: "BRANCH_1",
+      purpose: workshopPurpose,
       emails,
-      date_time_planned: dateTimePlanned
+      date_time_planned: dateTimePlanned,
+      workshop_stage_step_keys: WORKSHOP_STAGE_STEP_KEYS_PSS_MAP[problemSolvingStepSelected],
+      preparation_instructions: workshop.preparation_instructions,
+      existing_problems: existingProblems,
+      existing_solutions: existingSolutions
     })
     .then((response) => {
       dispatch(loadingSlice.actions.stopLoading('CREATING_NEW_WORKSHOP'));
