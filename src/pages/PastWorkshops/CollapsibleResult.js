@@ -28,6 +28,7 @@ const CollapsibleResult = ({title, items, group}) => {
   const collapsedEl = useRef(null);
 
   const isActive = (group) => groups.indexOf(group) === activeGroup;
+  const activeItems = items.filter((item) => item.assessment_category === groups[activeGroup].assessment_category)
   
   useEffect(() => {
     if (collapsed) {
@@ -36,8 +37,6 @@ const CollapsibleResult = ({title, items, group}) => {
       collapsedEl.current.style.maxHeight = `${collapsedEl.current.scrollHeight}px`;
     }
   })
-
-  let activeItems = items.filter((item) => item.assessment_category === groups[activeGroup].assessment_category)
 
   return (
     <div className="collapsible-result mb-2">
