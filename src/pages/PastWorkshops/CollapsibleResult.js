@@ -1,6 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Fragment } from 'react';
-
+import React, { useState, useRef, useEffect, Fragment } from 'react';
 import "./CollapsibleResult.scss";
 
 const groups = [
