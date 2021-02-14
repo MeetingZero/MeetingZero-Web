@@ -18,7 +18,7 @@ const groups = [
     assessment_category: 'Forget for Now',
     subtext: '(Low Impact, High Effort)'
   }
-]
+];
 
 const CollapsibleResult = ({title, items, group}) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -26,11 +26,11 @@ const CollapsibleResult = ({title, items, group}) => {
   const collapsedEl = useRef(null);
 
   const isActive = (group) => groups.indexOf(group) === activeGroup;
-  const activeItems = items.filter((item) => item.assessment_category === groups[activeGroup].assessment_category)
+  const activeItems = items.filter((item) => item.assessment_category === groups[activeGroup].assessment_category);
   
   useEffect(() => {
     if (collapsed) {
-      collapsedEl.current.style.maxHeight = null
+      collapsedEl.current.style.maxHeight = null;
     } else {
       collapsedEl.current.style.maxHeight = `${collapsedEl.current.scrollHeight}px`;
     }
