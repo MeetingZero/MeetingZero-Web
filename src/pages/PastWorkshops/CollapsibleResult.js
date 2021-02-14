@@ -1,32 +1,14 @@
 import React, { useState, useRef, useEffect, Fragment } from 'react';
 import "./CollapsibleResult.scss";
-
-const groups = [
-  {
-    assessment_category: 'Do Now',
-    subtext: '(High Impact, Low Effort)'
-  },
-  {
-    assessment_category: 'Make a Project',
-    subtext: '(High Impact, High Effort)'
-  },
-  {
-    assessment_category: 'Make a Task',
-    subtext: '(Low Impact, Low Effort)'
-  },
-  {
-    assessment_category: 'Forget for Now',
-    subtext: '(Low Impact, High Effort)'
-  }
-];
+import { ASSESSMENT_CATEGORIES } from '../../constants/labels';
 
 const CollapsibleResult = ({title, items, group}) => {
   const [collapsed, setCollapsed] = useState(true);
   const [activeGroup, setActiveGroup] = useState(0);
   const collapsedEl = useRef(null);
 
-  const isActive = (group) => groups.indexOf(group) === activeGroup;
-  const activeItems = items.filter((item) => item.assessment_category === groups[activeGroup].assessment_category);
+  const isActive = (group) => ASSESSMENT_CATEGORIES.indexOf(group) === activeGroup;
+  const activeItems = items.filter((item) => item.assessment_category === ASSESSMENT_CATEGORIES[activeGroup].assessment_category);
   
   useEffect(() => {
     if (collapsed) {
@@ -46,7 +28,7 @@ const CollapsibleResult = ({title, items, group}) => {
         { group ?
           <Fragment>
             <div className={"assessment-categories"}>
-              { groups.map((group) => <div onClick={setActiveGroup.bind(this, groups.indexOf(group))} className={`assessment-category ${isActive(group) ? 'active' : ''}`} key={group.assessment_category}> 
+              { ASSESSMENT_CATEGORIES.map((group) => <div onClick={setActiveGroup.bind(this, ASSESSMENT_CATEGORIES.indexOf(group))} className={`assessment-category ${isActive(group) ? 'active' : ''}`} key={group.assessment_category}> 
                 <span className={'assessment-category-label'}>{group.assessment_category}</span>
                 <span className={'assessment-category-subtext'}>{group.subtext}</span>
               </div>)}

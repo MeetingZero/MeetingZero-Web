@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RaciMatrix from 'pages/Workshop/stages/Experiments/steps/Owners/RaciMatrix';
 import PulseLoader from 'library/PulseLoader';
 import EmptyWorkshop from './EmptyWorkshop';
-import CollapsibleResult from './CollapsibleResult';
+import ResultItems from './ResultItems';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -96,15 +96,7 @@ const WorkshopSummary = ({ workshop }) => {
         </React.Fragment>
       : null}
 
-      <React.Fragment>
-        <h5 className="font-weight-normal mb-2">All Results</h5>
-        <div className="mb-8">
-          <CollapsibleResult title="What's Working" items={workshopSummary.what_is_working_responses} />
-          <CollapsibleResult title="Original Problem" items={workshopSummary.problem_responses} />
-          <CollapsibleResult title="Reframed Problem" items={workshopSummary.reframe_problem_responses} />
-          <CollapsibleResult title="Solutions" items={workshopSummary.solution_responses} group={true} />
-        </div>
-      </React.Fragment>
+      <ResultItems workshopSummary={workshopSummary} />
     </div>
   );
 }
