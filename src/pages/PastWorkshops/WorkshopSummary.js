@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RaciMatrix from 'pages/Workshop/stages/Experiments/steps/Owners/RaciMatrix';
 import PulseLoader from 'library/PulseLoader';
 import EmptyWorkshop from './EmptyWorkshop';
+import ResultItems from './ResultItems';
 
 import * as workshopActions from 'app/workshop/actions';
 
@@ -86,7 +87,7 @@ const WorkshopSummary = ({ workshop }) => {
         <React.Fragment>
           <h5 className="font-weight-normal mb-2">Owners and Tasks</h5>
 
-          <div>
+          <div className="mb-8">
             <RaciMatrix
               workshopToken={workshop.workshop_token}
               editable={false}
@@ -94,6 +95,8 @@ const WorkshopSummary = ({ workshop }) => {
           </div>
         </React.Fragment>
       : null}
+
+      <ResultItems workshopSummary={workshopSummary} />
     </div>
   );
 }

@@ -1,0 +1,92 @@
+@import "assets/vendor/bootstrap/_functions";
+@import "assets/vendor/bootstrap/_variables";
+@import "assets/vendor/bootstrap/_mixins";
+
+.collapsible-result {
+  h5 {
+    position: relative;
+    font-weight: bold;
+
+    &::before {
+      content: '';
+      background-color: #BBE1FF;
+      width: 4px;
+      height: 80%;
+      position: absolute;
+      top: 10%;
+      left: 0;
+    }
+
+    i {
+      margin-left: 30px;
+      transition: .3s transform ease-in-out;
+
+      &.collapsed {
+        transform: rotate(180deg);
+      }
+    }
+
+    span {
+      margin-left: 11px;
+      font-size: 1.6rem;
+      cursor: pointer;
+
+      &::before {
+        content: '';
+        background-color: #3F4089;
+        width: 2px;
+        height: 80%;
+        position: absolute;
+        top: 10%;
+        left: 5px;
+      }
+    }
+  }
+
+  &-items {
+    transition: .3s;
+    max-height: 0;
+    overflow: hidden;
+    margin-left: 11px;
+  }
+
+  &-item {
+    padding: 1rem 0;
+    transition: .3s transform ease-in-out;
+  }
+
+  .separator {
+    &:not(:last-of-type)::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background-color: #3F4089;
+    }
+  }
+
+  .assessment-categories {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .assessment-category {
+      display: flex;
+      flex-direction: column;
+      color: #AAAAAA;
+
+      &-label {
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+      &-subtext {
+        font-weight: 100;
+        font-size: 1.2rem;
+      }
+
+      &.active {
+        color: black;
+      }
+    }
+  }
+}
