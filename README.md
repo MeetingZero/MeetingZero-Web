@@ -1,6 +1,6 @@
 # MeetingZero Web Application
 
-MeetingZero removes pointless meetings and turns them into highly productive, digitally assisted, workshops — moving from meetings to collaborative problem-solving and structured sessions, i.e., to push discussions into decisions. Learn more [I'm an inline-style link](https://www.google.com).
+MeetingZero removes pointless meetings and turns them into highly productive, digitally assisted, workshops — moving from meetings to collaborative problem-solving and structured sessions, i.e., to push discussions into decisions. Learn more [here](https://www.producthunt.com/posts/meetingzero).
 
 # MeetingZero React Web Application
 
