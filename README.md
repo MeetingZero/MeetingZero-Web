@@ -1,3 +1,7 @@
+# MeetingZero Web Application
+
+MeetingZero removes pointless meetings and turns them into highly productive, digitally assisted, workshops — moving from meetings to collaborative problem-solving and structured sessions, i.e., to push discussions into decisions. Learn more [I'm an inline-style link](https://www.google.com).
+
 # MeetingZero React Web Application
 
 This is the React application that powers the MeetingZero front end. In order to run this project you will need Node.js version 14.3.0 or higher installed as well as NPM.
